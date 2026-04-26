@@ -1,0 +1,856 @@
+{
+  "countryCode": "IN",
+  "countryName": "India",
+  "currency": "INR",
+  "currencySymbol": "₹",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Please provide your personal identification details",
+      "fields": [
+        {
+          "label": "PAN",
+          "name": "pan",
+          "type": "text",
+          "placeholder": "e.g., ABCDE1234F",
+          "validation": {
+            "required": true,
+            "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+            "errorMessage": "PAN must be in format: ABCDE1234F (5 letters, 4 digits, 1 letter)"
+          }
+        },
+        {
+          "label": "UID No. (Aadhaar Card)",
+          "name": "aadhaar",
+          "type": "text",
+          "placeholder": "12 digit number",
+          "validation": {
+            "pattern": "^[0-9]{12}$",
+            "errorMessage": "Aadhaar must be exactly 12 digits"
+          }
+        },
+        {
+          "label": "Ration Card No.",
+          "name": "ration_card_no",
+          "type": "text",
+          "placeholder": "Enter ration card number"
+        },
+        {
+          "label": "Blood Group",
+          "name": "blood_group",
+          "type": "select",
+          "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+          "placeholder": "Select blood group"
+        },
+        {
+          "label": "Passport No.",
+          "name": "passport_no",
+          "type": "text",
+          "placeholder": "e.g., A1234567",
+          "validation": {
+            "pattern": "^[A-Z][0-9]{7}$",
+            "errorMessage": "Passport number format: 1 letter followed by 7 digits"
+          }
+        },
+        {
+          "label": "Driving License No.",
+          "name": "driving_license_no",
+          "type": "text",
+          "placeholder": "Enter driving license number"
+        },
+        {
+          "label": "Voters ID Card No.",
+          "name": "voters_id_no",
+          "type": "text",
+          "placeholder": "Enter voter ID"
+        },
+        {
+          "label": "EPF Account No. / UAN",
+          "name": "epf_uan_no",
+          "type": "text",
+          "placeholder": "12 digit UAN",
+          "validation": {
+            "pattern": "^[0-9]{12}$",
+            "errorMessage": "UAN must be 12 digits"
+          }
+        },
+        {
+          "label": "PPF Account No.",
+          "name": "ppf_no",
+          "type": "text",
+          "placeholder": "Enter PPF account number"
+        },
+        {
+          "label": "Telephone/Mobile No.",
+          "name": "telephone_mobile",
+          "type": "text",
+          "placeholder": "10 digit mobile number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Mobile number must be exactly 10 digits"
+          }
+        },
+        {
+          "label": "Mobile Service Provider",
+          "name": "mobile_service_provider",
+          "type": "text",
+          "placeholder": "e.g., Airtel, Jio, Vi, BSNL"
+        },
+        {
+          "label": "Gas Consumer No.",
+          "name": "gas_consumer_no",
+          "type": "text",
+          "placeholder": "Enter gas consumer number"
+        },
+        {
+          "label": "Gas Service Provider",
+          "name": "gas_service_provider",
+          "type": "text",
+          "placeholder": "e.g., Indane, HP Gas, Bharat Gas"
+        },
+        {
+          "label": "Electricity Account No.",
+          "name": "electricity_account_no",
+          "type": "text",
+          "placeholder": "Enter electricity account number"
+        },
+        {
+          "label": "Electricity Service Provider",
+          "name": "electricity_service_provider",
+          "type": "text",
+          "placeholder": "Enter provider name"
+        },
+        {
+          "label": "Water Account No.",
+          "name": "water_account_no",
+          "type": "text",
+          "placeholder": "Enter water account number"
+        }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "Add emergency contacts for urgent situations",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Contact Relation/Type",
+          "name": "contact_type",
+          "type": "select",
+          "options": [
+            "My Doctor",
+            "My Friend",
+            "Preferred Hospital Details",
+            "Ambulance Service",
+            "Health Insurance Company",
+            "Hospitalisation Process Representative",
+            "My Boss",
+            "Emergency Contact at Work",
+            "Others"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select contact type"
+          }
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Enter name",
+          "validation": {
+            "required": true,
+            "minLength": 2,
+            "maxLength": 100,
+            "errorMessage": "Name must be between 2 and 100 characters"
+          }
+        },
+        {
+          "label": "Phone No.",
+          "name": "phone",
+          "type": "text",
+          "placeholder": "10 digit number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Phone number must be exactly 10 digits"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Mediclaim details",
+      "type": "table",
+      "description": "Medical insurance coverage information",
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Relationship",
+          "name": "relationship",
+          "type": "select",
+          "options": ["Self", "Spouse", "Child", "Parent", "Sibling", "Other"],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select relationship"
+          }
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Enter name",
+          "validation": {
+            "required": true,
+            "minLength": 2,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "E-Card No.",
+          "name": "ecard_no",
+          "type": "text",
+          "placeholder": "Enter e-card number",
+          "validation": {
+            "required": true,
+            "errorMessage": "E-Card number is required"
+          }
+        },
+        {
+          "label": "Coverage (Individual or Family Floater)",
+          "name": "coverage",
+          "type": "select",
+          "options": ["Individual", "Family Floater"],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select coverage type"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Insurance details",
+      "type": "table",
+      "description": "Life, health, and other insurance policies",
+      "maxRows": 20,
+      "columns": [
+        {
+          "label": "Name of the Insured",
+          "name": "insured_name",
+          "type": "text",
+          "placeholder": "Enter insured name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Insured name is required"
+          }
+        },
+        {
+          "label": "Insurance Type",
+          "name": "insurance_type",
+          "type": "select",
+          "options": ["Life Insurance", "Health Insurance", "Motor Insurance", "Property Insurance", "Travel Insurance", "Other"],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select insurance type"
+          }
+        },
+        {
+          "label": "Insurance Provider",
+          "name": "provider",
+          "type": "text",
+          "placeholder": "Provider name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Provider name is required"
+          }
+        },
+        {
+          "label": "Policy No.",
+          "name": "policy_no",
+          "type": "text",
+          "placeholder": "Policy number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Policy number is required"
+          }
+        },
+        {
+          "label": "Premium Amount",
+          "name": "premium_amount",
+          "type": "number",
+          "placeholder": "Amount in ₹",
+          "validation": {
+            "required": true,
+            "min": 0,
+            "max": 10000000,
+            "errorMessage": "Premium amount must be between 0 and 1 crore"
+          }
+        },
+        {
+          "label": "Due Date",
+          "name": "due_date",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Due date is required"
+          }
+        },
+        {
+          "label": "Sum Assured",
+          "name": "sum_assured",
+          "type": "number",
+          "placeholder": "Amount in ₹",
+          "validation": {
+            "required": true,
+            "min": 0,
+            "errorMessage": "Sum assured must be a positive number"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Bank details",
+      "type": "table",
+      "description": "Your bank account information",
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Name of 1st Holder",
+          "name": "holder_name",
+          "type": "text",
+          "placeholder": "Account holder name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Holder name is required"
+          }
+        },
+        {
+          "label": "Bank Name and Address",
+          "name": "bank_details",
+          "type": "text",
+          "placeholder": "Bank name and branch",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank details are required"
+          }
+        },
+        {
+          "label": "Bank Account No.",
+          "name": "account_no",
+          "type": "text",
+          "placeholder": "Account number",
+          "validation": {
+            "required": true,
+            "minLength": 9,
+            "maxLength": 18,
+            "errorMessage": "Account number must be between 9 and 18 digits"
+          }
+        },
+        {
+          "label": "Joint Holder / Nominee",
+          "name": "joint_holder_nominee",
+          "type": "text",
+          "placeholder": "Joint holder or nominee name"
+        }
+      ]
+    },
+    {
+      "section": "Personal property details",
+      "type": "table",
+      "description": "Real estate and property holdings",
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Address",
+          "name": "address",
+          "type": "text",
+          "placeholder": "Property address",
+          "validation": {
+            "required": true,
+            "errorMessage": "Address is required"
+          }
+        },
+        {
+          "label": "Date Acquired",
+          "name": "date_acquired",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Date acquired is required"
+          }
+        },
+        {
+          "label": "Bank Name",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Bank name (if loan)"
+        },
+        {
+          "label": "Property Owners",
+          "name": "owners",
+          "type": "text",
+          "placeholder": "Owner names",
+          "validation": {
+            "required": true,
+            "errorMessage": "Property owners are required"
+          }
+        },
+        {
+          "label": "Returns or Income, if any",
+          "name": "returns_income",
+          "type": "text",
+          "placeholder": "Monthly/yearly income"
+        }
+      ]
+    },
+    {
+      "section": "Deposits with banks / post offices",
+      "type": "table",
+      "description": "Fixed deposits, recurring deposits, and savings",
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Holder Name",
+          "name": "holder_name",
+          "type": "text",
+          "placeholder": "Account holder name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Holder name is required"
+          }
+        },
+        {
+          "label": "Name and Address of Bank / Post Office",
+          "name": "bank_address",
+          "type": "text",
+          "placeholder": "Bank/Post office details",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank/Post office details are required"
+          }
+        },
+        {
+          "label": "Nominee",
+          "name": "nominee",
+          "type": "text",
+          "placeholder": "Nominee name"
+        },
+        {
+          "label": "Amount",
+          "name": "amount",
+          "type": "number",
+          "placeholder": "Deposit amount in ₹",
+          "validation": {
+            "required": true,
+            "min": 0,
+            "errorMessage": "Amount must be a positive number"
+          }
+        },
+        {
+          "label": "Date of Maturity",
+          "name": "date_maturity",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Maturity date is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Shares, bonds & other saving certificates",
+      "type": "table",
+      "description": "Investment portfolio details",
+      "maxRows": 20,
+      "columns": [
+        {
+          "label": "Company / Bank Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Company or bank name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Company/Bank name is required"
+          }
+        },
+        {
+          "label": "Account No.",
+          "name": "account_no",
+          "type": "text",
+          "placeholder": "Account/Folio number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Account number is required"
+          }
+        },
+        {
+          "label": "Nominee",
+          "name": "nominee",
+          "type": "text",
+          "placeholder": "Nominee name"
+        }
+      ]
+    },
+    {
+      "section": "Important website links & login credentials",
+      "type": "table",
+      "description": "Store important login information securely",
+      "maxRows": 20,
+      "columns": [
+        {
+          "label": "Purpose",
+          "name": "purpose",
+          "type": "text",
+          "placeholder": "e.g., Banking, Email",
+          "validation": {
+            "required": true,
+            "errorMessage": "Purpose is required"
+          }
+        },
+        {
+          "label": "Websites / URL",
+          "name": "website",
+          "type": "text",
+          "placeholder": "https://example.com",
+          "validation": {
+            "required": true,
+            "errorMessage": "Website URL is required"
+          }
+        },
+        {
+          "label": "Login ID",
+          "name": "login_id",
+          "type": "text",
+          "placeholder": "Username or email",
+          "validation": {
+            "required": true,
+            "errorMessage": "Login ID is required"
+          }
+        },
+        {
+          "label": "Password / Hint",
+          "name": "password_hint",
+          "type": "text",
+          "placeholder": "Password hint (not actual password)"
+        }
+      ]
+    },
+    {
+      "section": "Location of important documents & records",
+      "type": "complex",
+      "description": "Where you keep important documents",
+      "structure": [
+        {
+          "type": "table",
+          "title": "Bank Lockers",
+          "maxRows": 5,
+          "columns": [
+            {
+              "label": "Locker",
+              "name": "locker",
+              "type": "text",
+              "placeholder": "Locker identifier"
+            },
+            {
+              "label": "Name of Bank",
+              "name": "bank_name",
+              "type": "text",
+              "placeholder": "Bank name",
+              "validation": {
+                "required": true,
+                "errorMessage": "Bank name is required"
+              }
+            },
+            {
+              "label": "Address",
+              "name": "address",
+              "type": "text",
+              "placeholder": "Branch address",
+              "validation": {
+                "required": true,
+                "errorMessage": "Address is required"
+              }
+            },
+            {
+              "label": "Locker No.",
+              "name": "locker_no",
+              "type": "text",
+              "placeholder": "Locker number",
+              "validation": {
+                "required": true,
+                "errorMessage": "Locker number is required"
+              }
+            },
+            {
+              "label": "Keys located at",
+              "name": "key_location",
+              "type": "text",
+              "placeholder": "Where keys are kept"
+            },
+            {
+              "label": "List of Contents",
+              "name": "contents",
+              "type": "text",
+              "placeholder": "Brief description of contents"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "title": "Type of Document",
+          "maxRows": 20,
+          "columns": [
+            {
+              "label": "Type of Document",
+              "name": "doc_type",
+              "type": "select",
+              "options": [
+                "Birth Certificate",
+                "Marriage Certificate",
+                "Property Documents",
+                "Will/Testament",
+                "Educational Certificates",
+                "Insurance Policies",
+                "Tax Returns",
+                "Medical Records",
+                "Other"
+              ],
+              "validation": {
+                "required": true,
+                "errorMessage": "Document type is required"
+              }
+            },
+            {
+              "label": "Location",
+              "name": "location",
+              "type": "text",
+              "placeholder": "Where document is stored",
+              "validation": {
+                "required": true,
+                "errorMessage": "Location is required"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Contact details of my advisors",
+      "type": "table",
+      "description": "Legal, financial, and other professional advisors",
+      "maxRows": 15,
+      "columns": [
+        {
+          "label": "Role/Type",
+          "name": "role",
+          "type": "select",
+          "options": [
+            "Lawyer",
+            "Chartered Accountant",
+            "Financial Advisor",
+            "Tax Consultant",
+            "Insurance Agent",
+            "Real Estate Agent",
+            "Doctor",
+            "Other"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Role is required"
+          }
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Advisor name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "Address",
+          "name": "address",
+          "type": "text",
+          "placeholder": "Office address"
+        },
+        {
+          "label": "Contact No.",
+          "name": "contact_no",
+          "type": "text",
+          "placeholder": "10 digit number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Contact number must be 10 digits"
+          }
+        },
+        {
+          "label": "Email",
+          "name": "email",
+          "type": "email",
+          "placeholder": "email@example.com",
+          "validation": {
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+            "errorMessage": "Please enter a valid email address"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Credit card details",
+      "type": "table",
+      "description": "Credit card information",
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Credit Card No.",
+          "name": "card_no",
+          "type": "text",
+          "placeholder": "Last 4 digits only",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{4}$",
+            "errorMessage": "Enter last 4 digits only"
+          }
+        },
+        {
+          "label": "Name of Bank",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Bank name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank name is required"
+          }
+        },
+        {
+          "label": "Name On Card",
+          "name": "name_on_card",
+          "type": "text",
+          "placeholder": "Cardholder name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Cardholder name is required"
+          }
+        },
+        {
+          "label": "Expiry Date",
+          "name": "expiry_date",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Expiry date is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Loan details",
+      "type": "table",
+      "description": "Active loans and liabilities",
+      "maxRows": 15,
+      "columns": [
+        {
+          "label": "Type of Loan",
+          "name": "loan_type",
+          "type": "select",
+          "options": [
+            "Home Loan",
+            "Car Loan",
+            "Personal Loan",
+            "Education Loan",
+            "Business Loan",
+            "Gold Loan",
+            "Other"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Loan type is required"
+          }
+        },
+        {
+          "label": "Loan A/c No.",
+          "name": "loan_account_no",
+          "type": "text",
+          "placeholder": "Loan account number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Loan account number is required"
+          }
+        },
+        {
+          "label": "Amount",
+          "name": "amount",
+          "type": "number",
+          "placeholder": "Loan amount in ₹",
+          "validation": {
+            "required": true,
+            "min": 0,
+            "errorMessage": "Amount must be a positive number"
+          }
+        },
+        {
+          "label": "Bank",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Bank/Lender name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank name is required"
+          }
+        },
+        {
+          "label": "EMI",
+          "name": "emi",
+          "type": "number",
+          "placeholder": "Monthly EMI in ₹",
+          "validation": {
+            "required": true,
+            "min": 0,
+            "errorMessage": "EMI must be a positive number"
+          }
+        },
+        {
+          "label": "Start Date",
+          "name": "start_date",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Start date is required"
+          }
+        },
+        {
+          "label": "End Date",
+          "name": "end_date",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "End date is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Any other important information",
+      "fields": [
+        {
+          "label": "Additional Notes",
+          "name": "notes",
+          "type": "textarea",
+          "placeholder": "Enter any additional information you'd like to record...",
+          "validation": {
+            "maxLength": 5000,
+            "errorMessage": "Notes cannot exceed 5000 characters"
+          }
+        }
+      ]
+    }
+  ]
+}

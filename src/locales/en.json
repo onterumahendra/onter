@@ -1,0 +1,128 @@
+{
+  "app": {
+    "title": "Onter",
+    "tagline": "Secure, privacy-first financial data management"
+  },
+  "introduction": {
+    "welcome": "Welcome to ",
+    "privacy": {
+      "title": "Privacy-First Security",
+      "features": {
+        "localStorage": "All your data stays private on your device",
+        "noServer": "No data sent to any server or third party",
+        "autoDelete": "Data automatically deleted after 24 hours",
+        "offline": "Works completely offline"
+      }
+    },
+    "country": {
+      "label": "Select Your Country",
+      "description": "Choose your country to load appropriate form fields"
+    },
+    "start": {
+      "title": "Choose How to Start",
+      "resumeSession": "Resume Last Session",
+      "resumeDescription": "Continue where you left off",
+      "lastSaved": "Last saved: {{time}} ago",
+      "manualEntry": "Enter Data Manually",
+      "downloadTemplate": "Download Template",
+      "importExcel": "Import Excel",
+      "fileSelected": "✓ File Selected",
+      "importContinue": "Import & Continue",
+      "selectedFile": "Selected: {{filename}}",
+      "fileSize": "{{size}} KB",
+      "confirmClear": {
+        "title": "Clear Existing Data?",
+        "message": "You have previously saved data. Starting fresh will permanently delete all your saved information. This action cannot be undone.",
+        "confirm": "Yes, Start Fresh",
+        "cancel": "Cancel"
+      }
+    },
+    "howItWorks": {
+      "title": "How it works:",
+      "description": "Your data is stored locally on your device only. Nothing is sent to any server. You have complete control and privacy over your information."
+    },
+    "errors": {
+      "selectFile": "Please select a file to import",
+      "templateFailed": "Failed to generate template. Please try again.",
+      "importFailed": "Failed to import Excel file"
+    }
+  },
+  "formStepper": {
+    "loading": "Loading Form Configuration...",
+    "loadingDescription": "Please wait while we load the form for {{country}}",
+    "progress": "Progress: {{completed}}/{{total}}",
+    "saving": "Saving...",
+    "saved": "Saved {{time}}",
+    "sections": "Form Sections",
+    "stats": {
+      "completed": "Completed",
+      "skipped": "Skipped",
+      "remaining": "Remaining"
+    },
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next",
+      "skip": "Skip",
+      "exportData": "Export Data"
+    },
+    "success": {
+      "title": "Success!",
+      "message": "Data exported successfully! All data has been cleared from your browser."
+    },
+    "export": {
+      "title": "Export Your Data",
+      "warning": {
+        "title": "Important: Data Will Be Cleared",
+        "message": "After exporting, all your data will be automatically deleted from the browser for security. Make sure to save the downloaded Excel file in a secure location."
+      },
+      "stats": {
+        "totalSections": "Total Sections:",
+        "completed": "Completed:",
+        "skipped": "Skipped:"
+      },
+      "cancel": "Cancel",
+      "confirm": "Download Excel & Clear Data"
+    },
+    "stepLabel": "Step {{current}} of {{total}}",
+    "stepStatus": {
+      "completed": "Completed",
+      "skipped": "Skipped"
+    }
+  },
+  "table": {
+    "actions": "Actions",
+    "noEntries": "No entries yet. Click \"Add Row\" to get started.",
+    "addRow": "Add Row",
+    "addRowWithCount": "Add Row ({{current}}/{{max}})",
+    "maxRowsReached": "Maximum rows reached",
+    "minRowsRequired": "Minimum {{min}} row(s) required",
+    "removeRow": "Remove row",
+    "completeCurrentRow": "Please complete the current row before adding a new one"
+  },
+  "validation": {
+    "required": "Required",
+    "minLength": "Min {{min}} chars",
+    "maxLength": "Max {{max}} chars",
+    "minValue": "Min {{min}}",
+    "maxValue": "Max {{max}}",
+    "invalidFormat": "Invalid format",
+    "fieldRequired": "{{field}} is required",
+    "fieldMinLength": "{{field}} must be at least {{min}} characters",
+    "fieldMaxLength": "{{field}} must not exceed {{max}} characters",
+    "fieldMinValue": "{{field}} must be at least {{min}}",
+    "fieldMaxValue": "{{field}} must not exceed {{max}}",
+    "fieldInvalidFormat": "{{field}} format is invalid"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "countryCode": "US",
+  "countryName": "United States",
+  "currency": "USD",
+  "currencySymbol": "$",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Please provide your personal identification details",
+      "fields": [
+        {
+          "label": "Social Security Number (SSN)",
+          "name": "ssn",
+          "type": "text",
+          "placeholder": "XXX-XX-XXXX",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{3}-[0-9]{2}-[0-9]{4}$",
+            "errorMessage": "SSN must be in format: XXX-XX-XXXX"
+          }
+        },
+        {
+          "label": "Blood Group",
+          "name": "blood_group",
+          "type": "select",
+          "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+          "placeholder": "Select blood group"
+        },
+        {
+          "label": "Passport No.",
+          "name": "passport_no",
+          "type": "text",
+          "placeholder": "Passport number"
+        },
+        {
+          "label": "Driver's License No.",
+          "name": "drivers_license_no",
+          "type": "text",
+          "placeholder": "License number"
+        },
+        {
+          "label": "Phone Number",
+          "name": "phone",
+          "type": "text",
+          "placeholder": "(XXX) XXX-XXXX",
+          "validation": {
+            "required": true,
+            "pattern": "^\\([0-9]{3}\\) [0-9]{3}-[0-9]{4}$",
+            "errorMessage": "Phone number must be in format: (XXX) XXX-XXXX"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "Add emergency contacts for urgent situations",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Contact Type",
+          "name": "contact_type",
+          "type": "select",
+          "options": [
+            "Doctor",
+            "Friend",
+            "Hospital",
+            "Family Member",
+            "Emergency Service",
+            "Other"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select contact type"
+          }
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Contact name",
+          "validation": {
+            "required": true,
+            "minLength": 2,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "Phone No.",
+          "name": "phone",
+          "type": "text",
+          "placeholder": "(XXX) XXX-XXXX",
+          "validation": {
+            "required": true,
+            "errorMessage": "Phone number is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Insurance details",
+      "type": "table",
+      "description": "Life, health, and other insurance policies",
+      "maxRows": 20,
+      "columns": [
+        {
+          "label": "Name of the Insured",
+          "name": "insured_name",
+          "type": "text",
+          "placeholder": "Insured person's name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "Insurance Type",
+          "name": "insurance_type",
+          "type": "select",
+          "options": ["Life", "Health", "Auto", "Home", "Property", "Travel", "Other"],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select insurance type"
+          }
+        },
+        {
+          "label": "Provider",
+          "name": "provider",
+          "type": "text",
+          "placeholder": "Insurance company",
+          "validation": {
+            "required": true,
+            "errorMessage": "Provider is required"
+          }
+        },
+        {
+          "label": "Policy No.",
+          "name": "policy_no",
+          "type": "text",
+          "placeholder": "Policy number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Policy number is required"
+          }
+        },
+        {
+          "label": "Premium Amount",
+          "name": "premium_amount",
+          "type": "number",
+          "placeholder": "Annual premium",
+          "validation": {
+            "required": true,
+            "min": 0,
+            "errorMessage": "Please enter valid amount"
+          }
+        },
+        {
+          "label": "Due Date",
+          "name": "due_date",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Due date is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Bank details",
+      "type": "table",
+      "description": "Your bank account information",
+      "maxRows": 15,
+      "columns": [
+        {
+          "label": "Account Holder Name",
+          "name": "holder_name",
+          "type": "text",
+          "placeholder": "Name on account",
+          "validation": {
+            "required": true,
+            "errorMessage": "Account holder name is required"
+          }
+        },
+        {
+          "label": "Bank Name",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Bank name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank name is required"
+          }
+        },
+        {
+          "label": "Account No.",
+          "name": "account_no",
+          "type": "text",
+          "placeholder": "Account number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Account number is required"
+          }
+        },
+        {
+          "label": "Routing Number",
+          "name": "routing_number",
+          "type": "text",
+          "placeholder": "9-digit routing number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{9}$",
+            "errorMessage": "Routing number must be 9 digits"
+          }
+        }
+      ]
+    },
+    {
+      "section": "IMPORTANT DOCUMENTS LOCATION",
+      "type": "table",
+      "description": "Where you keep important documents",
+      "maxRows": 20,
+      "columns": [
+        {
+          "label": "Document Type",
+          "name": "doc_type",
+          "type": "select",
+          "options": [
+            "Birth Certificate",
+            "Marriage Certificate",
+            "Property Documents",
+            "Will/Testament",
+            "Educational Certificates",
+            "Insurance Policies",
+            "Tax Returns",
+            "Medical Records",
+            "Other"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Document type is required"
+          }
+        },
+        {
+          "label": "Location",
+          "name": "location",
+          "type": "text",
+          "placeholder": "Where stored",
+          "validation": {
+            "required": true,
+            "errorMessage": "Location is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Any other important information",
+      "fields": [
+        {
+          "label": "Additional Notes",
+          "name": "notes",
+          "type": "textarea",
+          "placeholder": "Enter any additional information...",
+          "validation": {
+            "maxLength": 5000,
+            "errorMessage": "Notes cannot exceed 5000 characters"
+          }
+        }
+      ]
+    }
+  ]
+}
