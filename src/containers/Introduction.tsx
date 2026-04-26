@@ -180,7 +180,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
             >
               {t('introduction.welcome')}
               <img
-                src="/logo.png"
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="Onter"
                 style={{ height: '40px', marginLeft: '5px' }}
               />

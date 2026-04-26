@@ -7,7 +7,7 @@ import type { FormSection, SimpleSection, TableSection, ComplexSection } from '.
  */
 
 export const PDF_CONFIG = {
-  LOGO_PATH: '/logo.png',
+  LOGO_PATH: `${import.meta.env.BASE_URL}logo.png`,
   PAGE_MARGIN: 10,
   LOGO_WIDTH: 40,
   THEME_COLOR: [37, 99, 235] as [number, number, number],

@@ -220,7 +220,7 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           {/* <Title order={2} c="slate.6">{t('app.title')}</Title> */}
            <img 
-             src="/logo.png" 
+             src={`${import.meta.env.BASE_URL}logo.png`} 
              alt="Onter" 
              style={{ height: '40px', cursor: 'pointer' }} 
              onClick={onBackToIntro}

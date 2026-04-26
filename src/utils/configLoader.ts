@@ -18,8 +18,8 @@ export async function loadCountryConfig(countryCode: string): Promise<CountryFor
   }
 
   try {
-    // Fetch the JSON file from public/configs
-    const response = await fetch(`/configs/${countryCode}.json`);
+    const configPath = `${import.meta.env.BASE_URL}configs/${countryCode}.json`;
+    const response = await fetch(configPath);
     
     if (!response.ok) {
       throw new Error(`Failed to load config for ${countryCode}`);
@@ -67,7 +67,8 @@ export function clearConfigCache(): void {
  */
 export async function isCountryAvailable(countryCode: string): Promise<boolean> {
   try {
-    const response = await fetch(`/configs/${countryCode}.json`, { method: 'HEAD' });
+    const configPath = `${import.meta.env.BASE_URL}configs/${countryCode}.json`;
+    const response = await fetch(configPath, { method: 'HEAD' });
     return response.ok;
   } catch {
     return false;
