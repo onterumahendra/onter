@@ -27,6 +27,7 @@ import { SimpleFieldsContainer } from './FormFields/SimpleFieldsContainer';
 import { TableFieldsContainer } from './FormFields/TableFieldsContainer';
 import { ComplexFieldsContainer } from './FormFields/ComplexFieldsContainer';
 import { downloadFormAsZip } from '../utils/zipService';
+import { publicAsset } from '../utils/paths';
 
 /**
  * Refactored FormStepper following SOLID principles
@@ -220,7 +221,7 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           {/* <Title order={2} c="slate.6">{t('app.title')}</Title> */}
            <img 
-             src={`${import.meta.env.BASE_URL}logo.png`} 
+             src={publicAsset('logo.png')} 
              alt="Onter" 
              style={{ height: '40px', cursor: 'pointer' }} 
              onClick={onBackToIntro}

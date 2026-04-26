@@ -1,13 +1,14 @@
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { FormSection, SimpleSection, TableSection, ComplexSection } from '../constants/types';
+import { publicAsset } from './paths';
 
 /**
  * Shared PDF utility constants and functions
  */
 
 export const PDF_CONFIG = {
-  LOGO_PATH: `${import.meta.env.BASE_URL}logo.png`,
+  LOGO_PATH: publicAsset('logo.png'),
   PAGE_MARGIN: 10,
   LOGO_WIDTH: 40,
   THEME_COLOR: [37, 99, 235] as [number, number, number],

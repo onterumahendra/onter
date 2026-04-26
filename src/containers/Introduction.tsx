@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { getAvailableCountries } from '../constants';
 import { useAppStore } from '../store/appStore';
 import { useExcelOperations } from '../hooks/useExcelOperations';
+import { publicAsset } from '../utils/paths';
 
 interface IntroductionProps {
   onComplete: () => void;
@@ -180,7 +181,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
             >
               {t('introduction.welcome')}
               <img
-                src={`${import.meta.env.BASE_URL}logo.png`}
+                src={publicAsset('logo.png')}
                 alt="Onter"
                 style={{ height: '40px', marginLeft: '5px' }}
               />

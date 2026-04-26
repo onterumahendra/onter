@@ -1,5 +1,6 @@
 import type { CountryFormConfig } from '../constants/types';
 import { AVAILABLE_COUNTRIES, DEFAULT_COUNTRY, getCountryCodes } from '../constants/countries';
+import { publicAsset } from './paths';
 
 /**
  * Cache for loaded country configurations
@@ -18,7 +19,7 @@ export async function loadCountryConfig(countryCode: string): Promise<CountryFor
   }
 
   try {
-    const configPath = `${import.meta.env.BASE_URL}configs/${countryCode}.json`;
+    const configPath = publicAsset(`configs/${countryCode}.json`);
     const response = await fetch(configPath);
     
     if (!response.ok) {
@@ -67,7 +68,7 @@ export function clearConfigCache(): void {
  */
 export async function isCountryAvailable(countryCode: string): Promise<boolean> {
   try {
-    const configPath = `${import.meta.env.BASE_URL}configs/${countryCode}.json`;
+    const configPath = publicAsset(`configs/${countryCode}.json`);
     const response = await fetch(configPath, { method: 'HEAD' });
     return response.ok;
   } catch {
