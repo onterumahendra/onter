@@ -1,84 +1,109 @@
 
-[![View source on GitHub](https://img.shields.io/badge/GitHub-View%20Source-blue?logo=github)](https://github.com/onterumahendra/onter)
+git clone https://github.com/onterumahendra/onter.git
 
-# Onter — Legacy Information Organizer
+[![Trust & verify: Source code on GitHub](https://img.shields.io/badge/GitHub-Trust%20%26%20Verify-blue?logo=github)](https://github.com/onterumahendra/onter)
 
-A privacy-first client-side React app designed to help individuals compile essential personal, financial, insurance, legal, and digital information in one organized package for family members and trusted executors.
+# Onter — Family Legacy Organizer
 
-Onter is built for people who want to prepare for unexpected events, avoid the chaos of scattered documents, and share a ready-to-use legacy bundle without ever uploading sensitive data to servers.
+> Onter helps families stay prepared by organizing essential personal, financial, insurance, legal, and digital information in one secure place—without ever sending sensitive data to servers.
+
+---
+
+## Who Onter Helps
+
+- Families preparing for emergencies
+- Primary earners organizing responsibilities
+- Parents protecting dependents
+- Professionals managing financial continuity
+- People supporting aging parents
+
+---
+
+## Why Onter Exists
+
+When a key family member passes away unexpectedly, surviving dependents face emotional and practical chaos. Records are scattered across devices, accounts, and papers. Onter provides a single, secure, up-to-date reference for your most important information—built for privacy, trust, and family continuity.
+
+---
+
+## Why Open Source?
+
+- **Transparency:** Anyone can review the code.
+- **Privacy verification:** Trust, but verify—no hidden data flows.
+- **Community contribution:** Improve and adapt Onter together.
+- **Trust without blind faith:** You control your data.
+
+---
 
 ## 🌟 Features
 
-- **Emergency-ready organization**: Capture critical details for family, dependents, advisors, and estate handlers
-- **Global form framework**: Configurable country-specific workflows with support for India, USA, and more
-- **Client-side privacy first**: All storage is local in the browser, no external servers or databases
-- **Exportable package**: Download a comprehensive data bundle for safe handover
-- **Auto-save**: Keep progress intact while adding information
-- **Responsive design**: Accessible on desktop and mobile devices
-- **Step-by-step forms**: Guided, easy-to-use wizard for structured entry
-- **Validation and completeness**: Built-in checks help ensure data is accurate and up to date
+- **Emergency-ready organization:** Capture critical details for family, dependents, advisors, and estate handlers
+- **Global form framework:** Configurable country-specific workflows (India, USA, more)
+- **Client-side privacy:** All storage is local in your browser
+- **Exportable package:** Download a comprehensive data bundle for safe handover
+- **Auto-save & auto-delete:** Progress is saved, and data is cleared after 24 hours for privacy
+- **Responsive design:** Desktop and mobile
+- **Step-by-step forms:** Guided, easy-to-use wizard
+- **Validation:** Built-in checks for accuracy
 
-## Why Onter?
+---
 
-When the primary breadwinner or a key family member passes away unexpectedly, surviving dependents often face emotional stress and practical chaos. Important records are scattered across devices, accounts, physical papers, and online services, and families need a trusted place to find everything quickly.
+## Live Demo
 
-Onter solves that problem with a secure, offline-first approach. It helps people build a single, up-to-date reference of their most important information, especially for regional financial and legal instruments such as EPF, NPS, PPF, LIC, demat accounts, Aadhaar-linked services, and other country-specific needs.
+[https://onterumahendra.github.io/onter/](https://onterumahendra.github.io/onter/)
 
-## What makes Onter different?
-
-- **Fully client-side**: No data is transmitted to third-party servers
-- **Privacy-first by design**: Ideal for sensitive legacy planning and estate preparation
-- **Flexible global model**: Country configurations let you adapt the app to regional requirements
-- **Export and share**: Create a ready-made package for family members or executors to use during a crisis
+---
 
 ## 📁 Form Sections
 
-The application helps you organize:
+- Personal Details
+- Emergency Contacts
+- Insurance details
+- Bank Accounts
+- Properties
+- Investments
+- Loans
+- Documents
+- Advisors
+- Credentials
+- And more...
 
-- **Personal Details**: ID numbers, contact information, utilities
-- **Emergency Contacts**: Important people to reach in emergencies
-- **Insurance details**: Life, health, and other insurance policies
-- **Bank Accounts**: Banking information and account details
-- **Properties**: Real estate and property holdings
-- **Investments**: Shares, bonds, deposits, and savings
-- **Loans**: Active loans and liabilities
-- **Documents**: Location of important documents and records
-- **Advisors**: Contact details for legal, financial advisors
-- **Credentials**: Important website logins (stored securely)
-- **And more...**
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js 18+ and npm/yarn/pnpm
-- Modern web browser with IndexedDB support
+- Modern web browser
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
+git clone https://github.com/onterumahendra/onter.git
 cd onter
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
-
-### Build for Production
-
-```bash
-npm run build
-npm run preview
-```
+---
 
 ## 🌍 Multi-Country Support
 
+src/
+├── components/         # Reusable UI components
+├── constants/         # Configuration and types
+├── hooks/            # Custom React hooks
+├── store/            # Zustand state management
+├── utils/            # Utilities (excel, indexedDB, configLoader, pdf)
+├── App.tsx           # Main app component
+├── FormStepper.tsx   # Multi-step form wizard
+└── main.tsx          # Application entry point
+
+public/
+└── configs/          # Country-specific JSON configurations
+    ├── IN.json       # India
+    ├── US.json       # United States
+    └── README.md     # Configuration guide
 ### Dynamic Configuration System
 
 Onter uses a JSON-based configuration system for easy internationalization:
@@ -98,47 +123,36 @@ Onter uses a JSON-based configuration system for easy internationalization:
 
 See [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) for detailed documentation.
 
-## 🏗️ Architecture
-
-### Technology Stack
-
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool and dev server  
-- **Mantine UI** - Component library
-- **Zustand** - State management
-- **IndexedDB** - Client-side database
-- **XLSX** - Excel export/import
-- **jsPDF** - PDF generation
-
-### Project Structure
-
-```
-src/
-├── components/         # Reusable UI components
-├── constants/         # Configuration and types
-├── hooks/            # Custom React hooks
-├── store/            # Zustand state management
-├── utils/            # Utilities (excel, indexedDB, configLoader, pdf)
-├── App.tsx           # Main app component
-├── FormStepper.tsx   # Multi-step form wizard
-└── main.tsx          # Application entry point
-
-public/
-└── configs/          # Country-specific JSON configurations
-    ├── IN.json       # India
-    ├── US.json       # United States
-    └── README.md     # Configuration guide
-```
+---
 
 ## 🔒 Security & Privacy
 
-- **Client-side only**: All data stays on your device
-- **IndexedDB storage**: Data stored in your browser's IndexedDB database
-- **No servers**: No data transmission to external servers
-- **Auto-delete**: Data automatically deleted after 24 hours
-- **Data export**: Export your data anytime
-- **Open source**: Transparent code you can audit
+- **Client-side only:** All data stays on your device
+- **No servers:** No data transmission to external servers
+- **Auto-delete:** Form data is stored locally in your browser and automatically cleared after 24 hours for additional privacy protection.
+- **Open source:** Transparent code you can audit
+
+---
+
+## Roadmap
+
+- More country packs
+- Family sharing workflows
+- Secure PDF emergency pack
+- Dead man’s switch (optional)
+- Executor checklist automation
+
+---
+
+## 📝 License
+
+MIT License
+
+---
+
+## Built for trust, privacy, and family continuity.
+
+---
 
 ## 📖 Documentation
 
@@ -146,6 +160,8 @@ public/
 - [public/configs/README.md](public/configs/README.md) - Country config creation
 - [MIGRATION.md](MIGRATION.md) - Migration guide (if applicable)
 - [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) - Feature status
+
+---
 
 ## 🧪 Development
 
@@ -165,6 +181,8 @@ npm run type-check   # TypeScript type checking
 - TypeScript for type safety
 - Prettier for code formatting (recommended)
 
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! To contribute:
@@ -179,23 +197,11 @@ Contributions are welcome! To contribute:
 
 We especially welcome contributions for new country configurations! See [public/configs/README.md](public/configs/README.md) for guidelines.
 
-## 📝 License
-
-[Add your license here]
-
-## 🙏 Acknowledgments
-
-- Mantine UI team for the excellent component library
-- React and Vite communities
-- All contributors
+---
 
 ## 📧 Support
 
-For issues, questions, or suggestions:
 - Open an issue on GitHub
-- Check existing documentation
-- Review the code examples
-
----
+- Check documentation
 
 **Built with ❤️ for secure personal information management**
