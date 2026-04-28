@@ -91,19 +91,20 @@ npm run dev
 
 src/
 ├── components/         # Reusable UI components
-├── constants/         # Configuration and types
-├── hooks/            # Custom React hooks
-├── store/            # Zustand state management
-├── utils/            # Utilities (excel, indexedDB, configLoader, pdf)
-├── App.tsx           # Main app component
-├── FormStepper.tsx   # Multi-step form wizard
-└── main.tsx          # Application entry point
+├── constants/          # Configuration and types
+├── hooks/              # Custom React hooks
+├── store/              # Zustand state management
+├── utils/              # Utilities (excel, indexedDB, configLoader, pdf)
+├── App.tsx             # Main app component
+├── FormStepper.tsx     # Multi-step form wizard
+└── main.tsx            # Application entry point
 
 public/
-└── configs/          # Country-specific JSON configurations
-    ├── IN.json       # India
-    ├── US.json       # United States
-    └── README.md     # Configuration guide
+└── configs/            # Country-specific JSON configurations
+    ├── IN.json         # India
+    ├── US.json         # United States
+    └── README.md       # Configuration guide
+    
 ### Dynamic Configuration System
 
 Onter uses a JSON-based configuration system for easy internationalization:
