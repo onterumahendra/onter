@@ -7,10 +7,15 @@ import { publicAsset } from './paths';
  * Shared PDF utility constants and functions
  */
 
+// Type for row data in PDFs
+interface PDFRowData {
+  [key: string]: string | number | boolean | null;
+}
+
 export const PDF_CONFIG = {
   LOGO_PATH: publicAsset('logo.png'),
   PAGE_MARGIN: 10,
-  LOGO_WIDTH: 40,
+  LOGO_WIDTH: 30,
   THEME_COLOR: [37, 99, 235] as [number, number, number],
   HEADER_TEXT_COLOR: [255, 255, 255] as [number, number, number],
   FONT_SIZE: 9,
@@ -118,34 +123,42 @@ export function generateSimplePDFSection(
 }
 
 /**
- * Generate PDF section for table layout
- * @param isTemplate - If true, generates empty template; if false, fills with data
+ * Generate PDF section for table layout with Smart Row Display
+ * Template: Shows all maxRows (full capacity)
+ * Data Export: Shows actual data + 2 buffer rows (compact)
  */
 export function generateTablePDFSection(
   doc: jsPDF,
   section: TableSection,
   yPosition: number,
-  data?: any[]
+  data?: PDFRowData[]
 ): void {
   const headers = section.columns.map(col => col.label);
   const maxRows = section.maxRows || 10;
   const minRows = section.minRows || 1;
   
   let rows = data || [];
+  const isTemplate = !data || rows.length === 0;
   
-  // If no data or generating template, create empty rows based on maxRows
-  if (rows.length === 0) {
+  // Smart Row Display Logic
+  if (isTemplate) {
+    // TEMPLATE: Show all maxRows for full visibility
     const emptyRowCount = Math.max(maxRows, minRows);
     rows = Array(emptyRowCount).fill(null).map(() => 
       section.columns.reduce((acc, col) => ({ ...acc, [col.name]: '' }), {})
     );
-  } else if (rows.length < maxRows) {
-    // Add empty rows to reach maxRows when data is provided but incomplete
-    const emptyRowsNeeded = maxRows - rows.length;
-    const emptyRows = Array(emptyRowsNeeded).fill(null).map(() => 
-      section.columns.reduce((acc, col) => ({ ...acc, [col.name]: '' }), {})
-    );
-    rows = [...rows, ...emptyRows];
+  } else {
+    // DATA EXPORT: Show actual data + 2 buffer rows (compact view)
+    const bufferRows = 2;
+    const targetRows = Math.min(rows.length + bufferRows, maxRows);
+    
+    if (rows.length < targetRows) {
+      const emptyRowsNeeded = targetRows - rows.length;
+      const emptyRows = Array(emptyRowsNeeded).fill(null).map(() => 
+        section.columns.reduce((acc, col) => ({ ...acc, [col.name]: '' }), {})
+      );
+      rows = [...rows, ...emptyRows];
+    }
   }
   
   const tableData = rows.map(row => 
@@ -184,14 +197,15 @@ export function generateTablePDFSection(
 }
 
 /**
- * Generate PDF section for complex layout
- * @param isTemplate - If true, generates empty template; if false, fills with data
+ * Generate PDF section for complex layout with Smart Row Display
+ * Template: Shows all maxRows (full capacity)
+ * Data Export: Shows actual data + 2 buffer rows (compact)
  */
 export function generateComplexPDFSection(
   doc: jsPDF,
   section: ComplexSection,
   startY: number,
-  data?: Record<string, any[]>
+  data?: Record<string, PDFRowData[]>
 ): void {
   let yPosition = startY;
   
@@ -208,20 +222,27 @@ export function generateComplexPDFSection(
     
     // Get data for this subsection
     let rows = data?.[struct.title] || [];
+    const isTemplate = !data || rows.length === 0;
     
-    // If no data, create empty rows based on maxRows
-    if (rows.length === 0) {
+    // Smart Row Display Logic
+    if (isTemplate) {
+      // TEMPLATE: Show all maxRows for full visibility
       const emptyRowCount = Math.max(maxRows, minRows);
       rows = Array(emptyRowCount).fill(null).map(() => 
         struct.columns.reduce((acc, col) => ({ ...acc, [col.name]: '' }), {})
       );
-    } else if (rows.length < maxRows) {
-      // Add empty rows to reach maxRows
-      const emptyRowsNeeded = maxRows - rows.length;
-      const emptyRows = Array(emptyRowsNeeded).fill(null).map(() => 
-        struct.columns.reduce((acc, col) => ({ ...acc, [col.name]: '' }), {})
-      );
-      rows = [...rows, ...emptyRows];
+    } else {
+      // DATA EXPORT: Show actual data + 2 buffer rows (compact view)
+      const bufferRows = 2;
+      const targetRows = Math.min(rows.length + bufferRows, maxRows);
+      
+      if (rows.length < targetRows) {
+        const emptyRowsNeeded = targetRows - rows.length;
+        const emptyRows = Array(emptyRowsNeeded).fill(null).map(() => 
+          struct.columns.reduce((acc, col) => ({ ...acc, [col.name]: '' }), {})
+        );
+        rows = [...rows, ...emptyRows];
+      }
     }
     
     const tableData = rows.map(row => 

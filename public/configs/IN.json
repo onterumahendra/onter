@@ -40,7 +40,16 @@
           "label": "Blood Group",
           "name": "blood_group",
           "type": "select",
-          "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+          "options": [
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-",
+            "O+",
+            "O-"
+          ],
           "placeholder": "Select blood group"
         },
         {
@@ -135,7 +144,7 @@
       "type": "table",
       "description": "Add emergency contacts for urgent situations",
       "minRows": 1,
-      "maxRows": 10,
+      "maxRows": 5,
       "columns": [
         {
           "label": "Contact Relation/Type",
@@ -186,13 +195,20 @@
       "section": "Mediclaim details",
       "type": "table",
       "description": "Medical insurance coverage information",
-      "maxRows": 10,
+      "maxRows": 6,
       "columns": [
         {
           "label": "Relationship",
           "name": "relationship",
           "type": "select",
-          "options": ["Self", "Spouse", "Child", "Parent", "Sibling", "Other"],
+          "options": [
+            "Self",
+            "Spouse",
+            "Child",
+            "Parent",
+            "Sibling",
+            "Other"
+          ],
           "validation": {
             "required": true,
             "errorMessage": "Please select relationship"
@@ -223,7 +239,10 @@
           "label": "Coverage (Individual or Family Floater)",
           "name": "coverage",
           "type": "select",
-          "options": ["Individual", "Family Floater"],
+          "options": [
+            "Individual",
+            "Family Floater"
+          ],
           "validation": {
             "required": true,
             "errorMessage": "Please select coverage type"
@@ -235,7 +254,7 @@
       "section": "Insurance details",
       "type": "table",
       "description": "Life, health, and other insurance policies",
-      "maxRows": 20,
+      "maxRows": 12,
       "columns": [
         {
           "label": "Name of the Insured",
@@ -251,7 +270,14 @@
           "label": "Insurance Type",
           "name": "insurance_type",
           "type": "select",
-          "options": ["Life Insurance", "Health Insurance", "Motor Insurance", "Property Insurance", "Travel Insurance", "Other"],
+          "options": [
+            "Life Insurance",
+            "Health Insurance",
+            "Motor Insurance",
+            "Property Insurance",
+            "Travel Insurance",
+            "Other"
+          ],
           "validation": {
             "required": true,
             "errorMessage": "Please select insurance type"
@@ -358,55 +384,6 @@
       ]
     },
     {
-      "section": "Personal property details",
-      "type": "table",
-      "description": "Real estate and property holdings",
-      "maxRows": 10,
-      "columns": [
-        {
-          "label": "Address",
-          "name": "address",
-          "type": "text",
-          "placeholder": "Property address",
-          "validation": {
-            "required": true,
-            "errorMessage": "Address is required"
-          }
-        },
-        {
-          "label": "Date Acquired",
-          "name": "date_acquired",
-          "type": "date",
-          "validation": {
-            "required": true,
-            "errorMessage": "Date acquired is required"
-          }
-        },
-        {
-          "label": "Bank Name",
-          "name": "bank_name",
-          "type": "text",
-          "placeholder": "Bank name (if loan)"
-        },
-        {
-          "label": "Property Owners",
-          "name": "owners",
-          "type": "text",
-          "placeholder": "Owner names",
-          "validation": {
-            "required": true,
-            "errorMessage": "Property owners are required"
-          }
-        },
-        {
-          "label": "Returns or Income, if any",
-          "name": "returns_income",
-          "type": "text",
-          "placeholder": "Monthly/yearly income"
-        }
-      ]
-    },
-    {
       "section": "Deposits with banks / post offices",
       "type": "table",
       "description": "Fixed deposits, recurring deposits, and savings",
@@ -464,7 +441,7 @@
       "section": "Shares, bonds & other saving certificates",
       "type": "table",
       "description": "Investment portfolio details",
-      "maxRows": 20,
+      "maxRows": 15,
       "columns": [
         {
           "label": "Company / Bank Name",
@@ -495,209 +472,73 @@
       ]
     },
     {
-      "section": "Important website links & login credentials",
+      "section": "Digital assets & online accounts",
       "type": "table",
-      "description": "Store important login information securely",
-      "maxRows": 20,
-      "columns": [
-        {
-          "label": "Purpose",
-          "name": "purpose",
-          "type": "text",
-          "placeholder": "e.g., Banking, Email",
-          "validation": {
-            "required": true,
-            "errorMessage": "Purpose is required"
-          }
-        },
-        {
-          "label": "Websites / URL",
-          "name": "website",
-          "type": "text",
-          "placeholder": "https://example.com",
-          "validation": {
-            "required": true,
-            "errorMessage": "Website URL is required"
-          }
-        },
-        {
-          "label": "Login ID",
-          "name": "login_id",
-          "type": "text",
-          "placeholder": "Username or email",
-          "validation": {
-            "required": true,
-            "errorMessage": "Login ID is required"
-          }
-        },
-        {
-          "label": "Password / Hint",
-          "name": "password_hint",
-          "type": "text",
-          "placeholder": "Password hint (not actual password)"
-        }
-      ]
-    },
-    {
-      "section": "Location of important documents & records",
-      "type": "complex",
-      "description": "Where you keep important documents",
-      "structure": [
-        {
-          "type": "table",
-          "title": "Bank Lockers",
-          "maxRows": 5,
-          "columns": [
-            {
-              "label": "Locker",
-              "name": "locker",
-              "type": "text",
-              "placeholder": "Locker identifier"
-            },
-            {
-              "label": "Name of Bank",
-              "name": "bank_name",
-              "type": "text",
-              "placeholder": "Bank name",
-              "validation": {
-                "required": true,
-                "errorMessage": "Bank name is required"
-              }
-            },
-            {
-              "label": "Address",
-              "name": "address",
-              "type": "text",
-              "placeholder": "Branch address",
-              "validation": {
-                "required": true,
-                "errorMessage": "Address is required"
-              }
-            },
-            {
-              "label": "Locker No.",
-              "name": "locker_no",
-              "type": "text",
-              "placeholder": "Locker number",
-              "validation": {
-                "required": true,
-                "errorMessage": "Locker number is required"
-              }
-            },
-            {
-              "label": "Keys located at",
-              "name": "key_location",
-              "type": "text",
-              "placeholder": "Where keys are kept"
-            },
-            {
-              "label": "List of Contents",
-              "name": "contents",
-              "type": "text",
-              "placeholder": "Brief description of contents"
-            }
-          ]
-        },
-        {
-          "type": "table",
-          "title": "Type of Document",
-          "maxRows": 20,
-          "columns": [
-            {
-              "label": "Type of Document",
-              "name": "doc_type",
-              "type": "select",
-              "options": [
-                "Birth Certificate",
-                "Marriage Certificate",
-                "Property Documents",
-                "Will/Testament",
-                "Educational Certificates",
-                "Insurance Policies",
-                "Tax Returns",
-                "Medical Records",
-                "Other"
-              ],
-              "validation": {
-                "required": true,
-                "errorMessage": "Document type is required"
-              }
-            },
-            {
-              "label": "Location",
-              "name": "location",
-              "type": "text",
-              "placeholder": "Where document is stored",
-              "validation": {
-                "required": true,
-                "errorMessage": "Location is required"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "section": "Contact details of my advisors",
-      "type": "table",
-      "description": "Legal, financial, and other professional advisors",
+      "description": "Cryptocurrency, domain names, and digital properties",
       "maxRows": 15,
       "columns": [
         {
-          "label": "Role/Type",
-          "name": "role",
+          "label": "Asset Type",
+          "name": "asset_type",
           "type": "select",
           "options": [
-            "Lawyer",
-            "Chartered Accountant",
-            "Financial Advisor",
-            "Tax Consultant",
-            "Insurance Agent",
-            "Real Estate Agent",
-            "Doctor",
+            "Cryptocurrency Wallet",
+            "Domain Name",
+            "Website/Blog",
+            "Online Business",
+            "Cloud Storage",
+            "Email Account",
+            "Social Media Account",
+            "Digital Subscription",
+            "NFT/Digital Art",
             "Other"
           ],
           "validation": {
             "required": true,
-            "errorMessage": "Role is required"
+            "errorMessage": "Asset type is required"
           }
         },
         {
-          "label": "Name",
-          "name": "name",
+          "label": "Asset Name/Description",
+          "name": "asset_name",
           "type": "text",
-          "placeholder": "Advisor name",
+          "placeholder": "e.g., Bitcoin Wallet, example.com",
           "validation": {
             "required": true,
-            "errorMessage": "Name is required"
+            "errorMessage": "Asset name is required"
           }
         },
         {
-          "label": "Address",
-          "name": "address",
+          "label": "Platform/Provider",
+          "name": "platform",
           "type": "text",
-          "placeholder": "Office address"
-        },
-        {
-          "label": "Contact No.",
-          "name": "contact_no",
-          "type": "text",
-          "placeholder": "10 digit number",
+          "placeholder": "e.g., Coinbase, GoDaddy, AWS",
           "validation": {
             "required": true,
-            "pattern": "^[0-9]{10}$",
-            "errorMessage": "Contact number must be 10 digits"
+            "errorMessage": "Platform is required"
           }
         },
         {
-          "label": "Email",
-          "name": "email",
-          "type": "email",
-          "placeholder": "email@example.com",
+          "label": "Account ID/Wallet Address",
+          "name": "account_id",
+          "type": "text",
+          "placeholder": "Account identifier or wallet address"
+        },
+        {
+          "label": "Estimated Value (₹)",
+          "name": "estimated_value",
+          "type": "number",
+          "placeholder": "Current estimated value",
           "validation": {
-            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
-            "errorMessage": "Please enter a valid email address"
+            "min": 0,
+            "errorMessage": "Value must be a positive number"
           }
+        },
+        {
+          "label": "Access Notes",
+          "name": "access_notes",
+          "type": "text",
+          "placeholder": "How to access (recovery phrase location, etc.)"
         }
       ]
     },
@@ -705,7 +546,7 @@
       "section": "Credit card details",
       "type": "table",
       "description": "Credit card information",
-      "maxRows": 10,
+      "maxRows": 6,
       "columns": [
         {
           "label": "Credit Card No.",
@@ -753,7 +594,7 @@
       "section": "Loan details",
       "type": "table",
       "description": "Active loans and liabilities",
-      "maxRows": 15,
+      "maxRows": 8,
       "columns": [
         {
           "label": "Type of Loan",
@@ -831,6 +672,262 @@
           "validation": {
             "required": true,
             "errorMessage": "End date is required"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Personal property details",
+      "type": "table",
+      "description": "Real estate and property holdings",
+      "maxRows": 6,
+      "columns": [
+        {
+          "label": "Address",
+          "name": "address",
+          "type": "text",
+          "placeholder": "Property address",
+          "validation": {
+            "required": true,
+            "errorMessage": "Address is required"
+          }
+        },
+        {
+          "label": "Date Acquired",
+          "name": "date_acquired",
+          "type": "date",
+          "validation": {
+            "required": true,
+            "errorMessage": "Date acquired is required"
+          }
+        },
+        {
+          "label": "Bank Name",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Bank name (if loan)"
+        },
+        {
+          "label": "Property Owners",
+          "name": "owners",
+          "type": "text",
+          "placeholder": "Owner names",
+          "validation": {
+            "required": true,
+            "errorMessage": "Property owners are required"
+          }
+        },
+        {
+          "label": "Returns or Income, if any",
+          "name": "returns_income",
+          "type": "text",
+          "placeholder": "Monthly/yearly income"
+        }
+      ]
+    },
+    {
+      "section": "Important website links & login credentials",
+      "type": "table",
+      "description": "Store important login information securely",
+      "maxRows": 20,
+      "columns": [
+        {
+          "label": "Purpose",
+          "name": "purpose",
+          "type": "text",
+          "placeholder": "e.g., Banking, Email",
+          "validation": {
+            "required": true,
+            "errorMessage": "Purpose is required"
+          }
+        },
+        {
+          "label": "Websites / URL",
+          "name": "website",
+          "type": "text",
+          "placeholder": "https://example.com",
+          "validation": {
+            "required": true,
+            "errorMessage": "Website URL is required"
+          }
+        },
+        {
+          "label": "Login ID",
+          "name": "login_id",
+          "type": "text",
+          "placeholder": "Username or email",
+          "validation": {
+            "required": true,
+            "errorMessage": "Login ID is required"
+          }
+        },
+        {
+          "label": "Password / Hint",
+          "name": "password_hint",
+          "type": "text",
+          "placeholder": "Password hint (not actual password)"
+        }
+      ]
+    },
+    {
+      "section": "Location of important documents & records",
+      "type": "complex",
+      "description": "Where you keep important documents",
+      "structure": [
+        {
+          "type": "table",
+          "title": "Bank Lockers",
+          "maxRows": 3,
+          "columns": [
+            {
+              "label": "Locker",
+              "name": "locker",
+              "type": "text",
+              "placeholder": "Locker identifier"
+            },
+            {
+              "label": "Name of Bank",
+              "name": "bank_name",
+              "type": "text",
+              "placeholder": "Bank name",
+              "validation": {
+                "required": true,
+                "errorMessage": "Bank name is required"
+              }
+            },
+            {
+              "label": "Address",
+              "name": "address",
+              "type": "text",
+              "placeholder": "Branch address",
+              "validation": {
+                "required": true,
+                "errorMessage": "Address is required"
+              }
+            },
+            {
+              "label": "Locker No.",
+              "name": "locker_no",
+              "type": "text",
+              "placeholder": "Locker number",
+              "validation": {
+                "required": true,
+                "errorMessage": "Locker number is required"
+              }
+            },
+            {
+              "label": "Keys located at",
+              "name": "key_location",
+              "type": "text",
+              "placeholder": "Where keys are kept"
+            },
+            {
+              "label": "List of Contents",
+              "name": "contents",
+              "type": "text",
+              "placeholder": "Brief description of contents"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "title": "Type of Document",
+          "maxRows": 15,
+          "columns": [
+            {
+              "label": "Type of Document",
+              "name": "doc_type",
+              "type": "select",
+              "options": [
+                "Birth Certificate",
+                "Marriage Certificate",
+                "Property Documents",
+                "Will/Testament",
+                "Educational Certificates",
+                "Insurance Policies",
+                "Tax Returns",
+                "Medical Records",
+                "Other"
+              ],
+              "validation": {
+                "required": true,
+                "errorMessage": "Document type is required"
+              }
+            },
+            {
+              "label": "Location",
+              "name": "location",
+              "type": "text",
+              "placeholder": "Where document is stored",
+              "validation": {
+                "required": true,
+                "errorMessage": "Location is required"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Contact details of my advisors",
+      "type": "table",
+      "description": "Legal, financial, and other professional advisors",
+      "maxRows": 8,
+      "columns": [
+        {
+          "label": "Role/Type",
+          "name": "role",
+          "type": "select",
+          "options": [
+            "Lawyer",
+            "Chartered Accountant",
+            "Financial Advisor",
+            "Tax Consultant",
+            "Insurance Agent",
+            "Real Estate Agent",
+            "Doctor",
+            "Other"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Role is required"
+          }
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Advisor name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "Address",
+          "name": "address",
+          "type": "text",
+          "placeholder": "Office address"
+        },
+        {
+          "label": "Contact No.",
+          "name": "contact_no",
+          "type": "text",
+          "placeholder": "10 digit number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Contact number must be 10 digits"
+          }
+        },
+        {
+          "label": "Email",
+          "name": "email",
+          "type": "email",
+          "placeholder": "email@example.com",
+          "validation": {
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+            "errorMessage": "Please enter a valid email address"
           }
         }
       ]

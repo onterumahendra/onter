@@ -1,8 +1,11 @@
 import { getFormSections } from '../constants';
 import DOMPurify from 'dompurify';
 
+// Type for values that can be sanitized
+type SanitizableValue = string | number | boolean | null | undefined;
+
 // Sanitize input to prevent XSS
-function sanitizeInput(value: any): any {
+function sanitizeInput(value: SanitizableValue): string | number | boolean {
   if (typeof value === 'string') {
     return DOMPurify.sanitize(value, { ALLOWED_TAGS: [] });
   }

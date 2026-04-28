@@ -1,5 +1,6 @@
-import { Table, Button, Group, ActionIcon, Box, Text, ScrollArea } from '@mantine/core';
+import { Table, Button, Group, ActionIcon, Box, Text, ScrollArea, Card, Stack, Divider, Paper } from '@mantine/core';
 import { IconPlus, IconTrash } from '@tabler/icons-react';
+import { useMediaQuery } from '@mantine/hooks';
 import { useTranslation } from 'react-i18next';
 import { SimpleField } from './SimpleFieldsGrid';
 import type { BaseField } from '../../constants/types';
@@ -34,67 +35,117 @@ export function TableFieldsGrid({
   isLastRowComplete = true
 }: TableFieldsGridProps) {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <Box>
-      <ScrollArea>
-        <Table striped highlightOnHover withTableBorder withColumnBorders>
-          <Table.Thead>
-            <Table.Tr>
-              {columns.map((col) => (
-                <Table.Th key={col.name} style={{ minWidth: 180 }}>
-                  <Text size="sm" fw={600}>
-                    {col.label}
-                    {col.validation?.required && <Text component="span" c="red.6"> *</Text>}
-                  </Text>
-                </Table.Th>
-              ))}
-              <Table.Th style={{ width: 80 }}>{t('table.actions')}</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {rows.length === 0 ? (
-              <Table.Tr>
-                <Table.Td colSpan={columns.length + 1}>
-                  <Text c="dimmed" ta="center" py="xl">
-                    {t('table.noEntries')}
-                  </Text>
-                </Table.Td>
-              </Table.Tr>
-            ) : (
-              rows.map((row, rowIndex) => (
-                <Table.Tr key={rowIndex}>
+      {/* Mobile Card View */}
+      {isMobile ? (
+        <Stack gap="md">
+          {rows.length === 0 ? (
+            <Paper withBorder p="xl">
+              <Text c="dimmed" ta="center">
+                {t('table.noEntries')}
+              </Text>
+            </Paper>
+          ) : (
+            rows.map((row, rowIndex) => (
+              <Card key={rowIndex} withBorder padding="md" shadow="sm">
+                <Stack gap="sm">
+                  <Group justify="space-between" mb="xs">
+                    <Text size="sm" fw={600} c="blue.6">
+                      {t('table.entry')} #{rowIndex + 1}
+                    </Text>
+                    <ActionIcon
+                      color="red"
+                      variant="light"
+                      onClick={() => onRemoveRow(rowIndex)}
+                      disabled={rows.length <= minRows}
+                      size="sm"
+                      title={rows.length <= minRows ? t('table.minRowsRequired', { min: minRows }) : t('table.removeRow')}
+                    >
+                      <IconTrash size={16} />
+                    </ActionIcon>
+                  </Group>
+                  <Divider />
                   {columns.map((col) => (
-                    <Table.Td key={col.name} style={{ verticalAlign: 'top', padding: '8px' }}>
+                    <Box key={col.name}>
                       <SimpleField
                         field={col}
                         value={row[col.name]}
                         error={errors[rowIndex]?.[col.name]}
                         onChange={(value) => onCellChange(rowIndex, col.name, value)}
                         onBlur={() => onCellBlur?.(rowIndex, col.name)}
-                        hideLabel={true}
+                        hideLabel={false}
                       />
-                    </Table.Td>
+                    </Box>
                   ))}
-                  <Table.Td style={{ verticalAlign: 'top', padding: '8px' }}>
-                    <ActionIcon
-                      color="red"
-                      variant="light"
-                      onClick={() => onRemoveRow(rowIndex)}
-                      disabled={rows.length <= minRows}
-                      title={rows.length <= minRows ? t('table.minRowsRequired', { min: minRows }) : t('table.removeRow')}
-                    >
-                      <IconTrash size={16} />
-                    </ActionIcon>
+                </Stack>
+              </Card>
+            ))
+          )}
+        </Stack>
+      ) : (
+        /* Desktop Table View */
+        <ScrollArea>
+          <Table striped highlightOnHover withTableBorder withColumnBorders>
+            <Table.Thead>
+              <Table.Tr>
+                {columns.map((col) => (
+                  <Table.Th key={col.name} style={{ minWidth: 180 }}>
+                    <Text size="sm" fw={600}>
+                      {col.label}
+                      {col.validation?.required && <Text component="span" c="red.6"> *</Text>}
+                    </Text>
+                  </Table.Th>
+                ))}
+                <Table.Th style={{ width: 80 }}>{t('table.actions')}</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              {rows.length === 0 ? (
+                <Table.Tr>
+                  <Table.Td colSpan={columns.length + 1}>
+                    <Text c="dimmed" ta="center" py="xl">
+                      {t('table.noEntries')}
+                    </Text>
                   </Table.Td>
                 </Table.Tr>
-              ))
-            )}
-          </Table.Tbody>
-        </Table>
-      </ScrollArea>
+              ) : (
+                rows.map((row, rowIndex) => (
+                  <Table.Tr key={rowIndex}>
+                    {columns.map((col) => (
+                      <Table.Td key={col.name} style={{ verticalAlign: 'top', padding: '8px' }}>
+                        <SimpleField
+                          field={col}
+                          value={row[col.name]}
+                          error={errors[rowIndex]?.[col.name]}
+                          onChange={(value) => onCellChange(rowIndex, col.name, value)}
+                          onBlur={() => onCellBlur?.(rowIndex, col.name)}
+                          hideLabel={true}
+                        />
+                      </Table.Td>
+                    ))}
+                    <Table.Td style={{ verticalAlign: 'top', padding: '8px' }}>
+                      <ActionIcon
+                        color="red"
+                        variant="light"
+                        onClick={() => onRemoveRow(rowIndex)}
+                        disabled={rows.length <= minRows}
+                        title={rows.length <= minRows ? t('table.minRowsRequired', { min: minRows }) : t('table.removeRow')}
+                      >
+                        <IconTrash size={16} />
+                      </ActionIcon>
+                    </Table.Td>
+                  </Table.Tr>
+                ))
+              )}
+            </Table.Tbody>
+          </Table>
+        </ScrollArea>
+      )}
 
-      <Group mt="md">
+      <Group mt="md" justify="space-between" align="center">
         <Button
           leftSection={<IconPlus size={16} />}
           onClick={onAddRow}
@@ -104,11 +155,8 @@ export function TableFieldsGrid({
         >
           {maxRows ? t('table.addRowWithCount', { current: rows.length, max: maxRows }) : t('table.addRow')}
         </Button>
-        {rows.length > 0 && !isLastRowComplete && (
-          <Text size="sm" c="orange.6">{t('table.completeCurrentRow')}</Text>
-        )}
         {maxRows && rows.length >= maxRows && (
-          <Text size="sm" c="dimmed">{t('table.maxRowsReached')}</Text>
+          <Text size="xs" c="dimmed">{t('table.maxRowsReached')}</Text>
         )}
       </Group>
     </Box>

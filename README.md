@@ -1,3 +1,6 @@
+
+[![View source on GitHub](https://img.shields.io/badge/GitHub-View%20Source-blue?logo=github)](https://github.com/onterumahendra/onter)
+
 # Onter — Legacy Information Organizer
 
 A privacy-first client-side React app designed to help individuals compile essential personal, financial, insurance, legal, and digital information in one organized package for family members and trusted executors.

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   AppShell,
   Burger,
@@ -23,11 +23,74 @@ import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store/appStore';
 import { useDebounce } from '../hooks/useDebounce';
 import { useFormConfig } from '../hooks/useFormConfig';
+import { createValidationService } from '../services/validationService';
 import { SimpleFieldsContainer } from './FormFields/SimpleFieldsContainer';
 import { TableFieldsContainer } from './FormFields/TableFieldsContainer';
 import { ComplexFieldsContainer } from './FormFields/ComplexFieldsContainer';
 import { downloadFormAsZip } from '../utils/zipService';
 import { publicAsset } from '../utils/paths';
+
+/**
+ * Progress Stats Component - Shows saving status and progress percentage
+ */
+interface ProgressStatsProps {
+  isSaving: boolean;
+  lastSaveTime: number | null;
+  completedSteps: number;
+  totalSteps: number;
+  progressPercentage: number;
+  variant: 'mobile' | 'desktop';
+  t: (key: string, params?: any) => string;
+}
+
+function ProgressStats({ 
+  isSaving, 
+  lastSaveTime, 
+  completedSteps, 
+  totalSteps, 
+  progressPercentage, 
+  variant,
+  t 
+}: ProgressStatsProps) {
+  if (variant === 'mobile') {
+    return (
+      <Group gap="xs" wrap="nowrap">
+        {isSaving && (
+          <Badge color="blue" variant="light" size="sm">
+            {t('formStepper.saving')}
+          </Badge>
+        )}
+        <Badge color="blue" variant="filled" size="sm">
+          {Math.round(progressPercentage)}%
+        </Badge>
+      </Group>
+    );
+  }
+
+  return (
+    <Group gap="xs" wrap="wrap" justify="flex-end">
+      {isSaving && (
+        <Badge color="blue" variant="light" leftSection={<IconDeviceFloppy size={12} />}>
+          {t('formStepper.saving')}
+        </Badge>
+      )}
+      {lastSaveTime && !isSaving && (
+        <Text size="xs" c="slate.5">
+          {t('formStepper.saved', { time: new Date(lastSaveTime).toLocaleTimeString() })}
+        </Text>
+      )}
+      <Text size="sm" c="slate.5">
+        {t('formStepper.progress', { 
+          completed: completedSteps, 
+          total: totalSteps 
+        })}
+      </Text>
+      <Badge color="blue" variant="light">
+        {Math.round(progressPercentage)}%
+      </Badge>
+    </Group>
+  );
+}
 
 /**
  * Refactored FormStepper following SOLID principles
@@ -43,7 +106,10 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
   const [showExportModal, setShowExportModal] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [exportError, setExportError] = useState<string | null>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const validationService = useMemo(() => createValidationService(), []);
 
   // State management
   const {
@@ -62,6 +128,11 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
 
   const currentSection = formSections[currentStep];
 
+  // Type for row data to avoid 'any'
+  interface RowData {
+    [key: string]: string | number | boolean | null | undefined;
+  }
+
   // Auto-save effect
   useEffect(() => {
     if (Object.keys(debouncedFormData).length > 0) {
@@ -72,8 +143,90 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
     }
   }, [debouncedFormData, saveToIndexedDB]);
 
+  const validateCurrentSection = (): boolean => {
+    if (!currentSection) return true;
+
+    const errors: string[] = [];
+    const sectionData = formData[currentSection.section];
+
+    switch (currentSection.type) {
+      case 'simple': {
+        // Validate simple fields
+        const values = sectionData || {};
+        const fieldErrors = validationService.validateAllFields(currentSection.fields, values);
+        
+        Object.values(fieldErrors).forEach((error) => {
+          errors.push(error);
+        });
+        break;
+      }
+
+      case 'table': {
+        // Validate table rows - check if any data exists and validate it
+        const rows = sectionData || [];
+        
+        if (rows.length > 0) {
+          rows.forEach((row: RowData, index: number) => {
+            // Skip completely empty rows
+            const hasData = currentSection.columns.some(col => 
+              row[col.name] != null && row[col.name] !== ''
+            );
+            if (hasData) {
+              const rowErrors = validationService.validateAllFields(currentSection.columns, row);
+              Object.values(rowErrors).forEach((error) => {
+                errors.push(`Row ${index + 1}: ${error}`);
+              });
+            }
+          });
+        }
+        break;
+      }
+
+      case 'complex': {
+        // Validate complex subsections
+        const complexData = sectionData || {};
+        
+        currentSection.structure.forEach((struct) => {
+          const rows = complexData[struct.title] || [];
+          
+          if (rows.length > 0) {
+            rows.forEach((row: RowData, index: number) => {
+              // Skip completely empty rows
+              const hasData = struct.columns.some(col => 
+                row[col.name] != null && row[col.name] !== ''
+              );
+              if (hasData) {
+                const rowErrors = validationService.validateAllFields(struct.columns, row);
+                Object.values(rowErrors).forEach((error) => {
+                  errors.push(`${struct.title} - Row ${index + 1}: ${error}`);
+                });
+              }
+            });
+          }
+        });
+        break;
+      }
+    }
+
+    setValidationErrors(errors);
+    return errors.length === 0;
+  };
+
   const handleNext = () => {
     if (currentStep < formSections.length - 1) {
+      // Clear previous validation errors
+      setValidationErrors([]);
+      
+      // Validate current section
+      const isValid = validateCurrentSection();
+      
+      if (!isValid) {
+        // Scroll to top to show validation errors
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // Proceed to next step
       setCompletedSteps(prev => new Set([...prev, currentStep]));
       setStep(currentStep + 1);
       if (isMobile) close();
@@ -82,6 +235,8 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
 
   const handlePrevious = () => {
     if (currentStep > 0) {
+      // Clear validation errors when going back
+      setValidationErrors([]);
       setStep(currentStep - 1);
       if (isMobile) close();
     }
@@ -89,6 +244,8 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
 
   const handleSkip = () => {
     if (currentStep < formSections.length - 1) {
+      // Clear validation errors when skipping
+      setValidationErrors([]);
       setSkippedSteps(prev => new Set([...prev, currentStep]));
       setStep(currentStep + 1);
       if (isMobile) close();
@@ -124,8 +281,8 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
         console.error('Export failed:', error);
         const errorMessage = error instanceof Error 
           ? error.message 
-          : 'Failed to export data. Please try again.';
-        alert(errorMessage);
+          : t('formStepper.export.error.defaultMessage');
+        setExportError(errorMessage);
       } finally {
         setIsExporting(false);
       }
@@ -217,16 +374,31 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
       padding="md"
     >
       <AppShell.Header style={isMobile ? undefined : { width: '300px', borderRight: '1px solid var(--mantine-color-gray-3)' }}>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          {/* <Title order={2} c="slate.6">{t('app.title')}</Title> */}
-           <img 
-             src={publicAsset('logo.png')} 
-             alt="Onter" 
-             style={{ height: '40px', cursor: 'pointer' }} 
-             onClick={onBackToIntro}
-             title="Go back to home"
-           />
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            {/* <Title order={2} c="slate.6">{t('app.title')}</Title> */}
+             <img 
+               src={publicAsset('logo.png')} 
+               alt="Onter" 
+               style={{ height: '40px', cursor: 'pointer' }} 
+               onClick={onBackToIntro}
+               title={t('formStepper.header.backToHome')}
+             />
+          </Group>
+          
+          {/* Mobile: Show progress stats in header */}
+          {isMobile && (
+            <ProgressStats
+              isSaving={isSaving}
+              lastSaveTime={lastSaveTime}
+              completedSteps={completedSteps.size + skippedSteps.size}
+              totalSteps={formSections.length}
+              progressPercentage={progressPercentage}
+              variant="mobile"
+              t={t}
+            />
+          )}
         </Group>
       </AppShell.Header>
 
@@ -326,8 +498,44 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
             </Notification>
           )}
 
+          {/* Export Error Notification */}
+          {exportError && (
+            <Notification
+              icon={<IconAlertTriangle size={18} />}
+              color="red"
+              title={t('formStepper.export.error.title')}
+              onClose={() => setExportError(null)}
+              mb="xl"
+            >
+              {exportError}
+            </Notification>
+          )}
+
           <Box style={{ flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
             <Stack gap="xl">
+              {/* Validation Errors */}
+              {validationErrors.length > 0 && (
+                <Alert
+                  icon={<IconAlertTriangle size={18} />}
+                  title={t('formStepper.validation.title')}
+                  color="red"
+                  variant="light"
+                  withCloseButton
+                  onClose={() => setValidationErrors([])}
+                >
+                  <Stack gap="xs">
+                    <Text size="sm">{t('formStepper.validation.message')}</Text>
+                    <Stack gap={4}>
+                      {validationErrors.map((error, index) => (
+                        <Text key={index} size="sm" c="red.7">
+                          • {error}
+                        </Text>
+                      ))}
+                    </Stack>
+                  </Stack>
+                </Alert>
+              )}
+
               <Group justify="space-between" align="flex-start">
                 <Box style={{ maxWidth: isMobile ? '100%' : '300px', flex: 1 }}>
                   <Title order={4} c="slate.8" mb="xs">
@@ -340,27 +548,18 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
                   )}
                 </Box>
                 
-                <Group gap="xs" wrap="wrap" justify="flex-end">
-                  {isSaving && (
-                    <Badge color="blue" variant="light" leftSection={<IconDeviceFloppy size={12} />}>
-                      {t('formStepper.saving')}
-                    </Badge>
-                  )}
-                  {lastSaveTime && !isSaving && (
-                    <Text size="xs" c="slate.5">
-                      {t('formStepper.saved', { time: new Date(lastSaveTime).toLocaleTimeString() })}
-                    </Text>
-                  )}
-                  <Text size="sm" c="slate.5">
-                    {t('formStepper.progress', { 
-                      completed: completedSteps.size + skippedSteps.size, 
-                      total: formSections.length 
-                    })}
-                  </Text>
-                  <Badge color="blue" variant="light">
-                    {Math.round(progressPercentage)}%
-                  </Badge>
-                </Group>
+                {/* Desktop/Tablet: Show progress stats beside section title */}
+                {!isMobile && (
+                  <ProgressStats
+                    isSaving={isSaving}
+                    lastSaveTime={lastSaveTime}
+                    completedSteps={completedSteps.size + skippedSteps.size}
+                    totalSteps={formSections.length}
+                    progressPercentage={progressPercentage}
+                    variant="desktop"
+                    t={t}
+                  />
+                )}
               </Group>
 
               {renderSectionContent()}

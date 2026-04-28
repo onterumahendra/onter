@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAppStore } from '../store/appStore';
 import { createFormConfigService, type IFormConfigService } from '../services/formConfigService';
 import type { FormSection } from '../constants/types';
@@ -10,19 +10,22 @@ interface UseFormConfigResult {
   reload: () => void;
 }
 
+// Create singleton service instance to avoid recreation
+const defaultService = createFormConfigService();
+
 /**
  * Hook for loading form configuration
  * Follows Dependency Inversion: Depends on IFormConfigService interface
  */
 export const useFormConfig = (
-  service: IFormConfigService = createFormConfigService()
+  service: IFormConfigService = defaultService
 ): UseFormConfigResult => {
   const [formSections, setFormSections] = useState<FormSection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { selectedCountry } = useAppStore();
 
-  const loadConfig = async () => {
+  const loadConfig = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     
@@ -34,11 +37,11 @@ export const useFormConfig = (
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [selectedCountry, service]);
 
   useEffect(() => {
     loadConfig();
-  }, [selectedCountry]);
+  }, [loadConfig]);
 
   return {
     formSections,

@@ -12,6 +12,7 @@ import {
   Alert,
   List,
   Modal,
+  SimpleGrid,
 } from '@mantine/core';
 import {
   IconFileDownload,
@@ -179,15 +180,24 @@ export function Introduction({ onComplete }: IntroductionProps) {
                 justifyContent: 'center'
               }}
             >
-              {t('introduction.welcome')}
               <img
                 src={publicAsset('logo.png')}
                 alt="Onter"
-                style={{ height: '40px', marginLeft: '5px' }}
+                style={{ height: '40px' }}
               />
             </Title>
             <Text c="slate.6" size="lg">
               {t('app.tagline')}
+              <div style={{ marginTop: 8 }}>
+                <a
+                  href="https://github.com/onterumahendra/onter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#2563eb', textDecoration: 'underline', fontSize: 14 }}
+                >
+                  {t('app.viewSource')}
+                </a>
+              </div>
             </Text>
           </div>
           
@@ -201,6 +211,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
               <List.Item>{t('introduction.privacy.features.localStorage')}</List.Item>
               <List.Item>{t('introduction.privacy.features.noServer')}</List.Item>
               <List.Item>{t('introduction.privacy.features.autoDelete')}</List.Item>
+              <List.Item>{t('introduction.privacy.features.noCloud')}</List.Item>
               <List.Item>{t('introduction.privacy.features.offline')}</List.Item>
             </List>
           </Alert>
@@ -268,7 +279,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
                 {t('introduction.start.manualEntry')}
               </Button>
               
-              <Group grow>
+              <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
                 <Button
                   variant="light"
                   leftSection={<IconFileDownload size={18} />}
@@ -294,7 +305,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
                     </Button>
                   )}
                 </FileButton>
-              </Group>
+              </SimpleGrid>
               
               {file && (
                 <Alert color="teal" variant="light">

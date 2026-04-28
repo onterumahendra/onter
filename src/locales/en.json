@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Onter",
-    "tagline": "Secure, privacy-first financial data management"
+    "tagline": "Organize today. Protect your family tomorrow.",
+    "viewSource": "Trust & verify: Source code on GitHub"
   },
   "introduction": {
     "welcome": "Welcome to ",
@@ -10,7 +11,8 @@
       "features": {
         "localStorage": "All your data stays private on your device",
         "noServer": "No data sent to any server or third party",
-        "autoDelete": "Data automatically deleted after 24 hours",
+        "autoDelete": "Data is automatically cleared after 24 hours for added privacy",
+        "noCloud": "No cloud storage, no hidden tracking",
         "offline": "Works completely offline"
       }
     },
@@ -39,7 +41,7 @@
     },
     "howItWorks": {
       "title": "How it works:",
-      "description": "Your data is stored locally on your device only. Nothing is sent to any server. You have complete control and privacy over your information."
+      "description": "Your information stays on your device—never on our servers. No third-party access, no hidden tracking, and automatic data cleanup after 24 hours for added security."
     },
     "errors": {
       "selectFile": "Please select a file to import",
@@ -54,6 +56,9 @@
     "saving": "Saving...",
     "saved": "Saved {{time}}",
     "sections": "Form Sections",
+    "header": {
+      "backToHome": "Go back to home"
+    },
     "stats": {
       "completed": "Completed",
       "skipped": "Skipped",
@@ -81,23 +86,45 @@
         "skipped": "Skipped:"
       },
       "cancel": "Cancel",
-      "confirm": "Download Excel & Clear Data"
+      "confirm": "Download Excel & Clear Data",
+      "error": {
+        "title": "Export Failed",
+        "defaultMessage": "Failed to export data. Please try again."
+      }
     },
     "stepLabel": "Step {{current}} of {{total}}",
     "stepStatus": {
       "completed": "Completed",
       "skipped": "Skipped"
+    },
+    "validation": {
+      "title": "Validation Errors",
+      "message": "Please fix the following errors before proceeding:"
+    },
+    "skip": {
+      "title": "Skip This Section?",
+      "warning": {
+        "title": "You have entered some data in this section",
+        "message": "Skipping will move to the next section, but your entered data will be saved and you can return to complete it later."
+      },
+      "info": {
+        "dataSaved": "Your data will be saved automatically",
+        "canReturn": "You can return anytime from the sidebar"
+      },
+      "cancel": "Continue Editing",
+      "confirm": "Skip Section"
     }
   },
   "table": {
     "actions": "Actions",
+    "entry": "Entry",
     "noEntries": "No entries yet. Click \"Add Row\" to get started.",
     "addRow": "Add Row",
     "addRowWithCount": "Add Row ({{current}}/{{max}})",
     "maxRowsReached": "Maximum rows reached",
     "minRowsRequired": "Minimum {{min}} row(s) required",
     "removeRow": "Remove row",
-    "completeCurrentRow": "Please complete the current row before adding a new one"
+    "completeCurrentRow": "Complete current row first"
   },
   "validation": {
     "required": "Required",

@@ -14,21 +14,17 @@ const FormStepper = lazy(() => import('./containers/FormStepper').then(m => ({ d
  */
 function App() {
   const [showIntro, setShowIntro] = useState(true);
-  const { initializeFromStorage, formData } = useAppStore();
+  const initializeFromStorage = useAppStore(state => state.initializeFromStorage);
   
   useEffect(() => {
-    // Cleanup expired data on mount
-    cleanupExpiredData();
+    // Cleanup expired data and initialize from storage on mount only
+    const initializeApp = async () => {
+      await cleanupExpiredData();
+      await initializeFromStorage();
+    };
     
-    // Auto-load saved data from IndexedDB
-    initializeFromStorage().then(() => {
-      // If data exists, skip intro
-      if (Object.keys(formData).length > 0) {
-        setShowIntro(false);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    initializeApp();
+  }, [initializeFromStorage]);
   
   return (
     <Suspense fallback={
