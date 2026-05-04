@@ -99,7 +99,7 @@ function ProgressStats({
  */
 export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
   const { t } = useTranslation();
-  const [opened, { toggle, close }] = useDisclosure(true);
+  const [opened, { toggle, close }] = useDisclosure(false);
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
   const [skippedSteps, setSkippedSteps] = useState<Set<number>>(new Set());
   const [showSuccess, setShowSuccess] = useState(false);
@@ -580,24 +580,43 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
               boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.05)'
             }}
           >
-            <Container size="xl">
-              <Group justify="space-between">
+            <Container size={isMobile ? 'xs' : 'xl'} fluid={isMobile} p={0}>
+              <Group
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: isMobile ? '0.75rem' : '1rem',
+                  flexWrap: 'nowrap',
+                }}
+              >
                 <Button
                   leftSection={<IconArrowLeft size={16} />}
                   variant="default"
                   onClick={handlePrevious}
                   disabled={currentStep === 0}
+                  size={isMobile ? 'xs' : 'sm'}
+                  style={isMobile ? { minWidth: 0 } : undefined}
                 >
                   {t('formStepper.navigation.previous')}
                 </Button>
 
-                <Group>
+                <Group
+                  style={{
+                    display: 'flex',
+                    gap: '0.5rem',
+                    flexWrap: 'nowrap',
+                    justifyContent: 'flex-end',
+                  }}
+                >
                   {currentStep < formSections.length - 1 && (
                     <Button
                       leftSection={<IconPlayerSkipForward size={16} />}
                       variant="subtle"
                       onClick={handleSkip}
                       color="gray"
+                      size={isMobile ? 'xs' : 'sm'}
+                      style={isMobile ? { minWidth: 0 } : undefined}
                     >
                       {t('formStepper.navigation.skip')}
                     </Button>
@@ -607,6 +626,8 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
                     <Button
                       rightSection={<IconArrowRight size={16} />}
                       onClick={handleNext}
+                      size={isMobile ? 'xs' : 'sm'}
+                      style={isMobile ? { minWidth: 0 } : undefined}
                     >
                       {t('formStepper.navigation.next')}
                     </Button>
@@ -615,6 +636,8 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
                       rightSection={<IconDownload size={16} />}
                       onClick={handleSubmit}
                       color="teal"
+                      size={isMobile ? 'xs' : 'sm'}
+                      style={isMobile ? { minWidth: 0 } : undefined}
                     >
                       {t('formStepper.navigation.exportData')}
                     </Button>

@@ -186,19 +186,19 @@ export function Introduction({ onComplete }: IntroductionProps) {
                 style={{ height: '40px' }}
               />
             </Title>
-            <Text c="slate.6" size="lg">
-              {t('app.tagline')}
-              <div style={{ marginTop: 8 }}>
-                <a
-                  href="https://github.com/onterumahendra/onter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: '#2563eb', textDecoration: 'underline', fontSize: 14 }}
-                >
-                  {t('app.viewSource')}
-                </a>
-              </div>
-            </Text>
+            <Stack gap="xs" align="center">
+              <Text c="slate.6" size="lg">
+                {t('app.tagline')}
+              </Text>
+              <a
+                href="https://github.com/onterumahendra/onter"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#2563eb', textDecoration: 'underline', fontSize: 14 }}
+              >
+                {t('app.viewSource')}
+              </a>
+            </Stack>
           </div>
           
           <Alert 
