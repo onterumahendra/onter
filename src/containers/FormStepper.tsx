@@ -381,7 +381,7 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
              <img 
                src={publicAsset('logo.png')} 
                alt="Onter" 
-               style={{ height: '40px', cursor: 'pointer' }} 
+               style={{ height: isMobile ? 20 : 30, cursor: 'pointer' }}
                onClick={onBackToIntro}
                title={t('formStepper.header.backToHome')}
              />

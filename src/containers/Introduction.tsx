@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useMediaQuery } from '@mantine/hooks';
 import {
   Container,
   Title,
@@ -40,6 +41,7 @@ interface IntroductionProps {
  */
 export function Introduction({ onComplete }: IntroductionProps) {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string>('');
   const [hasSavedData, setHasSavedData] = useState(false);
@@ -183,7 +185,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
               <img
                 src={publicAsset('logo.png')}
                 alt="Onter"
-                style={{ height: '40px' }}
+                style={{ height: isMobile ? 20 : 30 }}
               />
             </Title>
             <Stack gap="xs" align="center">
