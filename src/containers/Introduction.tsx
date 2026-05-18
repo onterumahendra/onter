@@ -14,6 +14,7 @@ import {
   List,
   Modal,
   SimpleGrid,
+  Transition,
 } from '@mantine/core';
 import {
   IconFileDownload,
@@ -47,6 +48,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
   const [hasSavedData, setHasSavedData] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingAction, setPendingAction] = useState<'manual' | 'import' | 'download' | null>(null);
+  const [showLogo, setShowLogo] = useState(false);
   
   const {
     selectedCountry,
@@ -68,6 +70,14 @@ export function Introduction({ onComplete }: IntroductionProps) {
     };
     checkSavedData();
   }, [loadFromIndexedDB]);
+  
+  // Lazy load logo with delay to improve FCP/LCP
+  useEffect(() => {
+    const logoTimer = setTimeout(() => {
+      setShowLogo(true);
+    }, 100);
+    return () => clearTimeout(logoTimer);
+  }, []);
   
   const formatTimeAgo = (timestamp: number | null) => {
     if (!timestamp) return '';
@@ -179,14 +189,28 @@ export function Introduction({ onComplete }: IntroductionProps) {
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                justifyContent: 'center'
+                justifyContent: 'center',
+                minHeight: isMobile ? 20 : 30
               }}
             >
-              <img
-                src={publicAsset('logo.png')}
-                alt="Onter"
-                style={{ height: isMobile ? 20 : 30 }}
-              />
+              <Transition
+                mounted={showLogo}
+                transition="fade"
+                duration={300}
+                timingFunction="ease-in-out"
+              >
+                {(styles) => (
+                  <img
+                    src={publicAsset('logo.png')}
+                    alt="Onter"
+                    loading="lazy"
+                    style={{ 
+                      height: isMobile ? 20 : 30,
+                      ...styles
+                    }}
+                  />
+                )}
+              </Transition>
             </Title>
             <Stack gap="xs" align="center">
               <Text c="slate.6" size="lg">
