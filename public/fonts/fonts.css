@@ -3,13 +3,13 @@
  */
 
 /* Light */
-@font-face {
+/* @font-face {
   font-family: 'Open Sans';
   src: url('./OpenSans-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 /* Regular */
 @font-face {
@@ -21,13 +21,13 @@
 }
 
 /* Regular Italic */
-@font-face {
+/* @font-face {
   font-family: 'Open Sans';
   src: url('./OpenSans-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
-}
+} */
 
 /* Medium */
 @font-face {
@@ -48,19 +48,19 @@
 }
 
 /* Bold */
-@font-face {
+/* @font-face {
   font-family: 'Open Sans';
   src: url('./OpenSans-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 /* Bold Italic */
-@font-face {
+/* @font-face {
   font-family: 'Open Sans';
   src: url('./OpenSans-BoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
-}
+} */
