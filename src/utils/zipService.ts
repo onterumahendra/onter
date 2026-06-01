@@ -114,13 +114,19 @@ export async function downloadFormAsZip(
 ): Promise<void> {
   try {
     // Dynamic imports for heavy libraries
-    const [JSZip, { generateFormPDF }] = await Promise.all([
+    const [JSZip, { generateFormPDF }, { generateAccessGuidePDF }, { generateRecoveryRoadmapPDF }, { getFormConfig }] = await Promise.all([
       import('jszip').then(m => m.default),
-      import('./pdfService')
+      import('./pdfService'),
+      import('../services/accessGuideService'),
+      import('../services/recoveryRoadmapService'),
+      import('../constants').then(m => ({ getFormConfig: m.getFormConfig }))
     ]);
     
     const zip = new JSZip();
     const timestamp = new Date().toISOString().split('T')[0];
+    
+    // Get country config for access guide
+    const countryConfig = await getFormConfig(countryCode);
     
     // Generate Excel blob with skipped sections handled
     const excelBlob = await generateExcelBlob(formData, countryCode, skippedSteps);
@@ -131,6 +137,35 @@ export async function downloadFormAsZip(
     // Add files to zip
     zip.file(`Onter_Care_${countryCode}_${timestamp}.xlsx`, excelBlob);
     zip.file(`Onter_Care_${countryCode}_${timestamp}.pdf`, pdfBlob);
+    
+    // Generate and add Access Guide if enabled
+    if (countryConfig.accessGuide?.enabled) {
+      try {
+        const accessGuideBlob = await generateAccessGuidePDF({
+          formData,
+          countryConfig,
+          includeData: true
+        });
+        zip.file(`Onter_Emergency_Access_Guide_${countryCode}.pdf`, accessGuideBlob);
+        console.log('✓ Access Guide generated successfully');
+      } catch (error) {
+        console.error('Failed to generate access guide:', error);
+        // Continue without access guide - user still gets Excel and Form PDF
+        // This is acceptable as access guide is supplementary
+      }
+    }
+
+    // Generate and add Recovery Roadmap if enabled
+    if ((countryConfig as any).recoveryRoadmap?.enabled) {
+      try {
+        const roadmapBlob = await generateRecoveryRoadmapPDF({ countryConfig });
+        zip.file(`Onter_Recovery_Roadmap_${countryCode}.pdf`, roadmapBlob);
+        console.log('✓ Recovery Roadmap generated successfully');
+      } catch (error) {
+        console.error('Failed to generate recovery roadmap:', error);
+        // Continue without roadmap - supplementary document
+      }
+    }
     
     // Generate zip file
     const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -143,7 +178,9 @@ export async function downloadFormAsZip(
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    
+    // Delay URL cleanup to ensure download completes
+    setTimeout(() => URL.revokeObjectURL(url), 100);
   } catch (error) {
     console.error('Error creating zip file:', error);
     throw new Error('Failed to create export package. Please try again.');

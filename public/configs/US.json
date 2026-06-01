@@ -24,7 +24,16 @@
           "label": "Blood Group",
           "name": "blood_group",
           "type": "select",
-          "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+          "options": [
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-",
+            "O+",
+            "O-"
+          ],
           "placeholder": "Select blood group"
         },
         {
@@ -119,7 +128,15 @@
           "label": "Insurance Type",
           "name": "insurance_type",
           "type": "select",
-          "options": ["Life", "Health", "Auto", "Home", "Property", "Travel", "Other"],
+          "options": [
+            "Life",
+            "Health",
+            "Auto",
+            "Home",
+            "Property",
+            "Travel",
+            "Other"
+          ],
           "validation": {
             "required": true,
             "errorMessage": "Please select insurance type"
@@ -271,5 +288,181 @@
         }
       ]
     }
-  ]
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "If this is a medical emergency, call 911 immediately",
+      "Locate your downloaded ZIP file (usually in Downloads folder)",
+      "Extract all files to a secure location (right-click > Extract All)",
+      "Open PDF files for quick reference without editing",
+      "Contact emergency contacts listed in your data",
+      "Keep all documents secure - share only with trusted individuals"
+    ],
+    "emergencyServices": {
+      "medical": "911",
+      "police": "911",
+      "fire": "911",
+      "poison_control": "1-800-222-1222",
+      "suicide_prevention": "988"
+    },
+    "sectionGuidance": {
+      "Personal Details": {
+        "description": "Core identity information required for all legal, medical, and financial processes.",
+        "usefulFor": [
+          "Medical professionals",
+          "Legal representatives",
+          "Government agencies",
+          "Financial institutions"
+        ],
+        "firstActions": [
+          "Verify all identity documents (SSN, Passport, Driver's License) are current",
+          "Ensure contact information is up to date",
+          "Confirm blood type with medical records if unknown",
+          "Notify healthcare providers if medical emergency"
+        ],
+        "criticalFields": [
+          "SSN",
+          "Blood Group",
+          "Phone Number",
+          "Email Address"
+        ]
+      },
+      "Emergency contact details": {
+        "description": "Primary and secondary contacts who should be notified in case of emergency.",
+        "usefulFor": [
+          "All emergency responders",
+          "Hospital staff",
+          "Legal representatives"
+        ],
+        "firstActions": [
+          "Contact primary emergency contact immediately",
+          "Verify contact information is current for all listed contacts",
+          "Ensure contacts are aware they are listed as emergency contacts",
+          "Update contact information if any changes have occurred"
+        ],
+        "criticalFields": [
+          "Primary Contact Name",
+          "Primary Contact Phone",
+          "Relationship"
+        ]
+      },
+      "Insurance details": {
+        "description": "Health, life, and other insurance policies that may need to be activated or claimed.",
+        "usefulFor": [
+          "Hospital billing",
+          "Insurance agents",
+          "Legal executors",
+          "Family members"
+        ],
+        "firstActions": [
+          "Locate original policy documents",
+          "Contact insurance company's emergency claims line",
+          "Verify policy is active and premiums are current",
+          "Understand coverage limits and claim procedures",
+          "Keep policy numbers readily accessible"
+        ],
+        "criticalFields": [
+          "Policy Number",
+          "Insurance Company",
+          "Policy Type",
+          "Coverage Amount"
+        ]
+      },
+      "Bank details": {
+        "description": "Financial accounts requiring immediate attention or access during emergencies.",
+        "usefulFor": [
+          "Estate executors",
+          "Financial advisors",
+          "Legal representatives",
+          "Family members"
+        ],
+        "firstActions": [
+          "Contact bank to freeze accounts if necessary",
+          "Verify account holders and beneficiaries",
+          "Locate physical bank statements and documents",
+          "Contact banks to understand next steps for account access",
+          "Ensure authorized signers have proper documentation"
+        ],
+        "criticalFields": [
+          "Account Number",
+          "Bank Name",
+          "Account Type",
+          "Authorized Signers"
+        ]
+      },
+      "IMPORTANT DOCUMENTS LOCATION": {
+        "description": "Physical location of critical legal and financial documents.",
+        "usefulFor": [
+          "Estate executors",
+          "Attorneys",
+          "Family members",
+          "Financial advisors"
+        ],
+        "firstActions": [
+          "Locate and secure all original documents immediately",
+          "Verify will is current and legally valid",
+          "Contact attorney if legal guidance needed",
+          "Gather all documents listed in this section",
+          "Store copies in multiple secure locations"
+        ],
+        "criticalFields": [
+          "Will Location",
+          "Safe/Lockbox Location",
+          "Attorney Contact"
+        ]
+      },
+      "Additional details": {
+        "description": "Supplementary information, special instructions, or unique circumstances.",
+        "usefulFor": [
+          "All parties",
+          "Medical staff",
+          "Legal representatives"
+        ],
+        "firstActions": [
+          "Read through all additional notes carefully",
+          "Follow any specific instructions provided",
+          "Share relevant information with appropriate parties"
+        ]
+      }
+    },
+    "legalNotes": [
+      "This guide provides general emergency access information only",
+      "Consult qualified attorneys for estate planning and legal matters",
+      "Verify compliance with state-specific regulations in your jurisdiction",
+      "Update this information at least annually or when circumstances change",
+      "Consider registering your will and other legal documents with appropriate authorities",
+      "This is not a substitute for proper legal documentation (wills, trusts, POAs)",
+      "Work with financial advisors for beneficiary designations on all accounts",
+      "Ensure healthcare directives and living wills are properly executed"
+    ],
+    "generalGuidance": {
+      "fileStructure": [
+        "Your emergency kit is packaged as a single ZIP file",
+        "Excel Workbook (.xlsx) - Editable spreadsheet with all your information",
+        "PDF Documents - Read-only files for easy printing and sharing",
+        "This Access Guide - Complete instructions for using your emergency kit",
+        "All files are password-protected for your security (if enabled)"
+      ],
+      "dataAccess": [
+        "Windows: Right-click ZIP file > Extract All",
+        "Mac: Double-click ZIP file to extract automatically",
+        "Save extracted files to a memorable, secure location",
+        "Consider encrypted cloud backup (Google Drive, iCloud, OneDrive)",
+        "Enable password protection on folders containing sensitive data",
+        "Share access credentials with at least one trusted person",
+        "Keep digital copies on secure devices (encrypted USB, password-protected phone)"
+      ],
+      "securityTips": [
+        "Never store passwords in plain text files",
+        "Share complete documents only via encrypted channels",
+        "Avoid sending sensitive information via regular email",
+        "Use secure messaging apps (Signal, WhatsApp) for sharing",
+        "Securely delete old versions (use file shredding software)",
+        "Enable two-factor authentication on all cloud storage",
+        "Consider professional document storage services for originals",
+        "Maintain both physical and digital copies in separate locations"
+      ]
+    }
+  }
 }

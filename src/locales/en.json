@@ -151,5 +151,91 @@
     "close": "Close",
     "yes": "Yes",
     "no": "No"
+  },
+  "accessGuide": {
+    "sectionHeaders": {
+      "quickStart": "Quick Start: What to Do RIGHT NOW",
+      "emergencyServices": "Emergency Services Contact",
+      "fileStructure": "Understanding Your Files",
+      "sectionGuide": "Section-by-Section Guide",
+      "emergencyContacts": "Your Emergency Contacts",
+      "legalSecurity": "Legal & Security Notes"
+    },
+    "subsections": {
+      "whatsInZip": "What's in the ZIP File?",
+      "howToAccess": "How to Access Your Data",
+      "howToUseEachSection": "How to Use Each Section",
+      "importantNotes": "Important Notes",
+      "securityBestPractices": "Security Best Practices",
+      "legalConsiderations": "{{country}} Legal Considerations"
+    },
+    "boxTitles": {
+      "criticalFirstMinutes": "CRITICAL: First 30 Minutes",
+      "emergencyNumbers": "{{country}} Emergency Numbers",
+      "contactsFromData": "Contacts from Your Data",
+      "disclaimer": "Disclaimer"
+    },
+    "labels": {
+      "whoNeedsThis": "Who Needs This:",
+      "firstActions": "First Actions:",
+      "criticalFields": "Critical Fields:"
+    },
+    "descriptions": {
+      "zipFileContents": "Your emergency kit contains multiple file formats to ensure accessibility in any situation.",
+      "accessSteps": "Follow these steps to safely access and manage your emergency documents.",
+      "sectionPurpose": "Each section of your form serves a specific purpose. Here's what you need to know about each one.",
+      "verifyContacts": "Verify these contacts are current. Update the form if any information has changed.",
+      "securityGuidelines": "Protect your sensitive information by following these security guidelines.",
+      "legalNotes": "Important legal notes specific to your country and jurisdiction."
+    },
+    "defaults": {
+      "quickStart": [
+        "If this is a medical emergency, call emergency services immediately",
+        "Locate the downloaded ZIP file on your computer",
+        "Extract all files to a secure, easy-to-find location",
+        "Open the PDF files for quick reference",
+        "Contact emergency contacts listed in this guide",
+        "Keep all documents secure - share only with trusted individuals"
+      ],
+      "fileStructure": [
+        "Your download contains a ZIP file with multiple documents",
+        "Excel File (.xlsx) - Editable spreadsheet with all your data",
+        "PDF Files - Read-only documents for easy sharing",
+        "This Access Guide - Instructions on how to use everything"
+      ],
+      "dataAccess": [
+        "Extract the ZIP file using built-in tools (right-click > Extract)",
+        "Store extracted files in a secure, memorable location",
+        "Consider backing up to a secure cloud service",
+        "Password protect folders containing sensitive data",
+        "Share access information with at least one trusted person"
+      ],
+      "securityTips": [
+        "Store this document in a secure location",
+        "Share only with trusted family members and legal representatives",
+        "Never send complete documents via unencrypted email",
+        "Use secure messaging apps or encrypted file sharing services",
+        "Securely delete or shred outdated copies"
+      ],
+      "legalNotes": [
+        "This guide is for emergency access only",
+        "Consult legal professionals for estate planning",
+        "Verify compliance with local regulations",
+        "Update information regularly (at least annually)",
+        "Consider registering important documents with legal authorities"
+      ],
+      "disclaimer": [
+        "This guide provides general information only and does not constitute legal advice.",
+        "Consult qualified professionals for specific legal, financial, or medical guidance.",
+        "Regularly review and update your emergency kit to ensure accuracy."
+      ],
+      "noContactsFound": "No emergency contacts found in form data",
+      "sectionDescription": "Important information section",
+      "sectionBullets": [
+        "Review all information in this section",
+        "Update as needed",
+        "Share with relevant parties"
+      ]
+    }
   }
 }

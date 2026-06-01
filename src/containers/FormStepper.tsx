@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   AppShell,
   Burger,
@@ -97,8 +98,9 @@ function ProgressStats({
  * - Single Responsibility: Only handles stepper UI and navigation
  * - Dependency Inversion: Uses hooks for all external dependencies
  */
-export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
+export function FormStepper() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [opened, { toggle, close }] = useDisclosure(false);
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
   const [skippedSteps, setSkippedSteps] = useState<Set<number>>(new Set());
@@ -162,46 +164,65 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
       }
 
       case 'table': {
-        // Validate table rows - check if any data exists and validate it
-        const rows = sectionData || [];
-        
-        if (rows.length > 0) {
-          rows.forEach((row: RowData, index: number) => {
-            // Skip completely empty rows
-            const hasData = currentSection.columns.some(col => 
-              row[col.name] != null && row[col.name] !== ''
-            );
-            if (hasData) {
-              const rowErrors = validationService.validateAllFields(currentSection.columns, row);
+        const sectionTableData = sectionData || {};
+        const rows = sectionTableData.rows || [];
+        const minRows = currentSection.minRows || 0;
+        let validRowCount = 0;
+
+        // Validate each row that has data and count valid rows
+        rows.forEach((row: RowData, index: number) => {
+          const hasData = currentSection.columns.some(col => 
+            row[col.name] != null && row[col.name] !== ''
+          );
+          
+          if (hasData) {
+            const rowErrors = validationService.validateAllFields(currentSection.columns, row);
+            if (Object.keys(rowErrors).length === 0) {
+              validRowCount++;
+            } else {
               Object.values(rowErrors).forEach((error) => {
                 errors.push(`Row ${index + 1}: ${error}`);
               });
             }
-          });
+          }
+        });
+
+        // Check minimum rows requirement (only count fully valid rows)
+        if (minRows > 0 && validRowCount < minRows) {
+          errors.push(`This section requires at least ${minRows} complete ${minRows === 1 ? 'entry' : 'entries'}`);
         }
         break;
       }
 
       case 'complex': {
-        // Validate complex subsections
         const complexData = sectionData || {};
         
         currentSection.structure.forEach((struct) => {
           const rows = complexData[struct.title] || [];
-          
-          if (rows.length > 0) {
-            rows.forEach((row: RowData, index: number) => {
-              // Skip completely empty rows
-              const hasData = struct.columns.some(col => 
-                row[col.name] != null && row[col.name] !== ''
-              );
-              if (hasData) {
-                const rowErrors = validationService.validateAllFields(struct.columns, row);
+          const minRows = struct.minRows || 0;
+          let validRowCount = 0;
+
+          // Validate each row that has data and count valid rows
+          rows.forEach((row: RowData, index: number) => {
+            const hasData = struct.columns.some(col => 
+              row[col.name] != null && row[col.name] !== ''
+            );
+            
+            if (hasData) {
+              const rowErrors = validationService.validateAllFields(struct.columns, row);
+              if (Object.keys(rowErrors).length === 0) {
+                validRowCount++;
+              } else {
                 Object.values(rowErrors).forEach((error) => {
                   errors.push(`${struct.title} - Row ${index + 1}: ${error}`);
                 });
               }
-            });
+            }
+          });
+
+          // Check minimum rows requirement for this subsection (only count fully valid rows)
+          if (minRows > 0 && validRowCount < minRows) {
+            errors.push(`${struct.title}: Requires at least ${minRows} complete ${minRows === 1 ? 'entry' : 'entries'}`);
           }
         });
         break;
@@ -272,13 +293,17 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
         setShowSuccess(true);
         setShowExportModal(false);
         
-        // Clear data after export
+        // Clear data after export and navigate back to intro
         await clearData();
         setCompletedSteps(new Set());
         setSkippedSteps(new Set());
         setStep(0);
+        
+        // Navigate back to intro after successful export
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       } catch (error) {
-        console.error('Export failed:', error);
         const errorMessage = error instanceof Error 
           ? error.message 
           : t('formStepper.export.error.defaultMessage');
@@ -377,14 +402,13 @@ export function FormStepper({ onBackToIntro }: { onBackToIntro: () => void }) {
         <Group h="100%" px="md" justify="space-between">
           <Group>
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-            {/* <Title order={2} c="slate.6">{t('app.title')}</Title> */}
-             <img 
-               src={publicAsset('logo.png')} 
-               alt="Onter" 
-               style={{ height: isMobile ? 20 : 30, cursor: 'pointer' }}
-               onClick={onBackToIntro}
-               title={t('formStepper.header.backToHome')}
-             />
+            <img 
+              src={publicAsset('logo.png')} 
+              alt="Onter" 
+              style={{ height: isMobile ? 20 : 30, cursor: 'pointer' }}
+              onClick={() => navigate('/')}
+              title={t('formStepper.header.backToHome')}
+            />
           </Group>
           
           {/* Mobile: Show progress stats in header */}

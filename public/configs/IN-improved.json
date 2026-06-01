@@ -1,0 +1,506 @@
+{
+  "countryCode": "IN",
+  "countryName": "India",
+  "currency": "INR",
+  "currencySymbol": "₹",
+  "formSections": [
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "priority": "critical",
+      "estimatedTime": 3,
+      "skippable": false,
+      "completionMessage": "Emergency contacts saved!",
+      "description": "Who should we contact in an emergency? Add at least 1 contact.",
+      "minRows": 1,
+      "maxRows": 5,
+      "helpText": "💡 Tip: Start with your most trusted person - spouse, parent, or close friend",
+      "columns": [
+        {
+          "label": "Contact Type",
+          "name": "contact_type",
+          "type": "select",
+          "options": [
+            "Emergency Contact",
+            "My Doctor",
+            "Family Member",
+            "Close Friend",
+            "Others"
+          ],
+          "validation": {
+            "required": true,
+            "errorMessage": "Please select contact type"
+          }
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Full name",
+          "validation": {
+            "required": true,
+            "minLength": 2,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "Phone No.",
+          "name": "phone",
+          "type": "text",
+          "placeholder": "10 digit number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Phone number must be exactly 10 digits"
+          }
+        },
+        {
+          "label": "Relationship (optional)",
+          "name": "relationship",
+          "type": "text",
+          "placeholder": "e.g., Spouse, Parent"
+        }
+      ]
+    },
+    {
+      "section": "Essential Personal Details",
+      "type": "simple",
+      "priority": "critical",
+      "estimatedTime": 2,
+      "skippable": false,
+      "completionMessage": "Basic medical info saved!",
+      "description": "Critical information for medical emergencies",
+      "helpText": "💡 This information could save your life in an emergency",
+      "fields": [
+        {
+          "label": "Blood Group",
+          "name": "blood_group",
+          "type": "select",
+          "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Don't Know"],
+          "placeholder": "Select blood group",
+          "validation": {
+            "required": true,
+            "errorMessage": "Blood group is critical for medical emergencies"
+          }
+        },
+        {
+          "label": "Primary Mobile No.",
+          "name": "telephone_mobile",
+          "type": "text",
+          "placeholder": "10 digit mobile number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Mobile number must be exactly 10 digits"
+          }
+        },
+        {
+          "label": "Aadhaar Number (optional but recommended)",
+          "name": "aadhaar",
+          "type": "text",
+          "placeholder": "12 digit number",
+          "validation": {
+            "pattern": "^[0-9]{12}$",
+            "errorMessage": "Aadhaar must be exactly 12 digits"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Health Insurance (Mediclaim)",
+      "type": "table",
+      "priority": "critical",
+      "estimatedTime": 3,
+      "skippable": true,
+      "skipMessage": "No health insurance? You can add this later.",
+      "completionMessage": "Health insurance details saved!",
+      "description": "Medical insurance for cashless treatment",
+      "helpText": "💡 Skip if you don't have health insurance",
+      "maxRows": 4,
+      "columns": [
+        {
+          "label": "Insurance Company",
+          "name": "company",
+          "type": "text",
+          "placeholder": "e.g., Star Health, HDFC Ergo",
+          "validation": {
+            "required": true,
+            "errorMessage": "Company name is required"
+          }
+        },
+        {
+          "label": "Policy Number",
+          "name": "policy_no",
+          "type": "text",
+          "placeholder": "Policy number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Policy number is required"
+          }
+        },
+        {
+          "label": "Covered Person",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Who is covered?",
+          "validation": {
+            "required": true,
+            "errorMessage": "Name is required"
+          }
+        },
+        {
+          "label": "Emergency Helpline (optional)",
+          "name": "helpline",
+          "type": "text",
+          "placeholder": "Customer care number"
+        }
+      ]
+    },
+    {
+      "section": "Bank Accounts",
+      "type": "table",
+      "priority": "important",
+      "estimatedTime": 5,
+      "skippable": false,
+      "completionMessage": "Primary bank details saved!",
+      "description": "Your primary bank accounts",
+      "helpText": "💡 Add at least your salary/main account. Other accounts can be added later.",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        {
+          "label": "Account Holder Name",
+          "name": "holder_name",
+          "type": "text",
+          "placeholder": "As per bank records",
+          "validation": {
+            "required": true,
+            "errorMessage": "Account holder name is required"
+          }
+        },
+        {
+          "label": "Bank Name",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "e.g., HDFC Bank, SBI",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank name is required"
+          }
+        },
+        {
+          "label": "Account Number",
+          "name": "account_no",
+          "type": "text",
+          "placeholder": "Account number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Account number is required"
+          }
+        },
+        {
+          "label": "Account Type (optional)",
+          "name": "account_type",
+          "type": "select",
+          "options": ["Savings", "Current", "Salary", "NRI"]
+        }
+      ]
+    },
+    {
+      "section": "Life Insurance Policies",
+      "type": "table",
+      "priority": "important",
+      "estimatedTime": 5,
+      "skippable": true,
+      "skipMessage": "No life insurance? You can add this when you get one.",
+      "completionMessage": "Insurance policies saved!",
+      "description": "Life insurance and term plans",
+      "helpText": "💡 Skip if you don't have life insurance",
+      "maxRows": 6,
+      "columns": [
+        {
+          "label": "Insured Person",
+          "name": "insured_name",
+          "type": "text",
+          "placeholder": "Who is insured?",
+          "validation": {
+            "required": true,
+            "errorMessage": "Insured name is required"
+          }
+        },
+        {
+          "label": "Insurance Company",
+          "name": "provider",
+          "type": "text",
+          "placeholder": "e.g., LIC, HDFC Life",
+          "validation": {
+            "required": true,
+            "errorMessage": "Company name is required"
+          }
+        },
+        {
+          "label": "Policy Number",
+          "name": "policy_no",
+          "type": "text",
+          "placeholder": "Policy number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Policy number is required"
+          }
+        },
+        {
+          "label": "Sum Assured (₹)",
+          "name": "sum_assured",
+          "type": "number",
+          "placeholder": "Coverage amount"
+        }
+      ]
+    },
+    {
+      "section": "Loans & EMIs",
+      "type": "table",
+      "priority": "important",
+      "estimatedTime": 5,
+      "skippable": true,
+      "skipMessage": "No loans? Great! You can skip this.",
+      "completionMessage": "Loan details saved!",
+      "description": "Active loans and monthly EMIs",
+      "helpText": "💡 Skip if you have no loans",
+      "maxRows": 6,
+      "columns": [
+        {
+          "label": "Loan Type",
+          "name": "loan_type",
+          "type": "select",
+          "options": ["Home Loan", "Car Loan", "Personal Loan", "Education Loan", "Other"],
+          "validation": {
+            "required": true,
+            "errorMessage": "Loan type is required"
+          }
+        },
+        {
+          "label": "Bank/Lender",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Bank name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Bank name is required"
+          }
+        },
+        {
+          "label": "Loan Account Number",
+          "name": "loan_account_no",
+          "type": "text",
+          "placeholder": "Account number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Account number is required"
+          }
+        },
+        {
+          "label": "Monthly EMI (₹)",
+          "name": "emi",
+          "type": "number",
+          "placeholder": "EMI amount"
+        }
+      ]
+    },
+    {
+      "section": "Complete Personal Details",
+      "type": "simple",
+      "priority": "recommended",
+      "estimatedTime": 5,
+      "skippable": true,
+      "skipMessage": "You can complete this later for comprehensive documentation.",
+      "description": "Additional identification documents",
+      "helpText": "💡 Optional: Add for complete estate planning",
+      "fields": [
+        {
+          "label": "PAN",
+          "name": "pan",
+          "type": "text",
+          "placeholder": "e.g., ABCDE1234F",
+          "validation": {
+            "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+            "errorMessage": "PAN must be in format: ABCDE1234F"
+          }
+        },
+        {
+          "label": "Passport No.",
+          "name": "passport_no",
+          "type": "text",
+          "placeholder": "e.g., A1234567"
+        },
+        {
+          "label": "Driving License No.",
+          "name": "driving_license_no",
+          "type": "text",
+          "placeholder": "DL number"
+        },
+        {
+          "label": "Voter ID",
+          "name": "voters_id_no",
+          "type": "text",
+          "placeholder": "Voter ID"
+        }
+      ]
+    },
+    {
+      "section": "Investments & Savings",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 10,
+      "skippable": true,
+      "description": "Fixed deposits, mutual funds, stocks, PPF, EPF, etc.",
+      "helpText": "💡 Optional: Add for comprehensive wealth tracking",
+      "maxRows": 15,
+      "columns": [
+        {
+          "label": "Investment Type",
+          "name": "type",
+          "type": "select",
+          "options": ["Fixed Deposit", "Mutual Fund", "Stocks", "PPF", "EPF/PF", "NPS", "Bonds", "Gold", "Other"]
+        },
+        {
+          "label": "Institution Name",
+          "name": "institution",
+          "type": "text",
+          "placeholder": "Bank/Company name"
+        },
+        {
+          "label": "Account/Folio Number",
+          "name": "account_no",
+          "type": "text",
+          "placeholder": "Reference number"
+        }
+      ]
+    },
+    {
+      "section": "Credit Cards",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 3,
+      "skippable": true,
+      "description": "Active credit cards",
+      "maxRows": 4,
+      "columns": [
+        {
+          "label": "Bank Name",
+          "name": "bank_name",
+          "type": "text",
+          "placeholder": "Issuing bank"
+        },
+        {
+          "label": "Card Last 4 Digits",
+          "name": "card_no",
+          "type": "text",
+          "placeholder": "Last 4 digits",
+          "validation": {
+            "pattern": "^[0-9]{4}$",
+            "errorMessage": "Enter last 4 digits only"
+          }
+        }
+      ]
+    },
+    {
+      "section": "Property & Assets",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 5,
+      "skippable": true,
+      "description": "Real estate and major assets",
+      "maxRows": 5,
+      "columns": [
+        {
+          "label": "Property Type",
+          "name": "type",
+          "type": "select",
+          "options": ["House", "Flat/Apartment", "Commercial Property", "Land", "Vehicle", "Other"]
+        },
+        {
+          "label": "Location/Details",
+          "name": "details",
+          "type": "text",
+          "placeholder": "Address or description"
+        }
+      ]
+    },
+    {
+      "section": "Important Documents Location",
+      "type": "simple",
+      "priority": "recommended",
+      "estimatedTime": 3,
+      "skippable": true,
+      "description": "Where you keep important papers",
+      "fields": [
+        {
+          "label": "Bank Locker Details (if any)",
+          "name": "bank_locker",
+          "type": "text",
+          "placeholder": "Bank name, branch, locker number"
+        },
+        {
+          "label": "Home Safe Location",
+          "name": "home_safe",
+          "type": "text",
+          "placeholder": "Where is your home safe?"
+        },
+        {
+          "label": "Will Location",
+          "name": "will_location",
+          "type": "text",
+          "placeholder": "Where is your will stored?"
+        }
+      ]
+    },
+    {
+      "section": "Professional Advisors",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 3,
+      "skippable": true,
+      "description": "Lawyer, CA, financial advisor contacts",
+      "maxRows": 5,
+      "columns": [
+        {
+          "label": "Role",
+          "name": "role",
+          "type": "select",
+          "options": ["Lawyer", "Chartered Accountant", "Financial Advisor", "Insurance Agent", "Other"]
+        },
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "placeholder": "Advisor name"
+        },
+        {
+          "label": "Contact Number",
+          "name": "contact_no",
+          "type": "text",
+          "placeholder": "Phone number"
+        }
+      ]
+    },
+    {
+      "section": "Additional Notes",
+      "type": "simple",
+      "priority": "recommended",
+      "estimatedTime": 2,
+      "skippable": true,
+      "description": "Any other important information",
+      "fields": [
+        {
+          "label": "Special Instructions or Notes",
+          "name": "notes",
+          "type": "textarea",
+          "placeholder": "Anything else your family should know...",
+          "validation": {
+            "maxLength": 2000
+          }
+        }
+      ]
+    }
+  ]
+}

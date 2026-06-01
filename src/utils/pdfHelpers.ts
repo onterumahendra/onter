@@ -15,7 +15,7 @@ interface PDFRowData {
 export const PDF_CONFIG = {
   LOGO_PATH: publicAsset('logo.png'),
   PAGE_MARGIN: 10,
-  LOGO_WIDTH: 30,
+  LOGO_HEIGHT: 7, // ~20px in PDF units (mm)
   THEME_COLOR: [37, 99, 235] as [number, number, number],
   HEADER_TEXT_COLOR: [255, 255, 255] as [number, number, number],
   FONT_SIZE: 9,
@@ -52,11 +52,11 @@ export async function addSectionHeader(
   
   // Add logo on the right at the same Y position
   try {
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const logoX = pageWidth - PDF_CONFIG.LOGO_WIDTH - PDF_CONFIG.PAGE_MARGIN;
     const { width: imgWidth, height: imgHeight } = await loadImageDimensions(PDF_CONFIG.LOGO_PATH);
-    const logoHeight = (PDF_CONFIG.LOGO_WIDTH * imgHeight) / imgWidth;
-    const logoY = yPosition - logoHeight + 2; // Align with text baseline
+    const logoWidth = (PDF_CONFIG.LOGO_HEIGHT * imgWidth) / imgHeight;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const logoX = pageWidth - logoWidth - PDF_CONFIG.PAGE_MARGIN;
+    const logoY = yPosition - PDF_CONFIG.LOGO_HEIGHT + 2; // Align with text baseline
     
     const logoImg = new Image();
     logoImg.crossOrigin = 'anonymous';
@@ -66,8 +66,8 @@ export async function addSectionHeader(
       'PNG',
       logoX,
       logoY,
-      PDF_CONFIG.LOGO_WIDTH,
-      logoHeight
+      logoWidth,
+      PDF_CONFIG.LOGO_HEIGHT
     );
   } catch (error) {
     console.warn('Failed to add logo to section header:', error);

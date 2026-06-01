@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mantine/hooks';
 import {
   Container,
@@ -31,17 +32,14 @@ import { useAppStore } from '../store/appStore';
 import { useExcelOperations } from '../hooks/useExcelOperations';
 import { publicAsset } from '../utils/paths';
 
-interface IntroductionProps {
-  onComplete: () => void;
-}
-
 /**
  * Introduction component following SOLID principles
  * - Single Responsibility: Only handles introduction UI and user choices
  * - Dependency Inversion: Uses hooks for all external dependencies
  */
-export function Introduction({ onComplete }: IntroductionProps) {
+export function Introduction() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string>('');
@@ -139,7 +137,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
         updateFormData(section, sectionData);
       });
       
-      onComplete();
+      navigate('/form');
     } catch (err) {
       setError(err instanceof Error ? err.message : t('introduction.errors.importFailed'));
     }
@@ -147,7 +145,7 @@ export function Introduction({ onComplete }: IntroductionProps) {
   
   const executeManualEntry = () => {
     setImportMode(false);
-    onComplete();
+    navigate('/form');
   };
   
   const handleDownloadTemplate = async () => {
@@ -172,10 +170,6 @@ export function Introduction({ onComplete }: IntroductionProps) {
     }
   };
   
-  const handleResumeSession = () => {
-    // Data is already loaded, just proceed
-    onComplete();
-  };
   
   return (
     <>

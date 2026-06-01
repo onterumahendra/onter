@@ -1,4 +1,5 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { cleanupExpiredData } from './utils/indexedDB';
 import { useAppStore } from './store/appStore';
 import { Container, Loader, Center, Stack, Text } from '@mantine/core';
@@ -13,7 +14,6 @@ const FormStepper = lazy(() => import('./containers/FormStepper').then(m => ({ d
  * - Open/Closed: Easy to extend with new routes
  */
 function App() {
-  const [showIntro, setShowIntro] = useState(true);
   const initializeFromStorage = useAppStore(state => state.initializeFromStorage);
   
   useEffect(() => {
@@ -25,6 +25,16 @@ function App() {
     
     initializeApp();
   }, [initializeFromStorage]);
+
+  useEffect(() => {
+    // Prefetch FormStepper chunk after a short idle delay.
+    // The 2s wait lets the Introduction finish painting and its assets load
+    // before we consume bandwidth on a slow connection.
+    const timer = setTimeout(() => {
+      import('./containers/FormStepper');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   
   return (
     <Suspense fallback={
@@ -37,11 +47,11 @@ function App() {
         </Center>
       </Container>
     }>
-      {showIntro ? (
-        <Introduction onComplete={() => setShowIntro(false)} />
-      ) : (
-        <FormStepper onBackToIntro={() => setShowIntro(true)} />
-      )}
+      <Routes>
+        <Route path="/" element={<Introduction />} />
+        <Route path="/form" element={<FormStepper />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </Suspense>
   );
 }

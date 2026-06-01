@@ -26,6 +26,7 @@
           "type": "text",
           "placeholder": "12 digit number",
           "validation": {
+            "required": true,
             "pattern": "^[0-9]{12}$",
             "errorMessage": "Aadhaar must be exactly 12 digits"
           }
@@ -50,7 +51,11 @@
             "O+",
             "O-"
           ],
-          "placeholder": "Select blood group"
+          "placeholder": "Select blood group",
+          "validation": {
+            "required": true,
+            "errorMessage": "Blood group is required for medical emergencies"
+          }
         },
         {
           "label": "Passport No.",
@@ -379,7 +384,11 @@
           "label": "Joint Holder / Nominee",
           "name": "joint_holder_nominee",
           "type": "text",
-          "placeholder": "Joint holder or nominee name"
+          "placeholder": "Joint holder or nominee name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Nominee is required for succession planning"
+          }
         }
       ]
     },
@@ -413,7 +422,11 @@
           "label": "Nominee",
           "name": "nominee",
           "type": "text",
-          "placeholder": "Nominee name"
+          "placeholder": "Nominee name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Nominee is required for succession planning"
+          }
         },
         {
           "label": "Amount",
@@ -467,7 +480,11 @@
           "label": "Nominee",
           "name": "nominee",
           "type": "text",
-          "placeholder": "Nominee name"
+          "placeholder": "Nominee name",
+          "validation": {
+            "required": true,
+            "errorMessage": "Nominee is required for succession planning"
+          }
         }
       ]
     },
@@ -949,5 +966,913 @@
         }
       ]
     }
-  ]
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "Medical Emergency: 108 (National) or 102 (Ambulance)",
+      "Police Emergency: 100",
+      "Fire Emergency: 101",
+      "Locate your downloaded ZIP file (check Downloads folder)",
+      "Extract all files - Right-click > Extract All / Extract Here",
+      "Open PDF files for quick reference",
+      "Contact emergency contacts listed in your data",
+      "Keep all documents secure - share only with trusted persons"
+    ],
+    "emergencyServices": {
+      "medical": "108 / 102",
+      "police": "100",
+      "fire": "101",
+      "women_helpline": "1091",
+      "child_helpline": "1098",
+      "senior_citizen": "14567",
+      "covid_helpline": "1075"
+    },
+    "sectionGuidance": {
+      "Personal Details": {
+        "description": "Core identity documents - Aadhaar, PAN, Passport, and other government IDs required for all official processes.",
+        "usefulFor": [
+          "Doctors",
+          "Lawyers",
+          "Banks",
+          "Government offices",
+          "Insurance companies"
+        ],
+        "firstActions": [
+          "Verify Aadhaar card is linked to mobile number",
+          "Check PAN card validity and linkage with Aadhaar",
+          "Ensure passport is current if traveling soon",
+          "Download DigiLocker copies of all identity documents",
+          "Share copies with trusted family member"
+        ],
+        "criticalFields": [
+          "Aadhaar Number",
+          "PAN Number",
+          "Blood Group",
+          "Mobile Number"
+        ]
+      },
+      "Emergency contact details": {
+        "description": "Primary and alternate contacts who must be notified immediately in emergencies.",
+        "usefulFor": [
+          "Medical staff",
+          "Police",
+          "Legal representatives",
+          "Employers"
+        ],
+        "firstActions": [
+          "Contact primary person immediately",
+          "Verify all contact numbers are reachable",
+          "Inform contacts they are listed as emergency contacts",
+          "Share medical conditions with emergency contacts"
+        ],
+        "criticalFields": [
+          "Primary Contact",
+          "Relationship",
+          "Phone Number",
+          "Address"
+        ]
+      },
+      "Mediclaim details": {
+        "description": "Health insurance policies for cashless treatment and medical claim reimbursements.",
+        "usefulFor": [
+          "Hospital billing departments",
+          "TPA (Third Party Administrators)",
+          "Family members"
+        ],
+        "firstActions": [
+          "Locate health card and policy documents",
+          "Check cashless hospital network",
+          "Contact TPA helpline for claim process",
+          "Verify policy premium is paid and policy is active",
+          "Know pre-authorization process for planned treatments"
+        ],
+        "criticalFields": [
+          "Policy Number",
+          "TPA Name",
+          "Sum Insured",
+          "Cashless Hospitals"
+        ]
+      },
+      "Insurance details": {
+        "description": "Life, term, endowment, and other insurance policies with maturity and death benefits.",
+        "usefulFor": [
+          "Nominees",
+          "Legal heirs",
+          "Insurance agents",
+          "Claim departments"
+        ],
+        "firstActions": [
+          "Locate original policy documents",
+          "Contact insurance company's claim department",
+          "Verify nominee details are current",
+          "Check if policy is in-force (premiums paid)",
+          "Understand claim process and required documents",
+          "For death claims: Get death certificate and submit claim within time limit"
+        ],
+        "criticalFields": [
+          "Policy Number",
+          "Insurance Company",
+          "Sum Assured",
+          "Nominee Name",
+          "Maturity Date"
+        ]
+      },
+      "Bank details": {
+        "description": "Savings accounts, current accounts, and salary accounts with account numbers and nominees.",
+        "usefulFor": [
+          "Nominees",
+          "Legal heirs",
+          "Estate executors"
+        ],
+        "firstActions": [
+          "Contact bank to understand claim/succession process",
+          "Verify nominee is registered (Form DA1)",
+          "Locate passbook, chequebook, debit cards",
+          "Check for auto-debit mandates (SIPs, EMIs, bills)",
+          "In case of death: Submit death certificate and claim form"
+        ],
+        "criticalFields": [
+          "Account Number",
+          "IFSC Code",
+          "Bank Name",
+          "Nominee"
+        ]
+      },
+      "Deposits with banks / post offices": {
+        "description": "Fixed deposits, recurring deposits, NSC, and other post office savings schemes.",
+        "usefulFor": [
+          "Nominees",
+          "Family members",
+          "Financial advisors"
+        ],
+        "firstActions": [
+          "Locate FD receipts and certificates",
+          "Check maturity dates and auto-renewal instructions",
+          "Contact bank/post office for premature closure process if needed",
+          "Verify nominee details on all deposits",
+          "Calculate maturity amounts for financial planning"
+        ],
+        "criticalFields": [
+          "FD Number",
+          "Amount",
+          "Maturity Date",
+          "Interest Rate",
+          "Nominee"
+        ]
+      },
+      "Shares, bonds & other saving certificates": {
+        "description": "Stock holdings, mutual funds, bonds, EPF, PPF, NPS, and other investment instruments.",
+        "usefulFor": [
+          "Nominees",
+          "Portfolio managers",
+          "Tax consultants"
+        ],
+        "firstActions": [
+          "Access Demat account through broker or CDSL/NSDL",
+          "Check EPF balance on EPFO portal using UAN",
+          "Access PPF account at bank/post office",
+          "Review mutual fund investments on platform (Groww, Zerodha, etc.)",
+          "Verify nominee registration on all investment accounts",
+          "In case of death: Submit transmission request with death certificate"
+        ],
+        "criticalFields": [
+          "Demat Account Number",
+          "UAN (EPF)",
+          "PPF Account Number",
+          "Folio Numbers",
+          "Nominee"
+        ]
+      },
+      "Digital assets & online accounts": {
+        "description": "Cryptocurrency, NFTs, digital wallets, domain names, and other digital properties.",
+        "usefulFor": [
+          "Family members",
+          "Digital estate managers",
+          "Tech-savvy relatives"
+        ],
+        "firstActions": [
+          "Access digital wallets using seed phrases (keep very secure)",
+          "Check cryptocurrency exchange accounts",
+          "Review domain registrations and renewals",
+          "Access cloud storage accounts (Google Drive, iCloud)",
+          "Memorialize or close social media accounts as per wishes",
+          "Transfer or shut down online subscriptions"
+        ],
+        "criticalFields": [
+          "Wallet Addresses",
+          "Seed Phrases",
+          "Platform Names",
+          "Login Credentials"
+        ]
+      },
+      "Credit card details": {
+        "description": "Active credit cards with limits, due dates, and outstanding balances.",
+        "usefulFor": [
+          "Family members handling finances",
+          "Legal representatives"
+        ],
+        "firstActions": [
+          "Locate latest credit card statements",
+          "Check for outstanding balances",
+          "Contact bank to freeze/cancel cards if needed",
+          "Verify auto-pay settings for utility bills",
+          "Check for add-on cards issued to family members"
+        ],
+        "criticalFields": [
+          "Card Number (last 4 digits)",
+          "Bank Name",
+          "Credit Limit",
+          "Payment Due Date"
+        ]
+      },
+      "Loan details": {
+        "description": "Home loans, car loans, personal loans, and other outstanding debt obligations.",
+        "usefulFor": [
+          "Nominees",
+          "Co-borrowers",
+          "Legal heirs",
+          "Loan guarantors"
+        ],
+        "firstActions": [
+          "Locate loan sanction letters and statements",
+          "Calculate outstanding principal amount",
+          "Check if loan has insurance cover (death benefit)",
+          "Contact bank's loan recovery department",
+          "Verify EMI auto-debit status",
+          "In case of death with insurance: Submit claim to settle loan"
+        ],
+        "criticalFields": [
+          "Loan Account Number",
+          "Bank Name",
+          "Outstanding Amount",
+          "EMI Amount",
+          "Insurance Cover"
+        ]
+      },
+      "Personal property details": {
+        "description": "Real estate, vehicles, jewelry, and other high-value physical assets.",
+        "usefulFor": [
+          "Legal heirs",
+          "Property lawyers",
+          "Valuers",
+          "Family members"
+        ],
+        "firstActions": [
+          "Locate property registration documents and sale deeds",
+          "Find vehicle RC (Registration Certificate) books",
+          "Locate jewelry purchase receipts and certificates",
+          "Check property tax payment status",
+          "Verify ownership documents are in safe custody",
+          "Understand succession/inheritance process for property"
+        ],
+        "criticalFields": [
+          "Property Address",
+          "Survey/Plot Number",
+          "Vehicle Registration Number",
+          "Document Location"
+        ]
+      },
+      "Important website links & login credentials": {
+        "description": "Online banking, investment platforms, insurance portals, and other critical logins.",
+        "usefulFor": [
+          "Trusted family members",
+          "Digital executors"
+        ],
+        "firstActions": [
+          "Access using saved passwords or password manager",
+          "Update security questions if possible",
+          "Enable trusted contact features where available",
+          "Download statements and important documents",
+          "Check for pending transactions or notifications"
+        ],
+        "criticalFields": [
+          "Website URL",
+          "Username/Email",
+          "Security Questions"
+        ]
+      },
+      "Location of important documents & records": {
+        "description": "Physical location of will, property papers, insurance policies, and other original documents.",
+        "usefulFor": [
+          "Legal executors",
+          "Family members",
+          "Lawyers"
+        ],
+        "firstActions": [
+          "Locate home safe/locker and find keys",
+          "Access bank locker (bring locker key and ID proof)",
+          "Find will and verify it's the latest version",
+          "Gather all original documents from locations listed",
+          "Consult lawyer for will execution and probate if needed",
+          "Check for registered will at Sub-Registrar office"
+        ],
+        "criticalFields": [
+          "Will Location",
+          "Bank Locker Number",
+          "Safe Key Location",
+          "Document Storage"
+        ]
+      },
+      "Contact details of my advisors": {
+        "description": "Lawyers, CAs, financial advisors, insurance agents, and other professional contacts.",
+        "usefulFor": [
+          "Family members",
+          "Legal executors"
+        ],
+        "firstActions": [
+          "Contact family lawyer for legal guidance",
+          "Reach out to CA for tax filing and financial matters",
+          "Contact insurance agent for claim assistance",
+          "Consult financial advisor for investment management",
+          "Inform all advisors about the situation"
+        ],
+        "criticalFields": [
+          "Advisor Name",
+          "Specialization",
+          "Phone Number",
+          "Email"
+        ]
+      },
+      "Additional details": {
+        "description": "Special instructions, wishes, preferences, or any other important information.",
+        "usefulFor": [
+          "All family members",
+          "Caregivers",
+          "Legal representatives"
+        ],
+        "firstActions": [
+          "Read all notes carefully",
+          "Follow specific instructions mentioned",
+          "Share relevant information with appropriate people",
+          "Respect wishes and preferences stated"
+        ]
+      }
+    },
+    "legalNotes": [
+      "This guide is for emergency access only - not a legal document",
+      "Consult qualified lawyers for succession, inheritance, and estate planning",
+      "Verify compliance with Indian laws and state-specific regulations",
+      "Update this kit annually or when major life events occur",
+      "Register your will with Sub-Registrar office for authenticity",
+      "Ensure Aadhaar is linked with PAN, bank accounts, and mobile number",
+      "Nominate beneficiaries on ALL financial accounts (mandatory under Indian law)",
+      "Execute advance medical directives and living will if desired",
+      "Understand Hindu Succession Act or relevant personal laws for your religion",
+      "Death claims: Insurance (within 3 years), EPF (within 3 years from date of eligibility)"
+    ],
+    "generalGuidance": {
+      "fileStructure": [
+        "Your emergency kit is a ZIP file containing multiple documents",
+        "Excel File (.xlsx) - Complete editable data in structured format",
+        "PDF Files - Print-ready documents for sharing with authorities",
+        "Emergency Access Guide - Section-by-section reference for each topic",
+        "Family Recovery Roadmap - Your 30/90/180/365-day action plan",
+        "Keep physical printouts in bank locker or home safe"
+      ],
+      "dataAccess": [
+        "Windows: Right-click ZIP > Extract All",
+        "Mac: Double-click ZIP to extract",
+        "Save in secure folder: Documents/Emergency_Kit",
+        "Backup to Google Drive / OneDrive (password-protected folder)",
+        "Keep offline copy on encrypted USB drive",
+        "Share access with spouse and one trusted family member",
+        "Use password manager (BitWarden, 1Password) for digital access"
+      ],
+      "securityTips": [
+        "Never share Aadhaar OTP or bank OTP with anyone",
+        "Share documents only via WhatsApp (encrypted) or in person",
+        "Do NOT email complete documents unencrypted",
+        "Enable screen lock on all devices storing this data",
+        "Shred physical copies before discarding",
+        "Use DigiLocker for verified government documents",
+        "Consider professional vault services for originals (bank locker)",
+        "Keep both digital and physical copies in separate secure locations",
+        "Beware of phishing - banks never ask for full details on call/email"
+      ]
+    }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "Step-by-step survival and recovery plan for dependent family members when the primary earner is incapacitated or deceased. Follow phases in order — do not skip ahead.",
+    "legalFramework": [
+      "Hindu Succession Act, 1956 (amended 2005)",
+      "Indian Succession Act, 1925",
+      "Insurance Act, 1938 & IRDAI Regulations, 2017",
+      "EPF & Miscellaneous Provisions Act, 1952",
+      "Income Tax Act, 1961 — Section 159 (Legal Representative)",
+      "Hindu Minority and Guardianship Act, 1956"
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "title": "Immediate Survival",
+        "timeframe": "Day 1 to Day 30",
+        "priority": "CRITICAL",
+        "focus": "Access liquid cash, stop auto-debits, obtain death certificates, notify institutions",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "Obtain Death Certificate — apply at Municipal Corporation/Gram Panchayat within 21 days. Get minimum 15 certified copies.",
+            "priority": "HIGH",
+            "why": "Every single claim, bank, and legal process requires a certified copy. Running out means delays of weeks."
+          },
+          {
+            "step": 2,
+            "action": "Access liquid cash immediately — joint 'Either or Survivor' accounts need NO court order. Withdraw what you need before notifying the bank to freeze.",
+            "priority": "HIGH",
+            "why": "Joint account survivors have full legal rights. Notifying bank too early freezes your access unnecessarily."
+          },
+          {
+            "step": 3,
+            "action": "List ALL auto-debits, SIPs, EMIs and standing instructions — pause or cancel them BEFORE they bounce and attract penalties.",
+            "priority": "HIGH",
+            "why": "Bounced EMIs after death notification damage credit history and attract charges on an already-stressed account."
+          },
+          {
+            "step": 4,
+            "action": "Notify the deceased's employer within 2-3 days to initiate: salary arrears, gratuity (Form F), group life insurance, and EDLI claims.",
+            "priority": "HIGH",
+            "why": "Employers hold group term policies worth 3-5x salary. Gratuity must be paid within 30 days of becoming payable."
+          },
+          {
+            "step": 5,
+            "action": "Intimate ALL insurance companies (LIC + private) about the death. Early intimation is required — IRDAI mandates 30-day settlement from document submission.",
+            "priority": "HIGH",
+            "why": "Claims filed within first 3 years of policy issuance may be investigated. Early intimation starts the clock on your side."
+          },
+          {
+            "step": 6,
+            "action": "Apply for Legal Heir Certificate from the Tehsildar/Revenue Authority. Takes 15-30 days and unlocks most claims without a court order.",
+            "priority": "HIGH",
+            "why": "Faster and cheaper than a Succession Certificate. Accepted by most banks, employers, and insurance companies."
+          },
+          {
+            "step": 7,
+            "action": "Secure ALL original documents: property papers, insurance policy bonds, FD receipts, Aadhaar, PAN, will. Check bank locker, home safe, and email for e-policies.",
+            "priority": "HIGH",
+            "why": "Original policy bond is required by LIC. Lost originals delay claims by months."
+          }
+        ],
+        "mustHaveDocuments": [
+          "Death Certificate — 15 certified copies minimum",
+          "Cremation / Burial Certificate (needed to get death certificate)",
+          "Aadhaar + PAN of deceased and all claimants",
+          "Marriage Certificate (for spouse claims)",
+          "Birth Certificates of children",
+          "Passport-size photographs — 10 each for all claimants",
+          "Bank passbooks and last 3 months statements",
+          "Last 3 salary slips of deceased (from employer)",
+          "Original insurance policy bonds",
+          "Ration Card / Family ID card"
+        ],
+        "keyContacts": [
+          {
+            "entity": "LIC Customer Care",
+            "number": "1800-258-5678",
+            "portal": "https://licindia.in",
+            "use": "Policy status and death claim intimation"
+          },
+          {
+            "entity": "IRDAI Grievance (all insurance complaints)",
+            "number": "1800-4254-732",
+            "portal": "https://igms.irda.gov.in",
+            "use": "If insurer delays or rejects claim"
+          },
+          {
+            "entity": "EPFO Helpline",
+            "number": "1800-118-005",
+            "portal": "https://www.epfindia.gov.in",
+            "use": "PF / pension / EDLI queries"
+          },
+          {
+            "entity": "National Consumer Helpline",
+            "number": "1800-11-4000",
+            "portal": "https://consumerhelpline.gov.in",
+            "use": "Disputes with any financial institution"
+          }
+        ],
+        "criticalMistakes": [
+          "Getting fewer than 10 death certificate copies — you will need 15+ across all claims",
+          "Notifying the bank about death BEFORE withdrawing from a joint 'Either or Survivor' account — survivor has full rights, no permission needed",
+          "Paying off the deceased's personal loans immediately without first checking if a credit life insurance policy exists on the loan",
+          "Discarding original insurance policy bonds thinking digital is sufficient — LIC and many insurers still require originals",
+          "Sharing OTPs or account credentials with agents or touts who offer to 'expedite' claims — this is fraud",
+          "Not looking for a Will — check email, bank locker, and lawyer's office before assuming intestate succession"
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Death Registration",
+            "deadline": "Within 21 days of death",
+            "consequence": "After 30 days, a Magistrate's order is required — adds weeks"
+          },
+          {
+            "item": "Insurance Claim Limitation",
+            "deadline": "File within 3 years of death",
+            "consequence": "Claims beyond 3 years may be time-barred under the Limitation Act, 1963"
+          },
+          {
+            "item": "Gratuity Payment by Employer",
+            "deadline": "30 days from when it becomes payable",
+            "consequence": "Employer must pay interest on delay under Section 7(3A), Payment of Gratuity Act"
+          }
+        ],
+        "jointAccountRules": {
+          "either_or_survivor": "Surviving holder has immediate full access. Bank only needs death certificate to remove deceased's name. No court order needed.",
+          "former_or_survivor": "If deceased was 'Former' holder — survivor accesses on submitting death certificate. No delay.",
+          "single_holder_account": "Account is frozen on death intimation. Nominee claims with death certificate + ID. Without nominee: Legal Heir Certificate or Succession Certificate required. RBI allows simplified claims up to ₹5 lakh."
+        }
+      },
+      {
+        "phase": 2,
+        "title": "Claim & Transfer",
+        "timeframe": "Day 30 to Day 90",
+        "priority": "HIGH",
+        "focus": "File all insurance and EPF claims, initiate bank and demat transmission, begin succession process",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "File LIC/insurance death claim: submit claimant's statement, original policy bond, death certificate, NEFT bank details. Track the 30-day IRDAI settlement clock.",
+            "priority": "HIGH",
+            "why": "IRDAI mandates settlement within 30 days of full document submission. Insurer must pay 2% above bank rate for every day of delay beyond this."
+          },
+          {
+            "step": 2,
+            "action": "File THREE EPF claims together via employer or EPFO office: Form 20 (PF withdrawal) + Form 10D (monthly pension) + Form 5IF (EDLI insurance up to ₹7 lakh). Most families miss EDLI entirely.",
+            "priority": "HIGH",
+            "why": "EDLI is a free life insurance benefit that pays up to ₹7 lakh. It is a separate claim from PF and pension — all three must be filed independently."
+          },
+          {
+            "step": 3,
+            "action": "Initiate bank account transmission for single-holder accounts: submit Transmission Request, death certificate, Legal Heir Certificate, and indemnity bond at the branch.",
+            "priority": "HIGH",
+            "why": "With nominee: simple KYC + death certificate. Without nominee and amount >₹5 lakh: Succession Certificate from Civil Court is required."
+          },
+          {
+            "step": 4,
+            "action": "Close PPF account by submitting Form C at the bank or post office where the account is held. Nominee/legal heir receives full balance + accrued interest.",
+            "priority": "HIGH",
+            "why": "PPF can be closed prematurely on death — the 15-year lock-in does not apply. Interest is credited until closure."
+          },
+          {
+            "step": 5,
+            "action": "File Demat account transmission with the Depository Participant (DP): submit Transmission Request Form + death certificate + nominee/heir KYC.",
+            "priority": "HIGH",
+            "why": "Without nominee and value >₹5 lakh (SEBI threshold): Succession Certificate required. With nominee: straightforward in 2-3 weeks."
+          },
+          {
+            "step": 6,
+            "action": "Claim mutual fund units through CAMS or KFintech (not just the broker). If held in folio mode, approach each AMC directly with death certificate and KYC.",
+            "priority": "MEDIUM",
+            "why": "Broker platforms may not cover all folios. CAMS and KFintech hold the actual records. Missing folios = lost money."
+          },
+          {
+            "step": 7,
+            "action": "Apply for Succession Certificate from District Civil Court under Section 372, Indian Succession Act, if assets exceed bank/SEBI thresholds and no nominee exists.",
+            "priority": "HIGH",
+            "why": "Takes 3-6 months. File early. Required for large bank balances, securities, and debentures without a nominee."
+          }
+        ],
+        "mustHaveDocuments": [
+          "Original insurance policy bonds",
+          "Claimant's Statement in insurer's prescribed form",
+          "Hospital records or postmortem report (if unnatural death)",
+          "FIR copy (if accidental or unnatural death — mandatory for insurance)",
+          "Legal Heir Certificate",
+          "Cancelled cheque of claimant (NEFT details)",
+          "Indemnity Bond with surety (for bank claims without nominee)",
+          "KYC of all claimants — Aadhaar + PAN",
+          "Form 20 (EPF) + Form 10D (Pension) + Form 5IF (EDLI)",
+          "Employer's certificate confirming death, date of joining, and last salary",
+          "Succession Certificate (if amounts exceed threshold and no nominee)"
+        ],
+        "keyContacts": [
+          {
+            "entity": "CAMS — Mutual Fund Registrar",
+            "number": "1800-419-2267",
+            "portal": "https://www.camsonline.com",
+            "use": "Transmission of mutual fund units"
+          },
+          {
+            "entity": "KFintech (formerly Karvy)",
+            "number": "1800-309-4001",
+            "portal": "https://www.kfintech.com",
+            "use": "Mutual funds serviced by KFintech"
+          },
+          {
+            "entity": "NSDL — Demat",
+            "number": "1800-228-030",
+            "portal": "https://nsdl.co.in",
+            "use": "Demat account transmission"
+          },
+          {
+            "entity": "CDSL — Demat",
+            "number": "1800-225-533",
+            "portal": "https://www.cdslindia.com",
+            "use": "Demat account transmission"
+          },
+          {
+            "entity": "District Civil Court (eCourts)",
+            "number": null,
+            "portal": "https://districts.ecourts.gov.in",
+            "use": "File petition for Succession Certificate"
+          }
+        ],
+        "criticalMistakes": [
+          "Filing only EPF withdrawal (Form 20) and missing EDLI insurance (Form 5IF) — this is a free ₹7 lakh benefit that most families never claim",
+          "Assuming the bank will automatically transfer FDs to nominee — each fixed deposit must be individually claimed or transmitted",
+          "Not filing insurance claim because original policy bond is lost — insurers cannot deny a valid claim for a missing bond; file for duplicate first",
+          "Not checking employer email and SMS history for group or term insurance policies the deceased may have enrolled in",
+          "Signing blank indemnity bonds or NOC papers without reading — get a lawyer to review before signing"
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Insurance Settlement (IRDAI mandate)",
+            "deadline": "30 days from receipt of all documents",
+            "consequence": "Insurer must pay penalty interest. File complaint on IRDAI IGMS portal if delayed."
+          },
+          {
+            "item": "EPFO Claim Processing",
+            "deadline": "EPFO target: 20 days",
+            "consequence": "File grievance at EPFiGMS portal: https://epfigms.gov.in"
+          },
+          {
+            "item": "Gratuity Payment",
+            "deadline": "30 days from date it becomes payable",
+            "consequence": "Employer pays interest under Section 7(3A) of Payment of Gratuity Act, 1972"
+          }
+        ],
+        "epfClaimNote": "2024 EPFO update: Claims can be processed without Aadhaar seeding (with OIC approval). No guardianship certificate needed for minor children — EPF is deposited directly to child's bank account."
+      },
+      {
+        "phase": 3,
+        "title": "Legal & Financial Settlement",
+        "timeframe": "Month 3 to Month 6",
+        "priority": "MEDIUM",
+        "focus": "Property mutation, will probate, final income tax filing, loan insurance claims, utility transfers",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "File the deceased's final Income Tax Return as Legal Representative under Section 159, Income Tax Act. Register as 'Legal Representative' on the income tax portal first.",
+            "priority": "HIGH",
+            "why": "Legal representative is personally liable for unpaid taxes. Missing this return attracts penalties under Section 234A/B/C."
+          },
+          {
+            "step": 2,
+            "action": "Initiate property mutation (revenue record name change) at Talathi/Tehsildar/Municipal Corporation. This is NOT a title transfer — it updates government records only.",
+            "priority": "HIGH",
+            "why": "Property tax continues to accrue in deceased's name until mutation. Mutation is required before any future sale or mortgage."
+          },
+          {
+            "step": 3,
+            "action": "Check ALL loans (home, car, personal) for credit life insurance before paying a single EMI. Home loans especially — most have mandatory insurance. File the claim with the lender's insurance partner.",
+            "priority": "HIGH",
+            "why": "Paying EMIs when a credit life policy exists means paying out of pocket for a liability that is already insured. Stop payments until insurance status is confirmed."
+          },
+          {
+            "step": 4,
+            "action": "File for Probate of Will at District Court or High Court. Mandatory in Mumbai, Kolkata, Chennai. Strongly recommended elsewhere for clean property transfers.",
+            "priority": "HIGH",
+            "why": "Without probate, property buyers and banks will question title validity. Probate establishes Will as legally operative."
+          },
+          {
+            "step": 5,
+            "action": "Transfer all utility connections (electricity, gas, water, phone, broadband) to surviving member's name using death certificate and ID proof.",
+            "priority": "MEDIUM",
+            "why": "Utilities in deceased's name cannot be modified or ported. Disconnection risk if ownership is disputed."
+          },
+          {
+            "step": 6,
+            "action": "Transfer vehicle RC to legal heir at RTO using Form 31. Simultaneously transfer motor insurance — vehicle cannot be insured without RC in living person's name.",
+            "priority": "LOW",
+            "why": "Driving or selling a vehicle with RC in deceased's name creates legal and insurance complications."
+          }
+        ],
+        "mustHaveDocuments": [
+          "Registered Will (original) OR Probate Order from court",
+          "Succession Certificate (for movable assets without nominee)",
+          "Property title deeds — original Sale Deed and Mother Deed chain",
+          "Encumbrance Certificate (EC) from Sub-Registrar — 13 years minimum",
+          "Latest property tax receipt",
+          "Khata Certificate or Patta (state-specific revenue document)",
+          "Income Tax Returns of deceased — last 3 years",
+          "Form 26AS and Form 16 of deceased for the final year",
+          "Loan sanction letters and outstanding principal statements",
+          "Credit life insurance policy documents (ask lender if unsure)"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Income Tax e-Filing Portal",
+            "number": "1800-103-0025",
+            "portal": "https://www.incometax.gov.in",
+            "use": "Register as Legal Representative and file deceased's return"
+          },
+          {
+            "entity": "CERSAI — Loan Charge Registry",
+            "number": null,
+            "portal": "https://www.cersai.org.in",
+            "use": "Verify if any hidden mortgage or charge exists on property"
+          },
+          {
+            "entity": "Maharashtra IGR (Property)",
+            "number": null,
+            "portal": "https://igrmaharashtra.gov.in",
+            "use": "Property registration and mutation — Maharashtra"
+          },
+          {
+            "entity": "Karnataka Bhoomi Portal",
+            "number": null,
+            "portal": "https://landrecords.karnataka.gov.in",
+            "use": "Agricultural land mutation — Karnataka"
+          },
+          {
+            "entity": "Tamil Nadu Land Records",
+            "number": null,
+            "portal": "https://eservices.tn.gov.in",
+            "use": "Patta transfer — Tamil Nadu"
+          }
+        ],
+        "criticalMistakes": [
+          "Confusing property MUTATION with ownership TRANSFER — mutation updates revenue records only; ownership transfer requires a registered deed",
+          "Not filing the deceased's income tax return — the legal representative is personally liable for unpaid tax and penalties",
+          "Paying home loan EMIs without confirming whether a credit life insurance policy settles the loan on death",
+          "Attempting to sell property before completing mutation and obtaining succession/probate — buyers and banks will refuse",
+          "Not obtaining an Encumbrance Certificate before transfer — hidden mortgages will surface later and invalidate sale",
+          "Ignoring daughters' rights — post-2005 amendment to Hindu Succession Act gives daughters equal coparcenary rights in ancestral property"
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Deceased's Income Tax Return",
+            "deadline": "July 31 of the assessment year following the year of death",
+            "consequence": "Penalty up to ₹10,000 under Section 234F + interest under 234A/B/C"
+          },
+          {
+            "item": "Probate Application",
+            "deadline": "No statutory deadline, but file within 3 years (Limitation Act)",
+            "consequence": "Delay increases risk of dispute; adverse possession risk after 12 years"
+          },
+          {
+            "item": "Property Mutation",
+            "deadline": "No hard deadline, but complete before any sale or loan",
+            "consequence": "Property tax accrues in deceased's name; future transactions are blocked"
+          }
+        ],
+        "minorChildrenRights": {
+          "inheritance": "Minor children are Class I legal heirs under Hindu Succession Act and inherit equally with spouse",
+          "guardian": "Mother is the natural guardian — no court appointment needed",
+          "restriction": "Natural guardian CANNOT sell, mortgage, or gift the minor's immovable property without court permission (Section 8, Hindu Minority and Guardianship Act, 1956)",
+          "account": "Minor's inherited share should be held in a separate bank account in the minor's name, operated by mother as guardian",
+          "majority": "On turning 18, the child has full independent rights over inherited assets"
+        }
+      },
+      {
+        "phase": 4,
+        "title": "Restructure & Rebuild",
+        "timeframe": "Month 6 to Month 12",
+        "priority": "MEDIUM",
+        "focus": "Protect the family you have left, prevent this from happening to your heirs, rebuild financial stability",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "Update nominations on EVERY financial account immediately — bank accounts, FDs, demat, mutual funds, PPF, NPS, and all insurance policies. Do not leave a single account without a nominee.",
+            "priority": "HIGH",
+            "why": "The entire pain of this process was caused by missing nominations. This one action prevents your family from going through the same ordeal."
+          },
+          {
+            "step": 2,
+            "action": "Draft a Will and register it at the Sub-Registrar's office. Registration costs ₹500-1000 in most states. An unregistered Will is valid but easier to challenge.",
+            "priority": "HIGH",
+            "why": "You have just experienced what happens without a Will. A registered Will eliminates ambiguity and speeds up property transfer to months, not years."
+          },
+          {
+            "step": 3,
+            "action": "Purchase adequate term life insurance for all earning members — minimum coverage should be 10x annual household expenses. Buy immediately before any existing policy lapses.",
+            "priority": "HIGH",
+            "why": "Health insurance portability and continuity benefits are lost after a break. Lock in health coverage before the transition period disrupts existing policies."
+          },
+          {
+            "step": 4,
+            "action": "Build a liquid emergency fund covering 6-12 months of household expenses in a savings account or liquid mutual fund. This is priority over any investment.",
+            "priority": "HIGH",
+            "why": "The first 30 days of a crisis are survivable only with accessible liquid cash. Locked-in FDs, PPF, and equity do not help in an emergency."
+          },
+          {
+            "step": 5,
+            "action": "Create a written Asset Register documenting: all account numbers, nominees, access credentials, document locations, and advisor contacts. Store one copy in bank locker and share with one trusted person.",
+            "priority": "HIGH",
+            "why": "This document IS the emergency kit. You now know the value of having it — create it for your family before they need it."
+          },
+          {
+            "step": 6,
+            "action": "Consolidate scattered bank accounts, demat accounts, and MF folios to reduce the number of institutions your heirs will need to deal with.",
+            "priority": "MEDIUM",
+            "why": "Every account you hold is a claim your heirs must file. Fewer accounts = significantly less paperwork and fewer chances for assets to be forgotten."
+          },
+          {
+            "step": 7,
+            "action": "Execute a registered Power of Attorney for a trusted family member to manage your financial affairs if you are incapacitated.",
+            "priority": "MEDIUM",
+            "why": "Critical if you are now a single parent. A registered POA allows action on your behalf without court delays."
+          }
+        ],
+        "mustHaveDocuments": [
+          "Registered Will (latest version)",
+          "Updated nomination forms for all accounts (filed and acknowledged)",
+          "Registered Power of Attorney",
+          "New term life insurance policy documents",
+          "New or renewed health insurance policy",
+          "Asset Register (physical + digital encrypted copy)",
+          "Children's investment and education fund documents",
+          "Updated KYC across all institutions"
+        ],
+        "keyContacts": [
+          {
+            "entity": "SEBI SCORES (Investment Complaints)",
+            "number": "1800-227-575",
+            "portal": "https://scores.sebi.gov.in",
+            "use": "Complaints against mutual funds, brokers, demat"
+          },
+          {
+            "entity": "PFRDA (NPS/Pension Regulator)",
+            "number": "1800-110-708",
+            "portal": "https://www.pfrda.org.in",
+            "use": "NPS account queries and nominee update"
+          },
+          {
+            "entity": "FPSB India (Certified Financial Planners)",
+            "number": null,
+            "portal": "https://www.fpsbindia.org",
+            "use": "Find a SEBI-registered or CFP-certified advisor for restructuring"
+          },
+          {
+            "entity": "AMFI (Mutual Fund Info)",
+            "number": null,
+            "portal": "https://www.amfiindia.com",
+            "use": "Fund information and advisor verification"
+          }
+        ],
+        "criticalMistakes": [
+          "Not updating nominations — the single most common mistake that forces the next generation to go through this same process",
+          "Investing an inherited lump sum immediately and aggressively — grief impairs financial judgment; park it in a liquid fund for 3-6 months first",
+          "Letting health insurance lapse during the transition — you lose continuity benefits and waiting period exemptions permanently",
+          "Keeping all assets in one person's name again — distribute, use joint holdings, and ensure each account has a nominee",
+          "Not making a Will because 'I'm young' — this crisis is the proof that financial planning has no age requirement",
+          "Ignoring tax on inherited assets — inheritance is not taxed in India, but capital gains on subsequent sale of inherited assets ARE taxable"
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Health Insurance Renewal",
+            "deadline": "Before policy expiry (30-day grace period typical)",
+            "consequence": "Loss of no-claim bonus, continuity, and waiting period benefits. Fresh waiting periods imposed."
+          },
+          {
+            "item": "Nominee Update",
+            "deadline": "No deadline — do it this week",
+            "consequence": "Without a nominee, your family faces the same months-long process you just survived"
+          },
+          {
+            "item": "Will Registration",
+            "deadline": "No statutory deadline — register immediately",
+            "consequence": "Unregistered Will is valid but can be contested. Registered Will is harder to challenge."
+          }
+        ]
+      }
+    ],
+    "quickReference": {
+      "legalHeirCertificate": {
+        "issuedBy": "Tehsildar / Revenue Authority / Municipal Corporation",
+        "timeToObtain": "15–30 days",
+        "cost": "₹50–₹500",
+        "usedFor": ["Property mutation", "Pension claims", "Bank claims (small amounts)", "Insurance claims", "Government dues"],
+        "notSuitableFor": "Large bank balances without nominee, securities above SEBI threshold"
+      },
+      "successionCertificate": {
+        "issuedBy": "District Civil Court under Section 372, Indian Succession Act",
+        "timeToObtain": "3–6 months (longer if contested)",
+        "cost": "Court fees: typically 2–3% of asset value (state-capped)",
+        "usedFor": ["Bank accounts above ₹5 lakh without nominee", "Share/demat transmission above ₹5 lakh without nominee", "Bonds and debentures"],
+        "notSuitableFor": "Immovable property — use Probate or registered Will for property"
+      },
+      "probate": {
+        "issuedBy": "High Court (Presidency towns) or District Court",
+        "mandatory": "Mumbai, Kolkata, Chennai — mandatory. All other cities — optional but strongly recommended.",
+        "timeToObtain": "6–18 months",
+        "usedFor": "Immovable property transfer based on a Will"
+      },
+      "irdaiClaimTimeline": {
+        "standardSettlement": "30 days from receipt of all documents",
+        "ifInvestigationNeeded": "90 days from claim intimation (only for policies <3 years old)",
+        "maximumAllowed": "120 days",
+        "penaltyForDelay": "2% above bank rate per day of delay",
+        "earlyClaimNote": "Policies claimed within 3 years of issuance may be investigated for non-disclosure at inception"
+      },
+      "epfClaimsChecklist": {
+        "form20": "PF balance withdrawal — submit to EPFO via employer",
+        "form10D": "Monthly pension for family — spouse + children receive this",
+        "form5IF": "EDLI insurance claim — up to ₹7 lakh, separate from PF — most families miss this",
+        "portal": "https://unifiedportal-mem.epfindia.gov.in",
+        "helpline": "1800-118-005"
+      }
+    }
+  }
 }

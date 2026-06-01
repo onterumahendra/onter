@@ -23,6 +23,8 @@ git clone https://github.com/onterumahendra/onter.git
 
 When a key family member passes away unexpectedly, surviving dependents face emotional and practical chaos. Records are scattered across devices, accounts, and papers. Onter provides a single, secure, up-to-date reference for your most important information—built for privacy, trust, and family continuity.
 
+**But having the data isn't enough.** Families need to know *what to do* with it during emergencies. That's why Onter includes an **Emergency Access Guide**—a comprehensive PDF that walks your loved ones through every step, from opening files to contacting the right people, with country-specific emergency numbers and legal guidance.
+
 ---
 
 ## Why Open Source?
@@ -37,13 +39,117 @@ When a key family member passes away unexpectedly, surviving dependents face emo
 ## 🌟 Features
 
 - **Emergency-ready organization:** Capture critical details for family, dependents, advisors, and estate handlers
+- **Emergency Access Guide (NEW):** Comprehensive PDF guide explaining how to use your exported data during emergencies
 - **Global form framework:** Configurable country-specific workflows (India, USA, more)
 - **Client-side privacy:** All storage is local in your browser
-- **Exportable package:** Download a comprehensive data bundle for safe handover
+- **Exportable package:** Download a comprehensive data bundle (Excel + PDF + Access Guide) for safe handover
 - **Auto-save & auto-delete:** Progress is saved, and data is cleared after 24 hours for privacy
 - **Responsive design:** Desktop and mobile
 - **Step-by-step forms:** Guided, easy-to-use wizard
 - **Validation:** Built-in checks for accuracy
+
+---
+
+## 📋 Emergency Access Guide
+
+**The Problem:** Families often have emergency data but don't know what to do with it during crises.
+
+**The Solution:** Onter automatically generates a comprehensive, step-by-step Emergency Access Guide PDF that explains exactly how to use your exported data when it matters most.
+
+### What's Included in the Access Guide
+
+#### 📘 Cover Page
+- Professional design with security warnings
+- Date stamp for version tracking
+- Clear emergency classification
+
+#### 🚨 Quick Start Section
+- Country-specific emergency numbers (911, 108, etc.)
+- Critical first 30 minutes actions
+- File extraction and access instructions
+- Immediate contact guidance
+
+#### 📁 File Structure Explanation
+- What's in your ZIP file (Excel, PDFs, Guide)
+- How to open and extract files
+- Secure storage recommendations
+- Cloud backup best practices
+
+#### 📚 Section-by-Section Guidance
+For each form section, the guide provides:
+- **Icon** for quick visual recognition
+- **Description** of what's inside
+- **Who Needs This** (e.g., doctors, lawyers, banks)
+- **First Actions** to take immediately
+- **Critical Fields** to prioritize
+
+**Example Sections Covered:**
+- 🇺🇸 **US:** Personal Details, Emergency Contacts, Insurance, Bank Details, Document Locations
+- 🇮🇳 **India:** Personal Details, Mediclaim, Insurance, Bank Details, EPF/PPF/NPS, Deposits, Loans, Property, Digital Assets (15 sections!)
+
+#### 👥 Emergency Contacts
+- Extracted directly from your form data
+- Highlighted for immediate access
+- Contact validation reminders
+
+#### ⚖️ Legal & Security Notes
+- Country-specific legal considerations
+- Estate planning guidance
+- Succession laws and timelines
+- Data security best practices
+- Professional disclaimers
+
+### Access Guide Benefits
+
+✅ **Peace of Mind** - Families know exactly what to do  
+✅ **Faster Emergency Response** - No time wasted figuring out the data  
+✅ **Reduced Errors** - Clear instructions prevent mistakes  
+✅ **Country-Specific Guidance** - Tailored emergency numbers and legal info  
+✅ **Actionable Intelligence** - "Do this first" approach  
+✅ **Professional Grade** - Scannable format with icons and clear hierarchy
+
+### Configuration
+
+Access guides are configurable per country in `public/configs/<COUNTRY>.json`:
+
+```json
+{
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": ["Emergency instructions..."],
+    "emergencyServices": {
+      "medical": "911",
+      "police": "911"
+    },
+    "sectionGuidance": {
+      "Personal Details": {
+        "icon": "👤",
+        "description": "Identity information...",
+        "usefulFor": ["Medical professionals", "Legal representatives"],
+        "firstActions": ["Verify documents...", "Contact emergency contacts..."],
+        "criticalFields": ["SSN", "Blood Group"]
+      }
+    },
+    "legalNotes": ["Legal disclaimers..."],
+    "generalGuidance": {
+      "fileStructure": ["What's in your ZIP..."],
+      "dataAccess": ["How to extract files..."],
+      "securityTips": ["Keep documents secure..."]
+    }
+  }
+}
+```
+
+### Export Package
+
+When you export your data, you receive a complete emergency kit:
+
+```
+Onter_Care_US_2026-05-22.zip
+├── Onter_Care_US_2026-05-22.xlsx      # Editable data
+├── Onter_Care_US_2026-05-22.pdf       # Print-ready form
+└── Onter_Emergency_Access_Guide_US.pdf      # Step-by-step instructions
+```
 
 ---
 
@@ -94,16 +200,25 @@ src/
 ├── components/        # Reusable UI components
 ├── constants/         # Configuration constants and shared types
 ├── hooks/             # Custom React hooks
+├── services/          # Business logic services
+│   └── accessGuideService.ts  # Emergency Access Guide PDF generation
 ├── store/             # Zustand state management
-├── utils/             # Utility functions (Excel, IndexedDB, configLoader, PDF)
+├── utils/             # Utility functions
+│   ├── excel.ts       # Excel generation
+│   ├── pdfService.ts  # Form PDF generation
+│   ├── pdfHelpers.ts  # PDF utilities for forms
+│   ├── accessGuidePdfHelpers.ts  # PDF utilities for access guide
+│   ├── indexedDB.ts   # Local storage
+│   ├── configLoader.ts  # Dynamic country config loader
+│   └── zipService.ts  # ZIP package generation (Excel + PDFs + Guide)
 ├── App.tsx            # Main application root component
 ├── FormStepper.tsx    # Multi-step form wizard
 └── main.tsx           # Application entry point
 
 public/
 └── configs/           # Country-specific JSON configurations
-    ├── IN.json        # India configuration
-    ├── US.json        # United States configuration
+    ├── IN.json        # India configuration (with access guide)
+    ├── US.json        # United States configuration (with access guide)
     └── README.md      # Configuration guide
 ```
 
@@ -121,8 +236,9 @@ Onter uses a JSON-based configuration system for easy internationalization:
 
 1. Create `public/configs/<CODE>.json` (see [configs/README.md](public/configs/README.md))
 2. Define country-specific form sections and validation
-3. Update `AVAILABLE_COUNTRIES` in `src/utils/configLoader.ts`
-4. Test thoroughly!
+3. Configure the **Emergency Access Guide** with country-specific emergency numbers, legal notes, and section guidance
+4. Update `AVAILABLE_COUNTRIES` in `src/utils/configLoader.ts`
+5. Test thoroughly, including PDF exports and access guide generation!
 
 See [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) for detailed documentation.
 
@@ -139,11 +255,14 @@ See [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) for detailed documentation.
 
 ## Roadmap
 
+- ✅ **Emergency Access Guide** - Comprehensive PDF guide for families (COMPLETED)
 - More country packs
 - Family sharing workflows
-- Secure PDF emergency pack
-- Dead man’s switch (optional)
+- ~~Secure PDF emergency pack~~ (COMPLETED - now includes Excel, PDF, and Access Guide)
+- Dead man's switch (optional)
 - Executor checklist automation
+- Multi-language support within countries
+- Digital vault integration
 
 ---
 
@@ -160,7 +279,7 @@ MIT License
 ## 📖 Documentation
 
 - [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) - Configuration system guide
-- [public/configs/README.md](public/configs/README.md) - Country config creation
+- [public/configs/README.md](public/configs/README.md) - Country config creation (includes Access Guide setup)
 - [MIGRATION.md](MIGRATION.md) - Migration guide (if applicable)
 - [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) - Feature status
 

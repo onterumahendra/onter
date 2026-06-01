@@ -50,10 +50,36 @@ export interface ComplexSection {
 
 export type FormSection = SimpleSection | TableSection | ComplexSection;
 
+export interface SectionGuidance {
+  description: string;
+  usefulFor: string[];
+  firstActions: string[];
+  criticalFields?: string[];
+}
+
+export interface AccessGuideConfig {
+  enabled: boolean;
+  quickStart: string[];
+  emergencyServices: {
+    medical: string;
+    police: string;
+    fire: string;
+    [key: string]: string;
+  };
+  sectionGuidance: Record<string, SectionGuidance>;
+  legalNotes: string[];
+  generalGuidance?: {
+    fileStructure?: string[];
+    dataAccess?: string[];
+    securityTips?: string[];
+  };
+}
+
 export interface CountryFormConfig {
   countryCode: string;
   countryName: string;
   currency: string;
   currencySymbol: string;
   formSections: FormSection[];
+  accessGuide?: AccessGuideConfig;
 }
