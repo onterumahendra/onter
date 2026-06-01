@@ -169,7 +169,10 @@ export function Introduction() {
       executeManualEntry();
     }
   };
-  
+
+  const handleResumeSession = () => {
+    navigate('/form');
+  };  
   
   return (
     <>
