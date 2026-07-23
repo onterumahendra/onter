@@ -16,6 +16,7 @@ import {
   Modal,
   SimpleGrid,
   Transition,
+  Box,
 } from '@mantine/core';
 import {
   IconFileDownload,
@@ -172,7 +173,9 @@ export function Introduction() {
 
   const handleResumeSession = () => {
     navigate('/form');
-  };  
+  };
+
+  const countryFlagSrc = publicAsset(`flags/${selectedCountry.toLowerCase()}.svg`);
   
   return (
     <>
@@ -197,15 +200,33 @@ export function Introduction() {
                 timingFunction="ease-in-out"
               >
                 {(styles) => (
-                  <img
-                    src={publicAsset('logo.png')}
-                    alt="Onter"
-                    loading="lazy"
-                    style={{ 
-                      height: isMobile ? 20 : 30,
-                      ...styles
-                    }}
-                  />
+                  <Group gap="sm" align="center" style={styles}>
+                    <img
+                      src={publicAsset('logo.png')}
+                      alt="Onter"
+                      loading="lazy"
+                      style={{ 
+                        height: isMobile ? 20 : 30,
+                      }}
+                    />
+                    <Box
+                      h={isMobile ? 20 : 30}
+                      style={{
+                        width: '1px',
+                        backgroundColor: 'var(--mantine-color-gray-3)',
+                      }}
+                    />
+                    <img
+                      src={countryFlagSrc}
+                      alt={selectedCountry}
+                      loading="lazy"
+                      style={{
+                        height: isMobile ? 20 : 30,
+                        width: 'auto',
+                        display: 'block',
+                      }}
+                    />
+                  </Group>
                 )}
               </Transition>
             </Title>

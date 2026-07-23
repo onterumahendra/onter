@@ -319,6 +319,7 @@ export function FormStepper() {
   };
 
   const progressPercentage = ((completedSteps.size + skippedSteps.size) / formSections.length) * 100;
+  const countryFlagSrc = publicAsset(`flags/${selectedCountry.toLowerCase()}.svg`);
 
   const renderSectionContent = () => {
     if (!currentSection) return null;
@@ -400,7 +401,7 @@ export function FormStepper() {
     >
       <AppShell.Header style={isMobile ? undefined : { width: '300px', borderRight: '1px solid var(--mantine-color-gray-3)' }}>
         <Group h="100%" px="md" justify="space-between">
-          <Group>
+          <Group gap="sm" align="center">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <img 
               src={publicAsset('logo.png')} 
@@ -408,6 +409,24 @@ export function FormStepper() {
               style={{ height: isMobile ? 20 : 30, cursor: 'pointer' }}
               onClick={() => navigate('/')}
               title={t('formStepper.header.backToHome')}
+            />
+            <Box
+              h={isMobile ? 20 : 30}
+              style={{
+                width: '1px',
+                backgroundColor: 'var(--mantine-color-gray-3)',
+                alignSelf: 'center',
+              }}
+            />
+            <img
+              src={countryFlagSrc}
+              alt={selectedCountry}
+              style={{
+                height: isMobile ? 20 : 30,
+                width: 'auto',
+                cursor: 'default',
+                display: 'block',
+              }}
             />
           </Group>
           
