@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -34,11 +34,19 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Verify deployment assets
+        run: |
+          test -f dist/index.html
+          test -f dist/fonts/fonts.css
+          test -f dist/fonts/OpenSans-Regular.ttf
+          echo "Verified deployment assets:"
+          find dist/fonts -maxdepth 1 -type f -print
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
