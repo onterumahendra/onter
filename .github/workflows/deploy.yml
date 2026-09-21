@@ -34,13 +34,19 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Verify deployment assets
+      - name: Verify production output
+        shell: bash
         run: |
+          set -euo pipefail
+
           test -f dist/index.html
-          test -f dist/fonts/fonts.css
+          test -d dist/assets
+          test -n "$(find dist/assets -type f -name '*.js' -print -quit)"
+          test -n "$(find dist/assets -type f -name '*.css' -print -quit)"
           test -f dist/fonts/OpenSans-Regular.ttf
-          echo "Verified deployment assets:"
-          find dist/fonts -maxdepth 1 -type f -print
+
+          ! grep -q 'src/main.tsx' dist/index.html
+          ! grep -q 'fonts/fonts.css' dist/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -48,7 +54,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist
+          path: dist
 
   deploy:
     needs: build
