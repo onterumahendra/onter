@@ -11,7 +11,9 @@ export interface Country {
  * List of all available countries
  */
 export const AVAILABLE_COUNTRIES: Country[] = [
-    { code: "IN", name: "India" }
+    { code: "IN", name: "India" },
+    { code: "US", name: "United States" },
+    { code: "CA", name: "Canada" }
 ];
 
 /**

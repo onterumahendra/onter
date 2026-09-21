@@ -28,6 +28,7 @@ This directory contains JSON configuration files for different countries. Each f
 
 - `IN` - India (₹ INR)
 - `US` - United States ($ USD)
+- `CA` - Canada (C$ CAD)
 
 ## Configuration Structure
 

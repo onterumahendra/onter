@@ -1,13 +1,13 @@
 {
-  "countryCode": "US",
-  "countryName": "United States",
-  "currency": "USD",
+  "countryCode": "CA",
+  "countryName": "Canada",
+  "currency": "CAD",
   "currencySymbol": "$",
   "formSections": [
     {
       "section": "Personal Details",
       "type": "simple",
-      "description": "Please provide your personal identification and contact details",
+      "description": "Please provide your legal identity and contact details",
       "fields": [
         {
           "label": "Full Legal Name",
@@ -21,14 +21,14 @@
           }
         },
         {
-          "label": "Social Security Number (SSN)",
-          "name": "ssn",
+          "label": "Social Insurance Number (SIN)",
+          "name": "sin",
           "type": "text",
-          "placeholder": "XXX-XX-XXXX",
+          "placeholder": "123 456 789",
           "validation": {
             "required": true,
-            "pattern": "^[0-9]{3}-[0-9]{2}-[0-9]{4}$",
-            "errorMessage": "SSN must be in format: XXX-XX-XXXX"
+            "pattern": "^[0-9]{3} [0-9]{3} [0-9]{3}$|^[0-9]{9}$",
+            "errorMessage": "SIN must be 9 digits or in format: 123 456 789"
           }
         },
         {
@@ -38,6 +38,16 @@
           "validation": {
             "required": true,
             "errorMessage": "Date of birth is required"
+          }
+        },
+        {
+          "label": "Provincial Health Card Number",
+          "name": "health_card_no",
+          "type": "text",
+          "placeholder": "Provincial health card number",
+          "validation": {
+            "required": true,
+            "errorMessage": "Health card number is required"
           }
         },
         {
@@ -71,13 +81,13 @@
           }
         },
         {
-          "label": "Driver's License / State ID No.",
+          "label": "Driver's License / Provincial ID",
           "name": "drivers_license_no",
           "type": "text",
-          "placeholder": "State license or ID number",
+          "placeholder": "License or ID number",
           "validation": {
             "pattern": "^[A-Za-z0-9]{5,20}$",
-            "errorMessage": "Driver's license or state ID must be 5-20 alphanumeric characters"
+            "errorMessage": "License or ID must be 5-20 alphanumeric characters"
           }
         },
         {
@@ -106,7 +116,7 @@
           "label": "Residential Address",
           "name": "residential_address",
           "type": "text",
-          "placeholder": "Street address, city, state, ZIP"
+          "placeholder": "Street address, city, province, postal code"
         }
       ]
     },
@@ -188,7 +198,7 @@
             "Life",
             "Auto",
             "Home",
-            "Renter",
+            "Tenant",
             "Travel",
             "Disability",
             "Property",
@@ -220,7 +230,7 @@
           }
         },
         {
-          "label": "Member ID",
+          "label": "Member / Group ID",
           "name": "member_id",
           "type": "text",
           "placeholder": "Member or group ID"
@@ -229,7 +239,7 @@
           "label": "Premium Amount",
           "name": "premium_amount",
           "type": "number",
-          "placeholder": "Monthly/annual premium",
+          "placeholder": "Monthly or annual premium",
           "validation": {
             "required": true,
             "min": 0,
@@ -250,7 +260,7 @@
     {
       "section": "Bank details",
       "type": "table",
-      "description": "Your bank account information",
+      "description": "Your bank and account information",
       "maxRows": 15,
       "columns": [
         {
@@ -280,13 +290,36 @@
           "options": [
             "Checking",
             "Savings",
-            "Money Market",
+            "TFSA",
+            "RRSP",
             "Brokerage",
             "Other"
           ],
           "validation": {
             "required": true,
             "errorMessage": "Please select account type"
+          }
+        },
+        {
+          "label": "Institution No.",
+          "name": "institution_no",
+          "type": "text",
+          "placeholder": "3-digit institution number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{3}$",
+            "errorMessage": "Institution number must be 3 digits"
+          }
+        },
+        {
+          "label": "Transit No.",
+          "name": "transit_no",
+          "type": "text",
+          "placeholder": "5-digit transit number",
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{5}$",
+            "errorMessage": "Transit number must be 5 digits"
           }
         },
         {
@@ -297,17 +330,6 @@
           "validation": {
             "required": true,
             "errorMessage": "Account number is required"
-          }
-        },
-        {
-          "label": "Routing Number",
-          "name": "routing_number",
-          "type": "text",
-          "placeholder": "9-digit routing number",
-          "validation": {
-            "required": true,
-            "pattern": "^[0-9]{9}$",
-            "errorMessage": "Routing number must be 9 digits"
           }
         },
         {
@@ -331,7 +353,8 @@
           "options": [
             "Birth Certificate",
             "Passport",
-            "Social Security Card",
+            "SIN Confirmation",
+            "Health Card",
             "Marriage Certificate",
             "Property Deed / Mortgage",
             "Will / Testament",
@@ -381,22 +404,22 @@
     "enabled": true,
     "quickStart": [
       "If this is a medical emergency, call 911 immediately",
-      "If you are in crisis or need emotional support, call or text 988",
-      "Locate your downloaded ZIP file and extract it to a secure, private folder",
-      "Open the PDF and Excel files for quick reference without editing the originals",
-      "Review emergency contacts, insurance, and banking details first",
-      "Keep copies of IDs, passports, and legal documents in a secure location"
+      "If you need emotional support or crisis help, call or text 988",
+      "Keep your SIN, health card, passport, and banking details in one secure folder",
+      "Review emergency contacts, insurance, and banking information before a crisis occurs",
+      "Store copies of legal documents in a lockbox, safe, or secure digital vault",
+      "Share access with a trusted family member only when appropriate"
     ],
     "emergencyServices": {
       "medical": "911",
       "police": "911",
       "fire": "911",
-      "poison_control": "1-800-222-1222",
+      "poison_control": "1-800-567-8911",
       "suicide_prevention": "988"
     },
     "sectionGuidance": {
       "Personal Details": {
-        "description": "Core identity information required for legal, medical, financial, and government processes in the United States.",
+        "description": "Core identity information used for healthcare, legal, government, and financial access in Canada.",
         "usefulFor": [
           "Medical professionals",
           "Legal representatives",
@@ -404,20 +427,20 @@
           "Financial institutions"
         ],
         "firstActions": [
-          "Verify the SSN, passport, and driver's license state ID are current",
-          "Confirm the residential address and contact details are up to date",
+          "Verify the SIN, health card, and passport are current",
+          "Confirm the residential address and phone details are up to date",
           "Ensure the blood type is noted in medical records if known",
-          "Share the emergency contact information with trusted family members"
+          "Keep document copies accessible to a trusted family member"
         ],
         "criticalFields": [
-          "SSN",
+          "Social Insurance Number (SIN)",
           "Date of Birth",
           "Primary Phone Number",
           "Email Address"
         ]
       },
       "Emergency contact details": {
-        "description": "Primary and secondary contacts who should be notified in case of emergency.",
+        "description": "Contacts who should be notified during medical, financial, or family emergencies.",
         "usefulFor": [
           "Emergency responders",
           "Hospital staff",
@@ -426,9 +449,9 @@
         ],
         "firstActions": [
           "Contact the primary emergency contact immediately if needed",
-          "Verify current phone numbers for each listed contact",
-          "Ensure each contact knows they are listed for emergency use",
-          "Update the list whenever your personal circumstances change"
+          "Verify current phone numbers for all listed contacts",
+          "Ensure each individual knows they are listed for emergency use",
+          "Update contact details after major life events"
         ],
         "criticalFields": [
           "Contact Type",
@@ -446,9 +469,9 @@
         ],
         "firstActions": [
           "Locate original policy documents and member IDs",
-          "Confirm the policy is active and premiums are current",
+          "Confirm policies are active and premiums are current",
           "Check coverage limits and claim procedures for each provider",
-          "Keep contacts for your insurance companies readily available"
+          "Keep emergency contact information for insurers ready"
         ],
         "criticalFields": [
           "Policy Holder Name",
@@ -458,7 +481,7 @@
         ]
       },
       "Bank details": {
-        "description": "Financial accounts requiring access, verification, or emergency coordination.",
+        "description": "Financial accounts requiring access or coordination during a family emergency.",
         "usefulFor": [
           "Estate executors",
           "Financial advisors",
@@ -466,20 +489,20 @@
           "Legal representatives"
         ],
         "firstActions": [
-          "Keep account and routing numbers in a secure but accessible place",
+          "Store transit, institution, and account numbers securely but accessibly",
           "Verify account holders and authorized signers",
-          "Contact the bank immediately if account access is compromised",
-          "Store bank statements and account records in a safe place"
+          "Review bank account types to decide which accounts to prioritize",
+          "Keep bank statements and branch details in a safe location"
         ],
         "criticalFields": [
           "Bank Name",
           "Account No.",
-          "Routing Number",
-          "Account Type"
+          "Transit No.",
+          "Institution No."
         ]
       },
       "IMPORTANT DOCUMENTS LOCATION": {
-        "description": "Physical location of critical legal, personal, and financial documents.",
+        "description": "Physical location of critical legal, medical, and financial documents.",
         "usefulFor": [
           "Estate executors",
           "Attorneys",
@@ -490,7 +513,7 @@
           "Locate and secure all original documents immediately",
           "Confirm wills, powers of attorney, and property records are current",
           "Store copies in multiple secure locations when possible",
-          "Keep document keys or lockbox access information with a trusted person"
+          "Keep safe combination or lockbox access information with a trusted person"
         ],
         "criticalFields": [
           "Document Type",
@@ -499,7 +522,7 @@
         ]
       },
       "Additional details": {
-        "description": "Supplementary information, special instructions, or unique circumstances relevant to your care or legal needs.",
+        "description": "Supplementary information, special instructions, or unique circumstances relevant to the family plan.",
         "usefulFor": [
           "All parties",
           "Medical staff",
@@ -507,19 +530,19 @@
         ],
         "firstActions": [
           "Read through all notes carefully",
-          "Follow any specific instructions shared in this section",
-          "Share important information with the appropriate contacts"
+          "Follow any specific instructions in this section",
+          "Share important information with the right people only"
         ]
       }
     },
     "legalNotes": [
       "This guide provides general emergency access information only and is not legal advice",
-      "Consult qualified attorneys for estate planning, wills, trusts, and powers of attorney",
-      "Verify compliance with the laws and regulations of your state or jurisdiction",
+      "Consult qualified legal or financial professionals for wills, powers of attorney, and account access planning",
+      "Ensure compliance with provincial and federal requirements for identity and healthcare documentation",
       "Update this information at least annually or after major life events",
-      "Keep beneficiary designations and plan documents reviewed and current",
-      "Consider whether a safe deposit box, digital vault, or secure document storage is appropriate for originals",
-      "Make sure healthcare directives and emergency medical instructions are properly documented",
+      "Review beneficiary designations and account ownership on a regular basis",
+      "Keep original legal documents in a secure, protected location with a trusted family member or executor",
+      "Make sure healthcare directives and emergency care instructions are properly documented",
       "Share access to this information only with trusted, authorized individuals"
     ],
     "generalGuidance": {
@@ -536,7 +559,7 @@
         "Save the extracted files to a secure, memorable location",
         "Consider encrypted cloud backup such as OneDrive, Google Drive, or iCloud",
         "Use password protection or a protected folder for sensitive information",
-        "Share access credentials with at least one trusted person",
+        "Share access credentials with at least one trusted family member",
         "Keep duplicate copies on an encrypted USB drive or secure mobile device"
       ],
       "securityTips": [

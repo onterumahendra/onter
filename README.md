@@ -40,7 +40,7 @@ When a key family member passes away unexpectedly, surviving dependents face emo
 
 - **Emergency-ready organization:** Capture critical details for family, dependents, advisors, and estate handlers
 - **Emergency Access Guide (NEW):** Comprehensive PDF guide explaining how to use your exported data during emergencies
-- **Global form framework:** Configurable country-specific workflows (India, USA, more)
+- **Global form framework:** Configurable country-specific workflows (India, USA, Canada, more)
 - **Client-side privacy:** All storage is local in your browser
 - **Exportable package:** Download a comprehensive data bundle (Excel + PDF + Access Guide) for safe handover
 - **Auto-save & auto-delete:** Progress is saved, and data is cleared after 24 hours for privacy
@@ -231,6 +231,7 @@ Onter uses a JSON-based configuration system for easy internationalization:
 **Available Countries**:
 - 🇮🇳 **IN** - India (₹ INR)
 - 🇺🇸 **US** - United States ($ USD)
+- 🇨🇦 **CA** - Canada (C$ CAD)
 
 ### Adding a New Country
 
