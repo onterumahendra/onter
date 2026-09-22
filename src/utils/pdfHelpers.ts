@@ -2,6 +2,7 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { FormSection, SimpleSection, TableSection, ComplexSection } from '../constants/types';
 import { publicAsset } from './paths';
+import { loadPdfImage, rasterizePdfImage, resolveCountryCode } from './pdfImageHelpers';
 
 /**
  * Shared PDF utility constants and functions
@@ -27,23 +28,11 @@ export const PDF_CONFIG = {
   FONT_NORMAL: 'normal' as const,
 } as const;
 
-/**
- * Add section header to the page
- */
-async function loadImageDimensions(src: string): Promise<{ width: number; height: number }> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
-    img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
-    img.src = src;
-  });
-}
-
 export async function addSectionHeader(
   doc: jsPDF,
   section: FormSection,
-  yPosition: number
+  yPosition: number,
+  country?: string | null
 ): Promise<number> {
   // Add section heading on the left
   doc.setFontSize(16);
@@ -52,15 +41,27 @@ export async function addSectionHeader(
   
   // Add logo on the right at the same Y position
   try {
-    const { width: imgWidth, height: imgHeight } = await loadImageDimensions(PDF_CONFIG.LOGO_PATH);
+    const logoImg = await loadPdfImage(PDF_CONFIG.LOGO_PATH);
+    const imgWidth = logoImg.naturalWidth;
+    const imgHeight = logoImg.naturalHeight;
     const logoWidth = (PDF_CONFIG.LOGO_HEIGHT * imgWidth) / imgHeight;
     const pageWidth = doc.internal.pageSize.getWidth();
-    const logoX = pageWidth - logoWidth - PDF_CONFIG.PAGE_MARGIN;
+    const countryCode = resolveCountryCode(country);
+    const flagPath = countryCode ? publicAsset(`flags/${countryCode}.svg`) : null;
+    const flagImg = flagPath ? await loadPdfImage(flagPath).catch(error => {
+      console.warn('Failed to add country flag to section header:', error);
+      return null;
+    }) : null;
+    const flagHeight = flagImg ? PDF_CONFIG.LOGO_HEIGHT : 0;
+    const flagWidth = flagImg
+      ? (flagHeight * flagImg.naturalWidth) / flagImg.naturalHeight
+      : 0;
+    const gap = flagImg ? 5 : 0;
+    const separatorWidth = flagImg ? 3 : 0;
+    const totalWidth = logoWidth + gap + separatorWidth + flagWidth;
+    const logoX = pageWidth - totalWidth - PDF_CONFIG.PAGE_MARGIN;
     const logoY = yPosition - PDF_CONFIG.LOGO_HEIGHT + 2; // Align with text baseline
     
-    const logoImg = new Image();
-    logoImg.crossOrigin = 'anonymous';
-    logoImg.src = PDF_CONFIG.LOGO_PATH;
     doc.addImage(
       logoImg,
       'PNG',
@@ -69,6 +70,26 @@ export async function addSectionHeader(
       logoWidth,
       PDF_CONFIG.LOGO_HEIGHT
     );
+
+    if (flagImg && flagWidth > 0) {
+      const separatorX = logoX + logoWidth + gap / 2;
+      const groupHeight = Math.max(PDF_CONFIG.LOGO_HEIGHT, flagHeight);
+      const separatorHeight = Math.min(PDF_CONFIG.LOGO_HEIGHT, flagHeight) * 0.6;
+      const separatorY = logoY + (groupHeight - separatorHeight) / 2;
+      doc.setDrawColor(100, 116, 139);
+      doc.setLineWidth(0.2);
+      doc.line(separatorX, separatorY, separatorX, separatorY + separatorHeight);
+
+      const flagCanvas = rasterizePdfImage(flagImg);
+      doc.addImage(
+        flagCanvas,
+        'PNG',
+        logoX + logoWidth + gap + separatorWidth,
+        logoY,
+        flagWidth,
+        flagHeight
+      );
+    }
   } catch (error) {
     console.warn('Failed to add logo to section header:', error);
     // Continue without logo if it fails

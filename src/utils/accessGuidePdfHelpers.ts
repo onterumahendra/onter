@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf';
 import { publicAsset } from './paths';
+import { loadPdfImage, rasterizePdfImage, resolveCountryCode } from './pdfImageHelpers';
 
 /**
  * Access Guide PDF Helper Functions
@@ -20,30 +21,8 @@ export const GUIDE_CONFIG = {
 } as const;
 
 /**
- * Load image dimensions with timeout
+ * Load an image with timeout and return only after it is ready for jsPDF.
  */
-async function loadImageDimensions(src: string): Promise<{ width: number; height: number }> {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        const timeout = setTimeout(() => {
-            img.onload = null;
-            img.onerror = null;
-            reject(new Error(`Image load timeout: ${src}`));
-        }, 5000); // 5 second timeout
-        
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-            clearTimeout(timeout);
-            resolve({ width: img.naturalWidth, height: img.naturalHeight });
-        };
-        img.onerror = () => {
-            clearTimeout(timeout);
-            reject(new Error(`Failed to load image: ${src}`));
-        };
-        img.src = src;
-    });
-}
-
 /**
  * Add a creative cover page
  */
@@ -64,15 +43,37 @@ export async function addCoverPage(doc: jsPDF, country: string): Promise<void> {
 
     // Add logo
     try {
-        const { width: imgWidth, height: imgHeight } = await loadImageDimensions(GUIDE_CONFIG.LOGO_PATH);
+        const logoImg = await loadPdfImage(GUIDE_CONFIG.LOGO_PATH);
+        const imgWidth = logoImg.naturalWidth;
+        const imgHeight = logoImg.naturalHeight;
         const logoHeight = 25;
         const logoWidth = (logoHeight * imgWidth) / imgHeight;
-        const logoX = (pageWidth - logoWidth) / 2;
+        const countryCode = resolveCountryCode(country);
+        const flagPath = countryCode ? publicAsset(`flags/${countryCode}.svg`) : null;
+        const flagImg = flagPath ? await loadPdfImage(flagPath).catch(error => {
+            console.warn('Failed to add country flag to cover page:', error);
+            return null;
+        }) : null;
+        const flagHeight = flagImg ? 25 : 0;
+        const flagWidth = flagImg && flagImg.naturalHeight > 0
+            ? (flagHeight * flagImg.naturalWidth) / flagImg.naturalHeight
+            : 0;
+        const gap = flagImg ? 8 : 0;
+        const logoX = (pageWidth - logoWidth - gap - flagWidth) / 2;
 
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = GUIDE_CONFIG.LOGO_PATH;
         doc.addImage(logoImg, 'PNG', logoX, yPos, logoWidth, logoHeight);
+        if (flagImg && flagWidth > 0) {
+            const separatorX = logoX + logoWidth + gap / 2;
+            const groupHeight = Math.max(logoHeight, flagHeight);
+            const separatorHeight = Math.min(logoHeight, flagHeight) * 0.6;
+            const separatorY = yPos + (groupHeight - separatorHeight) / 2;
+            doc.setDrawColor(...GUIDE_CONFIG.TEXT_SECONDARY);
+            doc.setLineWidth(0.3);
+            doc.line(separatorX, separatorY, separatorX, separatorY + separatorHeight);
+
+            const flagCanvas = rasterizePdfImage(flagImg);
+            doc.addImage(flagCanvas, 'PNG', logoX + logoWidth + gap, yPos, flagWidth, flagHeight);
+        }
         yPos += logoHeight + 20;
     } catch (error) {
         console.warn('Failed to add logo to cover page:', error);

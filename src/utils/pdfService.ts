@@ -56,7 +56,7 @@ export async function generateFormPDF(
       let yPosition = PDF_CONFIG.PAGE_MARGIN + 10;
       
       // Add section header (includes logo)
-      yPosition = await addSectionHeader(doc, section, yPosition);
+      yPosition = await addSectionHeader(doc, section, yPosition, countryCode);
       
       // Add skipped indicator if section was skipped
       if (isSkipped) {
