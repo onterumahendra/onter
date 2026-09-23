@@ -43,10 +43,12 @@ jobs:
           test -d dist/assets
           test -n "$(find dist/assets -type f -name '*.js' -print -quit)"
           test -n "$(find dist/assets -type f -name '*.css' -print -quit)"
+          test -f dist/logo_mini.ico
           test -f dist/fonts/OpenSans-Regular.ttf
 
           ! grep -q 'src/main.tsx' dist/index.html
           ! grep -q 'fonts/fonts.css' dist/index.html
+          ! grep -qE '(src|href)="/assets/' dist/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
