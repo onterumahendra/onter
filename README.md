@@ -191,6 +191,23 @@ npm install
 npm run dev
 ```
 
+### Running Tests and Coverage
+
+Use the Vitest-based test runner for local verification and coverage checks:
+
+```bash
+npm run test
+npm run test:coverage
+```
+
+The coverage command generates a terminal summary and an HTML report at:
+
+```text
+coverage/index.html
+```
+
+Open that file in a browser to inspect coverage by file and line.
+
 ---
 
 ## 🌍 Multi-Country Support
