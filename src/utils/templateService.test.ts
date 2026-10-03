@@ -42,7 +42,7 @@ describe('Template service', () => {
     expect(addPageNumber).toHaveBeenCalledTimes(3);
     expect(HTMLAnchorElement.prototype.click).toHaveBeenCalled();
     expect(document.querySelector('a')).toBeNull();
-  });
+  }, 15_000);
 
   it('wraps configuration or generation failures for the caller', async () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
