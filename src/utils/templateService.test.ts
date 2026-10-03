@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getFormSections } from '../constants';
-import { addPageNumber, addSectionHeader, generateComplexPDFSection, generateSimplePDFSection, generateTablePDFSection } from './pdfHelpers';
+import { addPageNumber, generateComplexPDFSection, generateSimplePDFSection, generateTablePDFSection } from './pdfHelpers';
 import { downloadTemplateAsZip } from './templateService';
 import type { FormSection } from '../constants/types';
 

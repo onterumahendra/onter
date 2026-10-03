@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { jsPDF } from 'jspdf';
-import type { FormSection } from '../constants/types';
-import { addPageNumber, addSectionHeader, generateComplexPDFSection, generateSimplePDFSection, generateTablePDFSection } from './pdfHelpers';
+import { addSectionHeader, generateComplexPDFSection, generateSimplePDFSection, generateTablePDFSection } from './pdfHelpers';
 
 const mocks = vi.hoisted(() => ({
   autoTable: vi.fn(),

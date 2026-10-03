@@ -12,7 +12,8 @@ import {
 type RequestLike = {
   result?: any;
   onsuccess?: (event: any) => void;
-  onerror?: () => void;
+  onerror?: (event?: any) => void;
+  onupgradeneeded?: (event: any) => void;
 };
 
 const records = new Map<string, any>();
@@ -89,7 +90,7 @@ beforeEach(() => {
         else {
           req.result = database;
           req.onupgradeneeded?.({ target: { result: database } });
-          req.onsuccess?.();
+          req.onsuccess?.({ target: { result: database } });
         }
       });
       return req;

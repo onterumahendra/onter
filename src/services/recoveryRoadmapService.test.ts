@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { jsPDF } from 'jspdf';
 import type { CountryFormConfig } from '../constants/types';
 import { addPageFooter } from '../utils/accessGuidePdfHelpers';
 import { generateRecoveryRoadmapPDF } from './recoveryRoadmapService';

@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { FormConfigService, createFormConfigService } from './formConfigService';
-import { getFormSections } from '../constants';
+import { getFormSections, type FormSection } from '../constants';
 
 vi.mock('../constants', () => ({ getFormSections: vi.fn() }));
 
-const sections = [{ section: 'Personal', type: 'simple', fields: [] }] as const;
+const sections: FormSection[] = [{ section: 'Personal', type: 'simple', fields: [] }];
 
 describe('FormConfigService', () => {
   beforeEach(() => vi.clearAllMocks());

@@ -1,13 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CountryFormConfig } from '../constants/types';
-import {
-  addBulletList,
-  addCoverPage,
-  addInfoBox,
-  addPageFooter,
-  addSectionHeader,
-  addSubsection,
-} from '../utils/accessGuidePdfHelpers';
 import { generateAccessGuidePDF } from './accessGuideService';
 
 const pdfHelpers = vi.hoisted(() => ({

@@ -10,11 +10,11 @@ vi.mock('../store/appStore', () => ({
   }),
 }));
 
-const mockService: IExcelService = {
+const mockService = {
   exportData: vi.fn<IExcelService['exportData']>(),
   generateTemplate: vi.fn<IExcelService['generateTemplate']>(),
   importData: vi.fn<IExcelService['importData']>(),
-};
+} satisfies IExcelService;
 
 describe('useExcelOperations', () => {
   beforeEach(() => {
