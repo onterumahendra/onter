@@ -18,6 +18,7 @@ const renderBoundary = (fallback?: React.ReactNode) => render(
 
 afterEach(() => {
   shouldThrow = true;
+  vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
 
@@ -35,6 +36,16 @@ describe('ErrorBoundary', () => {
     shouldThrow = false;
     fireEvent.click(screen.getByRole('button', { name: 'Try Again' }));
     expect(screen.getByText('Recovered child')).toBeInTheDocument();
+  });
+
+  it('reloads the page when the reload action is selected', () => {
+    const reload = vi.fn();
+    vi.stubGlobal('window', { location: { reload } });
+    const boundary = new ErrorBoundary({ children: null });
+
+    boundary.handleReload();
+
+    expect(reload).toHaveBeenCalledOnce();
   });
 
   it('shows error details in development mode', () => {

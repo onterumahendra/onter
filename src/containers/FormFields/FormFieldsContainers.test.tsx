@@ -54,4 +54,58 @@ describe('form field containers', () => {
     fireEvent.click(screen.getByRole('button', { name: /table.addRowWithCount/ }));
     expect(useAppStore.getState().formData.Estate.Beneficiaries).toHaveLength(2);
   });
+
+  it('blocks incomplete rows and clears validation errors when rows are edited or removed', async () => {
+    const structure: ComplexSubSection[] = [{
+      title: 'Beneficiaries',
+      type: 'table',
+      columns: [requiredName],
+      minRows: 1,
+      maxRows: 3,
+    }];
+    act(() => useAppStore.getState().updateFormData('Estate', {
+      Beneficiaries: [{ name: 'Ada' }, { name: '' }],
+    }));
+    wrap(<ComplexFieldsContainer structure={structure} sectionName="Estate" />);
+
+    const addButton = screen.getByRole('button', { name: /table.addRowWithCount/ });
+    const inputs = screen.getAllByRole('textbox');
+    expect(addButton).toBeDisabled();
+
+    fireEvent.blur(inputs[1]);
+    expect(await screen.findByText('Name is required')).toBeInTheDocument();
+    fireEvent.change(inputs[1], { target: { value: 'Grace' } });
+    expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
+    fireEvent.blur(inputs[1]);
+    expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
+
+    fireEvent.click(addButton);
+    expect(useAppStore.getState().formData.Estate.Beneficiaries).toHaveLength(3);
+    const currentInputs = screen.getAllByRole('textbox');
+    fireEvent.blur(currentInputs[2]);
+    expect(await screen.findByText('Name is required')).toBeInTheDocument();
+
+    fireEvent.click(screen.getAllByTitle('table.removeRow')[2]);
+    expect(useAppStore.getState().formData.Estate.Beneficiaries).toHaveLength(2);
+    expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
+
+    fireEvent.click(addButton);
+    expect(useAppStore.getState().formData.Estate.Beneficiaries).toHaveLength(3);
+    expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
+  });
+
+  it('adds an optional-only subsection row when no saved data exists', () => {
+    const optionalNote: BaseField = { name: 'note', label: 'Note', type: 'text' };
+    const structure: ComplexSubSection[] = [{
+      title: 'Notes',
+      type: 'table',
+      columns: [optionalNote],
+      maxRows: 2,
+    }];
+    wrap(<ComplexFieldsContainer structure={structure} sectionName="Preferences" />);
+
+    expect(screen.getByText('table.noEntries')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /table.addRowWithCount/ }));
+    expect(useAppStore.getState().formData.Preferences.Notes).toEqual([{ note: '' }]);
+  });
 });

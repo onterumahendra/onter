@@ -39,6 +39,10 @@ const sections: FormSection[] = [
 ];
 const reviewSection: FormSection = { section: 'Review', type: 'simple', fields: [] };
 const renderStepper = () => render(<MantineProvider theme={theme}><MemoryRouter><FormStepper /></MemoryRouter></MantineProvider>);
+const expectExportWarningClosed = () => {
+  const warning = screen.queryByText('formStepper.export.warning.message');
+  if (warning) expect(warning).not.toBeVisible();
+};
 
 beforeEach(() => {
   vi.useRealTimers();
@@ -187,12 +191,12 @@ describe('FormStepper', () => {
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.exportData' }));
     expect(await screen.findByText('formStepper.export.warning.message')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.export.cancel' }));
-    await waitFor(() => expect(screen.queryByText('formStepper.export.warning.message')).not.toBeInTheDocument());
+    await waitFor(expectExportWarningClosed);
 
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.exportData' }));
     await screen.findByText('formStepper.export.warning.message');
     fireEvent.click(screen.getByRole('dialog').querySelector('button')!);
-    await waitFor(() => expect(screen.queryByText('formStepper.export.warning.message')).not.toBeInTheDocument());
+    await waitFor(expectExportWarningClosed);
 
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.exportData' }));
     await screen.findByText('formStepper.export.warning.message');
@@ -209,7 +213,7 @@ describe('FormStepper', () => {
     expect(useAppStore.getState().currentStep).toBe(0);
     expect(screen.getByText('formStepper.success.message')).toBeInTheDocument();
     await act(async () => { await vi.advanceTimersByTimeAsync(250); });
-    expect(screen.queryByText('formStepper.export.warning.message')).not.toBeInTheDocument();
+    expectExportWarningClosed();
     fireEvent.click(document.querySelector('button.mantine-Notification-closeButton')!);
     expect(screen.queryByText('formStepper.success.message')).not.toBeInTheDocument();
 
