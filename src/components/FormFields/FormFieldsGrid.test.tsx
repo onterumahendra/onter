@@ -25,20 +25,37 @@ describe('SimpleField and SimpleFieldsGrid', () => {
     const onBlur = vi.fn();
     const fields = [
       field('text'), field('email', 'email'), field('note', 'textarea'),
-      field('age', 'number'), field('country', 'select'), field('date', 'date'),
+      field('age', 'number'), { ...field('country', 'select'), options: ['Canada'] },
+      field('region', 'select'), field('date', 'date'),
     ];
     const { rerender } = wrap(<SimpleFieldsGrid fields={fields} values={{}} errors={{}} onChange={onChange} onBlur={onBlur} />);
     for (const item of fields.filter(item => item.type !== 'select')) {
       expect(screen.getByLabelText(item.label)).toBeInTheDocument();
     }
     expect(screen.getByRole('combobox', { name: 'country' })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'region' })).toBeInTheDocument();
     fireEvent.change(screen.getByLabelText('text'), { target: { value: 'Ada' } });
     fireEvent.blur(screen.getByLabelText('text'));
     expect(onChange).toHaveBeenCalledWith('text', 'Ada');
     expect(onBlur).toHaveBeenCalledWith('text');
 
+    fireEvent.change(screen.getByLabelText('email'), { target: { value: 'ada@example.com' } });
+    fireEvent.change(screen.getByLabelText('note'), { target: { value: 'A note' } });
+    fireEvent.change(screen.getByLabelText('age'), { target: { value: '42' } });
+    fireEvent.click(screen.getByRole('combobox', { name: 'country' }));
+    fireEvent.click(screen.getByRole('option', { name: 'Canada' }));
+    fireEvent.change(screen.getByLabelText('date'), { target: { value: '03/10/2026' } });
+    for (const name of ['email', 'note', 'age', 'country', 'date']) {
+      expect(onChange.mock.calls.some(([changedName]) => changedName === name)).toBe(true);
+    }
+
     rerender(<MantineProvider theme={theme}><SimpleField field={field('hidden')} value="" error="bad" onChange={onChange} hideLabel /></MantineProvider>);
     expect(screen.queryByLabelText('hidden')).not.toBeInTheDocument();
+  }, 15000);
+
+  it('allows grid fields to blur when no blur callback is supplied', () => {
+    wrap(<SimpleFieldsGrid fields={[field('text')]} values={{}} errors={{}} onChange={vi.fn()} />);
+    fireEvent.blur(screen.getByLabelText('text'));
   });
 
   it('uses default text rendering for an unknown field type', () => {

@@ -4,6 +4,10 @@ const roots = vi.hoisted(() => ({ createRoot: vi.fn(), render: vi.fn() }));
 vi.mock('react-dom/client', () => ({ createRoot: roots.createRoot }));
 vi.mock('./App', () => ({ default: () => null }));
 vi.mock('./components/ErrorBoundary', () => ({ ErrorBoundary: ({ children }: { children: unknown }) => children }));
+vi.mock('react-router-dom', () => ({ BrowserRouter: () => null }));
+vi.mock('@mantine/core', () => ({ MantineProvider: () => null }));
+vi.mock('./theme', () => ({ theme: {} }));
+vi.mock('./i18n', () => ({}));
 
 beforeEach(() => {
   vi.resetModules();
