@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vite-plus/test';
 import { theme } from '../../theme';
 import { useAppStore } from '../../store/appStore';
 import { SimpleFieldsContainer } from './SimpleFieldsContainer';

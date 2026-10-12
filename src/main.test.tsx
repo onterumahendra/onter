@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 
 const roots = vi.hoisted(() => ({ createRoot: vi.fn(), render: vi.fn() }));
 vi.mock('react-dom/client', () => ({ createRoot: roots.createRoot }));

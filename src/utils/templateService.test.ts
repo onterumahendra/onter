@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { getFormSections } from '../constants';
 import { addPageNumber, generateComplexPDFSection, generateSimplePDFSection, generateTablePDFSection } from './pdfHelpers';
 import { downloadTemplateAsZip } from './templateService';

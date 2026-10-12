@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vite-plus/test';
 import { getAvailableCountries, getAvailableCountryCodes, getFormConfig, getFormSections, loadCountryConfig } from './index';
 import { AVAILABLE_COUNTRIES, DEFAULT_COUNTRY } from './countries';
 import { FEATURE_FLAGS } from './featureFlags';

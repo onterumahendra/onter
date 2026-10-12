@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 import i18n from './i18n';
 import { theme } from './theme';
 import { AVAILABLE_COUNTRIES, DEFAULT_COUNTRY, getCountryCodes } from './constants/countries_old';

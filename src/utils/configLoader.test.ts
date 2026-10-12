@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { clearConfigCache, isCountryAvailable, loadCountryConfig, preloadConfigs } from './configLoader';
 import { DEFAULT_COUNTRY } from '../constants/countries';
 import type { CountryFormConfig } from '../constants/types';

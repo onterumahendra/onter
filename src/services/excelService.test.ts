@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { createExcelService, ExcelService } from './excelService';
 import { exportToExcel, importExcel } from '../utils/excel';
 import { downloadTemplateAsZip } from '../utils/templateService';

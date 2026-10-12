@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { jsPDF } from 'jspdf';
 import { addBulletList, addCoverPage, addInfoBox, addPageFooter, addSectionHeader, addSubsection, GUIDE_CONFIG } from './accessGuidePdfHelpers';
 

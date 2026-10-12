@@ -1,4 +1,4 @@
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { act } from '@testing-library/react';
 
 const saveDataMock = vi.fn();
