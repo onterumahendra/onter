@@ -93,144 +93,132 @@ export async function generateSampleExcel(countryCode: string): Promise<void> {
  * Import Excel file and convert to form data structure
  * Maps sheet names back to actual section names
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export async function importExcel(file: File, countryCode: string): Promise<Record<string, any>> {
-  return new Promise(async (resolve, reject) => {
-    try {
-      // Dynamic import for XLSX
-      const XLSX = await import('xlsx');
-      
-      // Get form sections to create mapping
-      const sections = await getFormSections(countryCode);
-      const usedNames = new Set<string>();
-      
-      // Create mapping from sanitized sheet names to original section names
-      const sheetToSectionMap = new Map<string, string>();
-      const sectionStructureMap = new Map<string, any>();
-      const complexStructureMap = new Map<string, any>(); // Store complex subsection structures
-      
-      sections.forEach((section) => {
-        const sheetName = sanitizeSheetName(section.section, usedNames);
-        sheetToSectionMap.set(sheetName, section.section);
-        sectionStructureMap.set(section.section, section);
-        
-        // For complex sections, map sub-structures
-        if (section.type === 'complex') {
-          section.structure.forEach((struct, idx) => {
-            const structName = struct.title || `${section.section}_${idx + 1}`;
-            const complexSheetName = sanitizeSheetName(structName, usedNames);
-            const complexKey = `${section.section}:::${struct.title}`;
-            sheetToSectionMap.set(complexSheetName, complexKey);
-            complexStructureMap.set(complexKey, struct); // Store the structure
-          });
-        }
-      });
-      
-      const reader = new FileReader();
-      
-      reader.onload = (e) => {
-        try {
-          const data = new Uint8Array(e.target?.result as ArrayBuffer);
-          const workbook = XLSX.read(data, { type: 'array' });
-          const formData: Record<string, any> = {};
-          
-          workbook.SheetNames.forEach(sheetName => {
-            const worksheet = workbook.Sheets[sheetName];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet, { 
-              defval: '',
-              raw: false // Get formatted strings instead of raw values
+  return new Promise((resolve, reject) => {
+    const run = async () => {
+      try {
+        const XLSX = await import('xlsx');
+        const sections = await getFormSections(countryCode);
+        const usedNames = new Set<string>();
+
+        const sheetToSectionMap = new Map<string, string>();
+        const sectionStructureMap = new Map<string, any>();
+        const complexStructureMap = new Map<string, any>();
+
+        sections.forEach((section) => {
+          const sheetName = sanitizeSheetName(section.section, usedNames);
+          sheetToSectionMap.set(sheetName, section.section);
+          sectionStructureMap.set(section.section, section);
+
+          if (section.type === 'complex') {
+            section.structure.forEach((struct, idx) => {
+              const structName = struct.title || `${section.section}_${idx + 1}`;
+              const complexSheetName = sanitizeSheetName(structName, usedNames);
+              const complexKey = `${section.section}:::${struct.title}`;
+              sheetToSectionMap.set(complexSheetName, complexKey);
+              complexStructureMap.set(complexKey, struct);
             });
-            
-            // Sanitize only the data values, NOT the column headers (keys)
-            const sanitizedData = jsonData.map(row =>
-              Object.fromEntries(
-                Object.entries(row as Record<string, any>).map(([k, v]) => [
-                  k, // Keep original column header (label) as-is
-                  sanitizeInput(v) // Only sanitize the values
-                ])
-              )
-            );
-            
-            // Filter out completely empty rows
-            const nonEmptyRows = sanitizedData.filter(row => {
-              return Object.values(row).some(value => value !== '' && value !== null && value !== undefined);
-            });
-            
-            // Map sheet name to section name
-            const mappingKey = sheetToSectionMap.get(sheetName);
-            
-            if (mappingKey && nonEmptyRows.length > 0) {
-              if (mappingKey.includes(':::')) {
-                // Complex section subsection
-                const [sectionName, structTitle] = mappingKey.split(':::');
-                if (!formData[sectionName]) {
-                  formData[sectionName] = {};
-                }
-                
-                // Get the structure to convert labels to field names
-                const struct = complexStructureMap.get(mappingKey);
-                if (struct && struct.columns) {
-                  const convertedRows = nonEmptyRows.map(row => {
-                    const convertedRow: Record<string, any> = {};
-                    struct.columns.forEach((col: any) => {
-                      if (row[col.label] !== undefined) {
-                        convertedRow[col.name] = row[col.label];
-                      }
+          }
+        });
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          try {
+            const data = new Uint8Array(e.target?.result as ArrayBuffer);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const formData: Record<string, any> = {};
+
+            workbook.SheetNames.forEach((sheetName) => {
+              const worksheet = workbook.Sheets[sheetName];
+              const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+                defval: '',
+                raw: false,
+              });
+
+              const sanitizedData = jsonData.map((row) =>
+                Object.fromEntries(
+                  Object.entries(row as Record<string, any>).map(([k, v]) => [
+                    k,
+                    sanitizeInput(v),
+                  ])
+                )
+              );
+
+              const nonEmptyRows = sanitizedData.filter((row) => {
+                return Object.values(row).some((value) => value !== '' && value !== null && value !== undefined);
+              });
+
+              const mappingKey = sheetToSectionMap.get(sheetName);
+
+              if (mappingKey && nonEmptyRows.length > 0) {
+                if (mappingKey.includes(':::')) {
+                  const [sectionName, structTitle] = mappingKey.split(':::');
+                  if (!formData[sectionName]) {
+                    formData[sectionName] = {};
+                  }
+
+                  const struct = complexStructureMap.get(mappingKey);
+                  if (struct && struct.columns) {
+                    const convertedRows = nonEmptyRows.map((row) => {
+                      const convertedRow: Record<string, any> = {};
+                      struct.columns.forEach((col: any) => {
+                        if (row[col.label] !== undefined) {
+                          convertedRow[col.name] = row[col.label];
+                        }
+                      });
+                      return convertedRow;
                     });
-                    return convertedRow;
-                  });
-                  formData[sectionName][structTitle] = convertedRows;
+                    formData[sectionName][structTitle] = convertedRows;
+                  } else {
+                    formData[sectionName][structTitle] = nonEmptyRows;
+                  }
                 } else {
-                  // Fallback if structure not found
-                  formData[sectionName][structTitle] = nonEmptyRows;
-                }
-              } else {
-                // Get section structure to determine how to store data
-                const section = sectionStructureMap.get(mappingKey);
-                
-                if (section?.type === 'simple') {
-                  // For simple sections, convert first row to object
-                  if (nonEmptyRows.length > 0) {
+                  const section = sectionStructureMap.get(mappingKey);
+
+                  if (section?.type === 'simple') {
                     const firstRow = nonEmptyRows[0];
                     const sectionData: Record<string, any> = {};
-                    
-                    // Map labels back to field names
+
                     section.fields.forEach((field: any) => {
                       if (firstRow[field.label] !== undefined) {
                         sectionData[field.name] = firstRow[field.label];
                       }
                     });
-                    
+
                     formData[mappingKey] = sectionData;
-                  }
-                } else if (section?.type === 'table') {
-                  // For table sections, convert labels to field names
-                  const convertedRows = nonEmptyRows.map(row => {
-                    const convertedRow: Record<string, any> = {};
-                    section.columns.forEach((col: any) => {
-                      if (row[col.label] !== undefined) {
-                        convertedRow[col.name] = row[col.label];
-                      }
+                  } else if (section?.type === 'table') {
+                    const convertedRows = nonEmptyRows.map((row) => {
+                      const convertedRow: Record<string, any> = {};
+                      section.columns.forEach((col: any) => {
+                        if (row[col.label] !== undefined) {
+                          convertedRow[col.name] = row[col.label];
+                        }
+                      });
+                      return convertedRow;
                     });
-                    return convertedRow;
-                  });
-                  
-                  formData[mappingKey] = { rows: convertedRows };
+
+                    formData[mappingKey] = { rows: convertedRows };
+                  }
                 }
               }
-            }
-          });
-          
-          resolve(formData);
-        } catch (error) {
-          reject(new Error('Failed to parse Excel file. Please ensure it\'s a valid Excel file.'));
-        }
-      };
-      
-      reader.onerror = () => reject(new Error('Failed to read file'));
-      reader.readAsArrayBuffer(file);
-    } catch (error) {
-      reject(new Error('Failed to load form configuration'));
-    }
+            });
+
+            resolve(formData);
+          } catch {
+            reject(new Error('Failed to parse Excel file. Please ensure it\'s a valid Excel file.'));
+          }
+        };
+
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsArrayBuffer(file);
+      } catch {
+        reject(new Error('Failed to load form configuration'));
+      }
+    };
+
+    void run();
   });
 }
 

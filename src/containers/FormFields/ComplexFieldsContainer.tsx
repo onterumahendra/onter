@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useAppStore } from '../../store/appStore';
 import { useFieldValidation } from '../../hooks/useFieldValidation';
@@ -108,9 +109,9 @@ export function ComplexFieldsContainer({ structure, sectionName }: ComplexFields
       setErrors(prev => ({
         ...prev,
         [subSectionTitle]: {
-          ...(prev[subSectionTitle] || {}),
+          ...prev[subSectionTitle],
           [rowIndex]: {
-            ...(prev[subSectionTitle]?.[rowIndex] || {}),
+            ...prev[subSectionTitle]?.[rowIndex],
             [fieldName]: error
           }
         }

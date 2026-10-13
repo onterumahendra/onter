@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/appStore';
 import { useFieldValidation } from '../../hooks/useFieldValidation';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { BaseField } from '../constants/types';
 
 export interface IValidationService {

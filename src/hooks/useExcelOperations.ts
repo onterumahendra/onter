@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useAppStore } from '../store/appStore';
 import { createExcelService, type IExcelService } from '../services/excelService';

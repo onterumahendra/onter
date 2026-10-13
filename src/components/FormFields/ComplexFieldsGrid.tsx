@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack, Title, Divider } from '@mantine/core';
 import { TableFieldsGrid } from './TableFieldsGrid';
 import type { ComplexSubSection } from '../../constants/types';

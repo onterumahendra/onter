@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useCallback } from 'react';
 import { createValidationService, type IValidationService } from '../services/validationService';
 import type { BaseField } from '../constants/types';

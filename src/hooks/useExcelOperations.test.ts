@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { act, renderHook } from '@testing-library/react';
 import { useExcelOperations } from './useExcelOperations';
@@ -87,7 +89,7 @@ describe('useExcelOperations', () => {
   it('captures template generation failures', async () => {
     mockService.generateTemplate.mockRejectedValue(new Error('Template generation failed'));
 
-    const { result } = renderHook(() => useExcelOperations(mockService as any));
+    const { result } = renderHook(() => useExcelOperations(mockService));
 
     await act(async () => {
       await expect(result.current.generateTemplate()).rejects.toThrow('Template generation failed');

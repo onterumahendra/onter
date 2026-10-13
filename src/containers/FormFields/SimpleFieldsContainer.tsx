@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppStore } from '../../store/appStore';
 import { useFieldValidation } from '../../hooks/useFieldValidation';
 import { SimpleFieldsGrid } from '../../components/FormFields/SimpleFieldsGrid';

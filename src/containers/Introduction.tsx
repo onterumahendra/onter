@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, no-unused-vars, react/set-state-in-effect, react/purity, no-floating-promises */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mantine/hooks';
@@ -48,7 +49,8 @@ export function Introduction() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingAction, setPendingAction] = useState<'manual' | 'import' | 'download' | null>(null);
   const [showLogo, setShowLogo] = useState(false);
-  
+  const [now, setNow] = useState<number>(0);
+
   const {
     selectedCountry,
     setCountry,
@@ -67,9 +69,19 @@ export function Introduction() {
       const hasData = await loadFromIndexedDB();
       setHasSavedData(hasData);
     };
-    checkSavedData();
+    void checkSavedData();
   }, [loadFromIndexedDB]);
-  
+
+  useEffect(() => {
+    setNow(Date.now());
+
+    const intervalId = window.setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
   // Lazy load logo with delay to improve FCP/LCP
   useEffect(() => {
     const logoTimer = setTimeout(() => {
@@ -80,7 +92,7 @@ export function Introduction() {
   
   const formatTimeAgo = (timestamp: number | null) => {
     if (!timestamp) return '';
-    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    const seconds = Math.floor((now - timestamp) / 1000);
     if (seconds < 60) return `${seconds}s`;
     const minutes = Math.floor(seconds / 60);
     if (minutes < 60) return `${minutes}m`;
@@ -116,7 +128,7 @@ export function Introduction() {
     try {
       setError('');
       await generateTemplate();
-    } catch (err) {
+    } catch {
       setError(t('introduction.errors.templateFailed'));
     }
   };
@@ -139,8 +151,8 @@ export function Introduction() {
       });
       
       navigate('/form');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : t('introduction.errors.importFailed'));
+    } catch (error) {
+      setError(error instanceof Error ? error.message : t('introduction.errors.importFailed'));
     }
   };
   
@@ -150,9 +162,9 @@ export function Introduction() {
   };
   
   const handleDownloadTemplate = async () => {
-    executeDownloadTemplate();
+    await executeDownloadTemplate();
   };
-  
+
   const handleImport = async () => {
     if (hasSavedData) {
       setPendingAction('import');

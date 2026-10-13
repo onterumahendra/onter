@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createTheme, type MantineColorsTuple } from '@mantine/core';
 
 // Custom color palettes based on your design system

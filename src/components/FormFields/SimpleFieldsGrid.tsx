@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TextInput, Textarea, Select, NumberInput, Grid } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import type { BaseField } from '../../constants/types';

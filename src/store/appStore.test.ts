@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { act } from '@testing-library/react';
 
@@ -86,7 +88,9 @@ describe('useAppStore', () => {
     getDataMock
       .mockResolvedValueOnce(JSON.stringify({ personalInfo: { name: 'Asha' } }))
       .mockResolvedValueOnce(null);
-    await act(async () => useAppStore.getState().initializeFromStorage());
+    await act(async () => {
+      await useAppStore.getState().initializeFromStorage();
+    });
     expect(useAppStore.getState().selectedCountry).toBe('IN');
     expect(useAppStore.getState().currentStep).toBe(0);
 
@@ -132,7 +136,7 @@ describe('useAppStore', () => {
 
   it('logs persistence failures without rejecting store actions', async () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    act(() => useAppStore.getState().updateFormData('personalInfo', { name: 'Asha' }));
+    await act(() => useAppStore.getState().updateFormData('personalInfo', { name: 'Asha' }));
     saveDataMock.mockRejectedValue(new Error('write failed'));
     await expect(useAppStore.getState().saveToIndexedDB()).resolves.toBeUndefined();
     clearAllDataMock.mockRejectedValue(new Error('clear failed'));

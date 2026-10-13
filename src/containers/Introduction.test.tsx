@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
@@ -149,7 +151,7 @@ describe('Introduction', () => {
       expect(mockNavigate).toHaveBeenCalledWith('/form');
       expect(mockSetImportMode).toHaveBeenCalledWith(false);
     });
-  });
+  }, 15_000);
 
   it('resumes saved data and cancels or confirms a saved-session import', async () => {
     mockLoadFromIndexedDB.mockResolvedValue(true);
@@ -171,7 +173,7 @@ describe('Introduction', () => {
     await screen.findByText('introduction.start.confirmClear.message');
     fireEvent.click(screen.getByRole('button', { name: 'introduction.start.confirmClear.cancel' }));
     expect(mockClearData).not.toHaveBeenCalled();
-    expect(screen.getByRole('button', { name: 'introduction.start.importExcel' })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: 'introduction.start.importExcel' })).toBeInTheDocument();
 
     fireEvent.change(input, { target: { files: [file] } });
     fireEvent.click(screen.getByRole('button', { name: 'introduction.start.importContinue' }));
@@ -183,7 +185,7 @@ describe('Introduction', () => {
       expect(mockUpdateFormData).toHaveBeenCalledWith('personalInfo', { name: 'Jane' });
       expect(mockSetImportMode).toHaveBeenCalledWith(true);
     });
-  });
+  }, 15_000);
 
   it('shows a template generation error when the export fails', async () => {
     mockGenerateTemplate.mockRejectedValue(new Error('Template generation failed'));

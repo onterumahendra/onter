@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import type { CountryFormConfig } from '../constants/types';
 import { generateAccessGuidePDF } from './accessGuideService';

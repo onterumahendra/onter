@@ -13,14 +13,18 @@ const section: FormSection = { section: 'Personal', type: 'simple', fields: [] }
 
 describe('useDebounce', () => {
   beforeEach(() => vi.useFakeTimers());
-  it('updates after the delay and cancels a stale timer on change', () => {
+  it('updates after the delay and cancels a stale timer on change', async () => {
     const { result, rerender } = renderHook(({ value }) => useDebounce(value, 100), { initialProps: { value: 'first' } });
     expect(result.current).toBe('first');
     rerender({ value: 'second' });
-    act(() => vi.advanceTimersByTime(99));
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(99);
+    });
     expect(result.current).toBe('first');
     rerender({ value: 'third' });
-    act(() => vi.advanceTimersByTime(100));
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
     expect(result.current).toBe('third');
     vi.useRealTimers();
   });
@@ -51,11 +55,16 @@ describe('useFormConfig', () => {
     expect(result.current.formSections).toEqual([section]);
     expect(service.loadFormSections).toHaveBeenCalledWith('US');
 
-    await act(async () => result.current.reload());
-    expect(service.loadFormSections).toHaveBeenCalledTimes(2);
+    await act(async () => {
+      await result.current.reload();
+    });
+    await waitFor(() => expect(service.loadFormSections).toHaveBeenCalledTimes(2));
 
     service.loadFormSections.mockRejectedValueOnce('failure');
-    await act(async () => result.current.reload());
+    await act(async () => {
+      await result.current.reload();
+    });
+    await waitFor(() => expect(result.current.error).toEqual(new Error('Failed to load form configuration')));
     expect(result.current.error).toEqual(new Error('Failed to load form configuration'));
     expect(result.current.isLoading).toBe(false);
   });

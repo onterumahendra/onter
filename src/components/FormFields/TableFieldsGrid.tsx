@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table, Button, Group, ActionIcon, Box, Text, ScrollArea, Card, Stack, Divider, Paper } from '@mantine/core';
 import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { useMediaQuery } from '@mantine/hooks';

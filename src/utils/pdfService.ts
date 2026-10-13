@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getFormSections } from '../constants';
 import {
   PDF_CONFIG,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { jsPDF } from 'jspdf';
 import { addPageFooter, GUIDE_CONFIG } from '../utils/accessGuidePdfHelpers';
 import type { CountryFormConfig } from '../constants/types';
@@ -30,7 +31,15 @@ const PHASE_COLORS: Record<string, [number, number, number]> = {
  * AND avoids silent double-spaces where symbols were removed.
  */
 function safe(text: unknown): string {
-    return String(text ?? '')
+    const normalizedText = text == null
+        ? ''
+        : typeof text === 'string'
+            ? text
+            : typeof text === 'number' || typeof text === 'boolean'
+                ? String(text)
+                : JSON.stringify(text) ?? '';
+
+    return normalizedText
         .replace(/\u2014|\u2013/g, ' - ')   // em-dash, en-dash
         .replace(/[\u2018\u2019]/g, "'")
         .replace(/[\u201C\u201D]/g, '"')

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { exportToExcel as utilExportToExcel, importExcel as utilImportExcel } from '../utils/excel';
 import { downloadTemplateAsZip } from '../utils/templateService';
 

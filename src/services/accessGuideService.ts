@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { jsPDF } from 'jspdf';
 import i18n from '../i18n';
 import type { CountryFormConfig, FormSection } from '../constants/types';
@@ -26,12 +27,26 @@ interface AccessGuideOptions {
  * Sanitize text for PDF output to prevent injection and rendering issues
  */
 function sanitizeForPdf(text: string): string {
-    return String(text)
-        .replace(/[\x00-\x1F\x7F-\x9F]/g, '') // Remove control characters
-        .replace(/[<>]/g, '') // Remove angle brackets
+    return Array.from(String(text))
+        .filter((character) => {
+            const code = character.charCodeAt(0);
+            return !(code <= 0x1f || (code >= 0x7f && code <= 0x9f));
+        })
+        .join('')
+        .replace(/[<>]/g, '')
         .trim()
-        .substring(0, 500); // Limit length to prevent overflow
+        .substring(0, 500);
 }
+
+function toSafeString(value: unknown): string {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+        return String(value);
+    }
+
+    return JSON.stringify(value) ?? '';
+}
+
 
 /**
  * Extract emergency contacts from form data
@@ -57,14 +72,14 @@ function extractEmergencyContacts(formData: Record<string, any>): string[] {
                     if (hasContactInfo) {
                         const contactParts: string[] = [];
                         Object.entries(row).forEach(([key, value]) => {
-                            if (value && String(value).trim()) {
-                                const sanitizedKey = sanitizeForPdf(String(key));
-                                const sanitizedValue = sanitizeForPdf(String(value));
+                            if (value && toSafeString(value).trim()) {
+                                const sanitizedKey = sanitizeForPdf(toSafeString(key));
+                                const sanitizedValue = sanitizeForPdf(toSafeString(value));
                                 contactParts.push(`${sanitizedKey}: ${sanitizedValue}`);
                             }
                         });
                         if (contactParts.length > 0) {
-                            const sanitizedSection = sanitizeForPdf(String(section));
+                            const sanitizedSection = sanitizeForPdf(toSafeString(section));
                             contacts.push(`${sanitizedSection} #${index + 1} - ${contactParts.join(', ')}`);
                         }
                     }
@@ -77,10 +92,10 @@ function extractEmergencyContacts(formData: Record<string, any>): string[] {
             Object.entries(data).forEach(([key, value]) => {
                 if (key.toLowerCase().includes('emergency') ||
                     key.toLowerCase().includes('contact')) {
-                    if (value && String(value).trim()) {
-                        const sanitizedSection = sanitizeForPdf(String(section));
-                        const sanitizedKey = sanitizeForPdf(String(key));
-                        const sanitizedValue = sanitizeForPdf(String(value));
+                    if (value && toSafeString(value).trim()) {
+                        const sanitizedSection = sanitizeForPdf(toSafeString(section));
+                        const sanitizedKey = sanitizeForPdf(toSafeString(key));
+                        const sanitizedValue = sanitizeForPdf(toSafeString(value));
                         contacts.push(`${sanitizedSection} - ${sanitizedKey}: ${sanitizedValue}`);
                     }
                 }

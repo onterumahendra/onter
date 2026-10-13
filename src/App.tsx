@@ -23,7 +23,7 @@ function App() {
       await initializeFromStorage();
     };
     
-    initializeApp();
+    void initializeApp();
   }, [initializeFromStorage]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
     // The 2s wait lets the Introduction finish painting and its assets load
     // before we consume bandwidth on a slow connection.
     const timer = setTimeout(() => {
-      import('./containers/FormStepper');
+      void import('./containers/FormStepper');
     }, 2000);
     return () => clearTimeout(timer);
   }, []);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, no-unused-vars, @typescript-eslint/no-unused-vars */
 /**
  * IndexedDB Wrapper for secure data persistence
  * 
@@ -80,7 +81,7 @@ export async function saveData(id: string, encryptedPayload: string): Promise<vo
         reject(new Error('Failed to save data'));
       };
     });
-  } catch (error) {
+  } catch {
     throw new Error('IndexedDB save operation failed');
   }
 }
@@ -124,7 +125,7 @@ export async function getData(id: string): Promise<string | null> {
         reject(new Error('Failed to retrieve data'));
       };
     });
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -151,7 +152,7 @@ export async function deleteData(id: string): Promise<void> {
         reject(new Error('Failed to delete data'));
       };
     });
-  } catch (error) {
+  } catch {
     // Silently fail
   }
 }
@@ -178,7 +179,7 @@ export async function clearAllData(): Promise<void> {
         reject(new Error('Failed to clear data'));
       };
     });
-  } catch (error) {
+  } catch {
     throw new Error('IndexedDB clear operation failed');
   }
 }
@@ -211,7 +212,7 @@ export async function cleanupExpiredData(): Promise<void> {
     request.onerror = () => {
       db.close();
     };
-  } catch (error) {
+  } catch {
     // Silently fail cleanup
   }
 }
@@ -249,7 +250,7 @@ export async function getAllKeys(): Promise<string[]> {
         reject(new Error('Failed to get keys'));
       };
     });
-  } catch (error) {
+  } catch {
     return [];
   }
 }

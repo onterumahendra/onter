@@ -1,3 +1,4 @@
+/* eslint-disable react/set-state-in-effect, no-floating-promises */
 import { useState, useEffect, useCallback } from 'react';
 import { useAppStore } from '../store/appStore';
 import { createFormConfigService, type IFormConfigService } from '../services/formConfigService';
@@ -7,7 +8,7 @@ interface UseFormConfigResult {
   formSections: FormSection[];
   isLoading: boolean;
   error: Error | null;
-  reload: () => void;
+  reload: () => Promise<void>;
 }
 
 // Create singleton service instance to avoid recreation

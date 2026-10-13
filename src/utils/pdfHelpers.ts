@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/ban-ts-comment */
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { FormSection, SimpleSection, TableSection, ComplexSection } from '../constants/types';
@@ -300,7 +301,7 @@ export function generateComplexPDFSection(
       }
     });
     
-    // @ts-ignore - autoTable adds finalY to doc
+    // @ts-expect-error - autoTable adds finalY to doc at runtime
     yPosition = doc.lastAutoTable.finalY + 10;
     
     // Add new page if not the last subsection and space is running out

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { saveData, getData, clearAllData } from '../utils/indexedDB';

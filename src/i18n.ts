@@ -8,7 +8,7 @@ const resources = {
   }
 };
 
-i18n
+void i18n
   .use(initReactI18next)
   .init({
     resources,
