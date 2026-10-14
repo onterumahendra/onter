@@ -24,12 +24,12 @@ const config = {
     enabled: true,
     legalFramework: ['Succession law'],
     phases: [{
-      phase: 1, title: 'Stabilize', timeframe: 'Day 1-30', priority: 'CRITICAL', focus: 'Immediate needs',
-      keyActions: [{ step: 1, action: 'Notify family', why: 'Coordinate support', priority: 'HIGH' }],
+      phase: 1, title: 'Stabilize', timeframe: 'Day 1-30', priority: 'do-first', focus: 'Immediate needs',
+      keyActions: [{ step: 1, action: 'Notify family', why: 'Coordinate support', priority: 'do-soon' }],
       mustHaveDocuments: ['Identity documents'],
-      keyContacts: [{ entity: 'Bank', number: '100', use: 'Claims', portal: 'bank.test' }, { entity: 'Doctor', use: 'Care' }],
+      keyContacts: [{ name: 'Bank', phone: '100', use: 'Claims', url: 'bank.test' }, { name: 'Doctor', use: 'Care' }],
       criticalMistakes: ['Do not share passwords'],
-      legalDeadlines: [{ item: 'File claim', deadline: '30 days', consequence: 'Benefits may be delayed' }],
+      legalDeadlines: [{ item: 'File claim', deadline: '30 days', consequence: 'Benefits may be delayed', type: 'legal' }],
     }],
     quickReference: {
       legalHeirCertificate: { issuedBy: 'Court', timeToObtain: '2 weeks', cost: 'Low', usedFor: ['Bank'], notSuitableFor: 'Property disputes' },
@@ -47,6 +47,45 @@ beforeEach(() => {
 });
 
 describe('Recovery Roadmap service', () => {
+  it('renders the current roadmap schema without legacy fallback logic', async () => {
+    const result = await generateRecoveryRoadmapPDF({
+      countryConfig: {
+        ...config,
+        recoveryRoadmap: {
+          ...roadmap,
+          phases: [{
+            phase: 1,
+            title: 'Immediate survival',
+            priority: 'do-first',
+            focus: 'Get cash and documents',
+            keyActions: [{
+              step: 1,
+              action: 'Notify the insurer',
+              priority: 'do-soon',
+              why: 'Avoid delays',
+            }],
+            keyContacts: [{
+              name: 'LIC Customer Care',
+              phone: '1800-123-4567',
+              url: 'https://licindia.in',
+              use: 'Policy status',
+              verified: false,
+            }],
+            legalDeadlines: [{
+              item: 'Claim filing',
+              deadline: '30 days',
+              consequence: 'Benefits may be delayed',
+              type: 'legal',
+            }],
+          }],
+        },
+      } as unknown as CountryFormConfig,
+    });
+
+    expect(result).toBeInstanceOf(Blob);
+    expect(addPageFooter).toHaveBeenCalled();
+  });
+
   it('requires the roadmap feature to be enabled', async () => {
     await expect(generateRecoveryRoadmapPDF({ countryConfig: { ...config, recoveryRoadmap: undefined } as any })).rejects.toThrow('Recovery roadmap is not enabled for this country');
   });
@@ -68,13 +107,13 @@ describe('Recovery Roadmap service', () => {
           phase: 2,
           title: 'Claim',
           timeframe: 'Day 30-90',
-          priority: 'UNLISTED',
+          priority: 'when-ready',
           focus: 'File claims',
           keyActions: [
-            { step: 1, action: 'Contact the insurer', priority: 'MEDIUM' },
-            { step: 2, action: 'Keep records', priority: 'LOW' },
+            { step: 1, action: 'Contact the insurer', priority: 'do-soon' },
+            { step: 2, action: 'Keep records', priority: 'when-ready' },
           ],
-          keyContacts: [{ entity: 'Claims office' }],
+          keyContacts: [{ name: 'Claims office', phone: '123', use: 'Claim intake', url: 'claims.test' }],
         }],
         quickReference: {
           legalHeirCertificate: {

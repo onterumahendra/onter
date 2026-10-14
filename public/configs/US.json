@@ -550,5 +550,614 @@
         "Maintain both digital and physical copies in separate secure locations"
       ]
     }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "Step-by-step family recovery plan for the first 30 to 365 days after a death or severe incapacity. Use the steps in order and focus on documents, bank access, and claims before broader legal work.",
+    "meta": {
+      "title": "Family Recovery Roadmap – United States",
+      "version": "1.0",
+      "lastReviewed": "2026-10-14",
+      "reviewedBy": "Draft review pending",
+      "generatedOn": "2026-10-14"
+    },
+    "intro": {
+      "condolence": "We are sorry for your loss. This roadmap is designed to reduce confusion and show what matters first.",
+      "howToUse": "Start with immediate documents and financial access. Then file insurance and benefits claims, complete legal administration, and rebuild the family plan."
+    },
+    "startHere": [
+      "Get certified copies of the death certificate and list every account, policy, and asset.",
+      "Pause or cancel auto-payments, subscriptions, and recurring card charges.",
+      "Review beneficiaries on life insurance, retirement accounts, and bank accounts.",
+      "Notify the employer, bank, insurer, and executor or next of kin about the death.",
+      "Collect original wills, deeds, IDs, and policy papers in one secure place.",
+      "Check whether there is a trust, power of attorney, or healthcare directive.",
+      "Keep a simple log of every call, claim, and appointment."
+    ],
+    "legalFramework": [
+      "State probate and estate administration laws",
+      "Uniform Probate Code principles in many states",
+      "ERISA and employer benefit plan rules",
+      "Life insurance and disability contract terms",
+      "RMD and retirement account beneficiary rules",
+      "Federal and state tax return requirements for a decedent's estate"
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "title": "Immediate stabilization",
+        "timeframe": "Day 1 to Day 30",
+        "priority": "do-first",
+        "focus": "Secure documents, money, and legal records before the estate becomes complicated.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "Obtain certified death certificates and keep at least 10 to 15 copies. Count them for bank, insurer, mortgage, hospital, and federal uses.",
+            "priority": "do-first",
+            "why": "Every claim, transfer, and legal filing usually needs a certified copy. Missing copies create avoidable delays.",
+            "legalRef": "State vital records rules"
+          },
+          {
+            "step": 2,
+            "action": "Review all joint accounts, beneficiary designations, and transfer-on-death accounts. Confirm which assets pass outside probate and which require formal estate action.",
+            "priority": "do-first",
+            "why": "Some assets move outside probate because of beneficiaries or joint ownership. That is important for the first wave of access and protection.",
+            "legalRef": "Banking, retirement, and beneficiary rules"
+          },
+          {
+            "step": 3,
+            "action": "Stop recurring charges: mortgage, auto-pay, credit cards, subscriptions, utility bills, and any small automatic payments. Ask the bank for a temporary review if needed.",
+            "priority": "do-first",
+            "why": "Recurring charges can create late fees, damaged credit, and confusion during a family emergency.",
+            "legalRef": "Consumer account terms and bank procedures"
+          },
+          {
+            "step": 4,
+            "action": "Arrange a safe place for original documents: passport, ID, deed, will, trust records, insurance policies, tax filings, and healthcare directives.",
+            "priority": "do-soon",
+            "why": "Originals often move faster than copies when a bank, insurer, or court needs proof.",
+            "legalRef": "Document retention and estate administration practices"
+          },
+          {
+            "step": 5,
+            "action": "Notify the employer or retirement plan administrator about the death and ask about life insurance, disability, final paycheck, pension, or survivor benefits.",
+            "priority": "do-first",
+            "why": "Employer benefits are often time-sensitive and may be separate from personal insurance policies.",
+            "legalRef": "ERISA and employer benefit provisions"
+          },
+          {
+            "step": 6,
+            "action": "Contact each insurer and ask for claim forms for life insurance, health insurance, mortgage protection, or disability benefits. Ask whether the claim is subject to a no-fault or contestability review.",
+            "priority": "do-first",
+            "why": "Insurers often need the policy number, beneficiary designation, and death certificate before they can pay benefits.",
+            "legalRef": "Insurance contract terms and state claims rules"
+          },
+          {
+            "step": 7,
+            "action": "Check whether a will, trust, or power of attorney exists. If there is a court-appointed executor or personal representative, ask for a copy and document all actions.",
+            "priority": "do-soon",
+            "why": "A clear chain of authority reduces delays and prevents disputes about who can act on the estate.",
+            "legalRef": "Probate and estate administration rules"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Certified death certificate",
+          "Passport, driver's license, and ID copies",
+          "Will, trust, power of attorney, healthcare directive",
+          "Insurance policies and beneficiary worksheets",
+          "Bank statements and account numbers",
+          "Mortgage, loan, and credit card information",
+          "Employer benefits and retirement account details",
+          "Property deeds and title documents",
+          "Tax returns for the last 2 to 3 years",
+          "Family contact list and executor information"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Life insurer",
+            "name": "Life insurer",
+            "phone": null,
+            "url": null,
+            "use": "Life, mortgage, and employer benefits",
+            "verified": false
+          },
+          {
+            "entity": "Employer HR or benefits department",
+            "name": "Employer HR or benefits department",
+            "phone": null,
+            "url": null,
+            "use": "Final paycheck, 401(k), pension, and employer benefits",
+            "verified": false
+          },
+          {
+            "entity": "Bank or credit union",
+            "name": "Bank or credit union",
+            "phone": null,
+            "url": null,
+            "use": "Account access, joint account rules, and transfers",
+            "verified": false
+          },
+          {
+            "entity": "Estate attorney or probate lawyer",
+            "name": "Estate attorney or probate lawyer",
+            "phone": null,
+            "url": null,
+            "use": "Will, probate, trust, and court questions",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Not ordering enough certified death certificates. Banks, insurers, and courts often need multiple copies.",
+          "Assuming every account goes through probate. Beneficiary designations and joint accounts can bypass probate.",
+          "Paying off debts without checking whether a policy or benefit may cover them.",
+          "Using the deceased's online banking, cards, or passwords after death without authority.",
+          "Ignoring a will, trust, or healthcare directive because the family thinks it is not urgent.",
+          "Delaying employer, retirement, and insurer notification because the family does not know the plan details."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Death certificate filing",
+            "deadline": "As soon as possible; state rules vary",
+            "consequence": "Delay can slow down funeral arrangements, account access, and claim filings.",
+            "type": "recommended"
+          },
+          {
+            "item": "Life insurance claim",
+            "deadline": "Usually within a few weeks to a few months after filing all documents",
+            "consequence": "Benefit delays can make daily expenses and debt payments harder to manage.",
+            "type": "target"
+          },
+          {
+            "item": "Employer benefits",
+            "deadline": "Use the plan's deadlines and filing instructions immediately",
+            "consequence": "Benefits can be missed if the family waits too long to file.",
+            "type": "target"
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "title": "Claims and account transfer",
+        "timeframe": "Day 30 to Day 90",
+        "priority": "do-first",
+        "focus": "File benefits, move accounts, and identify what is probate vs non-probate property.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "File life insurance claims, retirement benefit claims, and any employer death benefits. Include the death certificate, policy numbers, and beneficiary paperwork.",
+            "priority": "do-first",
+            "why": "Many benefits are time-sensitive and separate from the estate process.",
+            "legalRef": "Insurance and ERISA beneficiary rules"
+          },
+          {
+            "step": 2,
+            "action": "Move or close the deceased's bank, brokerage, retirement, and savings accounts according to the account terms and beneficiary instructions.",
+            "priority": "do-first",
+            "why": "Accounts without a beneficiary or with a stale title often require formal administration before they can be transferred.",
+            "legalRef": "Bank, brokerage, and retirement account rules"
+          },
+          {
+            "step": 3,
+            "action": "Review real estate, vehicles, and titled property. Confirm whether a deed or title transfer requires probate, a transfer affidavit, or a title office filing.",
+            "priority": "do-soon",
+            "why": "Property transfer questions usually cost time and money if handled late.",
+            "legalRef": "State property and title transfer rules"
+          },
+          {
+            "step": 4,
+            "action": "Ask the bank or financial institution whether there is a small estate process, summary administration, or transfer-of-asset form available for the estate.",
+            "priority": "do-soon",
+            "why": "Some estates are eligible for faster procedures when the assets and debts are modest.",
+            "legalRef": "State probate simplification rules"
+          },
+          {
+            "step": 5,
+            "action": "Document all debts, credit cards, and loans. Ask each creditor whether they have a death benefit, insurance, or debt cancellation process.",
+            "priority": "do-soon",
+            "why": "This prevents paying debts twice or missing benefits that belong to the estate or family.",
+            "legalRef": "Debt and creditor rules"
+          },
+          {
+            "step": 6,
+            "action": "Start the estate administration process if there is no beneficiary or if the assets require probate. Ask whether a will requires formal appointment of an executor or personal representative.",
+            "priority": "do-soon",
+            "why": "A formal court process can be important for property, creditor clearance, and family disputes.",
+            "legalRef": "State probate procedures"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Life insurance and retirement benefit claim forms",
+          "Death certificate and beneficiary documents",
+          "Bank and brokerage account details",
+          "Real estate deeds and vehicle title papers",
+          "Loan and credit card statements",
+          "Will, trust documents, and probate papers",
+          "List of all assets and liabilities",
+          "Tax records and information for the decedent"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Insurance company",
+            "name": "Insurance company",
+            "phone": null,
+            "url": null,
+            "use": "Claim filing and policy review",
+            "verified": false
+          },
+          {
+            "entity": "401(k) or pension administrator",
+            "name": "401(k) or pension administrator",
+            "phone": null,
+            "url": null,
+            "use": "Retirement benefits and account transfer",
+            "verified": false
+          },
+          {
+            "entity": "County or state probate court",
+            "name": "County or state probate court",
+            "phone": null,
+            "url": null,
+            "use": "Estate opening, will filing, and executor appointment",
+            "verified": false
+          },
+          {
+            "entity": "DMV or title office",
+            "name": "DMV or title office",
+            "phone": null,
+            "url": null,
+            "use": "Vehicle title transfer and property-related paperwork",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Failing to file benefits before the family sees a bigger cash crunch.",
+          "Assuming all money can be accessed without checking beneficiary designations or joint ownership.",
+          "Leaving property title questions unresolved while the family is still grieving.",
+          "Paying estate debts or creditor claims before checking insurance or asset coverage.",
+          "Ignoring beneficiary updates on retirement and insurance accounts.",
+          "Waiting to open probate when a clear title or creditor process is required."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Insurance and benefit claims",
+            "deadline": "File as early as possible and follow plan-specific deadlines",
+            "consequence": "The claim may stall or be denied if the family waits too long or misses required documents.",
+            "type": "target"
+          },
+          {
+            "item": "Estate administration",
+            "deadline": "No universal deadline, but file promptly when probate or court action is required",
+            "consequence": "Delays can increase conflict, cost, and legal risk.",
+            "type": "recommended"
+          },
+          {
+            "item": "Tax filing and estate reporting",
+            "deadline": "Follow the decedent's final return and estate filing deadlines",
+            "consequence": "Late or missed filings can create penalties and interest.",
+            "type": "legal"
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "title": "Legal and financial settlement",
+        "timeframe": "Month 3 to Month 6",
+        "priority": "do-soon",
+        "focus": "Finalize estate administration, property transfer, taxes, and debt handling.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "If probate is required, file the necessary court documents and keep a ledger of assets, debts, account activity, and distributions.",
+            "priority": "do-first",
+            "why": "A clear ledger prevents confusion about what belongs to the estate and what has already been distributed.",
+            "legalRef": "State probate and executor duties"
+          },
+          {
+            "step": 2,
+            "action": "File the final tax return for the deceased and any required estate tax or income reporting. Confirm whether the family must file as executor or personal representative.",
+            "priority": "do-first",
+            "why": "The estate may still owe taxes, and the fiduciary has reporting duties. Missing these filings can create penalties and liability.",
+            "legalRef": "Federal and state tax rules"
+          },
+          {
+            "step": 3,
+            "action": "Review all loans, credit cards, mortgages, and debts and verify whether there is life insurance or benefit coverage. Do not pay debts blindly.",
+            "priority": "do-first",
+            "why": "Some debt is covered by a policy or a benefit. Other debt remains the estate's responsibility unless it was jointly owned or a co-signer is liable.",
+            "legalRef": "Debt, credit, and estate obligations"
+          },
+          {
+            "step": 4,
+            "action": "Complete real estate transfer, utility changes, and vehicle title records. Confirm the deed, property tax status, and any mortgage or lien information before sale or transfer.",
+            "priority": "do-soon",
+            "why": "Title defects and unpaid liens can block a sale or create disputes later.",
+            "legalRef": "Property title, mortgage, and local government records"
+          },
+          {
+            "step": 5,
+            "action": "Review healthcare directives, powers of attorney, and any trust terms. Ask whether the family needs to change fiduciary roles or update account mandates.",
+            "priority": "do-soon",
+            "why": "The family may need to replace authority on accounts, medical decisions, or financial operations after the loss.",
+            "legalRef": "Healthcare and fiduciary rules"
+          },
+          {
+            "step": 6,
+            "action": "Protect digital access: email, banking portals, cloud storage, social media, and subscriptions. Save and secure account records in a way that the family can use later.",
+            "priority": "do-soon",
+            "why": "Digital accounts often contain critical information and may require a legal process or collaboration with the provider to access safely.",
+            "legalRef": "Digital account terms and privacy law"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Court filings and probate documents",
+          "Inventory of estate assets and debts",
+          "Final tax returns and estate-related filings",
+          "Mortgage, deed, property tax, and title records",
+          "Beneficiary and fiduciary records",
+          "Healthcare directives and trust documents",
+          "Digital account access list and recovery information"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Estate attorney",
+            "name": "Estate attorney",
+            "phone": null,
+            "url": null,
+            "use": "Probate, trust, and will administration",
+            "verified": false
+          },
+          {
+            "entity": "CPA or tax preparer",
+            "name": "CPA or tax preparer",
+            "phone": null,
+            "url": null,
+            "use": "Final tax return and estate reporting",
+            "verified": false
+          },
+          {
+            "entity": "Mortgage or lender",
+            "name": "Mortgage or lender",
+            "phone": null,
+            "url": null,
+            "use": "Loan status, insurance, and payoff questions",
+            "verified": false
+          },
+          {
+            "entity": "Local recorder or property office",
+            "name": "Local recorder or property office",
+            "phone": null,
+            "url": null,
+            "use": "Deed, title, and property transfer records",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Confusing probate with non-probate assets. The process is different for titled property and beneficiaries.",
+          "Failing to file the final tax return for the deceased or to keep the estate records current.",
+          "Selling or transferring property before the title and lien checks are complete.",
+          "Ignoring a trustee or fiduciary instruction in a trust or will because the family thinks it is optional.",
+          "Leaving digital accounts unmanaged after a death, which can lead to loss of records and access.",
+          "Paying debt without checking whether it was covered by a policy, benefit, or insurance asset."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Probate filing",
+            "deadline": "As soon as practical when the estate requires court action",
+            "consequence": "Delays can increase court costs, conflict, and administrative time.",
+            "type": "recommended"
+          },
+          {
+            "item": "Final tax filing",
+            "deadline": "Follow applicable federal and state deadlines for the decedent and estate",
+            "consequence": "Missed deadlines can create penalties and interest.",
+            "type": "legal"
+          },
+          {
+            "item": "Creditor claims and lien issues",
+            "deadline": "Address early when a property transfer or sale is being planned",
+            "consequence": "Unresolved liens or unpaid debts can block a clean transfer.",
+            "type": "recommended"
+          }
+        ]
+      },
+      {
+        "phase": 4,
+        "title": "Rebuild and protect the family",
+        "timeframe": "Month 6 to Month 12",
+        "priority": "do-soon",
+        "focus": "Protect the surviving family from future disruption by updating plans, beneficiaries, and emergency records.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "Update beneficiary designations on all bank accounts, retirement accounts, life insurance, and investment accounts. Keep a written record of who is named and why.",
+            "priority": "do-first",
+            "why": "Beneficiary designations are often the fastest way to avoid a repeat of this process for the next generation.",
+            "legalRef": "Account and insurance beneficiary rules"
+          },
+          {
+            "step": 2,
+            "action": "Review the family's existing will, trust, and healthcare plan. Update powers of attorney, executor designations, and emergency care instructions for all adult family members.",
+            "priority": "do-first",
+            "why": "A valid plan reduces uncertainty when a family is under stress. Good planning is not just for older adults; it is for any family with dependents.",
+            "legalRef": "Will, trust, and healthcare planning law"
+          },
+          {
+            "step": 3,
+            "action": "Build a liquid emergency fund equal to 6 to 12 months of essential household expenses. Keep it in a high-yield savings account or cash reserve rather than locked investments.",
+            "priority": "do-first",
+            "why": "A family cannot manage a sudden crisis without accessible cash.",
+            "legalRef": "General financial planning guidance"
+          },
+          {
+            "step": 4,
+            "action": "Review life, disability, and health insurance needs. Confirm that the surviving family members still have adequate cover for income replacement and healthcare.",
+            "priority": "do-first",
+            "why": "Coverage gaps can create real financial strain later, especially when a household becomes dependent on a single income.",
+            "legalRef": "Insurance policy terms and renewal rules"
+          },
+          {
+            "step": 5,
+            "action": "Create a single family asset register with account numbers, account types, passwords, document locations, and key contacts. Store one copy securely and share one copy with a trusted fiduciary or family member.",
+            "priority": "do-soon",
+            "why": "This turns a stressful crisis into a manageable checklist for the next generation.",
+            "legalRef": "General recordkeeping and estate planning best practices"
+          },
+          {
+            "step": 6,
+            "action": "Review all legal and financial roles: executor, trustee, agent under power of attorney, and healthcare proxy. Make sure there is a trusted person ready to step in if needed.",
+            "priority": "do-soon",
+            "why": "The family should not learn mid-crisis that a role was never appointed or was outdated.",
+            "legalRef": "Fiduciary and agency law"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Updated will and trust documents",
+          "Updated beneficiary records on all accounts and policies",
+          "Emergency fund plan and cash reserves",
+          "Health and life insurance policy review",
+          "Power of attorney and healthcare directives",
+          "Updated family asset register",
+          "Executor or fiduciary information"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Financial advisor or CFP",
+            "name": "Financial advisor or CFP",
+            "phone": null,
+            "url": null,
+            "use": "Cash planning, insurance review, and beneficiary updates",
+            "verified": false
+          },
+          {
+            "entity": "Estate planning attorney",
+            "name": "Estate planning attorney",
+            "phone": null,
+            "url": null,
+            "use": "Wills, trusts, powers, and family planning",
+            "verified": false
+          },
+          {
+            "entity": "Insurance broker or agent",
+            "name": "Insurance broker or agent",
+            "phone": null,
+            "url": null,
+            "use": "Review life, health, disability, and homeowner coverage",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Not updating beneficiaries after a major life event.",
+          "Leaving key roles undefined when a family is already vulnerable.",
+          "Failing to review life, health, and disability coverage after a major loss.",
+          "Keeping all family records in one place with no trusted backup person.",
+          "Not creating a cash reserve before a future emergency hits.",
+          "Assuming legal documents do not need a fresh review after a family change."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Beneficiary review",
+            "deadline": "At least once a year and after changes in family status",
+            "consequence": "Outdated beneficiaries can cause major family and legal confusion.",
+            "type": "recommended"
+          },
+          {
+            "item": "Insurance review",
+            "deadline": "Before renewal or policy expiry",
+            "consequence": "Gaps in cover can become expensive and disruptive.",
+            "type": "recommended"
+          },
+          {
+            "item": "Will or trust review",
+            "deadline": "After major family changes, marriage, divorce, or children",
+            "consequence": "The family may inherit a plan that no longer reflects their wishes.",
+            "type": "recommended"
+          }
+        ]
+      }
+    ],
+    "quickReference": {
+      "deathCertificate": {
+        "issuedBy": "City, county, or state vital records office",
+        "timeToObtain": "Usually within a few days to a few weeks",
+        "cost": "Often low, depending on jurisdiction and number of copies",
+        "usedFor": [
+          "Insurance claims",
+          "Bank access",
+          "Estate filings",
+          "Retirement accounts",
+          "Property and title transfers"
+        ],
+        "notSuitableFor": "A substitute for a will or trust document"
+      },
+      "beneficiaryChecklist": {
+        "primaryFocus": "Review retirement accounts, life insurance, investment accounts, and transfer-on-death accounts",
+        "warning": "If the beneficiary is outdated, the family can face delays, disputes, and extra legal work",
+        "action": "Update in writing and keep a copy of the confirmation for each account"
+      },
+      "probate": {
+        "issuedBy": "County or state probate court",
+        "mandatory": "Depends on the asset mix, state law, and whether a will or trust is in place",
+        "timeToObtain": "Several weeks to several months, depending on jurisdiction",
+        "usedFor": "Property transfer, executor appointment, and estate administration",
+        "reviewStatus": "needs-legal-review"
+      },
+      "estateAdminChecklist": {
+        "mustTrack": [
+          "Deceased's assets and debts",
+          "Executor or personal representative duties",
+          "Beneficiary designations",
+          "Tax filings",
+          "Property and title transfer steps"
+        ],
+        "keyNote": "Keep a written ledger and copies of every filing and communication."
+      },
+      "emergencyFund": {
+        "target": "6 to 12 months of essential household expenses",
+        "preferredLocation": "High-yield savings account or liquid reserve",
+        "whyItMatters": "The first month after a loss is often the most cash-sensitive period."
+      }
+    },
+    "glossary": [
+      {
+        "term": "Executor",
+        "definition": "The person named to carry out the terms of a will and handle estate administration."
+      },
+      {
+        "term": "Personal representative",
+        "definition": "The legal fiduciary appointed to administer the estate under state law."
+      },
+      {
+        "term": "Beneficiary",
+        "definition": "The person or entity named to receive an asset or benefit on death."
+      },
+      {
+        "term": "Probate",
+        "definition": "The court-supervised process for authenticating a will and administering the estate."
+      },
+      {
+        "term": "Trust",
+        "definition": "A legal arrangement that holds assets for beneficiaries under the terms of a trust agreement."
+      },
+      {
+        "term": "Power of attorney",
+        "definition": "A document giving another person authority to act on your behalf for legal or financial matters."
+      },
+      {
+        "term": "Healthcare directive",
+        "definition": "A document outlining medical preferences and who can make healthcare decisions."
+      },
+      {
+        "term": "Joint tenancy",
+        "definition": "Ownership that may pass directly to the surviving co-owner without going through probate, depending on the jurisdiction."
+      },
+      {
+        "term": "Transfer-on-death",
+        "definition": "An account or asset that can pass directly to a beneficiary outside probate."
+      },
+      {
+        "term": "Lien",
+        "definition": "A legal claim against property to secure a debt or obligation."
+      }
+    ]
   }
 }

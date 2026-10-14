@@ -573,5 +573,614 @@
         "Maintain both digital and physical copies in separate secure locations"
       ]
     }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "Step-by-step family recovery plan for the first 30 to 365 days after a death or serious incapacity. Follow the steps in order and focus first on records, documents, and claims.",
+    "meta": {
+      "title": "Family Recovery Roadmap – Canada",
+      "version": "1.0",
+      "lastReviewed": "2026-10-14",
+      "reviewedBy": "Draft review pending",
+      "generatedOn": "2026-10-14"
+    },
+    "intro": {
+      "condolence": "We are sorry for your loss. This roadmap is meant to reduce confusion by showing what matters first and what can wait.",
+      "howToUse": "Begin with immediate records and financial access. Then move to insurance, pensions, estate administration, and long-term family protection."
+    },
+    "startHere": [
+      "Get several certified copies of the death certificate and list every account, policy, and major asset.",
+      "Pause or cancel automatic bill payments, subscriptions, and recurring charges.",
+      "Review beneficiaries on life insurance, pension plans, RRSPs, TFSAs, and bank accounts.",
+      "Notify the employer, financial institutions, insurer, executor, and next of kin about the death.",
+      "Collect the will, trust records, ID, and insurance policies in a secure place.",
+      "Check whether a power of attorney, healthcare directive, or personal representative has been named.",
+      "Keep a simple log of every call, claim, and appointment."
+    ],
+    "legalFramework": [
+      "Provincial estate administration and probate law",
+      "Federal pension and insurance rules",
+      "CPP and OAS survivor benefit rules",
+      "RRSP, TFSA, and retirement plan beneficiary rules",
+      "Provincial tenancy and property transfer rules",
+      "Provincial and federal tax filing requirements for a deceased estate"
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "title": "Immediate stabilization",
+        "timeframe": "Day 1 to Day 30",
+        "priority": "do-first",
+        "focus": "Secure documents, money, and critical records before family and legal tasks expand.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "Obtain several certified death certificates and keep copies for banks, insurers, government agencies, and the estate file.",
+            "priority": "do-first",
+            "why": "Most institutions need a certified death certificate before they can process claims or access records.",
+            "legalRef": "Provincial vital statistics and registration rules"
+          },
+          {
+            "step": 2,
+            "action": "Review all joint accounts, account beneficiaries, registered accounts, and transfer-on-death designations. Confirm what passes outside probate and what requires estate administration.",
+            "priority": "do-first",
+            "why": "Beneficiary designations and joint ownership can change whether an asset goes through probate or passes directly to the survivor or designated heir.",
+            "legalRef": "Banking, pension, and beneficiary rules"
+          },
+          {
+            "step": 3,
+            "action": "Pause recurring charges: mortgage, utilities, credit cards, subscriptions, and auto-payments. Confirm the bank or lender will not treat the bill as late while the account is being reviewed.",
+            "priority": "do-first",
+            "why": "Late charges and interest can build quickly during a family emergency.",
+            "legalRef": "Contract and bank account terms"
+          },
+          {
+            "step": 4,
+            "action": "Arrange a secure place for original documents and records: passport, SIN, health card, insurance policies, will, powers of attorney, deeds, and tax filings.",
+            "priority": "do-soon",
+            "why": "Original documents often help the bank, insurer, or court issue a faster result than a photocopy alone.",
+            "legalRef": "Document retention and estate administration practice"
+          },
+          {
+            "step": 5,
+            "action": "Tell the employer or pension administrator about the death and ask about final pay, pension death benefits, severance, or group insurance coverage.",
+            "priority": "do-first",
+            "why": "Employer plans often have separate rules and deadlines from personal insurance products.",
+            "legalRef": "Federal pension and employer benefit rules"
+          },
+          {
+            "step": 6,
+            "action": "Contact all insurers to begin life insurance, health insurance, mortgage, or funeral benefit claims. Ask whether the claim is being reviewed under a contestability or investigation process.",
+            "priority": "do-first",
+            "why": "Insurance benefits and policy continuation can matter for costs, debt payment, and family cash flow.",
+            "legalRef": "Insurance contract terms and provincial/federal insurance rules"
+          },
+          {
+            "step": 7,
+            "action": "Review whether a will, trust, or personal representative has been appointed. Ask for a copy of the estate documents and understand who has authority to act.",
+            "priority": "do-soon",
+            "why": "A clear chain of authority reduces friction and helps avoid disputes about who can access funds or records.",
+            "legalRef": "Provincial estate and probate law"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Certified death certificate",
+          "Health card, SIN, passport, and ID copies",
+          "Will, trust documents, and powers of attorney",
+          "Insurance policies and beneficiary designations",
+          "Bank and credit card records",
+          "Mortgage or loan information",
+          "Employer and pension records",
+          "Property papers and vehicle title documents",
+          "Recent tax returns",
+          "Family contact list and executor information"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Insurance provider",
+            "name": "Insurance provider",
+            "phone": null,
+            "url": null,
+            "use": "Life, mortgage, and funeral benefit claims",
+            "verified": false
+          },
+          {
+            "entity": "Employer HR or benefits team",
+            "name": "Employer HR or benefits team",
+            "phone": null,
+            "url": null,
+            "use": "Final pay, pension, and employer death benefits",
+            "verified": false
+          },
+          {
+            "entity": "Bank or credit union",
+            "name": "Bank or credit union",
+            "phone": null,
+            "url": null,
+            "use": "Account access and death processing",
+            "verified": false
+          },
+          {
+            "entity": "Estate lawyer or notary",
+            "name": "Estate lawyer or notary",
+            "phone": null,
+            "url": null,
+            "use": "Will, estate administration, and provincial procedure",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Not obtaining enough certified death certificates. Many institutions require more than one copy.",
+          "Assuming every account will go through probate. Beneficiaries and joint accounts may work differently.",
+          "Paying debts before checking whether an insurer or policy covers them.",
+          "Using the deceased person's online banking or card after death without authority.",
+          "Ignoring the will, trust, or healthcare directive because the family believes it is not urgent.",
+          "Waiting too long to inform the employer or pension administrator about the death."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Death registration",
+            "deadline": "As soon as possible under provincial rules",
+            "consequence": "Delays can slow down bank, insurer, and probate steps.",
+            "type": "recommended"
+          },
+          {
+            "item": "Employee or pension claims",
+            "deadline": "Follow the employer or plan deadlines immediately",
+            "consequence": "Benefits may be delayed or lost if filed late.",
+            "type": "target"
+          },
+          {
+            "item": "Insurance claim filing",
+            "deadline": "Usually a matter of weeks once all documents are available",
+            "consequence": "The family may struggle with daily costs while waiting for payment.",
+            "type": "target"
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "title": "Claims and account transfer",
+        "timeframe": "Day 30 to Day 90",
+        "priority": "do-first",
+        "focus": "File benefits, move assets, and identify what is probate and what is not.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "File life insurance, pension, CPP survivor, OAS survivor, and any employer death benefits. Include the death certificate, beneficiary details, and policy or account numbers.",
+            "priority": "do-first",
+            "why": "These benefits often move outside the estate and should be filed early to support household cash flow.",
+            "legalRef": "Federal pension, insurance, and employer benefit rules"
+          },
+          {
+            "step": 2,
+            "action": "Transfer or close bank, RRSP, TFSA, brokerage, and savings accounts according to the account terms and beneficiary instructions.",
+            "priority": "do-first",
+            "why": "Some accounts require an estate process before they can transfer, and others pass directly to the named beneficiary.",
+            "legalRef": "Financial institution and account rules"
+          },
+          {
+            "step": 3,
+            "action": "Review vehicles, property, and titled assets. Confirm whether the title or deed requires a transfer form, probate process, or land/vehicle office filing.",
+            "priority": "do-soon",
+            "why": "This prevents delays when family members later need to sell, insure, or use the asset.",
+            "legalRef": "Provincial property and title transfer law"
+          },
+          {
+            "step": 4,
+            "action": "Check all loans, credit cards, and mortgages and ask each lender whether death benefits or insurance covers the balance.",
+            "priority": "do-soon",
+            "why": "Do not pay debt blindly when a policy or benefit may already be available.",
+            "legalRef": "Lender and insurance policy agreements"
+          },
+          {
+            "step": 5,
+            "action": "Open or confirm the estate administration process if assets require probate or a personal representative. The executor may need to file court documents and maintain a record of all assets and debts.",
+            "priority": "do-soon",
+            "why": "Estate administration can protect the family and make it clear who is acting under the law.",
+            "legalRef": "Provincial estate administration and probate procedures"
+          },
+          {
+            "step": 6,
+            "action": "Keep a ledger of what has been paid out, what is still owing, and which documents are needed for each account and asset. This is especially important for mixed assets and family property.",
+            "priority": "do-soon",
+            "why": "A clean record prevents confusion and helps with later tax or family discussions.",
+            "legalRef": "Estate recordkeeping practice"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Insurance and pension claim forms",
+          "Death certificate and beneficiary records",
+          "Bank, RRSP, TFSA, and brokerage information",
+          "Vehicle title and real estate deeds",
+          "Loan, mortgage, and credit card records",
+          "Will, trust papers, and probate documents",
+          "Tax and income records",
+          "List of estate assets and liabilities"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Pension or CPP administrator",
+            "name": "Pension or CPP administrator",
+            "phone": null,
+            "url": null,
+            "use": "CPP survivor and pension benefits",
+            "verified": false
+          },
+          {
+            "entity": "Bank or financial institution",
+            "name": "Bank or financial institution",
+            "phone": null,
+            "url": null,
+            "use": "Account access, transfer, and paperwork",
+            "verified": false
+          },
+          {
+            "entity": "Provincial probate or estate court",
+            "name": "Provincial probate or estate court",
+            "phone": null,
+            "url": null,
+            "use": "Estate administration and court filings",
+            "verified": false
+          },
+          {
+            "entity": "Vehicle or land title office",
+            "name": "Vehicle or land title office",
+            "phone": null,
+            "url": null,
+            "use": "Vehicle or property title transfer",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Failing to file all benefits before the family feels the cash squeeze.",
+          "Assuming that all property will transfer automatically or without title steps.",
+          "Not checking whether the bank or financial institution requires a beneficiary or personal representative filing.",
+          "Allowing a probate or transfer issue to sit unresolved while the family tries to sell or insure property.",
+          "Ignoring pension, RRSP, and TFSA beneficiary designations.",
+          "Paying family or estate debts without checking the available insurance or benefit coverage."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Benefit claims",
+            "deadline": "File promptly once the documents are available",
+            "consequence": "Late filing can create stress, delays, and missed deadlines for cash support.",
+            "type": "target"
+          },
+          {
+            "item": "Estate administration",
+            "deadline": "No single universal deadline, but file promptly when court action is needed",
+            "consequence": "Delays can increase legal cost and uncertainty.",
+            "type": "recommended"
+          },
+          {
+            "item": "Tax and reporting obligations",
+            "deadline": "Follow federal and provincial deadlines for the deceased and the estate",
+            "consequence": "Missing tax filings can create penalties and interest.",
+            "type": "legal"
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "title": "Legal and financial settlement",
+        "timeframe": "Month 3 to Month 6",
+        "priority": "do-soon",
+        "focus": "Complete estate administration, taxes, property transfer, and debt handling.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "If probate or estate administration is required, maintain a complete file of assets, liabilities, dates, and communications. This is the estate record the family will rely on.",
+            "priority": "do-first",
+            "why": "Good records reduce disputes and make later reporting simpler.",
+            "legalRef": "Estate duty and probate records"
+          },
+          {
+            "step": 2,
+            "action": "File the deceased's final tax return and review all necessary estate filings. Ask whether a personal representative or executor has filing obligations.",
+            "priority": "do-first",
+            "why": "Tax obligations may continue after death and may involve the estate if money or property is still being managed.",
+            "legalRef": "Federal and provincial tax law"
+          },
+          {
+            "step": 3,
+            "action": "Review mortgages, lines of credit, car loans, credit cards, and other debt. Confirm whether any policy or benefit pays a balance or protects the family from a debt burden.",
+            "priority": "do-first",
+            "why": "Some debt is personal, some is estate debt, and some is covered by insurance or benefits.",
+            "legalRef": "Debt and creditor law"
+          },
+          {
+            "step": 4,
+            "action": "Complete property transfers, utility changes, vehicle update, and lien or title review before selling or transferring real estate.",
+            "priority": "do-soon",
+            "why": "Title issues and liens can block a sale or create family conflict if not corrected early.",
+            "legalRef": "Provincial land and title rules"
+          },
+          {
+            "step": 5,
+            "action": "Review the will, trust, healthcare directives, and any powers of attorney. Ask whether the family needs to change account authority or appoint a new representative.",
+            "priority": "do-soon",
+            "why": "Authority changes often matter just as much as asset transfers.",
+            "legalRef": "Estate and fiduciary rules"
+          },
+          {
+            "step": 6,
+            "action": "Protect digital access: email, cloud drives, social accounts, bank portals, and subscriptions. Keep a list of sites, accounts, and recovery contacts for the family.",
+            "priority": "do-soon",
+            "why": "Digital access is frequently overlooked and can hide dollars, communication records, or important documents.",
+            "legalRef": "Privacy, digital account terms, and estate practice"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Estate inventory and debts ledger",
+          "Probate or administration documents",
+          "Final tax return and estate filing records",
+          "Mortgage, deed, lien, and title documents",
+          "Trust and healthcare directives",
+          "Vehicle and property transfer forms",
+          "Digital account list and login recovery notes"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Estate lawyer or notary",
+            "name": "Estate lawyer or notary",
+            "phone": null,
+            "url": null,
+            "use": "Probate, trust, and provincial procedure",
+            "verified": false
+          },
+          {
+            "entity": "CPA or tax professional",
+            "name": "CPA or tax professional",
+            "phone": null,
+            "url": null,
+            "use": "Final tax return and estate filing",
+            "verified": false
+          },
+          {
+            "entity": "Mortgage or lender",
+            "name": "Mortgage or lender",
+            "phone": null,
+            "url": null,
+            "use": "Debt status and payoff or claim checks",
+            "verified": false
+          },
+          {
+            "entity": "Land or vehicle title office",
+            "name": "Land or vehicle title office",
+            "phone": null,
+            "url": null,
+            "use": "Property or vehicle updating and transfer",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Confusing the estate process with beneficiary transfer. The steps differ depending on the asset.",
+          "Failing to file the final tax return or to keep a list of unpaid liabilities.",
+          "Selling or transferring property before title, mortgage, and lien checks are complete.",
+          "Ignoring a trust or directive because the family believes a will is enough.",
+          "Leaving digital accounts unmanaged after a death.",
+          "Paying debts without checking whether insurance or benefits cover them."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Tax filing",
+            "deadline": "Follow federal and provincial deadlines for the deceased and estate",
+            "consequence": "Late filing can create penalties and unnecessary stress.",
+            "type": "legal"
+          },
+          {
+            "item": "Probate or estate administration",
+            "deadline": "As soon as practical when court procedures are required",
+            "consequence": "Delay can increase cost and family conflict.",
+            "type": "recommended"
+          },
+          {
+            "item": "Property or title transfer",
+            "deadline": "Complete before sale or refinancing if the asset is being transferred",
+            "consequence": "A title issue can block a sale or create a legal dispute.",
+            "type": "recommended"
+          }
+        ]
+      },
+      {
+        "phase": 4,
+        "title": "Rebuild and protect the family",
+        "timeframe": "Month 6 to Month 12",
+        "priority": "do-soon",
+        "focus": "Update plans, beneficiaries, and emergency records so the family is not exposed to the same risks again.",
+        "keyActions": [
+          {
+            "step": 1,
+            "action": "Review and update beneficiary designations on all bank, retirement, life, and investment accounts. Keep a copy of the confirmation for each account.",
+            "priority": "do-first",
+            "why": "This is one of the cleanest ways to reduce future delays and confusion.",
+            "legalRef": "Financial account and insurance beneficiary rules"
+          },
+          {
+            "step": 2,
+            "action": "Review the will, trust, powers of attorney, and healthcare directives. Update these after major life events, including marriage, divorce, new children, or a move.",
+            "priority": "do-first",
+            "why": "A family plan needs to reflect the current situation, not just the last version written years earlier.",
+            "legalRef": "Estate planning and fiduciary law"
+          },
+          {
+            "step": 3,
+            "action": "Build a liquid emergency fund equal to 6 to 12 months of essential household expenses and keep it in a liquid savings or cash reserve account.",
+            "priority": "do-first",
+            "why": "The first 90 days after a loss are usually the most cash-sensitive period.",
+            "legalRef": "General financial planning guidance"
+          },
+          {
+            "step": 4,
+            "action": "Review life, health, disability, and mortgage protection coverage. Confirm that the surviving family members still have adequate income replacement and healthcare protection.",
+            "priority": "do-first",
+            "why": "Coverage gaps can appear after a major loss or a job change and can be expensive to fix later.",
+            "legalRef": "Insurance product and renewal rules"
+          },
+          {
+            "step": 5,
+            "action": "Create a single family asset register with account types, numbers, document locations, passwords, and emergency contacts. Keep one secure copy and give another to a trusted family member.",
+            "priority": "do-soon",
+            "why": "This creates a practical map that can save time and reduce confusion when a family crisis hits again.",
+            "legalRef": "Recordkeeping and estate planning best practice"
+          },
+          {
+            "step": 6,
+            "action": "Review all key fiduciary roles, including executor, trustee, power of attorney, and healthcare proxy. Make sure the named person is still the right fit.",
+            "priority": "do-soon",
+            "why": "The family should not discover after a crisis that the right legal role is outdated or unclear.",
+            "legalRef": "Fiduciary and agency law"
+          }
+        ],
+        "mustHaveDocuments": [
+          "Updated will and trust papers",
+          "Updated beneficiary records",
+          "Emergency fund and cash plan",
+          "Insurance review documents",
+          "Healthcare directives and powers of attorney",
+          "Family asset register",
+          "Executor or fiduciary information"
+        ],
+        "keyContacts": [
+          {
+            "entity": "Financial planner or advisor",
+            "name": "Financial planner or advisor",
+            "phone": null,
+            "url": null,
+            "use": "Cash planning, insurance review, and beneficiary updates",
+            "verified": false
+          },
+          {
+            "entity": "Estate planning lawyer or notary",
+            "name": "Estate planning lawyer or notary",
+            "phone": null,
+            "url": null,
+            "use": "Wills, trusts, powers, and family updates",
+            "verified": false
+          },
+          {
+            "entity": "Insurance broker or advisor",
+            "name": "Insurance broker or advisor",
+            "phone": null,
+            "url": null,
+            "use": "Life, health, disability, and mortgage coverage review",
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          "Not updating beneficiaries after a major family change.",
+          "Leaving executor and fiduciary roles undefined or outdated.",
+          "Failing to review insurance and healthcare coverage after a loss.",
+          "Keeping all estate records in one place with no trusted backup person.",
+          "Not creating a cash reserve before a future emergency hits.",
+          "Assuming legal documents never need to be revisited."
+        ],
+        "legalDeadlines": [
+          {
+            "item": "Beneficiary review",
+            "deadline": "At least annually and after major life changes",
+            "consequence": "Outdated designations can create family conflict and legal delay.",
+            "type": "recommended"
+          },
+          {
+            "item": "Insurance and coverage review",
+            "deadline": "Before each renewal or policy expiry",
+            "consequence": "Coverage gaps can create major money stress.",
+            "type": "recommended"
+          },
+          {
+            "item": "Will and trust review",
+            "deadline": "After marriage, divorce, children, or any significant property change",
+            "consequence": "A stale plan can no longer reflect the family’s needs or wishes.",
+            "type": "recommended"
+          }
+        ]
+      }
+    ],
+    "quickReference": {
+      "deathCertificate": {
+        "issuedBy": "Provincial or territorial vital records office",
+        "timeToObtain": "Usually a few days to a few weeks",
+        "cost": "Low, depending on the jurisdiction and number of copies",
+        "usedFor": [
+          "Insurance claims",
+          "Bank access",
+          "Estate filings",
+          "Pension claims",
+          "Property and title transfers"
+        ],
+        "notSuitableFor": "A substitute for a will, trust, or estate plan"
+      },
+      "beneficiaryChecklist": {
+        "primaryFocus": "Review life insurance, RRSP, TFSA, pension plans, and bank accounts",
+        "warning": "Outdated beneficiary names can create legal delay and extra family disputes",
+        "action": "Update designations in writing and keep a copy of every confirmation"
+      },
+      "probate": {
+        "issuedBy": "Provincial court or probate authority",
+        "mandatory": "Depends on the asset mix and provincial law",
+        "timeToObtain": "Several weeks to several months depending on the estate",
+        "usedFor": "Property transfer, executor appointment, and estate administration",
+        "reviewStatus": "needs-legal-review"
+      },
+      "estateAdminChecklist": {
+        "mustTrack": [
+          "Assets and debts",
+          "Executor or personal representative duties",
+          "Beneficiary designations",
+          "Tax filings",
+          "Property and title transfer steps"
+        ],
+        "keyNote": "Keep a written ledger and copies of every filing and communication."
+      },
+      "emergencyFund": {
+        "target": "6 to 12 months of essential household expenses",
+        "preferredLocation": "High-interest savings account or cash reserve",
+        "whyItMatters": "The first month after a loss is often the most cash-sensitive period."
+      }
+    },
+    "glossary": [
+      {
+        "term": "Executor",
+        "definition": "The person named to carry out the terms of the will and handle the estate process."
+      },
+      {
+        "term": "Personal representative",
+        "definition": "The person appointed to administer the estate under provincial law."
+      },
+      {
+        "term": "Beneficiary",
+        "definition": "The person or entity named to receive an asset or benefit on death."
+      },
+      {
+        "term": "Probate",
+        "definition": "The court process that validates the will and coordinates estate administration."
+      },
+      {
+        "term": "Trust",
+        "definition": "A legal arrangement that holds assets for the benefit of one or more people."
+      },
+      {
+        "term": "Power of attorney",
+        "definition": "A document authorizing another person to act for you for legal or financial matters."
+      },
+      {
+        "term": "Healthcare directive",
+        "definition": "A document outlining healthcare preferences and who can make decisions if you cannot."
+      },
+      {
+        "term": "Joint account",
+        "definition": "An account with two or more owners, which may pass to a surviving owner depending on the account type and province."
+      },
+      {
+        "term": "Transfer-on-death",
+        "definition": "A registration or designation that allows an asset to pass directly to a beneficiary without going through probate."
+      },
+      {
+        "term": "Lien",
+        "definition": "A legal claim on property to secure a debt or obligation."
+      }
+    ]
   }
 }

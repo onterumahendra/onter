@@ -75,6 +75,87 @@ export interface AccessGuideConfig {
   };
 }
 
+export type RecoveryRoadmapPriority = 'do-first' | 'do-soon' | 'when-ready';
+export type RecoveryRoadmapReviewStatus = 'needs-legal-review';
+export type RecoveryRoadmapDeadlineType = 'legal' | 'target' | 'recommended';
+
+export interface RecoveryRoadmapMeta {
+  title?: string;
+  version?: string;
+  lastReviewed?: string;
+  reviewedBy?: string;
+  generatedOn?: string;
+}
+
+export interface RecoveryRoadmapIntro {
+  condolence?: string;
+  howToUse?: string;
+}
+
+export interface RecoveryRoadmapAction {
+  step?: number;
+  action?: string;
+  priority?: RecoveryRoadmapPriority;
+  why?: string;
+  legalRef?: string;
+  reviewStatus?: RecoveryRoadmapReviewStatus;
+  [key: string]: unknown;
+}
+
+export interface RecoveryRoadmapContact {
+  entity?: string;
+  name?: string;
+  phone?: string;
+  number?: string;
+  url?: string;
+  portal?: string;
+  use?: string;
+  verified?: boolean;
+  reviewStatus?: RecoveryRoadmapReviewStatus;
+  [key: string]: unknown;
+}
+
+export interface RecoveryRoadmapDeadline {
+  item?: string;
+  deadline?: string;
+  consequence?: string;
+  type?: RecoveryRoadmapDeadlineType;
+  reviewStatus?: RecoveryRoadmapReviewStatus;
+  [key: string]: unknown;
+}
+
+export interface RecoveryRoadmapGlossaryEntry {
+  term?: string;
+  definition?: string;
+}
+
+export interface RecoveryRoadmapPhase {
+  phase?: number;
+  title?: string;
+  timeframe?: string;
+  priority?: RecoveryRoadmapPriority;
+  focus?: string;
+  keyActions?: RecoveryRoadmapAction[];
+  mustHaveDocuments?: string[];
+  keyContacts?: RecoveryRoadmapContact[];
+  criticalMistakes?: string[];
+  legalDeadlines?: RecoveryRoadmapDeadline[];
+  [key: string]: unknown;
+}
+
+export interface RecoveryRoadmapConfig {
+  enabled?: boolean;
+  description?: string;
+  meta?: RecoveryRoadmapMeta;
+  intro?: RecoveryRoadmapIntro;
+  startHere?: string[];
+  legalFramework?: string[];
+  phases?: RecoveryRoadmapPhase[];
+  quickReference?: Record<string, unknown>;
+  glossary?: RecoveryRoadmapGlossaryEntry[];
+  [key: string]: unknown;
+}
+
 export interface CountryFormConfig {
   countryCode: string;
   countryName: string;
@@ -82,4 +163,5 @@ export interface CountryFormConfig {
   currencySymbol: string;
   formSections: FormSection[];
   accessGuide?: AccessGuideConfig;
+  recoveryRoadmap?: RecoveryRoadmapConfig;
 }

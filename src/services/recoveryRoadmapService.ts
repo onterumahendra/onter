@@ -17,11 +17,20 @@ import type { CountryFormConfig } from '../constants/types';
 const M = GUIDE_CONFIG.PAGE_MARGIN; // 15mm
 
 const PHASE_COLORS: Record<string, [number, number, number]> = {
-    CRITICAL: [220, 38, 38],
-    HIGH:     [217, 119, 6],
-    MEDIUM:   [37, 99, 235],
-    LOW:      [34, 197, 94],
+    'do-first': [220, 38, 38],
+    'do-soon': [217, 119, 6],
+    'when-ready': [34, 197, 94],
 };
+
+function normalizePriority(value: unknown): string {
+    const normalized = typeof value === 'string' ? value.trim() : '';
+
+    if (normalized === 'do-first' || normalized === 'do-soon' || normalized === 'when-ready') {
+        return normalized;
+    }
+
+    return 'when-ready';
+}
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -98,8 +107,8 @@ async function addCoverPage(doc: jsPDF, countryName: string): Promise<void> {
 
     // Phase timeline strips
     const phaseStrips = [
-        { label: 'Day 1-30',   color: PHASE_COLORS.CRITICAL,     title: 'SURVIVE' },
-        { label: 'Day 30-90',  color: PHASE_COLORS.HIGH,          title: 'CLAIM'   },
+        { label: 'Day 1-30',   color: PHASE_COLORS['do-first'],   title: 'SURVIVE' },
+        { label: 'Day 30-90',  color: PHASE_COLORS['do-soon'],    title: 'CLAIM'   },
         { label: 'Month 3-6',  color: GUIDE_CONFIG.THEME_COLOR,   title: 'SETTLE'  },
         { label: 'Month 6-12', color: GUIDE_CONFIG.SUCCESS_COLOR, title: 'REBUILD' },
     ];
@@ -157,7 +166,8 @@ function addPhaseHeader(
 ): number {
     const w = pW(doc);
     let y = M + 8;
-    const color = PHASE_COLORS[priority] ?? GUIDE_CONFIG.THEME_COLOR;
+    const normalizedPriority = normalizePriority(priority);
+    const color = PHASE_COLORS[normalizedPriority] ?? GUIDE_CONFIG.THEME_COLOR;
 
     // Banner background
     doc.setFillColor(...color);
@@ -249,16 +259,17 @@ function addKeyActions(doc: jsPDF, actions: any[], startY: number): number {
         }
 
         // Priority pill
+        const normalizedPriority = normalizePriority(item.priority);
         const pColor: [number, number, number] =
-            item.priority === 'HIGH'   ? PHASE_COLORS.HIGH :
-            item.priority === 'MEDIUM' ? GUIDE_CONFIG.THEME_COLOR :
-            GUIDE_CONFIG.SUCCESS_COLOR;
+            normalizedPriority === 'do-first' ? PHASE_COLORS['do-first'] :
+            normalizedPriority === 'do-soon' ? PHASE_COLORS['do-soon'] :
+            PHASE_COLORS['when-ready'];
         doc.setFillColor(...pColor);
         doc.roundedRect(M + 13, y, 22, 4.5, 1, 1, 'F');
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(6.5);
         doc.setTextColor(255, 255, 255);
-        doc.text(safe(item.priority), M + 24, y + 3.2, { align: 'center' });
+        doc.text(safe(normalizedPriority), M + 24, y + 3.2, { align: 'center' });
         y += 8;
     }
 
@@ -308,7 +319,6 @@ function addDocumentChecklist(doc: jsPDF, documents: string[], startY: number): 
 function addContactsTable(doc: jsPDF, contacts: any[], startY: number): number {
     let y = startY;
     const totalW = cW(doc);
-    // Column widths — entity + number + use = totalW (180mm at default margin)
     const entityW = 62;
     const numberW = 32;
     const useW = totalW - entityW - numberW;
@@ -322,29 +332,30 @@ function addContactsTable(doc: jsPDF, contacts: any[], startY: number): number {
     doc.text('KEY CONTACTS', M + 3, y + 5.5);
     y += 11;
 
-    // Column header row — background drawn BEFORE text
     doc.setFillColor(226, 232, 240);
     doc.rect(M, y, totalW, 6.5, 'F');
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7.5);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
-    doc.text('Institution',  M + 2,                y + 4.5);
-    doc.text('Helpline',     M + entityW + 2,       y + 4.5);
-    doc.text('Use',          M + entityW + numberW + 2, y + 4.5);
+    doc.text('Institution', M + 2, y + 4.5);
+    doc.text('Helpline', M + entityW + 2, y + 4.5);
+    doc.text('Use', M + entityW + numberW + 2, y + 4.5);
     y += 8;
 
     for (let i = 0; i < contacts.length; i++) {
         const c = contacts[i];
-        // Set font BEFORE splitTextToSize
+        const entity = c?.name ?? 'Contact';
+        const number = c?.phone ?? '';
+        const use = c?.use ?? c?.url ?? '';
+
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
-        const entityLines = wrapText(doc, c.entity, entityW - 4);
-        const useLines    = wrapText(doc, c.use || c.portal || '', useW - 4);
+        const entityLines = wrapText(doc, entity, entityW - 4);
+        const useLines = wrapText(doc, use, useW - 4);
         const rowH = Math.max(entityLines.length, useLines.length) * 4.5 + 5;
 
         y = ensureSpace(doc, y, rowH);
 
-        // Alternating row background — drawn BEFORE text
         if (i % 2 === 0) {
             doc.setFillColor(248, 250, 252);
             doc.rect(M, y, totalW, rowH, 'F');
@@ -353,9 +364,9 @@ function addContactsTable(doc: jsPDF, contacts: any[], startY: number): number {
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
         doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
-        doc.text(entityLines,                M + 2,                y + 4);
-        doc.text(safe(c.number || 'Portal'), M + entityW + 2,      y + 4);
-        doc.text(useLines,                   M + entityW + numberW + 2, y + 4);
+        doc.text(entityLines, M + 2, y + 4);
+        doc.text(safe(number), M + entityW + 2, y + 4);
+        doc.text(useLines, M + entityW + numberW + 2, y + 4);
         y += rowH;
     }
 
@@ -679,7 +690,7 @@ export interface RecoveryRoadmapOptions {
 
 export async function generateRecoveryRoadmapPDF(options: RecoveryRoadmapOptions): Promise<Blob> {
     const { countryConfig } = options;
-    const roadmap = (countryConfig as any).recoveryRoadmap;
+    const roadmap = countryConfig.recoveryRoadmap;
 
     if (!roadmap?.enabled) {
         throw new Error('Recovery roadmap is not enabled for this country');
@@ -688,35 +699,47 @@ export async function generateRecoveryRoadmapPDF(options: RecoveryRoadmapOptions
     try {
         const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
-        // 1. Cover
         await addCoverPage(doc, countryConfig.countryName);
 
-        // 2. Legal framework
         if (Array.isArray(roadmap.legalFramework) && roadmap.legalFramework.length) {
             addLegalFrameworkPage(doc, roadmap.legalFramework);
         }
 
-        // 3. One section per phase
-        const phases: any[] = roadmap.phases ?? [];
+        const phases: any[] = Array.isArray(roadmap.phases) ? roadmap.phases : [];
         for (const phase of phases) {
             doc.addPage();
             let y = addPhaseHeader(
-                doc, phase.phase, phase.title,
-                phase.timeframe, phase.priority, phase.focus,
+                doc,
+                phase.phase,
+                phase.title,
+                phase.timeframe,
+                normalizePriority(phase.priority),
+                phase.focus,
             );
-            if (phase.keyActions?.length)        y = addKeyActions(doc, phase.keyActions, y);
-            if (phase.mustHaveDocuments?.length)  y = addDocumentChecklist(doc, phase.mustHaveDocuments, y);
-            if (phase.keyContacts?.length)        y = addContactsTable(doc, phase.keyContacts, y);
-            if (phase.criticalMistakes?.length)   y = addMistakesSection(doc, phase.criticalMistakes, y);
-            if (phase.legalDeadlines?.length)     addDeadlinesSection(doc, phase.legalDeadlines, y);
+
+            const stepActions = Array.isArray(phase.keyActions)
+                ? phase.keyActions.map((action: any) => ({ ...action, priority: normalizePriority(action?.priority) }))
+                : [];
+
+            if (stepActions.length) y = addKeyActions(doc, stepActions, y);
+            if (Array.isArray(phase.mustHaveDocuments) && phase.mustHaveDocuments.length) {
+                y = addDocumentChecklist(doc, phase.mustHaveDocuments, y);
+            }
+            if (Array.isArray(phase.keyContacts) && phase.keyContacts.length) {
+                y = addContactsTable(doc, phase.keyContacts, y);
+            }
+            if (Array.isArray(phase.criticalMistakes) && phase.criticalMistakes.length) {
+                y = addMistakesSection(doc, phase.criticalMistakes, y);
+            }
+            if (Array.isArray(phase.legalDeadlines) && phase.legalDeadlines.length) {
+                addDeadlinesSection(doc, phase.legalDeadlines, y);
+            }
         }
 
-        // 4. Quick Reference
         if (roadmap.quickReference) {
-            addQuickReferencePage(doc, roadmap.quickReference);
+            addQuickReferencePage(doc, roadmap.quickReference as Record<string, any>);
         }
 
-        // Add page numbers (skip cover = page 1)
         const totalPages = doc.getNumberOfPages();
         for (let i = 2; i <= totalPages; i++) {
             doc.setPage(i);
