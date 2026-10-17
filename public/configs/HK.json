@@ -1,0 +1,304 @@
+{
+  "countryCode": "HK",
+  "countryName": "Hong Kong",
+  "currency": "HKD",
+  "currencySymbol": "HK$",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Identity and contact details for family, healthcare, financial, and government administration. HKID details are sensitive and should be recorded only when needed.",
+      "fields": [
+        { "label": "Full Legal Name", "name": "full_name", "type": "text", "placeholder": "Name as shown on official records", "validation": { "required": true, "minLength": 2, "errorMessage": "Full legal name is required" } },
+        { "label": "Date of Birth", "name": "date_of_birth", "type": "date", "validation": { "required": true, "errorMessage": "Date of birth is required" } },
+        { "label": "Hong Kong Identity Card Number (if applicable)", "name": "hkid_number", "type": "text", "placeholder": "As shown on your HKID; store securely" },
+        { "label": "Identity / Immigration Status", "name": "identity_status", "type": "select", "options": ["Hong Kong Permanent Resident", "Hong Kong Resident", "Non-permanent Resident", "Visitor", "Other / Not applicable"] },
+        { "label": "Passport / Travel Document Number", "name": "passport_no", "type": "text", "placeholder": "If applicable" },
+        { "label": "Driving Licence Number (if applicable)", "name": "drivers_license_no", "type": "text", "placeholder": "Driving licence number" },
+        { "label": "Primary Phone Number", "name": "phone", "type": "text", "placeholder": "+852 or international number", "validation": { "required": true, "errorMessage": "Primary phone number is required" } },
+        { "label": "Email Address", "name": "email", "type": "email", "placeholder": "name@example.hk", "validation": { "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", "errorMessage": "Enter a valid email address or leave blank" } },
+        { "label": "Residential Address", "name": "residential_address", "type": "textarea", "placeholder": "Building, floor, flat, street, district, Hong Kong" },
+        { "label": "District", "name": "district", "type": "select", "options": ["Central and Western", "Eastern", "Islands", "Kowloon City", "Kwai Tsing", "Kwun Tong", "North", "Sai Kung", "Sha Tin", "Sham Shui Po", "Southern", "Tai Po", "Tsuen Wan", "Tuen Mun", "Wan Chai", "Wong Tai Sin", "Yau Tsim Mong", "Yuen Long", "Outside Hong Kong"] }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "Trusted people to contact. Being listed does not itself grant legal authority to make decisions or access accounts.",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        { "label": "Relationship", "name": "relationship", "type": "text", "placeholder": "Partner, family member, friend, or other", "validation": { "required": true, "errorMessage": "Relationship is required" } },
+        { "label": "Name", "name": "name", "type": "text", "placeholder": "Full name", "validation": { "required": true, "minLength": 2, "errorMessage": "Name is required" } },
+        { "label": "Phone Number", "name": "phone", "type": "text", "placeholder": "+852 or international number", "validation": { "required": true, "errorMessage": "Phone number is required" } },
+        { "label": "Email / Address", "name": "contact_details", "type": "text", "placeholder": "Optional contact details" },
+        { "label": "Role / Instructions", "name": "role", "type": "text", "placeholder": "Emergency contact, executor, attorney, or other" }
+      ]
+    },
+    {
+      "section": "Health and Care Information",
+      "type": "simple",
+      "description": "Optional health and care information. Public healthcare charges and eligibility depend on status and applicable rules; public and private services are distinct.",
+      "fields": [
+        { "label": "Usual Doctor / Clinic", "name": "medical_practice", "type": "text", "placeholder": "Doctor, clinic, and contact details" },
+        { "label": "Hospital Authority / Health Record Reference (if known)", "name": "health_record_reference", "type": "text", "placeholder": "As supplied by your healthcare provider" },
+        { "label": "Known Medical Conditions", "name": "medical_conditions", "type": "textarea", "placeholder": "Relevant diagnoses or care needs" },
+        { "label": "Allergies and Reactions", "name": "allergies", "type": "textarea", "placeholder": "Known allergies, reactions, or none known" },
+        { "label": "Current Medicines", "name": "medications", "type": "textarea", "placeholder": "Medicine, dose, and where the current list is kept" },
+        { "label": "Blood Group (if confirmed)", "name": "blood_group", "type": "select", "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"] },
+        { "label": "Care / Accessibility Needs", "name": "care_needs", "type": "textarea", "placeholder": "Relevant communication, accessibility, or care needs" },
+        { "label": "Advance Directive / Care Plan Location", "name": "care_plan_location", "type": "text", "placeholder": "Secure location of current formal documents" }
+      ]
+    },
+    {
+      "section": "Insurance details",
+      "type": "table",
+      "description": "Private, employer, property, and other policies. Public Hospital Authority services have separate eligibility and charging arrangements.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Policy Holder", "name": "insured_name", "type": "text", "placeholder": "Name on policy", "validation": { "required": true, "errorMessage": "Policy holder is required" } },
+        { "label": "Cover Type", "name": "insurance_type", "type": "select", "options": ["Life", "Medical / Hospital", "Critical Illness", "Income Protection", "Personal Accident", "Home Contents", "Home / Property", "Motor", "Travel", "Business", "Other"], "validation": { "required": true, "errorMessage": "Select a cover type" } },
+        { "label": "Insurer / Provider", "name": "provider", "type": "text", "placeholder": "Insurer or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Policy / Member Reference", "name": "policy_no", "type": "text", "placeholder": "Policy or member reference", "validation": { "required": true, "errorMessage": "Reference is required" } },
+        { "label": "Insured People / Beneficiary", "name": "beneficiary", "type": "text", "placeholder": "As recorded with provider" },
+        { "label": "Claims Contact", "name": "claims_contact", "type": "text", "placeholder": "Phone, email, or official website" },
+        { "label": "Premium and Frequency", "name": "premium_frequency", "type": "text", "placeholder": "Optional amount and payment frequency" },
+        { "label": "Renewal / Review Date", "name": "renewal_date", "type": "date" },
+        { "label": "Policy Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Bank accounts",
+      "type": "table",
+      "description": "Hong Kong bank and stored-value accounts. Record the account format and payment identifiers supplied by each institution; never include passwords or security codes.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Account Holder(s)", "name": "holder_name", "type": "text", "placeholder": "Name(s) on account", "validation": { "required": true, "errorMessage": "Account holder is required" } },
+        { "label": "Bank / Institution", "name": "bank_name", "type": "text", "placeholder": "Institution name", "validation": { "required": true, "errorMessage": "Institution name is required" } },
+        { "label": "Account Type", "name": "account_type", "type": "select", "options": ["Current / Savings", "Time Deposit", "Joint", "Business", "Stored-value Facility", "Other"] },
+        { "label": "Account Number", "name": "account_no", "type": "text", "placeholder": "As shown by your institution" },
+        { "label": "Bank / Branch Code (if applicable)", "name": "bank_branch_code", "type": "text", "placeholder": "As supplied by your institution" },
+        { "label": "FPS Identifier (if applicable)", "name": "fps_identifier", "type": "text", "placeholder": "Mobile, email, FPS ID, or other linked identifier" },
+        { "label": "Account Owner / Authority Notes", "name": "ownership_notes", "type": "text", "placeholder": "Joint holder or authorised signatory details" },
+        { "label": "Bank Contact", "name": "provider_contact", "type": "text", "placeholder": "Bereavement or customer-service contact" },
+        { "label": "Statement Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Savings and Investments",
+      "type": "table",
+      "description": "Savings and investment assets. Record optional estimates with an as-of date; confirm ownership, tax treatment, and beneficiary details with the provider.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Time Deposit", "Shares", "Exchange-Traded Fund", "Investment Fund", "Bonds", "Brokerage Account", "Investment Property", "Business Interest", "Cryptoasset", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Provider / Institution", "name": "provider", "type": "text", "placeholder": "Bank, broker, registry, or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Account / Holding Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Owner(s)", "name": "owners", "type": "text", "placeholder": "Sole, joint, trust, or company ownership" },
+        { "label": "Beneficiary / Nomination", "name": "beneficiary", "type": "text", "placeholder": "Where current designation is recorded" },
+        { "label": "Approximate Value (HKD)", "name": "value", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Value As Of", "name": "value_date", "type": "date" },
+        { "label": "Contact / Documents Location", "name": "contact_location", "type": "text", "placeholder": "Provider contact or secure record location" }
+      ]
+    },
+    {
+      "section": "MPF, Pensions and Benefits",
+      "type": "table",
+      "description": "Mandatory Provident Fund (MPF), Occupational Retirement Schemes Ordinance (ORSO) schemes, public-service pensions, and benefits. Death claims and eligibility depend on scheme and legal rules.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Plan / Benefit Type", "name": "plan_type", "type": "select", "options": ["Mandatory Provident Fund (MPF)", "ORSO Scheme", "Public Service Pension", "Annuity / Retirement Product", "Old Age Living Allowance", "Comprehensive Social Security Assistance", "Other Government Benefit", "Other"], "validation": { "required": true, "errorMessage": "Select a plan or benefit type" } },
+        { "label": "Scheme / Administrator", "name": "provider", "type": "text", "placeholder": "MPF trustee, employer, or agency", "validation": { "required": true, "errorMessage": "Administrator is required" } },
+        { "label": "Employer (if applicable)", "name": "employer", "type": "text", "placeholder": "Current or former employer" },
+        { "label": "Member / Claim Reference", "name": "member_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Beneficiary / Estate Representative Notes", "name": "beneficiary", "type": "text", "placeholder": "Where nomination, will, or claim documents are recorded" },
+        { "label": "Scheme Contact", "name": "contact", "type": "text", "placeholder": "Official website or contact details" },
+        { "label": "Statement / Decision Letter Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Property and Vehicles",
+      "type": "table",
+      "description": "Property, tenancies, vehicles, titles, loans, and associated insurance. Record the district and full address; Hong Kong does not use a postal-code system.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Residential Property", "Other Property", "Rental Property", "Tenancy", "Motor Vehicle", "Boat", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Address / Description", "name": "address_description", "type": "textarea", "placeholder": "Building, floor, flat, street, district, and asset description", "validation": { "required": true, "errorMessage": "Address or description is required" } },
+        { "label": "Owner(s) / Ownership", "name": "owners", "type": "text", "placeholder": "Names and ownership as recorded" },
+        { "label": "Title / Registration Reference", "name": "title_reference", "type": "text", "placeholder": "Land Registry, vehicle registration, or other reference" },
+        { "label": "Mortgage / Lien / Lender", "name": "mortgage_lien", "type": "text", "placeholder": "Lender and reference; no login details" },
+        { "label": "Insurer / Policy Reference", "name": "insurance", "type": "text", "placeholder": "Provider and policy reference" },
+        { "label": "Approximate Value and Date", "name": "value_date", "type": "text", "placeholder": "Optional estimate and valuation date" },
+        { "label": "Title / Tenancy / Registration Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Loans and Liabilities",
+      "type": "table",
+      "description": "Mortgages, credit, tax, and other liabilities. Confirm legal responsibility before making payments or changing accounts.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Liability Type", "name": "liability_type", "type": "select", "options": ["Mortgage", "Credit Card", "Personal Loan", "Overdraft", "Salaries Tax / Profits Tax", "Rates / Government Rent", "Business Debt", "Vehicle Finance", "Other"], "validation": { "required": true, "errorMessage": "Select a liability type" } },
+        { "label": "Lender / Creditor", "name": "creditor", "type": "text", "placeholder": "Institution or organisation", "validation": { "required": true, "errorMessage": "Creditor is required" } },
+        { "label": "Account Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Borrower(s) / Guarantor", "name": "borrowers", "type": "text", "placeholder": "Names and shared responsibility" },
+        { "label": "Approximate Balance (HKD)", "name": "balance", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Balance As Of", "name": "balance_date", "type": "date" },
+        { "label": "Payment / Review Details", "name": "payment_details", "type": "text", "placeholder": "Optional amount and frequency" },
+        { "label": "Creditor Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact or secure record location" }
+      ]
+    },
+    {
+      "section": "Employment and Income",
+      "type": "table",
+      "description": "Employment, business, MPF, pension, and government payment sources.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Income / Benefit Type", "name": "income_type", "type": "select", "options": ["Employment", "Self-Employment", "Business", "MPF / Retirement Income", "Public Service Pension", "Social Welfare Benefit", "Rental Income", "Other"], "validation": { "required": true, "errorMessage": "Select an income or benefit type" } },
+        { "label": "Employer / Paying Organisation", "name": "organisation", "type": "text", "placeholder": "Employer or programme" },
+        { "label": "HR / Payroll / Claim Contact", "name": "contact_reference", "type": "text", "placeholder": "Contact and reference details" },
+        { "label": "Approximate Amount and Frequency", "name": "amount_frequency", "type": "text", "placeholder": "Optional estimate" },
+        { "label": "Survivor / Dependant Benefit Notes", "name": "survivor_benefit", "type": "text", "placeholder": "Where programme or plan terms are recorded" },
+        { "label": "Supporting Records Location", "name": "document_location", "type": "text", "placeholder": "Payslips, tax returns, or award letters" }
+      ]
+    },
+    {
+      "section": "Tax and Government Records",
+      "type": "table",
+      "description": "Reference details for the Inland Revenue Department (IRD), MPFA, and government services. Never record iAM Smart, eTAX, or banking credentials.",
+      "maxRows": 25,
+      "columns": [
+        { "label": "Record Type", "name": "record_type", "type": "select", "options": ["IRD Salaries Tax", "Profits Tax / Business", "Property Tax", "Stamp Duty", "MPF", "Government Rent / Rates", "Social Welfare Department", "Other"], "validation": { "required": true, "errorMessage": "Select a record type" } },
+        { "label": "Authority / Provider", "name": "authority", "type": "text", "placeholder": "IRD, MPFA, Housing Department, or other agency" },
+        { "label": "Reference Number", "name": "reference", "type": "text", "placeholder": "Optional account or reference" },
+        { "label": "Year of Assessment / District", "name": "period_location", "type": "text", "placeholder": "If relevant" },
+        { "label": "Tax Adviser / Contact", "name": "adviser", "type": "text", "placeholder": "Name and contact details" },
+        { "label": "Returns / Correspondence Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Legal and Estate Planning",
+      "type": "table",
+      "description": "Index wills, Probate Registry grants, enduring powers of attorney, and healthcare directives. Hong Kong legal instruments and estate processes are jurisdiction-specific.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Document / Arrangement", "name": "document_type", "type": "select", "options": ["Will", "Codicil", "Probate Grant", "Letters of Administration", "Enduring Power of Attorney", "Advance Medical Directive / Advance Directive", "Guardianship / Court Order", "Trust", "Funeral Wishes", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Governing Law / Notes", "name": "jurisdiction", "type": "text", "placeholder": "Hong Kong or relevant cross-border law" },
+        { "label": "Made / Last Reviewed", "name": "review_date", "type": "date" },
+        { "label": "Executor / Attorney / Representative", "name": "appointed_person", "type": "text", "placeholder": "Name and contact, if appropriate" },
+        { "label": "Solicitor / Adviser", "name": "professional_contact", "type": "text", "placeholder": "Firm and contact details" },
+        { "label": "Original / Registered Copy Location", "name": "document_location", "type": "text", "placeholder": "Secure location and registration details" },
+        { "label": "Instructions / Notes", "name": "instructions", "type": "textarea", "placeholder": "Point to formal instructions; do not duplicate sensitive content" }
+      ]
+    },
+    {
+      "section": "IMPORTANT DOCUMENTS LOCATION",
+      "type": "table",
+      "description": "An index of where originals and current copies are kept, not the documents themselves.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Document Type", "name": "document_type", "type": "select", "options": ["Birth / Marriage Certificate", "Hong Kong Identity Card", "Passport / Travel Document", "Medical / Hospital Records", "Will / Probate Grant / EPA", "Property Title / Mortgage", "Bank / Investment Statements", "MPF / ORSO Records", "Insurance Policies", "IRD Tax Returns / Notices", "Driving Licence / Vehicle Papers", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Location", "name": "location", "type": "text", "placeholder": "Physical or secure digital location", "validation": { "required": true, "errorMessage": "Location is required" } },
+        { "label": "Who Can Help Locate It", "name": "contact", "type": "text", "placeholder": "Trusted person, solicitor, or institution" },
+        { "label": "Last Checked", "name": "last_checked", "type": "date" }
+      ]
+    },
+    {
+      "section": "Digital Accounts and Devices",
+      "type": "table",
+      "description": "Inventory important services and devices. Never enter passwords, PINs, iAM Smart or eTAX credentials, one-time codes, security answers, or recovery keys.",
+      "maxRows": 50,
+      "columns": [
+        { "label": "Account / Device Type", "name": "account_type", "type": "select", "options": ["Primary Email", "iAM Smart / eTAX (reference only)", "Phone Provider", "Password Manager", "Cloud Storage", "Banking / MPF", "Social Media", "Photo / File Archive", "Domain / Website", "Subscription", "Computer / Phone / Tablet", "Crypto Wallet", "Other"], "validation": { "required": true, "errorMessage": "Select an account or device type" } },
+        { "label": "Provider / Description", "name": "provider", "type": "text", "placeholder": "Service or device name", "validation": { "required": true, "errorMessage": "Provider or description is required" } },
+        { "label": "Account Identifier (not password)", "name": "account_identifier", "type": "text", "placeholder": "Username or email, if safe to record" },
+        { "label": "Recovery / Multi-factor Method", "name": "recovery_method", "type": "text", "placeholder": "Method only; no codes or secret values" },
+        { "label": "Legacy Contact / Trusted Person", "name": "legacy_contact", "type": "text", "placeholder": "Person and contact details" },
+        { "label": "Secure Instructions Location", "name": "instructions_location", "type": "text", "placeholder": "Password-manager emergency access or secure location" },
+        { "label": "Preference", "name": "account_preference", "type": "select", "options": ["Preserve", "Close", "Memorialise / Transfer", "Review with family", "Not specified"] }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Other practical notes for trusted family members or representatives. Do not put account secrets here.",
+      "fields": [
+        { "label": "Additional Notes", "name": "notes", "type": "textarea", "placeholder": "Non-secret notes or pointers to secure records", "validation": { "maxLength": 5000, "errorMessage": "Notes cannot exceed 5000 characters" } }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "For an immediate emergency in Hong Kong, call 999.",
+      "Review emergency contacts, health details, legal document locations, insurance, bank accounts, MPF, pensions, and essential liabilities.",
+      "If someone has died, identify the executor or authorised representative and use the Hong Kong Judiciary Probate Registry and provider instructions.",
+      "Hong Kong probate grants cover Hong Kong estate assets; overseas property may need separate administration under the relevant jurisdiction.",
+      "Use official bank, MPF, IRD, and service-provider bereavement processes. Do not access accounts or use credentials without authority.",
+      "Keep the export encrypted. Never store passwords, iAM Smart or eTAX credentials, authentication codes, or recovery keys in it."
+    ],
+    "emergencyServices": {
+      "medical": "999",
+      "police": "999",
+      "fire": "999",
+      "urgent_health_advice": "Contact the Hospital Authority or Department of Health using current official service directories"
+    },
+    "sectionGuidance": {
+      "Personal Details": { "description": "Identity and contact details for Hong Kong government, healthcare, financial, and legal processes. HKID details are sensitive and should only be supplied when needed.", "usefulFor": ["Immigration Department", "Banks and MPF trustees", "Hospital Authority and healthcare providers", "Legal representatives"], "firstActions": ["Verify identity particulars against official records", "Protect HKID details and share only where required", "Keep residential address and contact details current"], "criticalFields": ["Full Legal Name", "Date of Birth", "Hong Kong Identity Card Number (if applicable)", "District"] },
+      "Emergency contact details": { "description": "Trusted people and their possible roles; listing someone does not grant legal or financial authority.", "usefulFor": ["Family", "Emergency responders", "Healthcare providers", "Executors and attorneys"], "firstActions": ["Confirm each person knows they are listed", "Verify phone and email details", "Locate separate legal appointments when authority is needed"], "criticalFields": ["Relationship", "Name", "Phone Number", "Role / Instructions"] },
+      "Health and Care Information": { "description": "Optional health and care information. Public and private services differ, and access or fees depend on eligibility and service rules.", "usefulFor": ["Ambulance and hospital staff", "Hospital Authority and clinic staff", "Family and appointed representatives"], "firstActions": ["Call 999 for an emergency", "Tell clinicians about known allergies and medicines", "Locate current care preferences and relevant medical records"], "criticalFields": ["Usual Doctor / Clinic", "Hospital Authority / Health Record Reference (if known)", "Allergies and Reactions", "Current Medicines"] },
+      "Insurance details": { "description": "Private, employer, property, and other insurance policies. Public Hospital Authority services are separate from private insurance.", "usefulFor": ["Insurers and claims teams", "Executors and beneficiaries", "Household members"], "firstActions": ["Find current policy schedules and claims contacts", "Check cover and beneficiary details with providers", "Ask about evidence and claim requirements"], "criticalFields": ["Cover Type", "Insurer / Provider", "Policy / Member Reference", "Claims Contact"] },
+      "Bank accounts": { "description": "Hong Kong bank and stored-value accounts with institution-provided account details and optional Faster Payment System identifier.", "usefulFor": ["Banks and financial institutions", "Authorised representatives", "Household bill management"], "firstActions": ["Confirm account holders and authority with the bank", "Use the bank's bereavement process", "Keep account and FPS details secure"], "criticalFields": ["Bank / Institution", "Account Number", "FPS Identifier (if applicable)", "Account Owner / Authority Notes"] },
+      "Savings and Investments": { "description": "Deposits, securities, funds, property interests, and other investments.", "usefulFor": ["Executors or administrators", "Banks and brokers", "IRD and financial advisers"], "firstActions": ["Confirm ownership and current valuations with providers", "Check tax and beneficiary treatment before transfers or sales", "Keep statements and valuation dates"], "criticalFields": ["Asset Type", "Provider / Institution", "Account / Holding Reference", "Approximate Value (HKD)"] },
+      "MPF, Pensions and Benefits": { "description": "MPF, ORSO, public-service pensions, and government benefits. Death claims and eligibility depend on the scheme and current legal requirements.", "usefulFor": ["MPF trustees", "Employers and ORSO administrators", "Social Welfare Department", "Executors and dependants"], "firstActions": ["Contact each MPF trustee and employer scheme administrator", "Ask what representative documents and claim forms are required", "Confirm benefit and withdrawal details directly with the provider"], "criticalFields": ["Plan / Benefit Type", "Scheme / Administrator", "Member / Claim Reference", "Beneficiary / Estate Representative Notes"] },
+      "Property and Vehicles": { "description": "Property, tenancies, vehicles, titles, loans, and related insurance.", "usefulFor": ["Executors and administrators", "Banks and lenders", "Land Registry and insurers"], "firstActions": ["Locate title, tenancy, and loan records", "Confirm ownership and transfer steps with the relevant authority or solicitor", "Check insurance and essential services before changing arrangements"], "criticalFields": ["Address / Description", "Owner(s) / Ownership", "Title / Registration Reference", "Mortgage / Lien / Lender"] },
+      "Loans and Liabilities": { "description": "Debts and recurring obligations, including joint borrowers and guarantees.", "usefulFor": ["Executors and administrators", "Banks, IRD, and creditors", "Household financial planning"], "firstActions": ["Contact creditors through official channels", "Confirm who is liable before paying or cancelling", "Ask whether insurance or other cover affects the balance"], "criticalFields": ["Liability Type", "Lender / Creditor", "Borrower(s) / Guarantor", "Approximate Balance (HKD)"] },
+      "Employment and Income": { "description": "Employment, business, MPF, retirement, and government payment sources.", "usefulFor": ["Employers and payroll", "MPF trustees", "Social Welfare Department", "Tax advisers"], "firstActions": ["Ask employers about final salary and group cover", "Check payment continuation with the relevant agency", "Keep tax and employment records"], "criticalFields": ["Income / Benefit Type", "Employer / Paying Organisation", "HR / Payroll / Claim Contact"] },
+      "Tax and Government Records": { "description": "References for IRD, MPFA, and government services; never record online account credentials.", "usefulFor": ["Inland Revenue Department", "MPFA", "Housing Department", "Tax advisers"], "firstActions": ["Use official channels and confirm current filing duties", "Keep tax records securely", "Never share eTAX, iAM Smart, or banking authentication secrets"], "criticalFields": ["Record Type", "Authority / Provider", "Reference Number", "Returns / Correspondence Location"] },
+      "Legal and Estate Planning": { "description": "Wills, probate grants, letters of administration, and incapacity or healthcare documents.", "usefulFor": ["Executors and administrators", "Attorneys and representatives", "Solicitors and the Probate Registry"], "firstActions": ["Locate the will and any original or granted court documents", "Check whether a Probate Registry grant is required before dealing with assets", "Seek Hong Kong legal advice for cross-border assets, domicile questions, or disputes"], "criticalFields": ["Document / Arrangement", "Executor / Attorney / Representative", "Solicitor / Adviser", "Original / Registered Copy Location"] },
+      "IMPORTANT DOCUMENTS LOCATION": { "description": "An index to identity, financial, health, property, and legal documents.", "usefulFor": ["Family", "Executors and administrators", "Healthcare providers and advisers"], "firstActions": ["Secure originals and verify current versions", "Tell the authorised representative where documents are stored", "Share locations only with trusted people"], "criticalFields": ["Document Type", "Location", "Who Can Help Locate It"] },
+      "Digital Accounts and Devices": { "description": "A safe inventory of online accounts, devices, and recovery pointers, not passwords.", "usefulFor": ["Digital legacy contacts", "Executors", "Service providers"], "firstActions": ["Use each provider's official bereavement or legacy process", "Use password-manager emergency access instead of putting secrets in this export", "Secure devices and do not bypass account controls"], "criticalFields": ["Provider / Description", "Account Identifier (not password)", "Recovery / Multi-factor Method", "Legacy Contact / Trusted Person"] },
+      "Additional details": { "description": "Other practical notes that do not fit another section. Do not put credentials or access codes here.", "usefulFor": ["Trusted family", "Executors", "Professional advisers"], "firstActions": ["Keep notes current and non-secret", "Point to formal documents or a secure credential manager where needed"], "criticalFields": ["Additional Notes"] }
+    },
+    "legalNotes": [
+      "This guide is general information, not legal, tax, insurance, or financial advice.",
+      "Hong Kong has its own identity, healthcare, MPF, tax, probate, and property systems; do not apply another country's rules to Hong Kong assets.",
+      "HKID particulars are sensitive personal data. Record only what is necessary and share it only with organisations that need it.",
+      "Hong Kong public healthcare and private healthcare are distinct; eligibility and charges depend on status and service rules.",
+      "The Hong Kong Probate Registry explains that probate, letters of administration, or letters of administration with will annexed may be required. Hong Kong grants cover Hong Kong estate assets; overseas assets may require separate administration.",
+      "MPF death benefit claims are administered under the MPF system. Confirm who may claim and which documents are needed with the trustee and MPFA.",
+      "Hong Kong salaries tax, profits tax, property tax, and estate-duty questions depend on circumstances and relevant dates. Confirm current IRD guidance rather than relying on fixed thresholds in this organizer.",
+      "Official: Hong Kong Identity Cards: https://www.immd.gov.hk/eng/services/hkid/general_info.html",
+      "Official: Hong Kong health system overview: https://www.gov.hk/en/residents/health/hosp/overview.htm",
+      "Official: Hong Kong Judiciary Probate Registry: https://www.judiciary.hk/en/court_services_facilities/probate.html",
+      "Official: MPF Authority: https://www.mpfa.org.hk/en/",
+      "Official: GovHK salaries tax information: https://www.gov.hk/en/residents/taxes/taxfiling/taxrates/salariesrates.htm",
+      "Emergency: Hong Kong Police: https://www.police.gov.hk/",
+      "Identity and registration: Immigration Department: https://www.immd.gov.hk/eng/services/birth-death-marriage-registration.html"
+    ],
+    "generalGuidance": {
+      "fileStructure": ["The export ZIP may contain a spreadsheet, PDFs, and this access guide.", "Treat every file as sensitive; it may include identity, health, financial, and legal references."],
+      "dataAccess": ["Extract to a private, encrypted location and keep an untouched backup.", "Share only with trusted authorised people; a family relationship alone does not grant legal access.", "Store credentials in a reputable password manager with an emergency-access feature, not in this export."],
+      "securityTips": ["Never put passwords, PINs, iAM Smart or eTAX credentials, authentication codes, or recovery keys in the export.", "Use encrypted storage and secure channels for sensitive documents.", "Review after major life events and at least annually; remove outdated copies securely."]
+    }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "A general checklist after a death in Hong Kong. Confirm authority, domicile, estate location, and current court and provider requirements before acting.",
+    "meta": { "title": "Family Recovery Roadmap - Hong Kong", "version": "1.0", "lastReviewed": "2026-10-17", "reviewedBy": "Government sources reviewed; case-specific legal and tax advice may be needed", "generatedOn": "2026-10-17" },
+    "intro": { "condolence": "We are sorry for your loss. This checklist is intended to make the first practical steps clearer.", "howToUse": "Register the death, identify the executor or administrator, notify relevant agencies and providers, and keep a record of each action." },
+    "startHere": ["Follow the official death-registration process and obtain the records requested by providers.", "Locate the will and identify the executor; confirm whether a Hong Kong grant is required.", "Notify banks, MPF trustees, insurers, employers, IRD, and other providers through their official bereavement processes.", "List Hong Kong and overseas assets separately; confirm jurisdiction, ownership, and authority before changing accounts or distributing property.", "Keep a log of contacts, forms, and documents supplied. Never use another person's iAM Smart, eTAX, or banking credentials."],
+    "legalFramework": ["Hong Kong Judiciary Probate Registry grants and estate administration.", "The Hong Kong Probate Registry's jurisdiction is limited to estate assets in Hong Kong; overseas assets follow the applicable local process.", "MPF scheme and trustee claim rules for a member's death.", "IRD salaries, profits, property, and any relevant estate-duty rules.", "Hong Kong identity, healthcare, and legal-document rules; seek advice for cross-border domicile or estate issues."],
+    "phases": [
+      { "phase": 1, "title": "Register and establish authority", "timeframe": "First days", "priority": "do-first", "focus": "Follow registration instructions, locate the will, and identify who may act.", "keyActions": [{ "step": 1, "action": "Follow the Immigration Department's death-registration instructions and obtain the documents needed by each institution.", "priority": "do-first", "why": "Registration and evidence requirements depend on circumstances and the receiving organisation.", "legalRef": "https://www.immd.gov.hk/eng/services/birth-death-marriage-registration.html" }, { "step": 2, "action": "Find the will and confirm the executor; get legal advice for intestacy, disputes, or overseas property.", "priority": "do-first", "why": "A grant may be needed before the estate representative can administer assets.", "legalRef": "https://www.judiciary.hk/en/court_services_facilities/probate.html" }], "mustHaveDocuments": ["Death registration and certificate details", "Will and codicils", "Executor or administrator details", "HKID record location", "Bank, MPF, insurance, property, and liability references"], "criticalMistakes": ["Assuming a relative can operate accounts without authority", "Assuming Hong Kong probate covers overseas assets", "Putting passwords or authentication codes in an export"] },
+      { "phase": 2, "title": "Notify and identify claims", "timeframe": "First weeks", "priority": "do-first", "focus": "Notify government agencies and providers and preserve an asset and liability inventory.", "keyActions": [{ "step": 1, "action": "Contact each MPF trustee and ask what estate representative documents and claim forms are required.", "priority": "do-first", "why": "MPF death claims follow MPF rules and trustee requirements.", "legalRef": "https://www.mpfa.org.hk/en/" }, { "step": 2, "action": "Contact banks, insurers, employers, IRD, lenders, property managers, and utilities separately.", "priority": "do-first", "why": "No single government notification completes all private account and benefit processes.", "legalRef": "https://www.gov.hk/en/residents/taxes/taxfiling/taxrates/salariesrates.htm" }], "mustHaveDocuments": ["Provider statements", "MPF and insurance records", "Employment and tax documents", "List of regular payments and liabilities"], "criticalMistakes": ["Automatically stopping essential payments", "Assuming an MPF benefit or asset follows a will without checking", "Paying liabilities without confirming authority"] },
+      { "phase": 3, "title": "Administer and finalise", "timeframe": "Following weeks and months", "priority": "do-soon", "focus": "Complete court, tax, property, and provider steps before final distribution.", "keyActions": [{ "step": 1, "action": "Confirm whether probate, letters of administration, or another grant is required for the Hong Kong estate.", "priority": "do-first", "why": "The required grant depends on the will, applicant, domicile, and estate assets.", "legalRef": "https://www.judiciary.hk/en/court_services_facilities/probate.html" }, { "step": 2, "action": "Check IRD filing or tax requirements and seek advice on cross-border assets or historical estate-duty questions.", "priority": "do-first", "why": "Tax and estate duties depend on dates, assets, and individual circumstances.", "legalRef": "https://www.ird.gov.hk/eng/" }], "mustHaveDocuments": ["Grant if required", "Hong Kong asset and liability inventory", "IRD correspondence", "MPF, title, and property records"], "criticalMistakes": ["Distributing assets before confirming authority", "Including overseas property in the wrong jurisdiction's filing", "Assuming no tax or reporting steps apply"] },
+      { "phase": 4, "title": "Review family arrangements", "timeframe": "When immediate tasks are complete", "priority": "when-ready", "focus": "Review the surviving household's will, incapacity documents, MPF, insurance, and secure recordkeeping.", "keyActions": [{ "step": 1, "action": "Review wills, enduring powers, advance directives, MPF information, insurance, and emergency contacts with appropriate professionals.", "priority": "when-ready", "why": "Major life changes can make appointments and nominations outdated.", "legalRef": "Hong Kong law and current MPF scheme requirements" }, { "step": 2, "action": "Keep an asset and digital-account index; store credentials only in a suitable password manager.", "priority": "when-ready", "why": "A secure index helps authorised people locate records without exposing secrets.", "legalRef": "Provider terms and security guidance" }], "mustHaveDocuments": ["Updated will and incapacity-planning information", "Current MPF and insurance records", "Secure family record index"], "criticalMistakes": ["Leaving outdated representatives or beneficiaries", "Storing credentials in a spreadsheet or PDF", "Failing to retain provider confirmations"] }
+    ],
+    "quickReference": {
+      "emergency": { "number": "999", "note": "Police, fire, and ambulance emergencies" },
+      "probate": { "note": "Hong Kong probate grants cover Hong Kong estate assets; overseas property may require separate administration.", "url": "https://www.judiciary.hk/en/court_services_facilities/probate.html" },
+      "health": { "note": "Public and private healthcare services have different eligibility and charging rules.", "url": "https://www.gov.hk/en/residents/health/hosp/overview.htm" }
+    },
+    "glossary": [{ "term": "Probate", "definition": "A court grant authorising an executor named in a will to administer the deceased's Hong Kong estate when a grant is required." }, { "term": "Letters of Administration", "definition": "A court grant authorising an administrator to deal with an estate, including where there is no will or no acting executor." }, { "term": "MPF death benefit", "definition": "An MPF scheme benefit claimed under MPF rules and trustee procedures; confirm claimant authority and supporting documents with the trustee." }]
+  }
+}

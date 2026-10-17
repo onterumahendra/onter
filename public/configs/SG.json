@@ -1,0 +1,304 @@
+{
+  "countryCode": "SG",
+  "countryName": "Singapore",
+  "currency": "SGD",
+  "currencySymbol": "$",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Identity and contact details for family, healthcare, financial, and government administration. NRIC/FIN is sensitive and should be recorded only when needed.",
+      "fields": [
+        { "label": "Full Legal Name", "name": "full_name", "type": "text", "placeholder": "Name as shown on official records", "validation": { "required": true, "minLength": 2, "errorMessage": "Full legal name is required" } },
+        { "label": "Date of Birth", "name": "date_of_birth", "type": "date", "validation": { "required": true, "errorMessage": "Date of birth is required" } },
+        { "label": "NRIC / FIN (if applicable)", "name": "nric_fin", "type": "text", "placeholder": "Store securely; format depends on document type" },
+        { "label": "Identity / Pass Type", "name": "identity_type", "type": "select", "options": ["Singapore Citizen", "Permanent Resident", "Employment Pass / S Pass", "Work Permit", "Student / Dependant Pass", "Other / Not applicable"] },
+        { "label": "Passport Number (if applicable)", "name": "passport_no", "type": "text", "placeholder": "Passport number" },
+        { "label": "Driving Licence Number (if applicable)", "name": "drivers_license_no", "type": "text", "placeholder": "Driving licence number" },
+        { "label": "Primary Phone Number", "name": "phone", "type": "text", "placeholder": "+65 or international number", "validation": { "required": true, "errorMessage": "Primary phone number is required" } },
+        { "label": "Email Address", "name": "email", "type": "email", "placeholder": "name@example.com", "validation": { "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", "errorMessage": "Enter a valid email address or leave blank" } },
+        { "label": "Residential Address", "name": "residential_address", "type": "textarea", "placeholder": "Block / house, street, unit, Singapore postal code" },
+        { "label": "Postal Code", "name": "postal_code", "type": "text", "placeholder": "6-digit Singapore postal code", "validation": { "pattern": "^[0-9]{6}$", "errorMessage": "Postal code should contain 6 digits or be left blank" } }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "Trusted people to contact. Being listed does not itself grant legal authority to make decisions or access accounts.",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        { "label": "Relationship", "name": "relationship", "type": "text", "placeholder": "Partner, family member, friend, or other", "validation": { "required": true, "errorMessage": "Relationship is required" } },
+        { "label": "Name", "name": "name", "type": "text", "placeholder": "Full name", "validation": { "required": true, "minLength": 2, "errorMessage": "Name is required" } },
+        { "label": "Phone Number", "name": "phone", "type": "text", "placeholder": "+65 or international number", "validation": { "required": true, "errorMessage": "Phone number is required" } },
+        { "label": "Email / Address", "name": "contact_details", "type": "text", "placeholder": "Optional contact details" },
+        { "label": "Role / Instructions", "name": "role", "type": "text", "placeholder": "Emergency contact, donee, nominee, or other" }
+      ]
+    },
+    {
+      "section": "Health and Care Information",
+      "type": "simple",
+      "description": "Optional health and care information. Public schemes and healthcare subsidies have eligibility and usage rules; MediSave is a medical savings scheme, not private insurance.",
+      "fields": [
+        { "label": "Usual Clinic / Healthcare Provider", "name": "medical_practice", "type": "text", "placeholder": "Clinic name and contact details" },
+        { "label": "Known Medical Conditions", "name": "medical_conditions", "type": "textarea", "placeholder": "Relevant diagnoses or care needs" },
+        { "label": "Allergies and Reactions", "name": "allergies", "type": "textarea", "placeholder": "Known allergies, reactions, or none known" },
+        { "label": "Current Medicines", "name": "medications", "type": "textarea", "placeholder": "Medicine, dose, and where the current list is kept" },
+        { "label": "Blood Group (if confirmed)", "name": "blood_group", "type": "select", "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"] },
+        { "label": "Care / Accessibility Needs", "name": "care_needs", "type": "textarea", "placeholder": "Relevant communication, accessibility, or care needs" },
+        { "label": "Advance Care Plan Location", "name": "advance_care_location", "type": "text", "placeholder": "Secure location of current formal documents" }
+      ]
+    },
+    {
+      "section": "Insurance details",
+      "type": "table",
+      "description": "Private, employer, and other insurance policies. MediShield Life and other national schemes are not private policies; record applicable cover separately.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Policy Holder", "name": "insured_name", "type": "text", "placeholder": "Name on policy", "validation": { "required": true, "errorMessage": "Policy holder is required" } },
+        { "label": "Cover Type", "name": "insurance_type", "type": "select", "options": ["Life", "Integrated Shield Plan", "Critical Illness", "Personal Accident", "Disability / Income Protection", "CareShield Life / Supplement", "Home", "Motor", "Travel", "Business", "Other"], "validation": { "required": true, "errorMessage": "Select a cover type" } },
+        { "label": "Insurer / Provider", "name": "provider", "type": "text", "placeholder": "Insurer, employer, or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Policy / Member Reference", "name": "policy_no", "type": "text", "placeholder": "Policy or member reference", "validation": { "required": true, "errorMessage": "Reference is required" } },
+        { "label": "Insured People / Beneficiary", "name": "beneficiary", "type": "text", "placeholder": "As recorded with provider" },
+        { "label": "Claims Contact", "name": "claims_contact", "type": "text", "placeholder": "Phone, email, or official website" },
+        { "label": "Premium and Frequency", "name": "premium_frequency", "type": "text", "placeholder": "Optional amount and payment frequency" },
+        { "label": "Renewal / Review Date", "name": "renewal_date", "type": "date" },
+        { "label": "Policy Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Bank accounts",
+      "type": "table",
+      "description": "Singapore bank and payment accounts. Record account details as provided by each institution; do not record login credentials or authentication codes.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Account Holder(s)", "name": "holder_name", "type": "text", "placeholder": "Name(s) on account", "validation": { "required": true, "errorMessage": "Account holder is required" } },
+        { "label": "Bank / Financial Institution", "name": "bank_name", "type": "text", "placeholder": "Institution name", "validation": { "required": true, "errorMessage": "Institution name is required" } },
+        { "label": "Account Type", "name": "account_type", "type": "select", "options": ["Current / Savings", "Fixed Deposit", "Joint", "Business", "SRS", "Other"] },
+        { "label": "Account Number", "name": "account_no", "type": "text", "placeholder": "As shown by your bank" },
+        { "label": "Bank / Branch Code (if applicable)", "name": "bank_branch_code", "type": "text", "placeholder": "As supplied by your bank" },
+        { "label": "PayNow Identifier (if applicable)", "name": "paynow_identifier", "type": "text", "placeholder": "Mobile, NRIC/FIN, UEN, or other linked ID; optional" },
+        { "label": "Account Owner / Authority Notes", "name": "ownership_notes", "type": "text", "placeholder": "Joint holder or authorised signatory details" },
+        { "label": "Bank Contact", "name": "provider_contact", "type": "text", "placeholder": "Bereavement or customer-service contact" },
+        { "label": "Statement Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Savings and Investments",
+      "type": "table",
+      "description": "Savings and investment assets. Record optional estimates with an as-of date; confirm ownership and tax treatment with the provider or a qualified adviser.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Fixed Deposit", "Singapore Savings Bonds / Singapore Government Securities", "Shares", "Exchange-Traded Fund", "Unit Trust", "Investment Account", "SRS Investment", "Property Interest", "Business Interest", "Cryptoasset", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Provider / Institution", "name": "provider", "type": "text", "placeholder": "Bank, broker, registry, or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Account / Holding Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Owner(s)", "name": "owners", "type": "text", "placeholder": "Sole, joint, trust, or company ownership" },
+        { "label": "Beneficiary / Nomination", "name": "beneficiary", "type": "text", "placeholder": "Where current designation is recorded" },
+        { "label": "Approximate Value (SGD)", "name": "value", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Value As Of", "name": "value_date", "type": "date" },
+        { "label": "Contact / Documents Location", "name": "contact_location", "type": "text", "placeholder": "Provider contact or secure record location" }
+      ]
+    },
+    {
+      "section": "CPF, Pensions and Government Benefits",
+      "type": "table",
+      "description": "CPF accounts, CPF LIFE, SRS, employer schemes, and eligible public benefits. CPF nomination and distribution rules differ from a will; verify current status with CPF Board.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Plan / Benefit Type", "name": "plan_type", "type": "select", "options": ["CPF Ordinary Account", "CPF Special Account", "CPF MediSave Account", "CPF Retirement Account", "CPF LIFE", "Supplementary Retirement Scheme (SRS)", "Employer Pension / Annuity", "Public Service Pension", "Workfare / Other Government Benefit", "Other"], "validation": { "required": true, "errorMessage": "Select a plan or benefit type" } },
+        { "label": "Administrator / Provider", "name": "provider", "type": "text", "placeholder": "CPF Board, employer, trustee, or provider", "validation": { "required": true, "errorMessage": "Administrator is required" } },
+        { "label": "Employer (if applicable)", "name": "employer", "type": "text", "placeholder": "Current or former employer" },
+        { "label": "Member / Claim Reference", "name": "member_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "CPF Nomination / Beneficiary Notes", "name": "beneficiary", "type": "text", "placeholder": "Whether a nomination exists and where confirmation is stored" },
+        { "label": "Scheme Contact", "name": "contact", "type": "text", "placeholder": "Official website or contact details" },
+        { "label": "Statement / Decision Letter Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Property and Vehicles",
+      "type": "table",
+      "description": "HDB and private property, tenancies, vehicles, titles, loans, and associated cover. Ownership and transfer rules depend on the asset and circumstances.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["HDB Flat", "Private Residential Property", "Commercial Property", "Rental / Tenancy", "Motor Vehicle", "Boat", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Address / Description", "name": "address_description", "type": "textarea", "placeholder": "Full address and postal code or asset description", "validation": { "required": true, "errorMessage": "Address or description is required" } },
+        { "label": "Owner(s) / Ownership", "name": "owners", "type": "text", "placeholder": "Names and ownership as recorded" },
+        { "label": "Title / Registration Reference", "name": "title_reference", "type": "text", "placeholder": "Title, vehicle registration, or other reference" },
+        { "label": "Mortgage / Lien / Lender", "name": "mortgage_lien", "type": "text", "placeholder": "Lender and reference; no login details" },
+        { "label": "Insurer / Policy Reference", "name": "insurance", "type": "text", "placeholder": "Provider and policy reference" },
+        { "label": "Approximate Value and Date", "name": "value_date", "type": "text", "placeholder": "Optional estimate and valuation date" },
+        { "label": "Title / Tenancy / Registration Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Loans and Liabilities",
+      "type": "table",
+      "description": "Mortgages, credit, tax, and other liabilities. Confirm legal responsibility before making payments or changing accounts.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Liability Type", "name": "liability_type", "type": "select", "options": ["Mortgage", "Credit Card", "Personal Loan", "Overdraft", "Property Tax / Tax", "Business Debt", "Vehicle Finance", "Other"], "validation": { "required": true, "errorMessage": "Select a liability type" } },
+        { "label": "Lender / Creditor", "name": "creditor", "type": "text", "placeholder": "Institution or organisation", "validation": { "required": true, "errorMessage": "Creditor is required" } },
+        { "label": "Account Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Borrower(s) / Guarantor", "name": "borrowers", "type": "text", "placeholder": "Names and shared responsibility" },
+        { "label": "Approximate Balance (SGD)", "name": "balance", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Balance As Of", "name": "balance_date", "type": "date" },
+        { "label": "Payment / Review Details", "name": "payment_details", "type": "text", "placeholder": "Optional amount and frequency" },
+        { "label": "Creditor Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact or secure record location" }
+      ]
+    },
+    {
+      "section": "Employment and Income",
+      "type": "table",
+      "description": "Employment, business, regular income, and CPF or government payment sources.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Income / Benefit Type", "name": "income_type", "type": "select", "options": ["Employment", "Self-Employment", "Business", "CPF LIFE / Retirement Payout", "Employer Pension", "Workfare / Government Benefit", "Rental Income", "Other"], "validation": { "required": true, "errorMessage": "Select an income or benefit type" } },
+        { "label": "Employer / Paying Organisation", "name": "organisation", "type": "text", "placeholder": "Employer or programme" },
+        { "label": "HR / Payroll / Claim Contact", "name": "contact_reference", "type": "text", "placeholder": "Contact and reference details" },
+        { "label": "Approximate Amount and Frequency", "name": "amount_frequency", "type": "text", "placeholder": "Optional estimate" },
+        { "label": "Survivor / Dependant Benefit Notes", "name": "survivor_benefit", "type": "text", "placeholder": "Where programme or plan terms are recorded" },
+        { "label": "Supporting Records Location", "name": "document_location", "type": "text", "placeholder": "Payslips, tax forms, or award letters" }
+      ]
+    },
+    {
+      "section": "Tax and Government Records",
+      "type": "table",
+      "description": "Reference details for IRAS, CPF Board, MOM, HDB, and other agencies. Never record Singpass or online banking credentials.",
+      "maxRows": 25,
+      "columns": [
+        { "label": "Record Type", "name": "record_type", "type": "select", "options": ["IRAS Individual Income Tax", "Corporate / Business Tax", "GST", "Property Tax", "Stamp Duty", "CPF", "MOM / Work Pass", "HDB", "Other"], "validation": { "required": true, "errorMessage": "Select a record type" } },
+        { "label": "Authority / Provider", "name": "authority", "type": "text", "placeholder": "IRAS, CPF Board, MOM, HDB, or other agency" },
+        { "label": "Reference Number", "name": "reference", "type": "text", "placeholder": "Optional account or reference" },
+        { "label": "Tax Year / Property", "name": "period_location", "type": "text", "placeholder": "If relevant" },
+        { "label": "Tax Adviser / Contact", "name": "adviser", "type": "text", "placeholder": "Name and contact details" },
+        { "label": "Returns / Correspondence Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Legal and Estate Planning",
+      "type": "table",
+      "description": "Index wills, Lasting Power of Attorney, Advance Care Planning records, and CPF nominations. These are separate arrangements with different legal effects.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Document / Arrangement", "name": "document_type", "type": "select", "options": ["Will", "Codicil", "Lasting Power of Attorney (LPA)", "Advance Care Plan (ACP)", "Advance Medical Directive (AMD)", "CPF Nomination", "Trust", "Deputyship / Court Order", "Funeral Wishes", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Governing Law / Notes", "name": "jurisdiction", "type": "text", "placeholder": "Singapore or relevant cross-border law" },
+        { "label": "Made / Last Reviewed", "name": "review_date", "type": "date" },
+        { "label": "Executor / Donee / Representative", "name": "appointed_person", "type": "text", "placeholder": "Name and contact, if appropriate" },
+        { "label": "Lawyer / Certificate Issuer / Adviser", "name": "professional_contact", "type": "text", "placeholder": "Firm and contact details" },
+        { "label": "Original / Registered Copy Location", "name": "document_location", "type": "text", "placeholder": "Secure location and OPG registration details if applicable" },
+        { "label": "Instructions / Notes", "name": "instructions", "type": "textarea", "placeholder": "Point to formal instructions; do not duplicate sensitive content" }
+      ]
+    },
+    {
+      "section": "IMPORTANT DOCUMENTS LOCATION",
+      "type": "table",
+      "description": "An index of where originals and current copies are kept, not the documents themselves.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Document Type", "name": "document_type", "type": "select", "options": ["Birth / Citizenship Certificate", "NRIC / FIN / Passport", "CPF Statement / Nomination", "MediSave / Health Records", "Driving Licence / Vehicle Papers", "Will / LPA / ACP", "Property Title / HDB Records", "Bank / Investment Statements", "Insurance Policies", "Tax Returns / IRAS Notices", "Employment / Work Pass Records", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Location", "name": "location", "type": "text", "placeholder": "Physical or secure digital location", "validation": { "required": true, "errorMessage": "Location is required" } },
+        { "label": "Who Can Help Locate It", "name": "contact", "type": "text", "placeholder": "Trusted person, lawyer, or institution" },
+        { "label": "Last Checked", "name": "last_checked", "type": "date" }
+      ]
+    },
+    {
+      "section": "Digital Accounts and Devices",
+      "type": "table",
+      "description": "Inventory important services and devices. Never enter passwords, PINs, Singpass credentials, one-time codes, security answers, or recovery keys.",
+      "maxRows": 50,
+      "columns": [
+        { "label": "Account / Device Type", "name": "account_type", "type": "select", "options": ["Primary Email", "Singpass (reference only)", "Phone Provider", "Password Manager", "Cloud Storage", "Banking / CPF / SRS", "Social Media", "Photo / File Archive", "Domain / Website", "Subscription", "Computer / Phone / Tablet", "Crypto Wallet", "Other"], "validation": { "required": true, "errorMessage": "Select an account or device type" } },
+        { "label": "Provider / Description", "name": "provider", "type": "text", "placeholder": "Service or device name", "validation": { "required": true, "errorMessage": "Provider or description is required" } },
+        { "label": "Account Identifier (not password)", "name": "account_identifier", "type": "text", "placeholder": "Username or email, if safe to record" },
+        { "label": "Recovery / Multi-factor Method", "name": "recovery_method", "type": "text", "placeholder": "Method only; no codes or secret values" },
+        { "label": "Legacy Contact / Trusted Person", "name": "legacy_contact", "type": "text", "placeholder": "Person and contact details" },
+        { "label": "Secure Instructions Location", "name": "instructions_location", "type": "text", "placeholder": "Password-manager emergency access or secure location" },
+        { "label": "Preference", "name": "account_preference", "type": "select", "options": ["Preserve", "Close", "Memorialise / Transfer", "Review with family", "Not specified"] }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Other practical notes for trusted family members or representatives. Do not put account secrets here.",
+      "fields": [
+        { "label": "Additional Notes", "name": "notes", "type": "textarea", "placeholder": "Non-secret notes or pointers to secure records", "validation": { "maxLength": 5000, "errorMessage": "Notes cannot exceed 5000 characters" } }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "For an immediate police emergency, call 999. For an ambulance or fire emergency, call 995.",
+      "For urgent but non-emergency medical needs, contact a healthcare provider or use the official MOH and HealthHub service directories.",
+      "Review emergency contacts, health information, legal document locations, insurance, bank accounts, CPF, SRS, and essential liabilities.",
+      "If someone has died, identify the executor or authorised representative and contact CPF Board, banks, insurers, employers, IRAS, and service providers using their official processes.",
+      "CPF nominations and wills are not interchangeable. Confirm CPF nomination status with CPF Board and obtain legal advice for estate questions.",
+      "Keep the export encrypted. Never store passwords, Singpass credentials, authentication codes, or recovery keys in it."
+    ],
+    "emergencyServices": {
+      "medical": "995 for emergency ambulance",
+      "police": "999 for police emergencies",
+      "fire": "995",
+      "non_emergency_ambulance": "1777; verify current service scope and charges with SCDF",
+      "crisis_support": "Samaritans of Singapore (SOS): 1767; verify current availability at sos.org.sg"
+    },
+    "sectionGuidance": {
+      "Personal Details": { "description": "Identity and contact details for public, health, financial, and legal processes. NRIC or FIN is highly sensitive and is not required for every interaction.", "usefulFor": ["ICA and government services", "CPF Board and banks", "Healthcare providers", "Legal representatives"], "firstActions": ["Check identity particulars against official records", "Share NRIC/FIN only when legally required or authorised", "Keep address and contact information current"], "criticalFields": ["Full Legal Name", "Date of Birth", "NRIC / FIN (if applicable)", "Primary Phone Number"] },
+      "Emergency contact details": { "description": "Trusted people and their possible roles; listing someone does not give them legal or financial authority.", "usefulFor": ["Family", "Emergency responders", "Healthcare providers", "Executors and donees"], "firstActions": ["Confirm each person knows they are listed", "Verify phone and email details", "Locate formal LPA, will, or care-plan documents when authority is needed"], "criticalFields": ["Relationship", "Name", "Phone Number", "Role / Instructions"] },
+      "Health and Care Information": { "description": "Optional health and care information. Public schemes, MediSave usage, and subsidies have eligibility and programme rules.", "usefulFor": ["Ambulance and hospital staff", "Healthcare providers", "Family and appointed donees"], "firstActions": ["Call 995 for an emergency ambulance", "Tell clinicians about known allergies and medicines", "Locate the current Advance Care Plan and appointed spokesperson if applicable"], "criticalFields": ["Usual Clinic / Healthcare Provider", "Known Medical Conditions", "Allergies and Reactions", "Current Medicines"] },
+      "Insurance details": { "description": "Private, employer, and other insurance policies. National schemes such as MediShield Life and CareShield Life have separate rules and should not be treated as private policies.", "usefulFor": ["Insurers and claims teams", "CPF Board", "Executors and beneficiaries"], "firstActions": ["Find current policy schedules and claims contacts", "Check cover and beneficiary details with each provider", "Ask about claim evidence and limits"], "criticalFields": ["Cover Type", "Insurer / Provider", "Policy / Member Reference", "Claims Contact"] },
+      "Bank accounts": { "description": "Singapore bank and payment accounts with provider-issued account details.", "usefulFor": ["Banks and financial institutions", "Authorised representatives", "Household bill management"], "firstActions": ["Confirm account holders and authority with the bank", "Use the bank's bereavement process", "Keep account and PayNow references secure"], "criticalFields": ["Bank / Financial Institution", "Account Number", "PayNow Identifier (if applicable)", "Account Owner / Authority Notes"] },
+      "Savings and Investments": { "description": "Deposits, securities, funds, property, and other investments.", "usefulFor": ["Executors or administrators", "Banks, brokers, and registries", "Tax and financial advisers"], "firstActions": ["Confirm ownership and valuations with providers", "Check tax and beneficiary treatment before transfers or sales", "Keep statements and valuation dates"], "criticalFields": ["Asset Type", "Provider / Institution", "Account / Holding Reference", "Approximate Value (SGD)"] },
+      "CPF, Pensions and Government Benefits": { "description": "CPF accounts, CPF LIFE, SRS, employer schemes, and public benefits. CPF nominations are distinct from a will; confirm current distribution details with CPF Board.", "usefulFor": ["CPF Board", "Employers and pension administrators", "SRS operators", "Nominees and dependants"], "firstActions": ["Check CPF nomination status directly with CPF Board", "Contact each SRS operator and employer scheme administrator", "Confirm current benefit eligibility and tax consequences"], "criticalFields": ["Plan / Benefit Type", "Administrator / Provider", "Member / Claim Reference", "CPF Nomination / Beneficiary Notes"] },
+      "Property and Vehicles": { "description": "HDB and private property, tenancies, vehicles, titles, loans, and related insurance.", "usefulFor": ["Executors and administrators", "HDB and lenders", "Insurers and vehicle authorities"], "firstActions": ["Locate title, HDB, and loan documents", "Confirm ownership and transfer requirements with the relevant authority", "Check insurance and essential services before changing arrangements"], "criticalFields": ["Asset Type", "Address / Description", "Owner(s) / Ownership", "Mortgage / Lien / Lender"] },
+      "Loans and Liabilities": { "description": "Debts and recurring obligations, including joint borrowers and guarantees.", "usefulFor": ["Executors and administrators", "Banks and creditors", "Household financial planning"], "firstActions": ["Contact creditors through official channels", "Confirm who is liable before paying or cancelling", "Ask whether cover or guarantees affect the balance"], "criticalFields": ["Liability Type", "Lender / Creditor", "Borrower(s) / Guarantor", "Approximate Balance (SGD)"] },
+      "Employment and Income": { "description": "Employment, business, CPF, retirement payouts, and government benefit sources.", "usefulFor": ["Employers and payroll", "CPF Board", "Government agencies", "Tax advisers"], "firstActions": ["Ask employers about final salary and group cover", "Check benefit continuation with the relevant programme", "Keep employment and payment records"], "criticalFields": ["Income / Benefit Type", "Employer / Paying Organisation", "HR / Payroll / Claim Contact"] },
+      "Tax and Government Records": { "description": "References for IRAS and other agencies; never record Singpass or banking credentials.", "usefulFor": ["IRAS", "CPF Board", "MOM and HDB", "Tax advisers"], "firstActions": ["Use official channels and confirm current tax or reporting duties", "Keep tax records securely", "Never share Singpass passwords or authentication codes"], "criticalFields": ["Record Type", "Authority / Provider", "Reference Number", "Returns / Correspondence Location"] },
+      "Legal and Estate Planning": { "description": "Wills, LPA, Advance Care Plan, and CPF nomination. Each has a distinct legal purpose and process.", "usefulFor": ["Executors and administrators", "LPA donees", "Healthcare representatives", "Lawyers and the Office of the Public Guardian"], "firstActions": ["Locate signed documents and confirm LPA status with OPG", "Keep CPF nomination confirmation separately from the will", "Seek Singapore legal advice for estate, capacity, or cross-border issues"], "criticalFields": ["Document / Arrangement", "Executor / Donee / Representative", "Lawyer / Certificate Issuer / Adviser", "Original / Registered Copy Location"] },
+      "IMPORTANT DOCUMENTS LOCATION": { "description": "An index to identity, financial, health, and legal documents.", "usefulFor": ["Family", "Executors and administrators", "Healthcare providers and advisers"], "firstActions": ["Secure originals and verify current versions", "Tell the appropriate representative where documents are stored", "Share locations only with trusted people"], "criticalFields": ["Document Type", "Location", "Who Can Help Locate It"] },
+      "Digital Accounts and Devices": { "description": "A safe inventory of online accounts, devices, and recovery pointers, not passwords.", "usefulFor": ["Digital legacy contacts", "Executors", "Service providers"], "firstActions": ["Use each provider's official bereavement or legacy process", "Use password-manager emergency access instead of putting secrets in this export", "Secure devices and do not bypass account controls"], "criticalFields": ["Provider / Description", "Account Identifier (not password)", "Recovery / Multi-factor Method", "Legacy Contact / Trusted Person"] },
+      "Additional details": { "description": "Other practical notes that do not fit another section. Do not put credentials or access codes here.", "usefulFor": ["Trusted family", "Executors", "Professional advisers"], "firstActions": ["Keep notes current and non-secret", "Point to formal documents or a secure credential manager where needed"], "criticalFields": ["Additional Notes"] }
+    },
+    "legalNotes": [
+      "This guide is general information, not legal, tax, insurance, or financial advice.",
+      "Singapore public healthcare subsidies and schemes have eligibility and programme conditions; MediSave is a savings scheme for approved healthcare expenses, not a universal insurance policy.",
+      "NRIC/FIN is sensitive personal data. Singapore government guidance says an IC is compulsory for citizens and permanent residents from age 15; recording the number in this organizer is optional.",
+      "CPF savings and CPF nominations have specific CPF Board rules and are not interchangeable with a will. Verify current nomination status and distribution procedures directly with CPF Board.",
+      "Singapore LPAs are registered arrangements for property/affairs and/or personal welfare decisions if mental capacity is lost. An LPA does not replace a will or determine post-death estate distribution.",
+      "IRAS states estate duty was removed for deaths on or after 15 February 2008; confirm any historical or current tax/reporting issue with IRAS or a qualified adviser.",
+      "Official: Singapore NRIC: https://www.ica.gov.sg/documents/identity-cards",
+      "Official: CPF nominations: https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/cpf-nomination",
+      "Official: MediSave: https://www.moh.gov.sg/healthcare-schemes-subsidies/medisave",
+      "Official: Lasting Power of Attorney: https://www.msf.gov.sg/what-we-do/opg/lasting-power-of-attorney",
+      "Official: IRAS estate duty: https://www.iras.gov.sg/taxes/other-taxes/estate-duty",
+      "Official: Singapore Courts: https://www.judiciary.gov.sg/",
+      "Emergency: Singapore Police: https://www.police.gov.sg/",
+      "Emergency: Singapore Civil Defence Force: https://www.scdf.gov.sg/"
+    ],
+    "generalGuidance": {
+      "fileStructure": ["The export ZIP may contain a spreadsheet, PDFs, and this access guide.", "Treat every file as sensitive; it may include identity, health, financial, and legal references."],
+      "dataAccess": ["Extract to a private, encrypted location and keep an untouched backup.", "Share only with trusted authorised people; a family relationship alone does not grant legal access.", "Store credentials in a reputable password manager with an emergency-access feature, not in this export."],
+      "securityTips": ["Never put passwords, PINs, Singpass credentials, authentication codes, or recovery keys in the export.", "Use encrypted storage and secure channels for sensitive documents.", "Review after major life events and at least annually; remove outdated copies securely."]
+    }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "A general checklist after a death in Singapore. Confirm representative authority and current CPF, court, tax, and provider requirements before acting.",
+    "meta": { "title": "Family Recovery Roadmap - Singapore", "version": "1.0", "lastReviewed": "2026-10-17", "reviewedBy": "Government sources reviewed; case-specific legal and tax advice may be needed", "generatedOn": "2026-10-17" },
+    "intro": { "condolence": "We are sorry for your loss. This checklist is intended to make the first practical steps clearer.", "howToUse": "Follow official registration guidance, identify the executor or authorised representative, contact each provider, and keep a record of each action." },
+    "startHere": ["Follow the official death registration and funeral guidance.", "Locate the will and identify the executor; check whether probate or letters of administration are required.", "Contact CPF Board, IRAS, banks, insurers, employers, SRS operators, and service providers using their current procedures.", "List assets, debts, regular payments, and claims; confirm authority before changing payments or distributing property.", "Keep a log of contacts, forms, and documents supplied. Never use the deceased person's Singpass or online account credentials."],
+    "legalFramework": ["Singapore Courts probate and letters of administration processes.", "CPF Board account, nomination, and death-benefit rules.", "IRAS income tax and any estate or historical tax matters.", "MSF Office of the Public Guardian LPA registration and decision-support requirements.", "Insurance, SRS, property, and financial-institution contract rules."],
+    "phases": [
+      { "phase": 1, "title": "Register and establish authority", "timeframe": "First days", "priority": "do-first", "focus": "Follow official death processes, locate the will, and identify who may act.", "keyActions": [{ "step": 1, "action": "Follow current registration, funeral, and death-certificate instructions from the relevant Singapore agencies.", "priority": "do-first", "why": "The documents and process required depend on circumstances and the agencies involved.", "legalRef": "https://www.gov.sg/" }, { "step": 2, "action": "Find the will and confirm the executor; obtain legal advice if there is no will, a dispute, or a complex estate.", "priority": "do-first", "why": "The executor or administrator may need a court grant before dealing with assets.", "legalRef": "https://www.judiciary.gov.sg/" }], "mustHaveDocuments": ["Death registration and certificate details", "Will and codicils", "Executor or administrator details", "NRIC/FIN and CPF record locations", "Bank, insurance, property, and liability references"], "criticalMistakes": ["Assuming next of kin automatically has authority", "Assuming CPF savings follow the will", "Putting Singpass or bank credentials in an export"] },
+      { "phase": 2, "title": "Notify and identify claims", "timeframe": "First weeks", "priority": "do-first", "focus": "Notify CPF, IRAS, financial institutions, employers, and insurers; preserve an accurate inventory.", "keyActions": [{ "step": 1, "action": "Contact CPF Board about CPF savings, any nomination, and the deceased member process.", "priority": "do-first", "why": "CPF distribution follows CPF legislation and nomination procedures, which are distinct from will administration.", "legalRef": "https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/cpf-nomination" }, { "step": 2, "action": "Notify banks, insurers, employers, SRS operators, IRAS, and utilities separately.", "priority": "do-first", "why": "No single notification completes all private claims or account administration.", "legalRef": "https://www.iras.gov.sg/" }], "mustHaveDocuments": ["Provider statements", "CPF and SRS details", "Insurance and employment records", "List of recurring payments and liabilities"], "criticalMistakes": ["Automatically stopping essential payments", "Assuming CPF nomination and will are the same", "Paying liabilities without confirming authority"] },
+      { "phase": 3, "title": "Administer and finalise", "timeframe": "Following weeks and months", "priority": "do-soon", "focus": "Complete any required court, IRAS, property, and provider steps before final distribution.", "keyActions": [{ "step": 1, "action": "Confirm whether probate or letters of administration are required under the current Singapore Courts process.", "priority": "do-first", "why": "Requirements depend on the estate, the will, and the organisations holding assets.", "legalRef": "https://www.judiciary.gov.sg/" }, { "step": 2, "action": "Check outstanding income-tax or historical estate-duty questions with IRAS before distributing assets.", "priority": "do-first", "why": "Tax status depends on dates, income, assets, and current or historical rules.", "legalRef": "https://www.iras.gov.sg/taxes/other-taxes/estate-duty" }], "mustHaveDocuments": ["Court grant if required", "Asset and liability inventory", "IRAS correspondence", "CPF, SRS, property, and insurance records"], "criticalMistakes": ["Distributing estate assets before confirming authority", "Assuming there are no tax or reporting steps", "Using the deceased person's credentials"] },
+      { "phase": 4, "title": "Review family arrangements", "timeframe": "When immediate tasks are complete", "priority": "when-ready", "focus": "Review the surviving household's will, LPA, ACP, CPF nominations, and secure recordkeeping.", "keyActions": [{ "step": 1, "action": "Review wills, LPA donees, Advance Care Plans, CPF nominations, insurance, and emergency contacts with appropriate professionals.", "priority": "when-ready", "why": "Appointments and nominations may need updating after a major family change.", "legalRef": "https://www.msf.gov.sg/what-we-do/opg/lasting-power-of-attorney" }, { "step": 2, "action": "Keep an asset and digital-account index; store credentials only in a suitable password manager.", "priority": "when-ready", "why": "A secure index helps authorised people find records without exposing secrets.", "legalRef": "Provider terms and security guidance" }], "mustHaveDocuments": ["Updated will and LPA information", "Current CPF nominations", "Secure family record index"], "criticalMistakes": ["Leaving outdated representatives or nominations", "Storing credentials in spreadsheets or PDFs", "Failing to retain provider confirmations"] }
+    ],
+    "quickReference": {
+      "emergency": { "police": "999", "ambulanceAndFire": "995", "crisisSupport": "SOS 1767; confirm current service information at sos.org.sg" },
+      "cpf": { "note": "Check current CPF nomination and member death-process requirements directly with CPF Board.", "url": "https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/cpf-nomination" },
+      "estate": { "note": "Confirm whether probate or letters of administration are required with Singapore Courts.", "url": "https://www.judiciary.gov.sg/" }
+    },
+    "glossary": [{ "term": "CPF nomination", "definition": "A CPF Board nomination specifying who is to receive CPF savings under CPF rules; it is not the same as a will." }, { "term": "Lasting Power of Attorney", "definition": "A registered legal document appointing donees to make specified personal-welfare and/or property-and-affairs decisions if the donor loses mental capacity." }, { "term": "Grant of probate", "definition": "A court grant that authorises the executor named in a will to administer the estate when a grant is required." }]
+  }
+}
