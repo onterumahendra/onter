@@ -11,17 +11,17 @@ export interface Country {
  * List of all available countries
  */
 export const AVAILABLE_COUNTRIES: Country[] = [
-    { code: "IN", name: "India" },
-    { code: "US", name: "United States" },
+  { code: "AU", name: "Australia" },
   { code: "CA", name: "Canada" },
   { code: "GB", name: "Great Britain" },
-  { code: "AU", name: "Australia" },
-  { code: "NZ", name: "New Zealand" },
-  { code: "IE", name: "Ireland" },
-  { code: "SG", name: "Singapore" },
   { code: "HK", name: "Hong Kong" },
+  { code: "IN", name: "India" },
+  { code: "IE", name: "Ireland" },
   { code: "JP", name: "Japan" },
-  { code: "KR", name: "South Korea" }
+  { code: "NZ", name: "New Zealand" },
+  { code: "SG", name: "Singapore" },
+  { code: "KR", name: "South Korea" },
+  { code: "US", name: "United States" }
 ];
 
 /**
