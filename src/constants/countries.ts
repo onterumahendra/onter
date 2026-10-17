@@ -19,7 +19,8 @@ export const AVAILABLE_COUNTRIES: Country[] = [
   { code: "NZ", name: "New Zealand" },
   { code: "IE", name: "Ireland" },
   { code: "SG", name: "Singapore" },
-  { code: "HK", name: "Hong Kong" }
+  { code: "HK", name: "Hong Kong" },
+  { code: "JP", name: "Japan" }
 ];
 
 /**

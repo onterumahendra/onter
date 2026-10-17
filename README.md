@@ -243,6 +243,7 @@ public/
     ├── IE.json        # Ireland configuration (with access guide)
     ├── SG.json        # Singapore configuration (with access guide)
     ├── HK.json        # Hong Kong configuration (with access guide)
+    ├── JP.json        # Japan configuration (with access guide)
     └── README.md      # Configuration guide
 ```
 
@@ -262,6 +263,7 @@ Onter uses a JSON-based configuration system for easy internationalization:
 - **IE** - Ireland (€ EUR; Republic of Ireland)
 - **SG** - Singapore ($ SGD)
 - **HK** - Hong Kong (HK$ HKD)
+- **JP** - Japan (¥ JPY)
 
 ### Adding a New Country
 
