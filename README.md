@@ -240,6 +240,7 @@ public/
     ├── GB.json        # Great Britain configuration (with access guide)
     ├── AU.json        # Australia configuration (with access guide)
     ├── NZ.json        # New Zealand configuration (with access guide)
+    ├── IE.json        # Ireland configuration (with access guide)
     └── README.md      # Configuration guide
 ```
 
@@ -256,6 +257,7 @@ Onter uses a JSON-based configuration system for easy internationalization:
 - **GB** - Great Britain (£ GBP; England, Scotland, and Wales)
 - **AU** - Australia ($ AUD)
 - **NZ** - New Zealand ($ NZD)
+- **IE** - Ireland (€ EUR; Republic of Ireland)
 
 ### Adding a New Country
 

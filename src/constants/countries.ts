@@ -16,7 +16,8 @@ export const AVAILABLE_COUNTRIES: Country[] = [
   { code: "CA", name: "Canada" },
   { code: "GB", name: "Great Britain" },
   { code: "AU", name: "Australia" },
-  { code: "NZ", name: "New Zealand" }
+  { code: "NZ", name: "New Zealand" },
+  { code: "IE", name: "Ireland" }
 ];
 
 /**
