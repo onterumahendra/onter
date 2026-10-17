@@ -1,0 +1,307 @@
+{
+  "countryCode": "KR",
+  "countryName": "South Korea",
+  "currency": "KRW",
+  "currencySymbol": "₩",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Identity and contact details for family, healthcare, financial, and government administration. Resident Registration Number and foreigner registration details are sensitive; record only when needed.",
+      "fields": [
+        { "label": "Full Legal Name", "name": "full_name", "type": "text", "placeholder": "Name as shown on official records", "validation": { "required": true, "minLength": 2, "errorMessage": "Full legal name is required" } },
+        { "label": "Name in Korean (if applicable)", "name": "name_korean", "type": "text", "placeholder": "Hangul name as recorded officially" },
+        { "label": "Date of Birth", "name": "date_of_birth", "type": "date", "validation": { "required": true, "errorMessage": "Date of birth is required" } },
+        { "label": "Resident Registration Number (RRN, if needed)", "name": "resident_registration_number", "type": "text", "placeholder": "Sensitive identifier; do not enter card PINs", "validation": { "pattern": "^[0-9]{6}-?[0-9]{7}$", "errorMessage": "Enter 13 digits (hyphen optional), or leave blank" } },
+        { "label": "Foreigner Registration / Residence Card Reference (if applicable)", "name": "foreigner_registration_reference", "type": "text", "placeholder": "Record only if useful; formats may vary" },
+        { "label": "Passport Number (if applicable)", "name": "passport_no", "type": "text", "placeholder": "Passport number" },
+        { "label": "Driver Licence Number (if applicable)", "name": "drivers_license_no", "type": "text", "placeholder": "Driver licence number" },
+        { "label": "Primary Phone Number", "name": "phone", "type": "text", "placeholder": "+82 or local number", "validation": { "required": true, "errorMessage": "Primary phone number is required" } },
+        { "label": "Email Address", "name": "email", "type": "email", "placeholder": "name@example.kr", "validation": { "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", "errorMessage": "Enter a valid email address or leave blank" } },
+        { "label": "Residential Address", "name": "residential_address", "type": "textarea", "placeholder": "Province / metropolitan city, district, street, building, unit, postal code" },
+        { "label": "Province / Metropolitan City", "name": "province_city", "type": "select", "placeholder": "Select an area; leave blank if outside Korea", "options": ["Seoul", "Busan", "Daegu", "Incheon", "Gwangju", "Daejeon", "Ulsan", "Sejong", "Gyeonggi-do", "Gangwon Special Self-Governing Province", "Chungcheongbuk-do", "Chungcheongnam-do", "Jeonbuk Special Self-Governing Province", "Jeollanam-do", "Gyeongsangbuk-do", "Gyeongsangnam-do", "Jeju Special Self-Governing Province"] },
+        { "label": "Postal Code (if applicable)", "name": "postal_code", "type": "text", "placeholder": "5 digits", "validation": { "pattern": "^[0-9]{5}$", "errorMessage": "Postal code should contain 5 digits or be left blank" } }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "Trusted people to contact. Being listed does not itself grant legal authority to make decisions or access accounts.",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        { "label": "Relationship", "name": "relationship", "type": "text", "placeholder": "Partner, family member, friend, or other", "validation": { "required": true, "errorMessage": "Relationship is required" } },
+        { "label": "Name", "name": "name", "type": "text", "placeholder": "Full name", "validation": { "required": true, "minLength": 2, "errorMessage": "Name is required" } },
+        { "label": "Phone Number", "name": "phone", "type": "text", "placeholder": "+82 or international number", "validation": { "required": true, "errorMessage": "Phone number is required" } },
+        { "label": "Email / Address", "name": "contact_details", "type": "text", "placeholder": "Optional contact details" },
+        { "label": "Role / Instructions", "name": "role", "type": "text", "placeholder": "Emergency contact, executor, guardian, or other" }
+      ]
+    },
+    {
+      "section": "Health and Care Information",
+      "type": "simple",
+      "description": "Optional health and care information. Keep health insurance provider information current; My Number Card health-insurance registration and eligibility documents are separate details.",
+      "fields": [
+        { "label": "Usual Clinic / Healthcare Provider", "name": "medical_practice", "type": "text", "placeholder": "Clinic name and contact details" },
+        { "label": "Health Insurance Provider / Insurer", "name": "health_insurer", "type": "text", "placeholder": "National Health Insurance or employer-based insurer" },
+        { "label": "Insurance Qualification / Eligibility Document Location", "name": "insurance_eligibility_location", "type": "text", "placeholder": "Current card or eligibility confirmation document location" },
+        { "label": "My Number Card Health Insurance Registration", "name": "myna_health_registration", "type": "select", "options": ["Registered", "Not registered / use eligibility document", "Not applicable", "Unknown"] },
+        { "label": "Known Medical Conditions", "name": "medical_conditions", "type": "textarea", "placeholder": "Relevant diagnoses or care needs" },
+        { "label": "Allergies and Reactions", "name": "allergies", "type": "textarea", "placeholder": "Known allergies, reactions, or none known" },
+        { "label": "Current Medicines", "name": "medications", "type": "textarea", "placeholder": "Medicine, dose, and where the current list is kept" },
+        { "label": "Blood Group (if confirmed)", "name": "blood_group", "type": "select", "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"] },
+        { "label": "Care / Accessibility Needs", "name": "care_needs", "type": "textarea", "placeholder": "Relevant communication, accessibility, or care needs" },
+        { "label": "Advance Care / Treatment Preference Location", "name": "care_plan_location", "type": "text", "placeholder": "Secure location of current formal records" }
+      ]
+    },
+    {
+      "section": "Insurance details",
+      "type": "table",
+      "description": "Private, employer, and other policies. Public health insurance and Long-Term Care Insurance are separate statutory systems.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Policy Holder", "name": "insured_name", "type": "text", "placeholder": "Name on policy", "validation": { "required": true, "errorMessage": "Policy holder is required" } },
+        { "label": "Cover Type", "name": "insurance_type", "type": "select", "options": ["Life", "Medical / Private Health", "Cancer / Serious Illness", "Income Protection", "Long-Term Care Supplement", "Home / Fire", "Contents", "Motor", "Travel", "Business", "Other"], "validation": { "required": true, "errorMessage": "Select a cover type" } },
+        { "label": "Insurer / Provider", "name": "provider", "type": "text", "placeholder": "Insurer or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Policy / Member Reference", "name": "policy_no", "type": "text", "placeholder": "Policy or member reference", "validation": { "required": true, "errorMessage": "Reference is required" } },
+        { "label": "Insured People / Beneficiary", "name": "beneficiary", "type": "text", "placeholder": "As recorded with provider" },
+        { "label": "Claims Contact", "name": "claims_contact", "type": "text", "placeholder": "Phone, email, or official website" },
+        { "label": "Premium and Frequency", "name": "premium_frequency", "type": "text", "placeholder": "Optional amount and payment frequency" },
+        { "label": "Renewal / Review Date", "name": "renewal_date", "type": "date" },
+        { "label": "Policy Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Bank accounts",
+      "type": "table",
+      "description": "South Korean bank and credit union accounts. Record bank, branch, and account details as supplied by the institution; never include online passwords or authentication codes.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Account Holder(s)", "name": "holder_name", "type": "text", "placeholder": "Name(s) as registered with bank", "validation": { "required": true, "errorMessage": "Account holder is required" } },
+        { "label": "Bank / Financial Institution", "name": "bank_name", "type": "text", "placeholder": "Institution name", "validation": { "required": true, "errorMessage": "Institution name is required" } },
+        { "label": "Account Type", "name": "account_type", "type": "select", "options": ["Demand Deposit", "Savings", "Time Deposit", "Joint", "Business", "Other"] },
+        { "label": "Bank / Branch", "name": "branch", "type": "text", "placeholder": "Branch name or code, if applicable" },
+        { "label": "Account Number", "name": "account_no", "type": "text", "placeholder": "As shown by your bank" },
+        { "label": "Account Owner / Authority Notes", "name": "ownership_notes", "type": "text", "placeholder": "Joint holder or authorised representative details" },
+        { "label": "Bank Contact", "name": "provider_contact", "type": "text", "placeholder": "Bereavement or customer-service contact" },
+        { "label": "Statement Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Savings and Investments",
+      "type": "table",
+      "description": "Savings and investment assets. Record optional estimates with an as-of date; confirm ownership and tax treatment with the provider or a qualified adviser.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Time Deposit", "Shares", "Exchange-Traded Fund", "Investment Fund", "Bonds", "Brokerage Account", "ISA", "Real Estate", "Business Interest", "Cryptoasset", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Provider / Institution", "name": "provider", "type": "text", "placeholder": "Bank, broker, registry, or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Account / Holding Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Owner(s)", "name": "owners", "type": "text", "placeholder": "Sole, joint, trust, or company ownership" },
+        { "label": "Beneficiary / Nomination", "name": "beneficiary", "type": "text", "placeholder": "Where current designation is recorded" },
+        { "label": "Approximate Value (KRW)", "name": "value", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Value As Of", "name": "value_date", "type": "date" },
+        { "label": "Contact / Documents Location", "name": "contact_location", "type": "text", "placeholder": "Provider contact or secure record location" }
+      ]
+    },
+    {
+      "section": "Pensions and Public Benefits",
+      "type": "table",
+      "description": "National Pension, public-service and workplace pensions, retirement accounts, and social benefits. Eligibility and survivor benefits depend on contribution and programme rules.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Plan / Benefit Type", "name": "plan_type", "type": "select", "options": ["National Pension", "Survivors' Pension", "Employees' Pension Insurance", "Public Service Pension", "Retirement Pension (DB / DC)", "Individual Retirement Pension (IRP)", "Personal Pension", "Basic Pension", "Other Government Benefit", "Other"], "validation": { "required": true, "errorMessage": "Select a plan or benefit type" } },
+        { "label": "Scheme / Administrator", "name": "provider", "type": "text", "placeholder": "National Pension Service, employer, fund, or agency", "validation": { "required": true, "errorMessage": "Administrator is required" } },
+        { "label": "Employer (if applicable)", "name": "employer", "type": "text", "placeholder": "Current or former employer" },
+        { "label": "Member / Claim Reference", "name": "member_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Survivor / Beneficiary Notes", "name": "beneficiary", "type": "text", "placeholder": "Where current scheme and claim details are recorded" },
+        { "label": "Scheme Contact", "name": "contact", "type": "text", "placeholder": "Official website or contact details" },
+        { "label": "Statement / Decision Letter Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Property and Vehicles",
+      "type": "table",
+      "description": "Property, tenancies, vehicles, titles, loans, and associated insurance. Record the municipality and province / metropolitan city.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Principal Residence", "Other Real Estate", "Rental Property", "Lease / Tenancy", "Motor Vehicle", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Address / Description", "name": "address_description", "type": "textarea", "placeholder": "Province / city, municipality, full address, and postal code", "validation": { "required": true, "errorMessage": "Address or description is required" } },
+        { "label": "Owner(s) / Ownership", "name": "owners", "type": "text", "placeholder": "Names and ownership as recorded" },
+        { "label": "Title / Registration Reference", "name": "title_reference", "type": "text", "placeholder": "Title, vehicle registration, or other reference" },
+        { "label": "Mortgage / Lien / Lender", "name": "mortgage_lien", "type": "text", "placeholder": "Lender and reference; no login details" },
+        { "label": "Insurer / Policy Reference", "name": "insurance", "type": "text", "placeholder": "Provider and policy reference" },
+        { "label": "Approximate Value and Date", "name": "value_date", "type": "text", "placeholder": "Optional estimate and valuation date" },
+        { "label": "Title / Tenancy / Registration Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Loans and Liabilities",
+      "type": "table",
+      "description": "Mortgages, credit, tax, and other liabilities. Confirm legal responsibility before making payments or changing accounts.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Liability Type", "name": "liability_type", "type": "select", "options": ["Mortgage", "Credit Card", "Personal Loan", "Tax", "Business Debt", "Vehicle Finance", "Other"], "validation": { "required": true, "errorMessage": "Select a liability type" } },
+        { "label": "Lender / Creditor", "name": "creditor", "type": "text", "placeholder": "Institution or organisation", "validation": { "required": true, "errorMessage": "Creditor is required" } },
+        { "label": "Account Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Borrower(s) / Guarantor", "name": "borrowers", "type": "text", "placeholder": "Names and shared responsibility" },
+        { "label": "Approximate Balance (KRW)", "name": "balance", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Balance As Of", "name": "balance_date", "type": "date" },
+        { "label": "Payment / Review Details", "name": "payment_details", "type": "text", "placeholder": "Optional amount and frequency" },
+        { "label": "Creditor Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact or secure record location" }
+      ]
+    },
+    {
+      "section": "Employment and Income",
+      "type": "table",
+      "description": "Employment, business, pension, and government payment sources.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Income / Benefit Type", "name": "income_type", "type": "select", "options": ["Employment", "Self-Employment", "Business", "National Pension", "Employees' Pension", "Retirement Pension / IRP", "Basic Pension / Public Benefit", "Rental Income", "Other"], "validation": { "required": true, "errorMessage": "Select an income or benefit type" } },
+        { "label": "Employer / Paying Organisation", "name": "organisation", "type": "text", "placeholder": "Employer or programme" },
+        { "label": "HR / Payroll / Claim Contact", "name": "contact_reference", "type": "text", "placeholder": "Contact and reference details" },
+        { "label": "Approximate Amount and Frequency", "name": "amount_frequency", "type": "text", "placeholder": "Optional estimate" },
+        { "label": "Survivor / Dependant Benefit Notes", "name": "survivor_benefit", "type": "text", "placeholder": "Where programme or plan terms are recorded" },
+        { "label": "Supporting Records Location", "name": "document_location", "type": "text", "placeholder": "Payslips, withholding slips, or award letters" }
+      ]
+    },
+    {
+      "section": "Tax and Government Records",
+      "type": "table",
+      "description": "Reference details for the National Tax Service, local governments, National Pension Service, and insurers. Never record online-service credentials or card PINs.",
+      "maxRows": 25,
+      "columns": [
+        { "label": "Record Type", "name": "record_type", "type": "select", "options": ["National Income Tax", "Inheritance Tax", "Resident Tax", "Business / Corporate Tax", "National Pension", "Health Insurance", "Municipal Services", "Other"], "validation": { "required": true, "errorMessage": "Select a record type" } },
+        { "label": "Authority / Provider", "name": "authority", "type": "text", "placeholder": "National Tax Service, municipality, NPS, or insurer" },
+        { "label": "Reference Number", "name": "reference", "type": "text", "placeholder": "Optional account or reference" },
+        { "label": "Tax Year / Municipality", "name": "period_location", "type": "text", "placeholder": "If relevant" },
+        { "label": "Tax Adviser / Contact", "name": "adviser", "type": "text", "placeholder": "Name and contact details" },
+        { "label": "Returns / Correspondence Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Legal and Estate Planning",
+      "type": "table",
+      "description": "Index wills, notarised documents, adult guardianship, and care preferences. A private power of attorney, will, and family-court guardianship arrangement have different legal effects.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Document / Arrangement", "name": "document_type", "type": "select", "options": ["Will", "Notarised Will", "Handwritten Will / Deposit", "Voluntary Guardianship Contract", "Adult Guardianship / Family Court Order", "Care Preferences / Advance Care Plan", "Trust", "Funeral Wishes", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Governing Law / Notes", "name": "jurisdiction", "type": "text", "placeholder": "Japan or relevant cross-border law" },
+        { "label": "Made / Last Reviewed", "name": "review_date", "type": "date" },
+        { "label": "Executor / Guardian / Representative", "name": "appointed_person", "type": "text", "placeholder": "Name and contact, if appropriate" },
+        { "label": "Notary / Lawyer / Adviser", "name": "professional_contact", "type": "text", "placeholder": "Office and contact details" },
+        { "label": "Original / Registered Copy Location", "name": "document_location", "type": "text", "placeholder": "Secure location and registration / court details" },
+        { "label": "Instructions / Notes", "name": "instructions", "type": "textarea", "placeholder": "Point to formal instructions; do not duplicate sensitive content" }
+      ]
+    },
+    {
+      "section": "IMPORTANT DOCUMENTS LOCATION",
+      "type": "table",
+      "description": "An index of where originals and current copies are kept, not the documents themselves.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Document Type", "name": "document_type", "type": "select", "options": ["Birth / Family Register Certificate", "Residence Record", "My Number Notice / Card", "Residence Card", "Passport", "Health Insurance Eligibility Document", "Pension Record", "Will / Guardianship Documents", "Property / Housing Records", "Bank / Investment Statements", "Insurance Policies", "Tax Returns / Notices", "Medical Records", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Location", "name": "location", "type": "text", "placeholder": "Physical or secure digital location", "validation": { "required": true, "errorMessage": "Location is required" } },
+        { "label": "Who Can Help Locate It", "name": "contact", "type": "text", "placeholder": "Trusted person, lawyer, or institution" },
+        { "label": "Last Checked", "name": "last_checked", "type": "date" }
+      ]
+    },
+    {
+      "section": "Digital Accounts and Devices",
+      "type": "table",
+      "description": "Inventory important services and devices. Never enter passwords, My Number Card PINs, e-Tax credentials, one-time codes, security answers, or recovery keys.",
+      "maxRows": 50,
+      "columns": [
+        { "label": "Account / Device Type", "name": "account_type", "type": "select", "options": ["Primary Email", "Mynaportal / e-Tax (reference only)", "Phone Provider", "Password Manager", "Cloud Storage", "Banking / Pension", "Social Media", "Photo / File Archive", "Domain / Website", "Subscription", "Computer / Phone / Tablet", "Crypto Wallet", "Other"], "validation": { "required": true, "errorMessage": "Select an account or device type" } },
+        { "label": "Provider / Description", "name": "provider", "type": "text", "placeholder": "Service or device name", "validation": { "required": true, "errorMessage": "Provider or description is required" } },
+        { "label": "Account Identifier (not password)", "name": "account_identifier", "type": "text", "placeholder": "Username or email, if safe to record" },
+        { "label": "Recovery / Multi-factor Method", "name": "recovery_method", "type": "text", "placeholder": "Method only; no codes or secret values" },
+        { "label": "Legacy Contact / Trusted Person", "name": "legacy_contact", "type": "text", "placeholder": "Person and contact details" },
+        { "label": "Secure Instructions Location", "name": "instructions_location", "type": "text", "placeholder": "Password-manager emergency access or secure location" },
+        { "label": "Preference", "name": "account_preference", "type": "select", "options": ["Preserve", "Close", "Memorialise / Transfer", "Review with family", "Not specified"] }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Other practical notes for trusted family members or representatives. Do not put credentials or access codes here.",
+      "fields": [
+        { "label": "Additional Notes", "name": "notes", "type": "textarea", "placeholder": "Non-secret notes or pointers to secure records", "validation": { "maxLength": 5000, "errorMessage": "Notes cannot exceed 5000 characters" } }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "For a police emergency in South Korea call 112; for fire or ambulance call 119.",
+      "For healthcare, confirm your National Health Insurance status and whether your My Number Card is registered as the health-insurance certificate or an eligibility document is available.",
+      "Review emergency contacts, health information, legal document locations, insurance, bank accounts, investments, pensions, and essential liabilities.",
+      "If someone has died, contact the municipal office, health insurer, National Pension Service, financial institutions, employer, and tax office as relevant.",
+      "Keep the export encrypted. Never put RRN credentials, My Number Card PINs, e-Tax credentials, passwords, authentication codes, or recovery keys in it."
+    ],
+    "emergencyServices": {
+      "medical": "119 for ambulance",
+      "police": "112",
+      "fire": "119",
+      "foreign_resident_support": "Korea Immigration Contact Center: 1345 for immigration and foreign-resident guidance"
+    },
+    "sectionGuidance": {
+      "Personal Details": { "description": "Identity and contact details for municipal, health, financial, and legal processes. Resident Registration Number and foreigner registration details are sensitive personal information.", "usefulFor": ["Municipal offices", "National Health Insurance Service", "National Pension Service", "Banks and government agencies"], "firstActions": ["Check names and address against official records", "Protect RRN and registration details; provide them only to authorised bodies when necessary", "Keep residence status and contact records current"], "criticalFields": ["Full Legal Name", "Date of Birth", "Resident Registration Number (RRN, if needed)", "Province / Metropolitan City"] },
+      "Emergency contact details": { "description": "Trusted people and their possible roles; listing someone does not grant legal or financial authority.", "usefulFor": ["Family", "Emergency responders", "Healthcare providers", "Executors and guardians"], "firstActions": ["Confirm each person knows they are listed", "Verify phone and email details", "Locate separate will or court appointment documents when authority is needed"], "criticalFields": ["Relationship", "Name", "Phone Number", "Role / Instructions"] },
+      "Health and Care Information": { "description": "Optional health information and insurer details. Health insurance eligibility and current document use depend on enrollment and registration status.", "usefulFor": ["Emergency responders", "Clinics and hospitals", "National Health Insurance Service", "Family and care representatives"], "firstActions": ["Call 119 for ambulance or fire emergencies", "Tell clinicians about allergies and current medicines", "Check insurance qualification with the insurer and keep the current card or eligibility confirmation available"], "criticalFields": ["Usual Clinic / Healthcare Provider", "Health Insurance Provider / Insurer", "Known Medical Conditions", "Allergies and Reactions"] },
+      "Insurance details": { "description": "Private, employer, and other policies; National Health Insurance and Long-Term Care Insurance operate separately from private insurance.", "usefulFor": ["Insurers and claims teams", "Employers", "Executors and beneficiaries"], "firstActions": ["Find policy documents and claims contacts", "Confirm policy status and beneficiary details with each insurer", "Check whether a policy is private, employer-provided, or statutory coverage"], "criticalFields": ["Cover Type", "Insurer / Provider", "Policy / Member Reference", "Claims Contact"] },
+      "Bank accounts": { "description": "South Korean bank and credit union accounts with bank, branch, and account references.", "usefulFor": ["Banks and credit unions", "Authorised representatives", "Household bill management"], "firstActions": ["Confirm account holder details and authority with the bank", "Use the bank's bereavement process", "Keep account details and statements securely"], "criticalFields": ["Bank / Financial Institution", "Branch Name / Code", "Account Number", "Account Owner / Authority Notes"] },
+      "Savings and Investments": { "description": "Deposits, NISA-style accounts, iDeCo, securities, property, and other investments.", "usefulFor": ["Executors or administrators", "Banks, brokers, and registries", "Tax and financial advisers"], "firstActions": ["Confirm account ownership and valuations with providers", "Check account succession and tax treatment before transfers or sales", "Keep statements and valuation dates"], "criticalFields": ["Asset Type", "Provider / Institution", "Account / Holding Reference", "Approximate Value (KRW)"] },
+      "Pensions and Public Benefits": { "description": "National Pension, Employees' Pension Insurance, survivor benefits, and employer plans; eligibility depends on contributions and programme rules.", "usefulFor": ["National Pension Service", "Employers and pension administrators", "Survivors and dependants"], "firstActions": ["Contact the National Pension Service or scheme administrator about reporting and claims", "Check contribution records and survivor pension eligibility", "Keep pension statements and records secure"], "criticalFields": ["Plan / Benefit Type", "Scheme / Administrator", "Member / Claim Reference", "Survivor / Beneficiary Notes"] },
+      "Property and Vehicles": { "description": "Property, tenancies, vehicles, titles, loans, and associated insurance.", "usefulFor": ["Municipal offices", "Executors and administrators", "Lenders and insurers"], "firstActions": ["Locate title and loan records", "Confirm ownership and transfer requirements with the relevant authority or professional", "Check insurance and essential services before changing arrangements"], "criticalFields": ["Address / Description", "Owner(s) / Ownership", "Title / Registration Reference", "Mortgage / Lien / Lender"] },
+      "Loans and Liabilities": { "description": "Debts and recurring obligations, including joint borrowers and guarantees.", "usefulFor": ["Executors and administrators", "Banks and creditors", "Household financial planning"], "firstActions": ["Contact creditors through official channels", "Confirm who is liable before paying or cancelling", "Ask whether insurance or guarantees affect the balance"], "criticalFields": ["Liability Type", "Lender / Creditor", "Borrower(s) / Guarantor", "Approximate Balance (KRW)"] },
+      "Employment and Income": { "description": "Employment, business, pension, and government payment sources.", "usefulFor": ["Employers and payroll", "National Pension Service", "Local governments", "Tax advisers"], "firstActions": ["Ask employers about final pay and group cover", "Check pension or benefit continuation with the relevant agency", "Keep withholding and employment records"], "criticalFields": ["Income / Benefit Type", "Employer / Paying Organisation", "HR / Payroll / Claim Contact"] },
+      "Tax and Government Records": { "description": "References for the National Tax Service, local governments, and insurers; never store online-service credentials.", "usefulFor": ["National Tax Service", "Municipal offices", "National Pension Service", "Tax advisers"], "firstActions": ["Use official channels and confirm current filing duties", "Keep tax returns and notices securely", "Never share online passwords or card PINs"], "criticalFields": ["Record Type", "Authority / Provider", "Reference Number", "Returns / Correspondence Location"] },
+      "Legal and Estate Planning": { "description": "Wills, notarised documents, adult guardianship, and care preferences. Private powers of attorney, wills, and Family Court guardianship have different legal effects.", "usefulFor": ["Executors and administrators", "Family Court and guardianship professionals", "Notaries and lawyers"], "firstActions": ["Locate the executed will or guardianship contract", "Confirm any guardianship appointment or court order with the relevant Family Court", "Seek Japanese legal advice for estate administration or cross-border issues"], "criticalFields": ["Document / Arrangement", "Executor / Guardian / Representative", "Notary / Lawyer / Adviser", "Original / Registered Copy Location"] },
+      "IMPORTANT DOCUMENTS LOCATION": { "description": "An index to identity, financial, health, property, and legal documents.", "usefulFor": ["Family", "Executors and administrators", "Healthcare providers and advisers"], "firstActions": ["Secure originals and verify current versions", "Tell the authorised representative where documents are stored", "Share locations only with trusted people"], "criticalFields": ["Document Type", "Location", "Who Can Help Locate It"] },
+      "Digital Accounts and Devices": { "description": "A safe inventory of online accounts, devices, and recovery pointers, not passwords.", "usefulFor": ["Digital legacy contacts", "Executors", "Service providers"], "firstActions": ["Use each provider's official bereavement or legacy process", "Use password-manager emergency access instead of putting secrets in this export", "Secure devices and do not bypass account controls"], "criticalFields": ["Provider / Description", "Account Identifier (not password)", "Recovery / Multi-factor Method", "Legacy Contact / Trusted Person"] },
+      "Additional details": { "description": "Other practical notes that do not fit another section. Do not put credentials or access codes here.", "usefulFor": ["Trusted family", "Executors", "Professional advisers"], "firstActions": ["Keep notes current and non-secret", "Point to formal documents or a secure credential manager where needed"], "criticalFields": ["Additional Notes"] }
+    },
+    "legalNotes": [
+      "This guide is general information, not legal, tax, insurance, or financial advice.",
+      "The 12-digit My Number is assigned to people with a resident record in Japan; the Individual Number Card is a separate card. Do not treat the identifier, physical card, and card PIN as interchangeable.",
+      "The Digital Agency states that new health insurance certificates stopped being issued from December 2, 2024. Existing certificates remained valid until expiry, up to December 1, 2025; current arrangements use a registered My Number Card or an insurer-issued eligibility certificate as applicable. Confirm with the insurer.",
+      "Japan's National Pension and Employees' Pension Insurance have separate enrollment and benefit rules. Survivor benefits depend on contribution history and eligibility.",
+      "Inheritance tax may apply depending on the estate, heirs, residence, and other circumstances. NTA filing and payment requirements can include time limits; confirm current rules and advice for the specific estate.",
+      "Adult guardianship, voluntary guardianship, wills, and private powers of attorney have different legal effects. Confirm formal requirements with the relevant Family Court, a notary, or a qualified Japanese lawyer.",
+      "Official: My Number system: https://www.digital.go.jp/en/policies/mynumber/",
+      "Official: My Number Card: https://www.kojinbango-card.go.jp/en/",
+      "Official: My Number Card as health insurance certificate: https://www.digital.go.jp/en/policies/mynumber/faq-insurance-card/",
+      "Official: Japan Pension Service: https://www.nenkin.go.jp/international/english/",
+      "Official: Japan pension systems and survivor benefits: https://www.nenkin.go.jp/international/english/japanese-system/index.html",
+      "Official: National Tax Agency inheritance tax: https://www.nta.go.jp/english/taxes/others/02/15001.htm",
+      "Official: Japan Courts: https://www.courts.go.jp/english/",
+      "Emergency numbers: Japan National Police Agency: https://www.npa.go.jp/english/",
+      "Emergency numbers: Japan National Tourism Organization: https://www.japan.travel/en/plan/"
+    ],
+    "generalGuidance": {
+      "fileStructure": ["The export ZIP may contain a spreadsheet, PDFs, and this access guide.", "Treat every file as sensitive; it may include identity, health, financial, and legal references."],
+      "dataAccess": ["Extract to a private, encrypted location and keep an untouched backup.", "Share only with trusted authorised people; a family relationship alone does not grant legal access.", "Store credentials in a reputable password manager with an emergency-access feature, not in this export."],
+      "securityTips": ["Never put My Number Card PINs, passwords, e-Tax credentials, authentication codes, or recovery keys in the export.", "Use encrypted storage and secure channels for sensitive documents.", "Review after major life events and at least annually; remove outdated copies securely."]
+    }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "A general checklist after a death in Japan. Confirm representative authority and current municipal, pension, court, and tax requirements before acting.",
+    "meta": { "title": "Family Recovery Roadmap - Japan", "version": "1.0", "lastReviewed": "2026-10-17", "reviewedBy": "Government sources reviewed; case-specific legal and tax advice may be needed", "generatedOn": "2026-10-17" },
+    "intro": { "condolence": "We are sorry for your loss. This checklist is intended to make the first practical steps clearer.", "howToUse": "Follow municipal death-registration instructions, identify the executor or representative, notify relevant insurers and providers, and keep a record of each action." },
+    "startHere": ["Follow the municipal death-registration and resident-record procedures that apply to the circumstances.", "Locate the will and identify the executor; seek advice if there is no will or the estate is complex.", "Contact the health insurer, Japan Pension Service, banks, employer, insurers, and tax office as relevant.", "List assets, debts, regular payments, and claims; confirm authority and obligations before changing payments or distributing property.", "Keep a log of contacts, forms, and documents supplied. Never use the deceased person's My Number Card PIN or online credentials."],
+    "legalFramework": ["Municipal death and resident-record procedures.", "Japan National Pension and Employees' Pension Insurance survivor-benefit rules.", "National Tax Agency inheritance-tax and final income-tax rules.", "Family Court adult guardianship procedures and relevant notarial instruments.", "Bank, insurer, property, and investment-provider processes."],
+    "phases": [
+      { "phase": 1, "title": "Register and establish authority", "timeframe": "First days", "priority": "do-first", "focus": "Follow official municipal instructions, locate the will, and identify who may act.", "keyActions": [{ "step": 1, "action": "Contact the municipal office and follow current death-registration, resident-record, and insurance instructions.", "priority": "do-first", "why": "Required steps and documents depend on the person's residence, status, and circumstances.", "legalRef": "https://www.digital.go.jp/en/policies/mynumber/" }, { "step": 2, "action": "Find the will and confirm the executor; contact a Japanese lawyer or notary if there is no will, a dispute, or cross-border property.", "priority": "do-first", "why": "The representative may need formal authority before administering assets.", "legalRef": "https://www.courts.go.jp/english/" }], "mustHaveDocuments": ["Death registration and certificate details", "Will and codicils", "Executor or representative details", "My Number and health-insurance record locations", "Bank, pension, insurance, property, and liability references"], "criticalMistakes": ["Assuming next of kin automatically has authority", "Treating My Number and My Number Card as the same thing", "Putting card PINs or passwords in an exported record"] },
+      { "phase": 2, "title": "Notify insurers and providers", "timeframe": "First weeks", "priority": "do-first", "focus": "Notify health insurers, pension administrators, financial institutions, employers, and tax agencies.", "keyActions": [{ "step": 1, "action": "Contact the health insurer and Japan Pension Service about required notifications, current eligibility, and survivor claims.", "priority": "do-first", "why": "Insurance and pension arrangements depend on enrollment and contribution records.", "legalRef": "https://www.nenkin.go.jp/international/english/" }, { "step": 2, "action": "Contact banks, employers, insurers, brokers, and service providers separately; confirm their authority and document requirements.", "priority": "do-first", "why": "No single notification settles all private accounts and claims.", "legalRef": "Provider's official bereavement process" }], "mustHaveDocuments": ["Insurance and health-insurance records", "Pension statements and benefit documents", "Bank and investment statements", "Employer and tax records"], "criticalMistakes": ["Automatically stopping essential payments", "Assuming My Number Card is a health insurance certificate without registration", "Paying liabilities without confirming responsibility"] },
+      { "phase": 3, "title": "Administer and finalise", "timeframe": "Following weeks and months", "priority": "do-soon", "focus": "Complete required court, tax, property, and provider procedures before final distribution.", "keyActions": [{ "step": 1, "action": "Confirm the required estate process and representative authority with the relevant Family Court, notary, or Japanese lawyer.", "priority": "do-first", "why": "The appropriate process depends on the will, estate, assets, and circumstances.", "legalRef": "https://www.courts.go.jp/english/" }, { "step": 2, "action": "Check inheritance tax and final income-tax requirements with the National Tax Agency or a qualified tax adviser.", "priority": "do-first", "why": "Tax scope and filing obligations depend on residence, heirs, estate value, and current rules.", "legalRef": "https://www.nta.go.jp/english/taxes/others/02/15001.htm" }], "mustHaveDocuments": ["Court or notarial documents if required", "Asset and liability inventory", "Tax returns and NTA correspondence", "Pension and property records"], "criticalMistakes": ["Relying on outdated tax thresholds or assumed deadlines", "Distributing property before authority and tax obligations are checked", "Using the deceased person's electronic credentials"] },
+      { "phase": 4, "title": "Review family arrangements", "timeframe": "When immediate tasks are complete", "priority": "when-ready", "focus": "Review the surviving household's will, guardianship, pension, health-insurance, and secure-record arrangements.", "keyActions": [{ "step": 1, "action": "Review wills, voluntary guardianship contracts, family-court arrangements, care preferences, insurance, and pension records with appropriate professionals.", "priority": "when-ready", "why": "Legal appointments and benefit nominations may become outdated after major family changes.", "legalRef": "https://www.courts.go.jp/english/" }, { "step": 2, "action": "Keep an asset and digital-account index; store credentials only in a suitable password manager.", "priority": "when-ready", "why": "A secure index helps authorised people find records without exposing secrets.", "legalRef": "Provider terms and security guidance" }], "mustHaveDocuments": ["Updated will and guardianship information", "Current pension and insurance records", "Secure family record index"], "criticalMistakes": ["Leaving outdated representatives or nominations", "Storing credentials in spreadsheets or PDFs", "Failing to retain provider confirmations"] }
+    ],
+    "quickReference": {
+      "emergency": { "police": "110", "ambulanceAndFire": "119", "visitorInformation": "Use JNTO visitor information for travel-related support; emergencies should go to 110/119." },
+      "healthInsurance": { "note": "Check whether the My Number Card is registered as the health-insurance certificate or whether an eligibility certificate is in use.", "url": "https://www.digital.go.jp/en/policies/mynumber/faq-insurance-card/" },
+      "inheritanceTax": { "note": "Check current National Tax Agency filing rules and consult a tax professional for the estate's circumstances.", "url": "https://www.nta.go.jp/english/taxes/others/02/15001.htm" }
+    },
+    "glossary": [{ "term": "My Number", "definition": "The 12-digit Individual Number assigned to people with a resident record in Japan; it is distinct from the optional Individual Number Card." }, { "term": "Individual Number Card", "definition": "An identity card that can be used for online procedures and, when registered, as a health insurance certificate under current arrangements." }, { "term": "Survivors' Pension", "definition": "Pension benefits that may be available to eligible survivors under the National Pension or Employees' Pension Insurance system." }]
+  }
+}

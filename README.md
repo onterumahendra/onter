@@ -244,6 +244,7 @@ public/
     ├── SG.json        # Singapore configuration (with access guide)
     ├── HK.json        # Hong Kong configuration (with access guide)
     ├── JP.json        # Japan configuration (with access guide)
+    ├── KR.json        # South Korea configuration (with access guide)
     └── README.md      # Configuration guide
 ```
 
@@ -264,6 +265,7 @@ Onter uses a JSON-based configuration system for easy internationalization:
 - **SG** - Singapore ($ SGD)
 - **HK** - Hong Kong (HK$ HKD)
 - **JP** - Japan (¥ JPY)
+- **KR** - South Korea (₩ KRW)
 
 ### Adding a New Country
 
