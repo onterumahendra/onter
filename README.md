@@ -236,7 +236,10 @@ public/
 └── configs/           # Country-specific JSON configurations
     ├── IN.json        # India configuration (with access guide)
     ├── US.json        # United States configuration (with access guide)
+    ├── CA.json        # Canada configuration (with access guide)
     ├── GB.json        # Great Britain configuration (with access guide)
+    ├── AU.json        # Australia configuration (with access guide)
+    ├── NZ.json        # New Zealand configuration (with access guide)
     └── README.md      # Configuration guide
 ```
 
@@ -251,6 +254,8 @@ Onter uses a JSON-based configuration system for easy internationalization:
 - 🇺🇸 **US** - United States ($ USD)
 - 🇨🇦 **CA** - Canada (C$ CAD)
 - **GB** - Great Britain (£ GBP; England, Scotland, and Wales)
+- **AU** - Australia ($ AUD)
+- **NZ** - New Zealand ($ NZD)
 
 ### Adding a New Country
 

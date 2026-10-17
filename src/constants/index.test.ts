@@ -19,7 +19,7 @@ const config = {
 describe('country constants and public configuration API', () => {
   it('returns country metadata, codes, and feature flags', () => {
     expect(getAvailableCountries()).toBe(AVAILABLE_COUNTRIES);
-    expect(getAvailableCountryCodes()).toEqual(['IN', 'US', 'CA', 'GB']);
+    expect(getAvailableCountryCodes()).toEqual(['IN', 'US', 'CA', 'GB', 'AU', 'NZ']);
     expect(DEFAULT_COUNTRY).toBe('IN');
     expect(FEATURE_FLAGS.ENABLE_PASSPHRASE).toBe(false);
   });

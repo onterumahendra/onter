@@ -1,0 +1,303 @@
+{
+  "countryCode": "NZ",
+  "countryName": "New Zealand",
+  "currency": "NZD",
+  "currencySymbol": "$",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Identity and contact details for family, health, financial, and government administration. IRD and health identifiers are sensitive and optional.",
+      "fields": [
+        { "label": "Full Legal Name", "name": "full_name", "type": "text", "placeholder": "Name as shown on official records", "validation": { "required": true, "minLength": 2, "errorMessage": "Full legal name is required" } },
+        { "label": "Date of Birth", "name": "date_of_birth", "type": "date", "validation": { "required": true, "errorMessage": "Date of birth is required" } },
+        { "label": "IRD Number (if useful)", "name": "ird_number", "type": "text", "placeholder": "As shown in Inland Revenue records; store securely" },
+        { "label": "NHI Number (if known)", "name": "nhi_number", "type": "text", "placeholder": "As shown in health records" },
+        { "label": "Passport Number (if applicable)", "name": "passport_no", "type": "text", "placeholder": "Passport number" },
+        { "label": "Driver Licence Number (if applicable)", "name": "drivers_license_no", "type": "text", "placeholder": "Driver licence number" },
+        { "label": "Primary Phone Number", "name": "phone", "type": "text", "placeholder": "+64 or local number", "validation": { "required": true, "errorMessage": "Primary phone number is required" } },
+        { "label": "Email Address", "name": "email", "type": "email", "placeholder": "name@example.co.nz", "validation": { "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", "errorMessage": "Enter a valid email address or leave blank" } },
+        { "label": "Residential Address", "name": "residential_address", "type": "textarea", "placeholder": "Street, suburb, town or city, postcode" },
+        { "label": "Region / Local Authority", "name": "region", "type": "text", "placeholder": "Region, district, or council if relevant" }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "Trusted people to contact. Being listed does not itself grant legal authority to make decisions or access accounts.",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        { "label": "Relationship", "name": "relationship", "type": "text", "placeholder": "Partner, whānau, friend, or other", "validation": { "required": true, "errorMessage": "Relationship is required" } },
+        { "label": "Name", "name": "name", "type": "text", "placeholder": "Full name", "validation": { "required": true, "minLength": 2, "errorMessage": "Name is required" } },
+        { "label": "Phone Number", "name": "phone", "type": "text", "placeholder": "+64 or local number", "validation": { "required": true, "errorMessage": "Phone number is required" } },
+        { "label": "Email / Address", "name": "contact_details", "type": "text", "placeholder": "Optional contact details" },
+        { "label": "Role / Instructions", "name": "role", "type": "text", "placeholder": "Next of kin, executor, attorney, or other" }
+      ]
+    },
+    {
+      "section": "Health and Care Information",
+      "type": "simple",
+      "description": "Optional health and care information. Publicly funded services depend on eligibility; ACC may support accepted accident-injury claims.",
+      "fields": [
+        { "label": "GP / Medical Centre", "name": "medical_practice", "type": "text", "placeholder": "Practice name and contact details" },
+        { "label": "Known Medical Conditions", "name": "medical_conditions", "type": "textarea", "placeholder": "Relevant diagnoses or care needs" },
+        { "label": "Allergies and Reactions", "name": "allergies", "type": "textarea", "placeholder": "Known allergies, reactions, or none known" },
+        { "label": "Current Medicines", "name": "medications", "type": "textarea", "placeholder": "Medicine, dose, and where the current list is kept" },
+        { "label": "Blood Group (if confirmed)", "name": "blood_group", "type": "select", "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"] },
+        { "label": "Care / Accessibility Needs", "name": "care_needs", "type": "textarea", "placeholder": "Relevant communication, accessibility, or care needs" },
+        { "label": "Advance Directive / Care Plan Location", "name": "care_plan_location", "type": "text", "placeholder": "Secure location of current formal documents" }
+      ]
+    },
+    {
+      "section": "Insurance details",
+      "type": "table",
+      "description": "Private, employer, property, and other cover. Publicly funded healthcare has eligibility rules, and ACC is a separate accident-injury scheme.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Policy Holder", "name": "insured_name", "type": "text", "placeholder": "Name on policy", "validation": { "required": true, "errorMessage": "Policy holder is required" } },
+        { "label": "Cover Type", "name": "insurance_type", "type": "select", "options": ["Life", "Health", "Trauma / Critical Illness", "Income Protection", "Total Permanent Disability", "House", "Contents", "Vehicle", "Travel", "Landlord", "Business", "Other"], "validation": { "required": true, "errorMessage": "Select a cover type" } },
+        { "label": "Insurer / Provider", "name": "provider", "type": "text", "placeholder": "Insurer or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Policy / Member Reference", "name": "policy_no", "type": "text", "placeholder": "Policy or member reference", "validation": { "required": true, "errorMessage": "Reference is required" } },
+        { "label": "Insured People / Beneficiary", "name": "beneficiary", "type": "text", "placeholder": "As recorded with provider" },
+        { "label": "Claims Contact", "name": "claims_contact", "type": "text", "placeholder": "Phone, email, or official website" },
+        { "label": "Premium and Frequency", "name": "premium_frequency", "type": "text", "placeholder": "Optional amount and payment frequency" },
+        { "label": "Renewal / Review Date", "name": "renewal_date", "type": "date" },
+        { "label": "Policy Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Bank accounts",
+      "type": "table",
+      "description": "New Zealand bank and credit union accounts. Record the complete account format, including suffix where shown; accepted details vary by institution.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Account Holder(s)", "name": "holder_name", "type": "text", "placeholder": "Name(s) on account", "validation": { "required": true, "errorMessage": "Account holder is required" } },
+        { "label": "Bank / Credit Union", "name": "bank_name", "type": "text", "placeholder": "Institution name", "validation": { "required": true, "errorMessage": "Institution name is required" } },
+        { "label": "Account Type", "name": "account_type", "type": "select", "options": ["Everyday / Transaction", "Savings", "Joint", "Business", "Term Deposit", "Other"] },
+        { "label": "Account Number (including suffix)", "name": "account_no", "type": "text", "placeholder": "Use the complete format supplied by your bank" },
+        { "label": "Branch / Bank Code (if useful)", "name": "branch_code", "type": "text", "placeholder": "As shown by the institution" },
+        { "label": "Account Owner / Authority Notes", "name": "ownership_notes", "type": "text", "placeholder": "Joint holder or authorised signatory details" },
+        { "label": "Bank Contact", "name": "provider_contact", "type": "text", "placeholder": "Bereavement or customer-service contact" },
+        { "label": "Statement Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Savings and Investments",
+      "type": "table",
+      "description": "Savings and investment assets. Record optional estimates with an as-of date; confirm ownership, tax treatment, and beneficiary details with the provider.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Term Deposit", "PIE Fund", "Managed Fund", "Shares", "Exchange-Traded Fund", "Bonds", "Investment Account", "Investment Property", "Business Interest", "Cryptoasset", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Provider / Institution", "name": "provider", "type": "text", "placeholder": "Bank, broker, registry, or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Account / Holding Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Owner(s)", "name": "owners", "type": "text", "placeholder": "Sole, joint, trust, or company ownership" },
+        { "label": "Beneficiary / Nomination", "name": "beneficiary", "type": "text", "placeholder": "Where current designation is recorded" },
+        { "label": "Approximate Value (NZD)", "name": "value", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Value As Of", "name": "value_date", "type": "date" },
+        { "label": "Contact / Documents Location", "name": "contact_location", "type": "text", "placeholder": "Provider contact or secure record location" }
+      ]
+    },
+    {
+      "section": "Pensions and Government Benefits",
+      "type": "table",
+      "description": "KiwiSaver, NZ Super, workplace and personal schemes, and government supports. Eligibility, survivor entitlements, and withdrawal rules depend on each programme.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Plan / Benefit Type", "name": "plan_type", "type": "select", "options": ["KiwiSaver", "NZ Superannuation", "Workplace Pension", "Personal Pension / Annuity", "Veterans' Pension", "Work and Income Payment", "ACC Support", "Student Loan", "Other"], "validation": { "required": true, "errorMessage": "Select a plan or benefit type" } },
+        { "label": "Scheme / Administrator", "name": "provider", "type": "text", "placeholder": "Provider or government agency", "validation": { "required": true, "errorMessage": "Administrator is required" } },
+        { "label": "Employer (if applicable)", "name": "employer", "type": "text", "placeholder": "Current or former employer" },
+        { "label": "Member / Client Reference", "name": "member_reference", "type": "text", "placeholder": "Reference, if known" },
+        { "label": "Beneficiary / Survivor Notes", "name": "beneficiary", "type": "text", "placeholder": "Where current scheme details are recorded" },
+        { "label": "Scheme Contact", "name": "contact", "type": "text", "placeholder": "Phone, email, or official website" },
+        { "label": "Statement / Decision Letter Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Property and Vehicles",
+      "type": "table",
+      "description": "Property, tenancies, vehicles, and registrations. Ownership, estate, title, and transfer steps depend on the asset and applicable New Zealand law.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Principal Residence", "Other Property", "Rental Property", "Lease / Tenancy", "Motor Vehicle", "Boat / Caravan", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Address / Description", "name": "address_description", "type": "textarea", "placeholder": "Full address or asset description", "validation": { "required": true, "errorMessage": "Address or description is required" } },
+        { "label": "Owner(s) / Ownership", "name": "owners", "type": "text", "placeholder": "Names and ownership as recorded" },
+        { "label": "Record of Title / Registration Reference", "name": "title_reference", "type": "text", "placeholder": "Record of title, vehicle plate, or other reference" },
+        { "label": "Mortgage / Lien / Lender", "name": "mortgage_lien", "type": "text", "placeholder": "Lender and reference; no login details" },
+        { "label": "Insurer / Policy Reference", "name": "insurance", "type": "text", "placeholder": "Provider and policy reference" },
+        { "label": "Approximate Value and Date", "name": "value_date", "type": "text", "placeholder": "Optional estimate and valuation date" },
+        { "label": "Title / Tenancy / Registration Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Loans and Liabilities",
+      "type": "table",
+      "description": "Mortgages, credit, student loans, tax, and other liabilities. Confirm legal responsibility before making payments or changing accounts.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Liability Type", "name": "liability_type", "type": "select", "options": ["Mortgage", "Credit Card", "Personal Loan", "Overdraft", "Student Loan", "Vehicle Finance", "Business Debt", "IRD / Tax", "Other"], "validation": { "required": true, "errorMessage": "Select a liability type" } },
+        { "label": "Lender / Creditor", "name": "creditor", "type": "text", "placeholder": "Institution or organisation", "validation": { "required": true, "errorMessage": "Creditor is required" } },
+        { "label": "Account Reference", "name": "account_reference", "type": "text", "placeholder": "Reference, if useful" },
+        { "label": "Borrower(s) / Guarantor", "name": "borrowers", "type": "text", "placeholder": "Names and shared responsibility" },
+        { "label": "Approximate Balance (NZD)", "name": "balance", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Balance As Of", "name": "balance_date", "type": "date" },
+        { "label": "Payment / Review Details", "name": "payment_details", "type": "text", "placeholder": "Optional amount and frequency" },
+        { "label": "Creditor Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact or secure record location" }
+      ]
+    },
+    {
+      "section": "Employment and Income",
+      "type": "table",
+      "description": "Employment, business, regular income, and benefits that may support household or estate administration.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Income / Benefit Type", "name": "income_type", "type": "select", "options": ["Employment", "Self-Employment", "Business", "KiwiSaver / Pension", "NZ Superannuation", "Work and Income Payment", "ACC Payment", "Rental Income", "Other"], "validation": { "required": true, "errorMessage": "Select an income or benefit type" } },
+        { "label": "Employer / Paying Organisation", "name": "organisation", "type": "text", "placeholder": "Employer or programme" },
+        { "label": "HR / Payroll / Claim Contact", "name": "contact_reference", "type": "text", "placeholder": "Contact and reference details" },
+        { "label": "Approximate Amount and Frequency", "name": "amount_frequency", "type": "text", "placeholder": "Optional estimate" },
+        { "label": "Survivor / Dependant Benefit Notes", "name": "survivor_benefit", "type": "text", "placeholder": "Where programme or plan terms are recorded" },
+        { "label": "Supporting Records Location", "name": "document_location", "type": "text", "placeholder": "Payslips, tax summaries, or award letters" }
+      ]
+    },
+    {
+      "section": "Tax and Government Records",
+      "type": "table",
+      "description": "Reference details for Inland Revenue, local authorities, ACC, and other agencies. Never record myIR, RealMe, banking credentials, or one-time codes.",
+      "maxRows": 25,
+      "columns": [
+        { "label": "Record Type", "name": "record_type", "type": "select", "options": ["Inland Revenue Individual Tax", "IRD Business / GST", "PAYE / Employer", "Student Loan", "Rates / Local Council", "ACC", "Work and Income / MSD", "Other"], "validation": { "required": true, "errorMessage": "Select a record type" } },
+        { "label": "Authority / Provider", "name": "authority", "type": "text", "placeholder": "Inland Revenue, council, ACC, MSD, or other" },
+        { "label": "Reference Number", "name": "reference", "type": "text", "placeholder": "Optional reference number" },
+        { "label": "Tax Year / Region", "name": "period_region", "type": "text", "placeholder": "If relevant" },
+        { "label": "Tax Agent / Adviser", "name": "adviser", "type": "text", "placeholder": "Name and contact details" },
+        { "label": "Returns / Correspondence Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Legal and Estate Planning",
+      "type": "table",
+      "description": "Index wills, enduring powers of attorney, advance directives, and estate documents. A New Zealand EPA for property is separate from one for personal care and welfare.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Document / Arrangement", "name": "document_type", "type": "select", "options": ["Will", "Codicil", "Enduring Power of Attorney - Property", "Enduring Power of Attorney - Personal Care and Welfare", "Advance Directive", "Trust", "Relationship Property Agreement", "Welfare Guardian / Court Order", "Funeral Wishes", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Governing Law / Notes", "name": "jurisdiction", "type": "text", "placeholder": "New Zealand or any relevant cross-border law" },
+        { "label": "Made / Last Reviewed", "name": "review_date", "type": "date" },
+        { "label": "Executor / Attorney / Representative", "name": "appointed_person", "type": "text", "placeholder": "Name and contact, if appropriate" },
+        { "label": "Lawyer / Trustee / Adviser", "name": "professional_contact", "type": "text", "placeholder": "Firm and contact details" },
+        { "label": "Original / Registered Copy Location", "name": "document_location", "type": "text", "placeholder": "Secure location and registration details" },
+        { "label": "Instructions / Notes", "name": "instructions", "type": "textarea", "placeholder": "Point to formal instructions; do not duplicate sensitive content" }
+      ]
+    },
+    {
+      "section": "IMPORTANT DOCUMENTS LOCATION",
+      "type": "table",
+      "description": "An index of where originals and current copies are kept, not the documents themselves.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Document Type", "name": "document_type", "type": "select", "options": ["Birth / Citizenship Certificate", "Passport", "IRD Correspondence", "NHI / Health Records", "Driver Licence / Vehicle Papers", "Will / EPA / Advance Directive", "Record of Title / Mortgage", "Bank / Investment Statements", "KiwiSaver / Pension Records", "Insurance Policies", "Tax Returns / Income Summaries", "Medical Records", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Location", "name": "location", "type": "text", "placeholder": "Physical or secure digital location", "validation": { "required": true, "errorMessage": "Location is required" } },
+        { "label": "Who Can Help Locate It", "name": "contact", "type": "text", "placeholder": "Trusted person, lawyer, or institution" },
+        { "label": "Last Checked", "name": "last_checked", "type": "date" }
+      ]
+    },
+    {
+      "section": "Digital Accounts and Devices",
+      "type": "table",
+      "description": "Inventory important services and devices. Never enter passwords, PINs, myIR or RealMe credentials, one-time codes, security answers, or recovery keys.",
+      "maxRows": 50,
+      "columns": [
+        { "label": "Account / Device Type", "name": "account_type", "type": "select", "options": ["Primary Email", "myIR / RealMe (reference only)", "Phone Provider", "Password Manager", "Cloud Storage", "Banking / KiwiSaver", "Social Media", "Photo / File Archive", "Domain / Website", "Subscription", "Computer / Phone / Tablet", "Crypto Wallet", "Other"], "validation": { "required": true, "errorMessage": "Select an account or device type" } },
+        { "label": "Provider / Description", "name": "provider", "type": "text", "placeholder": "Service or device name", "validation": { "required": true, "errorMessage": "Provider or description is required" } },
+        { "label": "Account Identifier (not password)", "name": "account_identifier", "type": "text", "placeholder": "Username or email, if safe to record" },
+        { "label": "Recovery / Multi-factor Method", "name": "recovery_method", "type": "text", "placeholder": "Method only; no codes or secret values" },
+        { "label": "Legacy Contact / Trusted Person", "name": "legacy_contact", "type": "text", "placeholder": "Person and contact details" },
+        { "label": "Secure Instructions Location", "name": "instructions_location", "type": "text", "placeholder": "Password-manager emergency access or secure location" },
+        { "label": "Preference", "name": "account_preference", "type": "select", "options": ["Preserve", "Close", "Memorialise / Transfer", "Review with whānau", "Not specified"] }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Other practical notes for trusted family members or representatives. Do not put account secrets here.",
+      "fields": [
+        { "label": "Additional Notes", "name": "notes", "type": "textarea", "placeholder": "Non-secret notes or pointers to secure records", "validation": { "maxLength": 5000, "errorMessage": "Notes cannot exceed 5000 characters" } }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "For an immediate emergency involving police, fire, or ambulance, call 111.",
+      "For urgent health advice that is not an emergency, call Healthline on 0800 611 116.",
+      "For poison advice, call the National Poisons Centre on 0800 764 766.",
+      "For brief emotional support, call or text 1737. If someone is in immediate danger, call 111.",
+      "Review emergency contacts, health information, legal document locations, insurance, bank accounts, KiwiSaver, pensions, and essential liabilities.",
+      "Use official bereavement and provider processes. Do not access accounts or use credentials without authority.",
+      "Keep the export encrypted and never store passwords, PINs, myIR/RealMe credentials, authentication codes, or recovery keys in it."
+    ],
+    "emergencyServices": {
+      "medical": "111",
+      "police": "111 for emergencies; 105 for non-emergency Police contact",
+      "fire": "111",
+      "poison_control": "National Poisons Centre: 0800 764 766",
+      "urgent_health_advice": "Healthline: 0800 611 116",
+      "suicide_prevention": "1737: call or text for brief emotional support"
+    },
+    "sectionGuidance": {
+      "Personal Details": { "description": "Identity and contact details for official, health, financial, and government processes. IRD and NHI identifiers are sensitive and optional.", "usefulFor": ["Inland Revenue", "Banks and KiwiSaver providers", "Health providers", "Legal representatives"], "firstActions": ["Check identifiers against official records", "Protect IRD details and share them only when required", "Keep address and contact details current"], "criticalFields": ["Full Legal Name", "Date of Birth", "IRD Number (if useful)", "NHI Number (if known)"] },
+      "Emergency contact details": { "description": "Trusted people and their possible roles; this list does not itself create legal authority.", "usefulFor": ["Whānau and family", "Emergency responders", "Health providers", "Executors and attorneys"], "firstActions": ["Confirm each person knows they are listed", "Verify phone and email details", "Locate separate formal appointment documents when authority is needed"], "criticalFields": ["Relationship", "Name", "Phone Number", "Role / Instructions"] },
+      "Health and Care Information": { "description": "Optional health and care information and locations of formal directives. Publicly funded care depends on eligibility; ACC may cover accepted accident-related injuries.", "usefulFor": ["Ambulance and hospital staff", "GP and care teams", "Family and appointed decision-makers"], "firstActions": ["Call 111 for an emergency", "Tell clinicians about known allergies and current medicines", "Locate any advance directive and confirm it is the current signed document"], "criticalFields": ["GP / Medical Centre", "Known Medical Conditions", "Allergies and Reactions", "Current Medicines"] },
+      "Insurance details": { "description": "Private, employer, house, vehicle, and other policies. Public health service eligibility and ACC are separate from private insurance.", "usefulFor": ["Insurers and claims teams", "Executors and beneficiaries", "Household members"], "firstActions": ["Find current policy schedules and claims contacts", "Check cover and beneficiary details with the provider", "Ask about evidence and claim requirements"], "criticalFields": ["Cover Type", "Insurer / Provider", "Policy / Member Reference", "Claims Contact"] },
+      "Bank accounts": { "description": "New Zealand bank and credit union accounts, recorded in the format the institution uses.", "usefulFor": ["Banks and credit unions", "Authorised representatives", "Household bill management"], "firstActions": ["Confirm account holders and authorities with the bank", "Use the provider's bereavement process", "Keep current statements in secure storage"], "criticalFields": ["Bank / Credit Union", "Account Number (including suffix)", "Account Owner / Authority Notes"] },
+      "Savings and Investments": { "description": "Deposits, PIE funds, securities, property interests, and other investments.", "usefulFor": ["Executors or administrators", "Banks, brokers, and registries", "Tax and financial advisers"], "firstActions": ["Confirm ownership and current valuations with providers", "Check tax and beneficiary treatment before transfer or sale", "Record valuation dates and keep statements"], "criticalFields": ["Asset Type", "Provider / Institution", "Account / Holding Reference", "Approximate Value (NZD)"] },
+      "Pensions and Government Benefits": { "description": "KiwiSaver, NZ Super, workplace schemes, and public support; eligibility and survivor entitlements vary by programme.", "usefulFor": ["KiwiSaver providers", "Work and Income", "ACC", "Dependants and beneficiaries"], "firstActions": ["Contact each scheme or agency about notification and claim steps", "Check current beneficiary and withdrawal records with the provider", "Confirm eligibility and tax treatment using current official guidance"], "criticalFields": ["Plan / Benefit Type", "Scheme / Administrator", "Member / Client Reference", "Beneficiary / Survivor Notes"] },
+      "Property and Vehicles": { "description": "Property, tenancies, vehicles, titles, lending, and associated cover.", "usefulFor": ["Executors and administrators", "Lenders and insurers", "Land Information New Zealand and vehicle authorities"], "firstActions": ["Locate title, tenancy, loan, and registration records", "Confirm ownership and transfer requirements with the relevant authority", "Check insurance and essential services before changing arrangements"], "criticalFields": ["Address / Description", "Owner(s) / Ownership", "Record of Title / Registration Reference", "Mortgage / Lien / Lender"] },
+      "Loans and Liabilities": { "description": "Debts and recurring obligations, including joint borrowers and guarantees.", "usefulFor": ["Executors and administrators", "Lenders and creditors", "Household cash-flow planning"], "firstActions": ["Contact creditors through official channels", "Confirm who is liable before paying or cancelling", "Ask whether insurance or a guarantee affects the balance"], "criticalFields": ["Liability Type", "Lender / Creditor", "Borrower(s) / Guarantor", "Approximate Balance (NZD)"] },
+      "Employment and Income": { "description": "Employment, business, KiwiSaver, ACC, and government payment sources.", "usefulFor": ["Employer HR and payroll", "Work and Income", "ACC", "Tax agents"], "firstActions": ["Ask employers about final pay and any group cover", "Check benefit continuation or survivor claims", "Keep tax summaries and award letters"], "criticalFields": ["Income / Benefit Type", "Employer / Paying Organisation", "HR / Payroll / Claim Contact"] },
+      "Tax and Government Records": { "description": "References for Inland Revenue and other agencies; never store portal credentials.", "usefulFor": ["Inland Revenue", "Local authorities", "ACC and MSD", "Tax agents"], "firstActions": ["Use official services and confirm current filing duties", "Keep tax records and correspondence securely", "Never share myIR, RealMe, or banking authentication secrets"], "criticalFields": ["Record Type", "Authority / Provider", "Reference Number", "Returns / Correspondence Location"] },
+      "Legal and Estate Planning": { "description": "Estate and incapacity documents. A property EPA and a personal care and welfare EPA are distinct New Zealand arrangements.", "usefulFor": ["Executors and administrators", "Attorneys and welfare decision-makers", "Lawyers and the High Court"], "firstActions": ["Locate the current signed document and identify appointed people", "Confirm whether the relevant EPA has been activated where required", "Use Govt.nz and qualified legal advice for probate, estate, and cross-border questions"], "criticalFields": ["Document / Arrangement", "Governing Law / Notes", "Executor / Attorney / Representative", "Original / Registered Copy Location"] },
+      "IMPORTANT DOCUMENTS LOCATION": { "description": "An index to identity, financial, health, and legal documents.", "usefulFor": ["Whānau and family", "Executors and administrators", "Financial institutions and advisers"], "firstActions": ["Secure originals and verify current versions", "Tell the appropriate representative where documents are stored", "Share location details only with trusted people"], "criticalFields": ["Document Type", "Location", "Who Can Help Locate It"] },
+      "Digital Accounts and Devices": { "description": "A safe inventory of online accounts, devices, and recovery pointers, not passwords.", "usefulFor": ["Digital legacy contacts", "Executors", "Service providers"], "firstActions": ["Use each provider's official legacy or bereavement process", "Use password-manager emergency access instead of putting secrets in this export", "Secure devices and do not bypass account controls"], "criticalFields": ["Provider / Description", "Account Identifier (not password)", "Recovery / Multi-factor Method", "Legacy Contact / Trusted Person"] },
+      "Additional details": { "description": "Other practical notes that do not fit another section. Do not place credentials or access codes here.", "usefulFor": ["Trusted whānau and family", "Executors", "Professional advisers"], "firstActions": ["Keep notes current and non-secret", "Point to formal documents or a secure credential manager where needed"], "criticalFields": ["Additional Notes"] }
+    },
+    "legalNotes": [
+      "This guide is general information, not legal, tax, insurance, or financial advice.",
+      "Publicly funded health and disability services have eligibility rules. ACC is a separate scheme for injuries and acceptance and support depend on its rules.",
+      "A New Zealand EPA for property and an EPA for personal care and welfare are distinct. EPA authority ends on death; an executor's authority comes from the will and any required court grant.",
+      "Estate administration, probate, tax, relationship property, and trust questions can depend on the facts and may require High Court or professional steps. Confirm with Govt.nz, Inland Revenue, and a qualified New Zealand adviser.",
+      "Official: Death and bereavement: https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/",
+      "Official: Wills, probate, and estates: https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/wills-probate-estates/",
+      "Official: Enduring powers of attorney: https://www.govt.nz/browse/family-and-whanau/power-of-attorney-enduring-and-ordinary/",
+      "Official: Deceased estates and tax: https://www.ird.govt.nz/roles/deceased-estates",
+      "Official: Publicly funded healthcare eligibility: https://www.healthnz.govt.nz/hospitals-services/eligibility-subsidies/publicly-funded-healthcare",
+      "Health support: https://www.govt.nz/browse/health/health-services/",
+      "Crisis support: 1737: https://1737.org.nz/",
+      "Poison advice: National Poisons Centre: https://poisons.co.nz/"
+    ],
+    "generalGuidance": {
+      "fileStructure": ["The export ZIP may contain a spreadsheet, PDFs, and this access guide.", "Treat every file as sensitive; it may include identity, health, financial, and legal references."],
+      "dataAccess": ["Extract to a private, encrypted location and keep an untouched backup.", "Share only with trusted authorised people; a family relationship alone does not grant legal access.", "Store credentials in a reputable password manager with an emergency-access feature, not in this export."],
+      "securityTips": ["Never put passwords, PINs, IRD portal credentials, authentication codes, or recovery keys in the export.", "Use encrypted storage and secure channels for sensitive documents.", "Review after major life events and at least annually; remove outdated copies securely."]
+    }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "A general checklist after a death in New Zealand. Confirm representative authority and current legal, tax, and provider requirements before acting.",
+    "meta": { "title": "Family Recovery Roadmap - New Zealand", "version": "1.0", "lastReviewed": "2026-10-17", "reviewedBy": "Government sources reviewed; individual legal and tax advice may be needed", "generatedOn": "2026-10-17" },
+    "intro": { "condolence": "We are sorry for your loss. This checklist is intended to make the first practical steps clearer.", "howToUse": "Follow official registration guidance, identify the executor or administrator, notify relevant agencies and providers, and keep a record of each action." },
+    "startHere": ["Follow the official death-registration and certificate process.", "Locate the will and identify the executor; check whether a High Court grant or other authority is required.", "Notify Inland Revenue, Work and Income, ACC, banks, insurers, employers, and KiwiSaver or pension providers as appropriate.", "List assets, debts, regular bills, and claims; confirm responsibility before changing payments or distributing property.", "Keep a log of contacts and documents supplied. Never use another person's myIR, RealMe, banking, or device credentials."],
+    "legalFramework": ["Govt.nz death, wills, probate, and estate processes.", "Inland Revenue final individual and estate tax responsibilities.", "Different enduring powers of attorney for property and personal care and welfare; an EPA does not appoint an executor and ends on death.", "KiwiSaver, NZ Super, ACC, insurance, relationship property, and trust rules depend on programme and personal circumstances."],
+    "phases": [
+      { "phase": 1, "title": "Register and establish authority", "timeframe": "First days", "priority": "do-first", "focus": "Follow registration instructions, locate the will, and identify who may act.", "keyActions": [{ "step": 1, "action": "Follow the official registration process and obtain the death certificate or records required by providers.", "priority": "do-first", "why": "The registrar and each institution set the applicable evidence requirements.", "legalRef": "https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/" }, { "step": 2, "action": "Find the will and confirm the executor; seek advice if there is no will, an overseas asset, or a dispute.", "priority": "do-first", "why": "The executor or court-appointed administrator has duties and may need a grant before dealing with assets.", "legalRef": "https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/wills-probate-estates/" }], "mustHaveDocuments": ["Death registration and certificate details", "Will and codicils", "Executor or administrator details", "IRD and NHI record locations", "Bank, KiwiSaver, insurance, property, and debt references"], "criticalMistakes": ["Assuming next of kin automatically has authority", "Treating an EPA as continuing after death", "Putting passwords or recovery codes in an exported record"] },
+      { "phase": 2, "title": "Notify and identify claims", "timeframe": "First weeks", "priority": "do-first", "focus": "Notify government agencies and providers and keep an accurate estate inventory.", "keyActions": [{ "step": 1, "action": "Contact Inland Revenue and other relevant government agencies using current bereavement processes.", "priority": "do-first", "why": "Tax, payments, and entitlements may need to be updated; requirements depend on the situation.", "legalRef": "https://www.ird.govt.nz/roles/deceased-estates" }, { "step": 2, "action": "Contact banks, insurers, employers, lenders, KiwiSaver providers, and utilities separately.", "priority": "do-first", "why": "Government notification does not complete private-provider claims or account administration.", "legalRef": "https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/what-to-do-someone-dies/" }], "mustHaveDocuments": ["Provider statements", "KiwiSaver and insurance details", "Employer and benefit records", "List of recurring bills and liabilities"], "criticalMistakes": ["Automatically stopping essential payments", "Assuming an asset passes outside the estate", "Paying liabilities without confirming responsibility"] },
+      { "phase": 3, "title": "Administer and finalise", "timeframe": "Following weeks and months", "priority": "do-soon", "focus": "Complete the court, tax, property, and provider work required for this estate.", "keyActions": [{ "step": 1, "action": "Confirm whether probate or letters of administration are needed and follow the High Court process when required.", "priority": "do-first", "why": "The process depends on the estate and the organisations holding assets.", "legalRef": "https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/wills-probate-estates/" }, { "step": 2, "action": "Confirm final tax and estate income obligations with Inland Revenue or a qualified tax adviser before distribution.", "priority": "do-first", "why": "The estate can have ongoing income and filing responsibilities.", "legalRef": "https://www.ird.govt.nz/roles/deceased-estates" }], "mustHaveDocuments": ["Grant or administration papers if required", "Asset and liability inventory", "Inland Revenue correspondence", "Property and KiwiSaver records"], "criticalMistakes": ["Distributing assets before confirming court and tax obligations", "Assuming no estate tax or filing duties apply", "Using the deceased person's account credentials"] },
+      { "phase": 4, "title": "Review family arrangements", "timeframe": "When immediate tasks are complete", "priority": "when-ready", "focus": "Review the surviving household's estate, KiwiSaver, insurance, and secure information arrangements.", "keyActions": [{ "step": 1, "action": "Review wills, enduring powers, beneficiaries, insurance, and emergency contacts with appropriate professionals.", "priority": "when-ready", "why": "Major life changes can make current appointments or nominations unsuitable.", "legalRef": "https://www.govt.nz/browse/family-and-whanau/power-of-attorney-enduring-and-ordinary/" }, { "step": 2, "action": "Keep an asset and digital-account index; store credentials only in a suitable password manager.", "priority": "when-ready", "why": "A secure index helps authorised people locate records without exposing secrets.", "legalRef": "Provider terms and security guidance" }], "mustHaveDocuments": ["Updated will and EPA information", "Current KiwiSaver and insurance records", "Secure family record index"], "criticalMistakes": ["Leaving old appointments or beneficiaries in place", "Storing credentials in a spreadsheet or PDF", "Failing to keep provider confirmations"] }
+    ],
+    "quickReference": {
+      "emergency": { "number": "111", "nonEmergencyPolice": "105", "healthline": "0800 611 116", "poisons": "0800 764 766", "emotionalSupport": "1737 call or text" },
+      "estate": { "note": "Check the will, executor, and whether probate or letters of administration are required.", "url": "https://www.govt.nz/browse/family-and-whanau/death-and-bereavement/wills-probate-estates/" },
+      "healthEligibility": { "note": "Eligibility for publicly funded health services depends on status and programme rules; ACC is a separate accident injury scheme.", "url": "https://www.healthnz.govt.nz/hospitals-services/eligibility-subsidies/publicly-funded-healthcare" }
+    },
+    "glossary": [{ "term": "Executor", "definition": "A person named in a will who is responsible for administering the estate, subject to applicable law and any required grant." }, { "term": "Enduring power of attorney", "definition": "A legal appointment for property or personal care and welfare decisions during a person's lifetime; it is separate from a will and does not continue after death." }, { "term": "Probate", "definition": "A High Court grant confirming an executor's authority to administer an estate when required." }]
+  }
+}

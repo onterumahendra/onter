@@ -5,7 +5,7 @@ This directory contains JSON configuration files for different countries. Each f
 ## File Naming Convention
 
 - Use ISO 3166-1 alpha-2 country codes (2 letters)
-- File names should be uppercase: `IN.json`, `US.json`, `GB.json`, etc.
+- File names should be uppercase: `IN.json`, `US.json`, `GB.json`, `AU.json`, `NZ.json`, etc.
 - See: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
 ## Creating a New Country Configuration
@@ -30,6 +30,8 @@ This directory contains JSON configuration files for different countries. Each f
 - `US` - United States ($ USD)
 - `CA` - Canada (C$ CAD)
 - `GB` - Great Britain (£ GBP; England, Scotland, and Wales)
+- `AU` - Australia ($ AUD)
+- `NZ` - New Zealand ($ NZD)
 
 ## Configuration Structure
 
