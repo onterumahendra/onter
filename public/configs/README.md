@@ -22,13 +22,14 @@ This directory contains JSON configuration files for different countries. Each f
    }
    ```
 4. Customize the form sections and fields for your country
-5. Update `src/utils/configLoader.ts` to add your country code to `AVAILABLE_COUNTRIES`
+5. Add your country code to `AVAILABLE_COUNTRIES` in `src/constants/countries.ts`
 
 ## Available Countries
 
 - `IN` - India (₹ INR)
 - `US` - United States ($ USD)
 - `CA` - Canada (C$ CAD)
+- `GB` - Great Britain (£ GBP; England, Scotland, and Wales)
 
 ## Configuration Structure
 

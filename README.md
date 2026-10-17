@@ -236,6 +236,7 @@ public/
 └── configs/           # Country-specific JSON configurations
     ├── IN.json        # India configuration (with access guide)
     ├── US.json        # United States configuration (with access guide)
+    ├── GB.json        # Great Britain configuration (with access guide)
     └── README.md      # Configuration guide
 ```
 
@@ -249,13 +250,14 @@ Onter uses a JSON-based configuration system for easy internationalization:
 - 🇮🇳 **IN** - India (₹ INR)
 - 🇺🇸 **US** - United States ($ USD)
 - 🇨🇦 **CA** - Canada (C$ CAD)
+- **GB** - Great Britain (£ GBP; England, Scotland, and Wales)
 
 ### Adding a New Country
 
 1. Create `public/configs/<CODE>.json` (see [configs/README.md](public/configs/README.md))
 2. Define country-specific form sections and validation
 3. Configure the **Emergency Access Guide** with country-specific emergency numbers, legal notes, and section guidance
-4. Update `AVAILABLE_COUNTRIES` in `src/utils/configLoader.ts`
+4. Update `AVAILABLE_COUNTRIES` in `src/constants/countries.ts`
 5. Test thoroughly, including PDF exports and access guide generation!
 
 See [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) for detailed documentation.

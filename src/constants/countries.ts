@@ -13,7 +13,8 @@ export interface Country {
 export const AVAILABLE_COUNTRIES: Country[] = [
     { code: "IN", name: "India" },
     { code: "US", name: "United States" },
-    { code: "CA", name: "Canada" }
+  { code: "CA", name: "Canada" },
+  { code: "GB", name: "Great Britain" }
 ];
 
 /**

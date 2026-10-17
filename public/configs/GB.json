@@ -1,0 +1,566 @@
+{
+  "countryCode": "GB",
+  "countryName": "Great Britain",
+  "currency": "GBP",
+  "currencySymbol": "£",
+  "formSections": [
+    {
+      "section": "Personal Details",
+      "type": "simple",
+      "description": "Identity and contact details for emergency, family, legal, and financial administration.",
+      "fields": [
+        {
+          "label": "Full Legal Name",
+          "name": "full_name",
+          "type": "text",
+          "placeholder": "Name as shown on official records",
+          "validation": { "required": true, "minLength": 2, "errorMessage": "Full legal name is required" }
+        },
+        {
+          "label": "Date of Birth",
+          "name": "date_of_birth",
+          "type": "date",
+          "validation": { "required": true, "errorMessage": "Date of birth is required" }
+        },
+        {
+          "label": "National Insurance Number",
+          "name": "national_insurance_number",
+          "type": "text",
+          "placeholder": "For example, AB 12 34 56 C",
+          "validation": { "pattern": "^[A-CEGHJ-PR-TW-Z]{2} ?[0-9]{2} ?[0-9]{2} ?[0-9]{2} ?[A-D]$", "errorMessage": "Enter a National Insurance number in the usual format, or leave blank" }
+        },
+        {
+          "label": "NHS Number (if known)",
+          "name": "nhs_number",
+          "type": "text",
+          "placeholder": "10 digits, for example 485 777 3456",
+          "validation": { "pattern": "^[0-9]{10}$|^[0-9]{3} [0-9]{3} [0-9]{4}$", "errorMessage": "NHS number should contain 10 digits" }
+        },
+        {
+          "label": "Passport Number (if applicable)",
+          "name": "passport_no",
+          "type": "text",
+          "placeholder": "Passport number",
+          "validation": { "pattern": "^[A-Za-z0-9]{6,12}$", "errorMessage": "Check the passport number format" }
+        },
+        {
+          "label": "Driving Licence Number (if applicable)",
+          "name": "drivers_license_no",
+          "type": "text",
+          "placeholder": "Driving licence number"
+        },
+        {
+          "label": "Primary Phone Number",
+          "name": "phone",
+          "type": "text",
+          "placeholder": "+44 7xxx xxx xxx or 01xxx xxxxxx"
+        },
+        {
+          "label": "Email Address",
+          "name": "email",
+          "type": "email",
+          "placeholder": "name@example.co.uk",
+          "validation": { "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", "errorMessage": "Please enter a valid email address" }
+        },
+        {
+          "label": "Home Address and Postcode",
+          "name": "residential_address",
+          "type": "textarea",
+          "placeholder": "House number, street, town or city, postcode"
+        },
+        {
+          "label": "Country within Great Britain",
+          "name": "gb_nation",
+          "type": "select",
+          "options": ["England", "Scotland", "Wales"]
+        }
+      ]
+    },
+    {
+      "section": "Emergency contact details",
+      "type": "table",
+      "description": "People to contact in an emergency. Include a trusted person who knows where this record is kept.",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        { "label": "Relationship", "name": "relationship", "type": "text", "placeholder": "For example, partner, relative, friend", "validation": { "required": true, "errorMessage": "Relationship is required" } },
+        { "label": "Name", "name": "name", "type": "text", "placeholder": "Full name", "validation": { "required": true, "minLength": 2, "maxLength": 100, "errorMessage": "Name is required" } },
+        { "label": "Phone Number", "name": "phone", "type": "text", "placeholder": "+44 or UK number", "validation": { "required": true, "errorMessage": "Phone number is required" } },
+        { "label": "Email or Address", "name": "contact_details", "type": "text", "placeholder": "Optional contact details" },
+        { "label": "Role or Instructions", "name": "role", "type": "text", "placeholder": "Next of kin, executor, attorney, or other" }
+      ]
+    },
+    {
+      "section": "Health and Care Information",
+      "type": "simple",
+      "description": "Information that can help family and healthcare professionals. Record a blood group only if confirmed by a reliable medical record.",
+      "fields": [
+        { "label": "GP Practice", "name": "gp_practice", "type": "text", "placeholder": "Practice name and contact number" },
+        { "label": "Known Medical Conditions", "name": "medical_conditions", "type": "textarea", "placeholder": "Include relevant diagnoses and care needs" },
+        { "label": "Allergies and Reactions", "name": "allergies", "type": "textarea", "placeholder": "List allergies, reactions, or none known" },
+        { "label": "Current Medicines", "name": "medications", "type": "textarea", "placeholder": "Medicine name, dose, and where the current list is kept" },
+        { "label": "Blood Group (if confirmed)", "name": "blood_group", "type": "select", "options": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"] },
+        { "label": "Relevant Care or Communication Needs", "name": "care_needs", "type": "textarea", "placeholder": "Accessibility, interpreter, or other important needs" },
+        { "label": "Advance Decision / Care Plan Location", "name": "advance_care_location", "type": "text", "placeholder": "Where the document is stored; do not rely on this note as a substitute" }
+      ]
+    },
+    {
+      "section": "Insurance policies",
+      "type": "table",
+      "description": "Private and employer-provided cover. NHS access is not a private health insurance policy.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Policy Holder", "name": "insured_name", "type": "text", "placeholder": "Name on the policy", "validation": { "required": true, "errorMessage": "Policy holder is required" } },
+        { "label": "Cover Type", "name": "insurance_type", "type": "select", "options": ["Life", "Private Medical", "Dental", "Income Protection", "Critical Illness", "Home Buildings", "Home Contents", "Motor", "Travel", "Pet", "Mortgage Protection", "Business", "Other"], "validation": { "required": true, "errorMessage": "Select a cover type" } },
+        { "label": "Insurer / Provider", "name": "provider", "type": "text", "placeholder": "Insurance provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Policy Number", "name": "policy_no", "type": "text", "placeholder": "Policy number", "validation": { "required": true, "errorMessage": "Policy number is required" } },
+        { "label": "Covered People / Beneficiary", "name": "beneficiary", "type": "text", "placeholder": "As listed with the insurer" },
+        { "label": "Claims Contact", "name": "claims_contact", "type": "text", "placeholder": "Phone, email, or claims URL" },
+        { "label": "Premium and Frequency", "name": "premium_amount", "type": "text", "placeholder": "Amount and monthly / annual frequency" },
+        { "label": "Renewal / Review Date", "name": "renewal_date", "type": "date" },
+        { "label": "Policy Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Bank accounts",
+      "type": "table",
+      "description": "Current, savings, and cash accounts. UK sort codes are commonly six digits and account numbers commonly eight digits; confirm the accepted details with the provider.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Account Holder(s)", "name": "holder_name", "type": "text", "placeholder": "Name(s) on account", "validation": { "required": true, "errorMessage": "Account holder is required" } },
+        { "label": "Bank / Building Society", "name": "bank_name", "type": "text", "placeholder": "Provider name", "validation": { "required": true, "errorMessage": "Provider name is required" } },
+        { "label": "Account Type", "name": "account_type", "type": "select", "options": ["Current", "Savings", "Cash ISA", "Joint", "Business", "Other"] },
+        { "label": "Account Number", "name": "account_no", "type": "text", "placeholder": "Account number" },
+        { "label": "Sort Code", "name": "sort_code", "type": "text", "placeholder": "12-34-56" },
+        { "label": "IBAN / BIC (if relevant)", "name": "iban_bic", "type": "text", "placeholder": "For international payments" },
+        { "label": "Joint Holder / Mandate Notes", "name": "joint_details", "type": "text", "placeholder": "Names and relevant account arrangements" },
+        { "label": "Provider Contact", "name": "provider_contact", "type": "text", "placeholder": "Bereavement or customer service details" },
+        { "label": "Statement / Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Savings and investments",
+      "type": "table",
+      "description": "Investments, savings products, and other financial assets. Values are optional and should include an as-of date if recorded.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Stocks and Shares ISA", "Investment Account", "Premium Bonds / NS&I", "Shares", "Bonds", "Funds", "Cash Savings", "Business Interest", "Cryptoasset", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Provider / Institution", "name": "provider", "type": "text", "placeholder": "Provider or institution", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Account or Reference", "name": "account_reference", "type": "text", "placeholder": "Account or policy reference" },
+        { "label": "Owner(s)", "name": "owner", "type": "text", "placeholder": "Sole, joint, or other ownership" },
+        { "label": "Beneficiary / Nomination", "name": "beneficiary", "type": "text", "placeholder": "As recorded with the provider" },
+        { "label": "Approximate Value", "name": "value", "type": "number", "placeholder": "Optional estimate in GBP", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Value As Of", "name": "value_date", "type": "date" },
+        { "label": "Provider Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact details or secure record location" }
+      ]
+    },
+    {
+      "section": "Pensions",
+      "type": "table",
+      "description": "State, workplace, personal, and defined-benefit pensions. Record scheme contacts and beneficiary nominations; provider rules determine entitlements.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Pension Type", "name": "pension_type", "type": "select", "options": ["State Pension", "Workplace Defined Contribution", "Workplace Defined Benefit", "Personal Pension", "SIPP", "Annuity", "Public Service Pension", "Other"], "validation": { "required": true, "errorMessage": "Select a pension type" } },
+        { "label": "Scheme / Provider", "name": "provider", "type": "text", "placeholder": "Pension scheme or provider", "validation": { "required": true, "errorMessage": "Scheme or provider is required" } },
+        { "label": "Employer (if workplace pension)", "name": "employer", "type": "text", "placeholder": "Current or former employer" },
+        { "label": "Member / Policy Reference", "name": "member_reference", "type": "text", "placeholder": "Reference number" },
+        { "label": "Scheme Contact", "name": "contact", "type": "text", "placeholder": "Phone, email, or website" },
+        { "label": "Beneficiary / Expression of Wish", "name": "beneficiary", "type": "text", "placeholder": "Where nomination details are recorded" },
+        { "label": "Approximate Value / Benefit", "name": "value", "type": "text", "placeholder": "Optional estimate and valuation date" },
+        { "label": "Statement Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Property",
+      "type": "table",
+      "description": "Residential, rental, and other property. Ownership and title rules vary; keep official title and mortgage records available.",
+      "maxRows": 20,
+      "columns": [
+        { "label": "Property Address and Postcode", "name": "address", "type": "textarea", "placeholder": "Full address", "validation": { "required": true, "errorMessage": "Property address is required" } },
+        { "label": "Ownership / Tenure", "name": "ownership_type", "type": "select", "options": ["Sole Owner", "Joint Tenants", "Tenants in Common", "Leaseholder", "Rented", "Other"] },
+        { "label": "Owners and Ownership Notes", "name": "owners", "type": "text", "placeholder": "Names and recorded shares, if known" },
+        { "label": "Land Registry Title Number", "name": "title_number", "type": "text", "placeholder": "If known" },
+        { "label": "Mortgage Lender / Reference", "name": "mortgage_details", "type": "text", "placeholder": "Lender and account reference; do not include passwords" },
+        { "label": "Buildings / Contents Insurer", "name": "insurer", "type": "text", "placeholder": "Provider and policy reference" },
+        { "label": "Approximate Value and Date", "name": "value", "type": "text", "placeholder": "Optional estimate and date" },
+        { "label": "Title / Mortgage Document Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Loans and liabilities",
+      "type": "table",
+      "description": "Mortgages, credit, student loans, tax liabilities, and other debts. Record joint borrowers or guarantors and contact the lender before taking action.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Liability Type", "name": "liability_type", "type": "select", "options": ["Mortgage", "Credit Card", "Personal Loan", "Overdraft", "Student Loan", "Vehicle Finance", "Business Loan", "Tax", "Other"], "validation": { "required": true, "errorMessage": "Select a liability type" } },
+        { "label": "Lender / Creditor", "name": "creditor", "type": "text", "placeholder": "Organisation", "validation": { "required": true, "errorMessage": "Creditor is required" } },
+        { "label": "Account Reference", "name": "account_reference", "type": "text", "placeholder": "Reference number" },
+        { "label": "Borrower(s) / Guarantor", "name": "borrowers", "type": "text", "placeholder": "Names and joint responsibility, if applicable" },
+        { "label": "Approximate Balance", "name": "balance", "type": "number", "placeholder": "Optional balance in GBP", "validation": { "min": 0, "errorMessage": "Enter a non-negative value" } },
+        { "label": "Balance As Of", "name": "balance_date", "type": "date" },
+        { "label": "Payment / Renewal Details", "name": "payment_details", "type": "text", "placeholder": "Amount, frequency, or next review date" },
+        { "label": "Creditor Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact details or secure record location" }
+      ]
+    },
+    {
+      "section": "Employment, income and benefits",
+      "type": "table",
+      "description": "Employment, business, regular income, and benefit contacts that may be important to a household or estate.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Income / Benefit Type", "name": "income_type", "type": "select", "options": ["Employment", "Self-Employment", "Company Directorship", "State Pension", "Workplace Pension", "Universal Credit", "Other DWP Benefit", "Social Security Scotland Benefit", "Rental Income", "Other"], "validation": { "required": true, "errorMessage": "Select an income or benefit type" } },
+        { "label": "Employer / Paying Organisation", "name": "organisation", "type": "text", "placeholder": "Organisation or department" },
+        { "label": "Contact / Payroll Reference", "name": "contact_reference", "type": "text", "placeholder": "HR, payroll, adviser, or claim reference" },
+        { "label": "Approximate Amount and Frequency", "name": "amount_frequency", "type": "text", "placeholder": "Optional, for example monthly net income" },
+        { "label": "Relevant Dependants / Survivor Benefit", "name": "survivor_details", "type": "text", "placeholder": "Where scheme or benefit terms are recorded" },
+        { "label": "Documents Location", "name": "document_location", "type": "text", "placeholder": "Payslip, P60, award letter, or contract location" }
+      ]
+    },
+    {
+      "section": "Tax and government records",
+      "type": "table",
+      "description": "Reference details only. Never store Government Gateway passwords, authentication codes, or bank card security data here.",
+      "maxRows": 20,
+      "columns": [
+        { "label": "Record Type", "name": "record_type", "type": "select", "options": ["HMRC Self Assessment", "Unique Taxpayer Reference (UTR)", "PAYE / Employer", "VAT", "Corporation Tax", "Council Tax", "Student Loan", "DVLA / Vehicle", "Other"], "validation": { "required": true, "errorMessage": "Select a record type" } },
+        { "label": "Authority / Provider", "name": "authority", "type": "text", "placeholder": "HMRC, local council, Student Loans Company, or other" },
+        { "label": "Reference Number", "name": "reference", "type": "text", "placeholder": "Account or reference; optional" },
+        { "label": "Local Authority / Tax Year", "name": "authority_period", "type": "text", "placeholder": "If relevant" },
+        { "label": "Accountant / Adviser", "name": "adviser", "type": "text", "placeholder": "Name and contact details" },
+        { "label": "Latest Return / Correspondence Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Legal and estate planning",
+      "type": "table",
+      "description": "Record the existence, jurisdiction, key people, review date, and secure location of legal documents. A contact list is not a substitute for a valid document.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Document / Arrangement", "name": "document_type", "type": "select", "options": ["Will", "Executor Appointment", "Lasting Power of Attorney - Property and Financial Affairs", "Lasting Power of Attorney - Health and Welfare", "Continuing Power of Attorney - Scotland", "Welfare Power of Attorney - Scotland", "Advance Decision / Advance Directive", "Guardianship / Childcare Plan", "Trust", "Funeral Wishes", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Jurisdiction", "name": "jurisdiction", "type": "select", "options": ["England", "Wales", "Scotland", "Other / Cross-border"] },
+        { "label": "Date Made / Last Reviewed", "name": "review_date", "type": "date" },
+        { "label": "Executor / Attorney / Trustee", "name": "appointed_person", "type": "text", "placeholder": "Name and contact details, if appropriate" },
+        { "label": "Solicitor / Professional Contact", "name": "professional_contact", "type": "text", "placeholder": "Firm, adviser, and contact details" },
+        { "label": "Original / Registered Copy Location", "name": "document_location", "type": "text", "placeholder": "Secure location; note if registered with OPG" },
+        { "label": "Important Instructions", "name": "instructions", "type": "textarea", "placeholder": "Where to find formal instructions; avoid duplicating sensitive content" }
+      ]
+    },
+    {
+      "section": "Important documents location",
+      "type": "table",
+      "description": "List where originals and copies are kept, not the documents themselves.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Document Type", "name": "document_type", "type": "select", "options": ["Birth / Adoption Certificate", "Passport", "Driving Licence", "National Insurance Record", "NHS / GP Records", "Marriage / Civil Partnership Certificate", "Will / Power of Attorney", "Property Title / Mortgage", "Bank / Investment Statements", "Pension Records", "Insurance Policies", "Tax Returns / P60", "Vehicle V5C", "Education / Professional Records", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Location", "name": "location", "type": "text", "placeholder": "Physical or secure digital location", "validation": { "required": true, "errorMessage": "Document location is required" } },
+        { "label": "Who Can Help Locate It", "name": "contact", "type": "text", "placeholder": "Trusted person, solicitor, or institution" },
+        { "label": "Last Checked", "name": "last_checked", "type": "date" }
+      ]
+    },
+    {
+      "section": "Digital accounts and devices",
+      "type": "table",
+      "description": "Inventory important accounts, devices, and recovery arrangements. Do not enter passwords, PINs, security answers, one-time codes, or recovery keys. Use a password manager's emergency-access feature where available.",
+      "maxRows": 50,
+      "columns": [
+        { "label": "Account / Device Type", "name": "account_type", "type": "select", "options": ["Primary Email", "Mobile / Phone Provider", "Password Manager", "Cloud Storage", "Banking / Financial Service", "Social Media", "Photo / File Archive", "Domain / Website", "Subscription", "Computer / Phone / Tablet", "Cryptocurrency Wallet", "Other"], "validation": { "required": true, "errorMessage": "Select an account or device type" } },
+        { "label": "Provider / Description", "name": "provider", "type": "text", "placeholder": "Service or device name", "validation": { "required": true, "errorMessage": "Provider or description is required" } },
+        { "label": "Account Identifier (not password)", "name": "account_identifier", "type": "text", "placeholder": "Username or account email, if safe to record" },
+        { "label": "Recovery / Two-Factor Method", "name": "recovery_method", "type": "text", "placeholder": "Describe the method, not codes or secret values" },
+        { "label": "Legacy Contact / Trusted Person", "name": "legacy_contact", "type": "text", "placeholder": "Person and how to contact them" },
+        { "label": "Instructions / Secure Location", "name": "instructions_location", "type": "text", "placeholder": "Password manager emergency access or secure instructions location" },
+        { "label": "Preference", "name": "account_preference", "type": "select", "options": ["Preserve", "Close", "Transfer / Memorialise", "Review with family", "Not specified"] }
+      ]
+    },
+    {
+      "section": "Additional details",
+      "type": "simple",
+      "description": "Other practical information for trusted family members or representatives.",
+      "fields": [
+        { "label": "Additional Notes", "name": "notes", "type": "textarea", "placeholder": "Add non-secret information or point to its secure location", "validation": { "maxLength": 5000, "errorMessage": "Notes cannot exceed 5000 characters" } }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "quickStart": [
+      "If anyone is in immediate danger or has a life-threatening emergency, call 999 or 112. Give the operator the exact location and postcode.",
+      "For urgent medical advice that is not a life-threatening emergency, use NHS 111 or the relevant NHS service for the nation; service routes differ across Great Britain.",
+      "Locate the exported ZIP and extract it to a private, secure folder. Keep an untouched copy of the original export.",
+      "Start with emergency contacts, health information, legal document locations, insurance, bank accounts, pensions, and essential bills.",
+      "Do not use another person's bank cards, online banking, passwords, or devices without the proper authority. Contact the relevant provider and follow its bereavement process.",
+      "Share the pack only with trusted people who need it. Keep passwords, PINs, one-time codes, and recovery keys out of the exported files."
+    ],
+    "emergencyServices": {
+      "medical": "999 or 112 for life-threatening emergencies",
+      "police": "999 or 112 for an emergency; 101 for non-emergency police contact in England, Wales, and Scotland",
+      "fire": "999 or 112",
+      "urgent_health_advice": "111; use the appropriate NHS 111 / NHS 24 service for your nation"
+    },
+    "sectionGuidance": {
+      "Personal Details": {
+        "description": "Identity and contact information used to match records and support family, medical, financial, and official processes.",
+        "usefulFor": ["Emergency contacts", "NHS and GP services", "Banks and pension providers", "HMRC and other public bodies"],
+        "firstActions": ["Confirm spelling and date of birth against official records", "Keep the National Insurance number and NHS number in a secure place", "Check that the address, email, and phone number are current"],
+        "criticalFields": ["Full Legal Name", "Date of Birth", "National Insurance Number", "NHS Number", "Primary Phone Number"]
+      },
+      "Emergency contact details": {
+        "description": "Trusted people to contact and the roles they may hold. Being listed here does not itself grant legal authority.",
+        "usefulFor": ["Family members", "Medical professionals", "Executors and attorneys"],
+        "firstActions": ["Contact the person identified for the relevant situation", "Check that contact details are current", "Confirm that named attorneys or executors have copies of the formal documents"],
+        "criticalFields": ["Relationship", "Name", "Phone Number", "Role or Instructions"]
+      },
+      "Health and Care Information": {
+        "description": "Health information, GP details, allergies, medication, and locations of care documents.",
+        "usefulFor": ["Ambulance and hospital staff", "GP and care teams", "Family and appointed welfare decision-makers"],
+        "firstActions": ["Call 999 for a life-threatening emergency", "Share known allergies and current medication with clinicians", "Locate any formal advance decision, advance care plan, or power of attorney"],
+        "criticalFields": ["GP Practice", "Known Medical Conditions", "Allergies and Reactions", "Current Medicines"]
+      },
+      "Insurance policies": {
+        "description": "Private, employer, home, motor, and other insurance cover and the information needed to find policy terms.",
+        "usefulFor": ["Policy holders and beneficiaries", "Family representatives", "Insurers and claims teams"],
+        "firstActions": ["Locate the current policy schedule and claims contact", "Check policy status, beneficiaries, exclusions, and claim requirements with the insurer", "Do not assume NHS coverage is the same as private insurance"],
+        "criticalFields": ["Cover Type", "Insurer / Provider", "Policy Number", "Claims Contact"]
+      },
+      "Bank accounts": {
+        "description": "Current and savings account references to help identify providers and ownership arrangements.",
+        "usefulFor": ["Account holders", "Executors or administrators", "Banks and building societies"],
+        "firstActions": ["Confirm account ownership and any joint-holder arrangements with the bank", "Ask the bank about its bereavement process before attempting changes", "Keep recent statements and account references available"],
+        "criticalFields": ["Bank / Building Society", "Account Number", "Sort Code", "Joint Holder / Mandate Notes"]
+      },
+      "Savings and investments": {
+        "description": "ISAs, NS&I products, investments, and other assets held with financial providers.",
+        "usefulFor": ["Executors or administrators", "Financial advisers", "Investment providers"],
+        "firstActions": ["Check ownership and beneficiary or nomination records", "Request current valuations from providers", "Do not sell or transfer assets until the authorised representative has checked the relevant rules"],
+        "criticalFields": ["Asset Type", "Provider / Institution", "Account or Reference", "Beneficiary / Nomination"]
+      },
+      "Pensions": {
+        "description": "State, workplace, personal, and public service pension records and provider contacts.",
+        "usefulFor": ["Pension scheme administrators", "Executors or administrators", "Dependants and beneficiaries"],
+        "firstActions": ["Contact each scheme to confirm benefits, options, and claim steps", "Check any expression-of-wish or beneficiary nomination with the scheme", "Use GOV.UK's Pension Tracing Service if a provider is unknown; it finds contact details, not pension values"],
+        "criticalFields": ["Pension Type", "Scheme / Provider", "Member / Policy Reference", "Beneficiary / Expression of Wish"]
+      },
+      "Property": {
+        "description": "Property addresses, ownership, mortgage, title, and insurance records.",
+        "usefulFor": ["Executors or administrators", "Mortgage lenders", "Conveyancers and property professionals"],
+        "firstActions": ["Locate title and mortgage documents", "Confirm the registered ownership and any mortgage with the relevant organisations", "Get jurisdiction-specific advice before transferring or selling property"],
+        "criticalFields": ["Property Address and Postcode", "Ownership / Tenure", "Land Registry Title Number", "Mortgage Lender / Reference"]
+      },
+      "Loans and liabilities": {
+        "description": "Debts and recurring liabilities, including any joint borrower or guarantor responsibilities.",
+        "usefulFor": ["Executors or administrators", "Lenders and creditors", "Household budget planning"],
+        "firstActions": ["Contact creditors using their bereavement or account-support process", "Check who is contractually responsible before making payments", "Keep a record of balances, correspondence, and decisions"],
+        "criticalFields": ["Liability Type", "Lender / Creditor", "Borrower(s) / Guarantor", "Approximate Balance"]
+      },
+      "Employment, income and benefits": {
+        "description": "Employer, income, and benefit details that may help identify ongoing household support or survivor benefits.",
+        "usefulFor": ["Employer HR and payroll", "DWP or Social Security Scotland", "Pension administrators", "Family representatives"],
+        "firstActions": ["Contact the employer or benefit administrator to confirm entitlements and next steps", "Check whether any benefit or pension must be notified separately", "Keep recent payslips, P60s, and award letters"],
+        "criticalFields": ["Income / Benefit Type", "Employer / Paying Organisation", "Contact / Payroll Reference"]
+      },
+      "Tax and government records": {
+        "description": "HMRC, council, student loan, and government account references; authentication secrets must never be stored here.",
+        "usefulFor": ["HMRC", "Local authorities", "Student Loans Company", "Tax advisers"],
+        "firstActions": ["Use official GOV.UK services and verify current requirements", "Keep tax records and correspondence for the authorised representative", "Never share Government Gateway passwords or one-time codes"],
+        "criticalFields": ["Record Type", "Authority / Provider", "Reference Number", "Latest Return / Correspondence Location"]
+      },
+      "Legal and estate planning": {
+        "description": "Wills, powers of attorney, advance decisions, and appointed representatives. Rules and document names differ within Great Britain.",
+        "usefulFor": ["Executors and administrators", "Attorneys and trustees", "Solicitors and courts"],
+        "firstActions": ["Find the original or registered document and confirm its jurisdiction", "For England and Wales, check whether an LPA is registered before an attorney acts", "For Scotland, follow Scottish power-of-attorney and estate procedures; get local legal advice"],
+        "criticalFields": ["Document / Arrangement", "Jurisdiction", "Executor / Attorney / Trustee", "Original / Registered Copy Location"]
+      },
+      "Important documents location": {
+        "description": "An index of where official records and original documents are stored.",
+        "usefulFor": ["Family members", "Executors or administrators", "Solicitors and financial institutions"],
+        "firstActions": ["Secure originals and tell the appropriate representative where they are", "Check that the current version of each document is recorded", "Do not put original identity or financial documents in an unsecured shared location"],
+        "criticalFields": ["Document Type", "Location", "Who Can Help Locate It"]
+      },
+      "Digital accounts and devices": {
+        "description": "An inventory and recovery plan for digital services and devices. This section intentionally excludes passwords and authentication secrets.",
+        "usefulFor": ["Trusted digital legacy contact", "Executors or administrators", "Service providers"],
+        "firstActions": ["Use the provider's official legacy or bereavement process", "Use password-manager emergency access rather than placing credentials in this export", "Secure devices and recovery methods; do not bypass access controls"],
+        "criticalFields": ["Provider / Description", "Account Identifier (not password)", "Recovery / Two-Factor Method", "Legacy Contact / Trusted Person"]
+      },
+      "Additional details": {
+        "description": "Other practical notes that do not fit another section. Do not place passwords or access codes here.",
+        "usefulFor": ["Trusted family members", "Executors or administrators", "Professional advisers"],
+        "firstActions": ["Check whether a note points to a formal document or professional contact", "Keep information current and limit access to trusted people"],
+        "criticalFields": ["Additional Notes"]
+      }
+    },
+    "legalNotes": [
+      "This guide is general information, not legal, tax, insurance, or financial advice. Rules depend on the facts and the relevant UK jurisdiction.",
+      "Great Britain means England, Scotland, and Wales; Northern Ireland is not covered by this GB configuration and has separate processes.",
+      "Probate in England and Wales and confirmation in Scotland are not interchangeable. Scotland has distinct succession, estate, and power-of-attorney rules; obtain advice for the relevant jurisdiction.",
+      "In England, Scotland, and Wales, GOV.UK says Tell Us Once may be available after registration or qualifying coroner certification. Northern Ireland and people permanently living abroad are excluded; check current eligibility and use any reference within its stated validity period.",
+      "Tell Us Once does not notify every private organisation. Banks, mortgage providers, insurers, employers, and many personal or workplace pension schemes may still need to be contacted directly.",
+      "Do not distribute an estate, assume a particular account passes automatically, or pay another person's debts without confirming authority, ownership, and applicable law.",
+      "Official guidance: What to do when someone dies: https://www.gov.uk/when-someone-dies",
+      "Official guidance: Tell Us Once: https://www.gov.uk/after-a-death/organisations-you-need-to-contact-and-tell-us-once",
+      "Official guidance: Applying for probate in England and Wales: https://www.gov.uk/applying-for-probate",
+      "Official guidance: Scottish deceased estates: https://www.scotcourts.gov.uk/taking-action/dealing-with-a-deceaseds-estate-in-scotland/",
+      "Official guidance: National Insurance number: https://www.gov.uk/find-national-insurance-number",
+      "Official guidance: NHS number: https://www.nhs.uk/nhs-services/find-nhs-number/",
+      "Official guidance: Pension Tracing Service: https://www.gov.uk/find-pension-contact-details",
+      "Official guidance: Making a will: https://www.gov.uk/make-will",
+      "Official guidance: Managing a lasting power of attorney: https://www.gov.uk/manage-lasting-power-attorney"
+    ],
+    "generalGuidance": {
+      "fileStructure": [
+        "The export is packaged as a ZIP containing the available spreadsheet, PDF, and this access guide.",
+        "Treat the files as highly sensitive: they may contain identity, account, health, and legal-record references.",
+        "Keep an untouched backup and note when the information was last reviewed."
+      ],
+      "dataAccess": [
+        "Windows: right-click the ZIP file and choose Extract All. On macOS, double-click the ZIP file.",
+        "Store extracted files in an encrypted, access-controlled location and share only with trusted representatives.",
+        "Use an established password manager's emergency-access or legacy feature for credentials; do not add passwords or recovery codes to this export.",
+        "If a person has died, contact each financial and service provider and follow its bereavement process. A family relationship alone does not grant account access."
+      ],
+      "securityTips": [
+        "Never store passwords, PINs, card security codes, one-time codes, or account recovery keys in this file or its export.",
+        "Use encrypted storage and a separate secure channel when sharing sensitive documents.",
+        "Enable multi-factor authentication and keep recovery methods current.",
+        "Make sure a trusted person knows where the encrypted record is kept and how to reach its authorised access method.",
+        "Review the record after major life events and at least annually; securely remove outdated copies."
+      ]
+    }
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": "A general checklist for family representatives after a death. The correct legal and tax process depends on whether the relevant jurisdiction is England, Wales, or Scotland.",
+    "meta": {
+      "title": "Family Recovery Roadmap - Great Britain",
+      "version": "1.0",
+      "lastReviewed": "2026-10-17",
+      "reviewedBy": "Official guidance reviewed; not a substitute for legal or tax advice",
+      "generatedOn": "2026-10-17"
+    },
+    "intro": {
+      "condolence": "We are sorry for your loss. This checklist is intended to help organise the first practical steps.",
+      "howToUse": "Confirm the jurisdiction and your authority first. Then secure records, notify the right organisations, and obtain professional advice where needed."
+    },
+    "startHere": [
+      "If there is an immediate safety or medical emergency, call 999 or 112.",
+      "Register the death and follow the registrar or coroner's instructions; timing and process differ between Scotland and England or Wales.",
+      "Ask the registrar whether Tell Us Once is available and obtain its reference if applicable. It does not notify all private providers.",
+      "Locate the will, identify the executor or appropriate representative, and confirm the correct jurisdiction before acting.",
+      "Secure identity, property, bank, insurance, pension, debt, and tax records. Keep a log of every organisation contacted.",
+      "Do not access accounts, distribute assets, or pay debts until authority and provider requirements have been checked."
+    ],
+    "legalFramework": [
+      "England and Wales: probate and estate administration processes; see GOV.UK applying for probate.",
+      "Scotland: confirmation and Scottish estate administration processes; see the Scottish Courts and Tribunals Service.",
+      "Wills, succession, powers of attorney, tax, benefits, and property rules can differ by jurisdiction and individual circumstances.",
+      "Tell Us Once can notify specified government departments in England, Scotland, and Wales when eligibility requirements are met; private organisations may need separate notification.",
+      "Official guidance may change. Confirm all forms, eligibility, fees, and deadlines with the relevant authority or a qualified adviser."
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "title": "Immediate care and records",
+        "timeframe": "First days",
+        "priority": "do-first",
+        "focus": "Follow official registration guidance, identify the responsible person, and protect important records.",
+        "keyActions": [
+          { "step": 1, "action": "Follow the registrar, medical examiner, or coroner's instructions for registration and certificates.", "priority": "do-first", "why": "Registration and certificate processes are jurisdiction-specific and are needed for subsequent administration.", "legalRef": "https://www.gov.uk/after-a-death" },
+          { "step": 2, "action": "Find the will and identify the named executor or other person entitled to deal with the estate.", "priority": "do-first", "why": "Only an authorised person should make estate decisions or contact providers as a representative.", "legalRef": "https://www.gov.uk/applying-for-probate" },
+          { "step": 3, "action": "Secure the home, identity papers, will, financial records, devices, and any medicines or care information that need urgent attention.", "priority": "do-first", "why": "This protects property and helps representatives find the information needed for later steps.", "legalRef": "General recordkeeping; seek advice for urgent legal questions" },
+          { "step": 4, "action": "Ask the registrar about Tell Us Once eligibility and keep the reference and any deadline supplied.", "priority": "do-soon", "why": "The service can notify specified public bodies, but it does not replace contact with all private organisations.", "legalRef": "https://www.gov.uk/after-a-death/organisations-you-need-to-contact-and-tell-us-once" }
+        ],
+        "mustHaveDocuments": ["Death registration and certificate information", "Will and codicils, if any", "Executor or representative details", "National Insurance and NHS number records", "Current bank, insurer, pension, and mortgage contacts"],
+        "keyContacts": [
+          { "entity": "Registrar / local authority", "name": "Relevant register office", "use": "Registration process and Tell Us Once reference", "url": "https://www.gov.uk/register-offices", "verified": true },
+          { "entity": "Solicitor", "name": "Existing or jurisdiction-appropriate solicitor", "use": "Will, authority, estate, and urgent legal questions", "verified": false }
+        ],
+        "criticalMistakes": ["Assuming a relative can operate accounts without authority", "Assuming the England and Wales probate process applies in Scotland", "Sharing passwords or using another person's online banking", "Assuming Tell Us Once contacts every organisation"]
+      },
+      {
+        "phase": 2,
+        "title": "Notify providers and protect finances",
+        "timeframe": "First weeks",
+        "priority": "do-first",
+        "focus": "Notify public bodies and private providers, understand immediate bills, and preserve a record of the estate.",
+        "keyActions": [
+          { "step": 1, "action": "Use Tell Us Once if eligible; otherwise follow the relevant official process for notifying government departments.", "priority": "do-first", "why": "Benefits, tax, vehicle, and other public records may need updating, and the service has defined eligibility.", "legalRef": "https://www.gov.uk/after-a-death/organisations-you-need-to-contact-and-tell-us-once" },
+          { "step": 2, "action": "Contact banks, mortgage providers, insurers, employers, utilities, and private pension schemes through their official bereavement channels.", "priority": "do-first", "why": "Tell Us Once does not notify all private institutions or personal pension schemes.", "legalRef": "https://www.gov.uk/after-a-death/organisations-you-need-to-contact-and-tell-us-once" },
+          { "step": 3, "action": "Record assets, debts, regular payments, ownership, and provider responses; ask before stopping payments or moving funds.", "priority": "do-soon", "why": "Joint ownership, contracts, and estate duties differ; assumptions can cause financial or legal problems.", "legalRef": "Provider terms and jurisdiction-specific estate rules" },
+          { "step": 4, "action": "Contact pension providers or use the Pension Tracing Service if a scheme contact is unknown.", "priority": "do-soon", "why": "The tracing service provides contact details, not confirmation that a pension exists or its value.", "legalRef": "https://www.gov.uk/find-pension-contact-details" }
+        ],
+        "mustHaveDocuments": ["Provider account references and statements", "Insurance schedules and claim contacts", "Pension scheme details", "Mortgage and property records", "List of income, benefits, recurring payments, and debts"],
+        "keyContacts": [
+          { "entity": "Bank or building society", "name": "Each relevant provider", "use": "Bereavement notification and account process", "verified": false },
+          { "entity": "Pension scheme", "name": "Workplace and personal providers", "use": "Benefits, nominations, and claim requirements", "url": "https://www.gov.uk/find-pension-contact-details", "verified": true },
+          { "entity": "Insurer", "name": "Each relevant provider", "use": "Policy status and claims process", "verified": false }
+        ],
+        "criticalMistakes": ["Assuming joint accounts or assets pass in the same way in every case", "Paying debts from personal funds without checking responsibility", "Overlooking private pension or employer benefits", "Treating a provider reference as authority to operate an account"]
+      },
+      {
+        "phase": 3,
+        "title": "Estate, tax, and property administration",
+        "timeframe": "Following weeks and months",
+        "priority": "do-soon",
+        "focus": "Confirm the required authority, value the estate, and complete the appropriate tax and property processes.",
+        "keyActions": [
+          { "step": 1, "action": "Ask the relevant institutions whether a grant is needed and obtain jurisdiction-specific advice on probate in England or Wales or confirmation in Scotland.", "priority": "do-first", "why": "The required process depends on the jurisdiction, assets, ownership, and provider requirements.", "legalRef": "https://www.gov.uk/applying-for-probate" },
+          { "step": 2, "action": "Identify and value estate assets and liabilities; check HMRC guidance for inheritance tax and any reporting requirements.", "priority": "do-first", "why": "Tax reporting and payment requirements depend on estate facts and current rules.", "legalRef": "https://www.gov.uk/inheritance-tax" },
+          { "step": 3, "action": "Keep complete records of decisions, valuations, expenses, provider correspondence, and distributions.", "priority": "do-soon", "why": "Representatives may need to account to beneficiaries, creditors, HMRC, or a court.", "legalRef": "General estate recordkeeping" },
+          { "step": 4, "action": "Check title, mortgage, insurance, and occupancy arrangements before selling, transferring, or changing property.", "priority": "do-soon", "why": "Title, co-ownership, lender, and jurisdiction rules can affect what can be done and when.", "legalRef": "https://www.gov.uk/update-property-records-someone-dies" }
+        ],
+        "mustHaveDocuments": ["Asset and debt inventory with valuation dates", "Grant of probate or Scottish confirmation, if required", "HMRC and tax correspondence", "Property title, mortgage, and insurance records", "Beneficiary and distribution records"],
+        "keyContacts": [
+          { "entity": "HMRC", "name": "HMRC inheritance tax and bereavement guidance", "use": "Tax reporting and estate obligations", "url": "https://www.gov.uk/when-someone-dies", "verified": true },
+          { "entity": "Court / probate authority", "name": "Authority for the relevant jurisdiction", "use": "Grant or confirmation process", "url": "https://www.scotcourts.gov.uk/taking-action/dealing-with-a-deceaseds-estate-in-scotland/", "verified": true },
+          { "entity": "Solicitor or tax adviser", "name": "Qualified professional", "use": "Complex estate, tax, property, or cross-border advice", "verified": false }
+        ],
+        "criticalMistakes": ["Applying the wrong nation's procedure", "Distributing assets before checking authority, tax, and creditor requirements", "Assuming a grant is always required or never required", "Relying on old tax thresholds or deadlines"]
+      },
+      {
+        "phase": 4,
+        "title": "Close out and review family plans",
+        "timeframe": "After immediate administration",
+        "priority": "when-ready",
+        "focus": "Complete provider matters and review the surviving household's records and arrangements.",
+        "keyActions": [
+          { "step": 1, "action": "Confirm claims, final bills, account closures, pension decisions, and property records with each organisation.", "priority": "do-soon", "why": "Each provider may have separate documentation, timelines, and confirmation requirements.", "legalRef": "Provider terms and official guidance" },
+          { "step": 2, "action": "Review the surviving household's will, powers of attorney, beneficiaries, insurance, and emergency contacts with qualified advisers where appropriate.", "priority": "when-ready", "why": "Family circumstances and appointed roles may have changed.", "legalRef": "https://www.gov.uk/make-will" },
+          { "step": 3, "action": "Update the family asset and digital-account inventory, keeping credentials in an appropriate password manager rather than this export.", "priority": "when-ready", "why": "A current, safely stored index can reduce confusion during a future emergency.", "legalRef": "Provider digital legacy guidance" }
+        ],
+        "mustHaveDocuments": ["Provider closure and claim confirmations", "Current will and power-of-attorney details", "Updated insurance and pension nominations", "Updated family document and digital-account index"],
+        "keyContacts": [
+          { "entity": "Financial adviser", "name": "Qualified adviser", "use": "Review household finances and protection needs", "verified": false },
+          { "entity": "Solicitor", "name": "Qualified adviser for the relevant jurisdiction", "use": "Review wills, powers, and estate planning", "verified": false }
+        ],
+        "criticalMistakes": ["Leaving outdated beneficiaries or representatives in place", "Keeping credentials in an unprotected spreadsheet or PDF", "Failing to retain copies of final provider correspondence"]
+      }
+    ],
+    "quickReference": {
+      "deathRegistration": {
+        "action": "Follow the registrar or coroner's instructions. Published registration timeframes differ between Scotland and England or Wales and may be affected by the circumstances.",
+        "officialGuide": "https://www.gov.uk/after-a-death"
+      },
+      "tellUsOnce": {
+        "scope": "May be used for eligible deaths of people living in England, Scotland, or Wales; not for a person living in Northern Ireland or permanently abroad.",
+        "importantNote": "It notifies specified public bodies, not every private organisation.",
+        "officialGuide": "https://www.gov.uk/after-a-death/organisations-you-need-to-contact-and-tell-us-once"
+      },
+      "estateAuthority": {
+        "englandAndWales": "Check whether a grant of probate or letters of administration are required.",
+        "scotland": "Check the Scottish confirmation and estate administration process.",
+        "officialGuide": "https://www.gov.uk/applying-for-probate"
+      },
+      "pensionTracing": {
+        "service": "The Pension Tracing Service can find contact details for a pension scheme; it cannot confirm whether a pension exists or its value.",
+        "officialGuide": "https://www.gov.uk/find-pension-contact-details"
+      }
+    },
+    "glossary": [
+      { "term": "Executor", "definition": "A person named in a will who may apply to deal with the estate, subject to the applicable jurisdiction and legal process." },
+      { "term": "Grant of probate", "definition": "An England and Wales legal document that can authorise an executor to deal with an estate; whether it is needed depends on the circumstances and institutions involved." },
+      { "term": "Confirmation", "definition": "The Scottish court authority used by an executor to administer a deceased person's estate, where required." },
+      { "term": "Lasting Power of Attorney", "definition": "An England and Wales legal arrangement. Scotland has separate continuing and welfare power-of-attorney arrangements." },
+      { "term": "Tell Us Once", "definition": "A service for eligible people living in England, Scotland, or Wales to report a death to specified government organisations." }
+    ]
+  }
+}
