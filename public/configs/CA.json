@@ -7,7 +7,7 @@
     {
       "section": "Personal Details",
       "type": "simple",
-      "description": "Please provide your legal identity and contact details",
+      "description": "Identity and contact details for family, medical, financial, and government administration. SIN and health-card details are sensitive; record only when useful.",
       "fields": [
         {
           "label": "Full Legal Name",
@@ -26,9 +26,8 @@
           "type": "text",
           "placeholder": "123 456 789",
           "validation": {
-            "required": true,
-            "pattern": "^[0-9]{3} [0-9]{3} [0-9]{3}$|^[0-9]{9}$",
-            "errorMessage": "SIN must be 9 digits or in format: 123 456 789"
+            "pattern": "^[0-9]{9}$|^[0-9]{3} [0-9]{3} [0-9]{3}$",
+            "errorMessage": "SIN should contain 9 digits, with or without spaces"
           }
         },
         {
@@ -41,14 +40,10 @@
           }
         },
         {
-          "label": "Provincial Health Card Number",
+          "label": "Provincial / Territorial Health Card Number (if applicable)",
           "name": "health_card_no",
           "type": "text",
-          "placeholder": "Provincial health card number",
-          "validation": {
-            "required": true,
-            "errorMessage": "Health card number is required"
-          }
+          "placeholder": "Provincial or territorial health-card number (formats vary)"
         },
         {
           "label": "Blood Group",
@@ -62,13 +57,11 @@
             "AB+",
             "AB-",
             "O+",
-            "O-"
+            "O-",
+            "Unknown"
           ],
           "placeholder": "Select blood group",
-          "validation": {
-            "required": true,
-            "errorMessage": "Blood group is required for medical emergencies"
-          }
+          "validation": { "errorMessage": "Select a listed value or Unknown" }
         },
         {
           "label": "Passport No.",
@@ -94,12 +87,8 @@
           "label": "Primary Phone Number",
           "name": "phone",
           "type": "text",
-          "placeholder": "(XXX) XXX-XXXX",
-          "validation": {
-            "required": true,
-            "pattern": "^\\([0-9]{3}\\) [0-9]{3}-[0-9]{4}$",
-            "errorMessage": "Phone number must be in format: (XXX) XXX-XXXX"
-          }
+          "placeholder": "+1 416-555-0123 or (416) 555-0123",
+          "validation": { "required": true, "errorMessage": "Primary phone number is required" }
         },
         {
           "label": "Email Address",
@@ -115,8 +104,21 @@
         {
           "label": "Residential Address",
           "name": "residential_address",
+          "type": "textarea",
+          "placeholder": "Street address, city, province or territory, postal code"
+        },
+        {
+          "label": "Province or Territory",
+          "name": "province_territory",
+          "type": "select",
+          "options": ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia", "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"]
+        },
+        {
+          "label": "Postal Code (if known)",
+          "name": "postal_code",
           "type": "text",
-          "placeholder": "Street address, city, province, postal code"
+          "placeholder": "A1A 1A1",
+          "validation": { "pattern": "^[A-Za-z][0-9][A-Za-z][ -]?[0-9][A-Za-z][0-9]$", "errorMessage": "Enter a Canadian postal code or leave blank" }
         }
       ]
     },
@@ -164,19 +166,15 @@
           "label": "Phone No.",
           "name": "phone",
           "type": "text",
-          "placeholder": "(XXX) XXX-XXXX",
-          "validation": {
-            "required": true,
-            "pattern": "^\\([0-9]{3}\\) [0-9]{3}-[0-9]{4}$",
-            "errorMessage": "Phone number must be in format: (XXX) XXX-XXXX"
-          }
+          "placeholder": "+1 416-555-0123 or local phone format",
+          "validation": { "required": true, "errorMessage": "Contact phone number is required" }
         }
       ]
     },
     {
       "section": "Insurance details",
       "type": "table",
-      "description": "Medical, life, auto, and other insurance policies",
+      "description": "Private, employer, property, and other insurance policies. Provincial or territorial public health coverage is not a private insurance policy.",
       "maxRows": 20,
       "columns": [
         {
@@ -194,14 +192,17 @@
           "name": "insurance_type",
           "type": "select",
           "options": [
-            "Health",
+            "Supplemental Health",
+            "Dental",
             "Life",
             "Auto",
-            "Home",
-            "Tenant",
+            "Homeowners",
+            "Tenant / Renters",
             "Travel",
-            "Disability",
-            "Property",
+            "Disability / Income Protection",
+            "Critical Illness",
+            "Mortgage Protection",
+            "Business",
             "Other"
           ],
           "validation": {
@@ -236,31 +237,22 @@
           "placeholder": "Member or group ID"
         },
         {
-          "label": "Premium Amount",
+          "label": "Premium and Frequency (optional)",
           "name": "premium_amount",
-          "type": "number",
-          "placeholder": "Monthly or annual premium",
-          "validation": {
-            "required": true,
-            "min": 0,
-            "errorMessage": "Please enter valid amount"
-          }
+          "type": "text",
+          "placeholder": "For example, amount and monthly / annual frequency"
         },
         {
-          "label": "Due Date",
+          "label": "Renewal / Review Date (optional)",
           "name": "due_date",
-          "type": "date",
-          "validation": {
-            "required": true,
-            "errorMessage": "Due date is required"
-          }
+          "type": "date"
         }
       ]
     },
     {
       "section": "Bank details",
       "type": "table",
-      "description": "Your bank and account information",
+      "description": "Canadian bank and credit union accounts. Institution and transit identifiers are commonly 3 and 5 digits; account-number formats vary by institution.",
       "maxRows": 15,
       "columns": [
         {
@@ -288,11 +280,10 @@
           "name": "account_type",
           "type": "select",
           "options": [
-            "Checking",
+            "Chequing",
             "Savings",
-            "TFSA",
-            "RRSP",
-            "Brokerage",
+            "Joint",
+            "Business",
             "Other"
           ],
           "validation": {
@@ -383,6 +374,140 @@
       ]
     },
     {
+      "section": "Health and Care Information",
+      "type": "simple",
+      "description": "Optional care information for family and health professionals. Blood type should only be recorded if confirmed by a reliable medical record.",
+      "fields": [
+        { "label": "Family Doctor / Primary Care Clinic", "name": "primary_care_provider", "type": "text", "placeholder": "Clinic and contact details" },
+        { "label": "Known Medical Conditions", "name": "medical_conditions", "type": "textarea", "placeholder": "Relevant diagnoses or care needs" },
+        { "label": "Allergies and Reactions", "name": "allergies", "type": "textarea", "placeholder": "Known allergies, reactions, or none known" },
+        { "label": "Current Medicines", "name": "medications", "type": "textarea", "placeholder": "Medicine, dose, and location of current medication list" },
+        { "label": "Care, Accessibility, or Communication Needs", "name": "care_needs", "type": "textarea", "placeholder": "Relevant needs or where the care plan is stored" },
+        { "label": "Advance Care Plan / Directive Location", "name": "advance_care_location", "type": "text", "placeholder": "Secure location of the current document" }
+      ]
+    },
+    {
+      "section": "Savings and Investments",
+      "type": "table",
+      "description": "Registered and non-registered savings or investment assets. Values are optional estimates; note their date and confirm beneficiary details with the provider.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Account / Asset Type", "name": "asset_type", "type": "select", "options": ["RRSP", "RRIF", "TFSA", "FHSA", "RESP", "RDSP", "Non-registered Investment", "GIC", "Mutual Fund", "Stocks / Bonds", "Brokerage", "NS&I / Government Savings Bond", "Cryptoasset", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Institution / Provider", "name": "provider", "type": "text", "placeholder": "Bank, credit union, brokerage, or provider", "validation": { "required": true, "errorMessage": "Provider is required" } },
+        { "label": "Account / Plan Reference", "name": "account_reference", "type": "text", "placeholder": "Reference number, if useful" },
+        { "label": "Owner(s)", "name": "owners", "type": "text", "placeholder": "Account holder(s) and ownership notes" },
+        { "label": "Beneficiary / Successor Holder", "name": "beneficiary", "type": "text", "placeholder": "As recorded with the provider" },
+        { "label": "Approximate Value (CAD)", "name": "value", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative amount" } },
+        { "label": "Value As Of", "name": "value_date", "type": "date" },
+        { "label": "Provider Contact / Document Location", "name": "contact_location", "type": "text", "placeholder": "Contact details or secure record location" }
+      ]
+    },
+    {
+      "section": "Pensions and Public Benefits",
+      "type": "table",
+      "description": "Canada Pension Plan (CPP), Quebec Pension Plan (QPP), Old Age Security (OAS), workplace, and personal pension records. Eligibility and survivor benefits depend on program rules and personal circumstances.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Plan / Benefit Type", "name": "plan_type", "type": "select", "options": ["Canada Pension Plan (CPP)", "Quebec Pension Plan (QPP)", "Old Age Security (OAS)", "Guaranteed Income Supplement (GIS)", "Workplace Defined Benefit", "Workplace Defined Contribution", "Personal Pension / Annuity", "Public-Sector Pension", "Disability / Survivor Benefit", "Other"], "validation": { "required": true, "errorMessage": "Select a plan or benefit type" } },
+        { "label": "Administrator / Provider", "name": "provider", "type": "text", "placeholder": "Plan administrator or government program", "validation": { "required": true, "errorMessage": "Administrator is required" } },
+        { "label": "Employer (if applicable)", "name": "employer", "type": "text", "placeholder": "Current or former employer" },
+        { "label": "Member / Claim Reference", "name": "member_reference", "type": "text", "placeholder": "Reference number, if known" },
+        { "label": "Plan Contact", "name": "contact", "type": "text", "placeholder": "Phone, email, or official website" },
+        { "label": "Beneficiary / Survivor Information", "name": "beneficiary", "type": "text", "placeholder": "Where current nomination or plan details are held" },
+        { "label": "Statement / Decision Letter Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Property and Vehicles",
+      "type": "table",
+      "description": "Real property, leases, and vehicles. Ownership, probate, land-title, and transfer processes vary by province or territory.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Asset Type", "name": "asset_type", "type": "select", "options": ["Principal Residence", "Other Real Estate", "Rental Property", "Lease / Rental", "Vehicle", "Recreational Vehicle / Boat", "Other"], "validation": { "required": true, "errorMessage": "Select an asset type" } },
+        { "label": "Address / Description", "name": "address_description", "type": "textarea", "placeholder": "Full property address or asset description", "validation": { "required": true, "errorMessage": "Address or description is required" } },
+        { "label": "Owner(s) / Ownership Details", "name": "owners", "type": "text", "placeholder": "Names and ownership as recorded" },
+        { "label": "Title / Parcel / Registration Number", "name": "title_reference", "type": "text", "placeholder": "If known" },
+        { "label": "Mortgage / Lien / Lender", "name": "mortgage_lien", "type": "text", "placeholder": "Lender and reference; do not include credentials" },
+        { "label": "Insurer / Policy Reference", "name": "insurance", "type": "text", "placeholder": "Provider and policy reference" },
+        { "label": "Approximate Value and Date", "name": "value_date", "type": "text", "placeholder": "Optional estimate and valuation date" },
+        { "label": "Title / Lease / Registration Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Loans and Liabilities",
+      "type": "table",
+      "description": "Mortgages, credit, student loans, taxes, and other liabilities. Confirm who is legally responsible before arranging payment.",
+      "maxRows": 40,
+      "columns": [
+        { "label": "Liability Type", "name": "liability_type", "type": "select", "options": ["Mortgage", "Credit Card", "Line of Credit", "Personal Loan", "Student Loan", "Vehicle Financing", "Business Debt", "Tax Liability", "Other"], "validation": { "required": true, "errorMessage": "Select a liability type" } },
+        { "label": "Lender / Creditor", "name": "creditor", "type": "text", "placeholder": "Institution or organization", "validation": { "required": true, "errorMessage": "Creditor is required" } },
+        { "label": "Account Reference", "name": "account_reference", "type": "text", "placeholder": "Account reference, if useful" },
+        { "label": "Borrower(s) / Co-signer", "name": "borrowers", "type": "text", "placeholder": "Names and shared responsibility, if applicable" },
+        { "label": "Approximate Balance (CAD)", "name": "balance", "type": "number", "placeholder": "Optional estimate", "validation": { "min": 0, "errorMessage": "Enter a non-negative amount" } },
+        { "label": "Balance As Of", "name": "balance_date", "type": "date" },
+        { "label": "Payment / Renewal Details", "name": "payment_details", "type": "text", "placeholder": "Optional amount and frequency" },
+        { "label": "Creditor Contact / Documents", "name": "contact_location", "type": "text", "placeholder": "Contact details or secure record location" }
+      ]
+    },
+    {
+      "section": "Employment and Income",
+      "type": "table",
+      "description": "Employer, self-employment, regular income, and benefit contacts that may be important to a household or estate.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Income / Benefit Type", "name": "income_type", "type": "select", "options": ["Employment", "Self-employment", "Business Ownership", "CPP / QPP", "OAS / GIS", "Provincial / Territorial Benefit", "Rental Income", "Other"], "validation": { "required": true, "errorMessage": "Select an income or benefit type" } },
+        { "label": "Employer / Paying Organization", "name": "organization", "type": "text", "placeholder": "Employer, government program, or other payer" },
+        { "label": "HR / Payroll / Claim Contact", "name": "contact_reference", "type": "text", "placeholder": "Contact and reference details" },
+        { "label": "Approximate Amount and Frequency", "name": "amount_frequency", "type": "text", "placeholder": "Optional estimate" },
+        { "label": "Survivor / Dependant Benefit Notes", "name": "survivor_benefit", "type": "text", "placeholder": "Where plan or program terms are recorded" },
+        { "label": "Supporting Records Location", "name": "document_location", "type": "text", "placeholder": "Pay statements, T4s, award letters, or contracts" }
+      ]
+    },
+    {
+      "section": "Tax and Government Records",
+      "type": "table",
+      "description": "Reference details for CRA, provincial or territorial taxes, and government services. Never store account passwords, security answers, or one-time codes.",
+      "maxRows": 25,
+      "columns": [
+        { "label": "Record Type", "name": "record_type", "type": "select", "options": ["CRA Personal Tax", "Business Number / GST-HST", "Payroll / Employer Account", "Provincial / Territorial Tax", "Property Tax", "Student Loan", "Veterans Benefit", "Other"], "validation": { "required": true, "errorMessage": "Select a record type" } },
+        { "label": "Authority / Provider", "name": "authority", "type": "text", "placeholder": "CRA, province, territory, municipality, or other" },
+        { "label": "Reference Number", "name": "reference", "type": "text", "placeholder": "Optional account or business reference" },
+        { "label": "Tax Year / Jurisdiction", "name": "period_jurisdiction", "type": "text", "placeholder": "If relevant" },
+        { "label": "Accountant / Adviser", "name": "adviser", "type": "text", "placeholder": "Name and contact details" },
+        { "label": "Returns / Correspondence Location", "name": "document_location", "type": "text", "placeholder": "Secure storage location" }
+      ]
+    },
+    {
+      "section": "Legal and Estate Planning",
+      "type": "table",
+      "description": "Index wills, powers of attorney, representation agreements, and care directives. Requirements and legal names differ by province or territory, especially in Quebec.",
+      "maxRows": 30,
+      "columns": [
+        { "label": "Document / Arrangement", "name": "document_type", "type": "select", "options": ["Will", "Codicil", "Power of Attorney - Property / Financial", "Power of Attorney - Personal Care", "Mandate in Case of Incapacity - Quebec", "Representation Agreement", "Advance Directive / Health Care Directive", "Trust", "Guardianship / Minor Care Plan", "Funeral Wishes", "Other"], "validation": { "required": true, "errorMessage": "Select a document type" } },
+        { "label": "Province / Territory Governing It", "name": "jurisdiction", "type": "select", "options": ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia", "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon", "Other / Cross-border"] },
+        { "label": "Made / Last Reviewed", "name": "review_date", "type": "date" },
+        { "label": "Executor / Attorney / Representative", "name": "appointed_person", "type": "text", "placeholder": "Name and contact details, if appropriate" },
+        { "label": "Lawyer / Notary / Adviser", "name": "professional_contact", "type": "text", "placeholder": "Firm and contact details" },
+        { "label": "Original / Registered Copy Location", "name": "document_location", "type": "text", "placeholder": "Secure location and any registration details" },
+        { "label": "Instructions / Notes", "name": "instructions", "type": "textarea", "placeholder": "Point to formal instructions; avoid duplicating sensitive content" }
+      ]
+    },
+    {
+      "section": "Digital Accounts and Devices",
+      "type": "table",
+      "description": "Inventory important accounts, devices, and recovery arrangements. Do not enter passwords, PINs, security answers, one-time codes, or recovery keys.",
+      "maxRows": 50,
+      "columns": [
+        { "label": "Account / Device Type", "name": "account_type", "type": "select", "options": ["Primary Email", "Mobile Provider", "Password Manager", "Cloud Storage", "Banking / Financial Service", "Social Media", "Photo / File Archive", "Domain / Website", "Subscription", "Computer / Phone / Tablet", "Cryptocurrency Wallet", "Other"], "validation": { "required": true, "errorMessage": "Select an account or device type" } },
+        { "label": "Provider / Description", "name": "provider", "type": "text", "placeholder": "Service or device name", "validation": { "required": true, "errorMessage": "Provider or description is required" } },
+        { "label": "Account Identifier (not password)", "name": "account_identifier", "type": "text", "placeholder": "Username or account email, if safe to record" },
+        { "label": "Recovery / Multi-factor Method", "name": "recovery_method", "type": "text", "placeholder": "Describe the method, not codes or secret values" },
+        { "label": "Legacy Contact / Trusted Person", "name": "legacy_contact", "type": "text", "placeholder": "Person and how to contact them" },
+        { "label": "Secure Instructions Location", "name": "instructions_location", "type": "text", "placeholder": "Password-manager emergency access or secure instructions location" },
+        { "label": "Preference", "name": "account_preference", "type": "select", "options": ["Preserve", "Close", "Transfer / Memorialize", "Review with family", "Not specified"] }
+      ]
+    },
+    {
       "section": "Additional details",
       "type": "simple",
       "description": "Any other important information",
@@ -403,23 +528,23 @@
   "accessGuide": {
     "enabled": true,
     "quickStart": [
-      "If this is a medical emergency, call 911 immediately",
-      "If you need emotional support or crisis help, call or text 988",
-      "Keep your SIN, health card, passport, and banking details in one secure folder",
+      "For an immediate threat to life or safety, call 911 where available; otherwise use the local emergency number.",
+      "For suicide crisis support anywhere in Canada, call or text 9-8-8. If immediate safety is at risk, call 9-1-1.",
+      "Keep identity, health-card, passport, and banking records in encrypted, access-controlled storage.",
       "Review emergency contacts, insurance, and banking information before a crisis occurs",
       "Store copies of legal documents in a lockbox, safe, or secure digital vault",
       "Share access with a trusted family member only when appropriate"
     ],
     "emergencyServices": {
-      "medical": "911",
-      "police": "911",
-      "fire": "911",
-      "poison_control": "1-800-567-8911",
-      "suicide_prevention": "988"
+      "medical": "911 where available; otherwise use the local emergency number",
+      "police": "911 where available; otherwise use the local emergency number",
+      "fire": "911 where available; otherwise use the local emergency number",
+      "poison_control": "Contact your provincial or territorial poison centre; contact details vary",
+      "suicide_prevention": "Call or text 9-8-8"
     },
     "sectionGuidance": {
       "Personal Details": {
-        "description": "Core identity information used for healthcare, legal, government, and financial access in Canada.",
+        "description": "Identity information for healthcare, legal, government, and financial processes. SIN and health-card records are sensitive, and health-card formats and rules vary by province or territory.",
         "usefulFor": [
           "Medical professionals",
           "Legal representatives",
@@ -427,13 +552,14 @@
           "Financial institutions"
         ],
         "firstActions": [
-          "Verify the SIN, health card, and passport are current",
+          "Confirm identity details against official records and share a SIN only when there is a lawful need",
           "Confirm the residential address and phone details are up to date",
-          "Ensure the blood type is noted in medical records if known",
+          "Record a blood group only if confirmed by a reliable medical record",
           "Keep document copies accessible to a trusted family member"
         ],
         "criticalFields": [
           "Social Insurance Number (SIN)",
+          "Province or Territory",
           "Date of Birth",
           "Primary Phone Number",
           "Email Address"
@@ -460,7 +586,7 @@
         ]
       },
       "Insurance details": {
-        "description": "Health, life, and other insurance policies that may need to be activated or claimed.",
+        "description": "Private and employer insurance that may need to be continued or claimed. Public health coverage is administered by provinces and territories and is not a private policy.",
         "usefulFor": [
           "Hospital billing",
           "Insurance agents",
@@ -489,10 +615,10 @@
           "Legal representatives"
         ],
         "firstActions": [
-          "Store transit, institution, and account numbers securely but accessibly",
+          "Store institution, transit, and account numbers in encrypted storage",
           "Verify account holders and authorized signers",
           "Review bank account types to decide which accounts to prioritize",
-          "Keep bank statements and branch details in a safe location"
+          "Keep bank statements and branch details in a secure location"
         ],
         "criticalFields": [
           "Bank Name",
@@ -513,7 +639,7 @@
           "Locate and secure all original documents immediately",
           "Confirm wills, powers of attorney, and property records are current",
           "Store copies in multiple secure locations when possible",
-          "Keep safe combination or lockbox access information with a trusted person"
+          "Keep a note of who can help locate the originals; store combinations and credentials separately"
         ],
         "criticalFields": [
           "Document Type",
@@ -531,19 +657,81 @@
         "firstActions": [
           "Read through all notes carefully",
           "Follow any specific instructions in this section",
-          "Share important information with the right people only"
+          "Share important information with the right people only",
+          "Never put passwords, PINs, one-time codes, security answers, or recovery keys in notes"
         ]
+      },
+      "Health and Care Information": {
+        "description": "Optional health information, care contacts, and locations of formal health directives.",
+        "usefulFor": ["Emergency responders", "Hospital and primary-care teams", "Family and substitute decision-makers"],
+        "firstActions": ["Call 911 where available for immediate emergencies; otherwise use local emergency services", "Tell clinicians about known allergies and current medicines", "Locate the current directive or care plan and confirm its province-specific legal status"],
+        "criticalFields": ["Family Doctor / Primary Care Clinic", "Known Medical Conditions", "Allergies and Reactions", "Current Medicines"]
+      },
+      "Savings and Investments": {
+        "description": "Registered and non-registered savings and investment accounts, with provider and beneficiary information.",
+        "usefulFor": ["Executors or estate representatives", "Financial institutions", "Financial and tax advisers"],
+        "firstActions": ["Confirm account ownership and beneficiary or successor-holder records with the provider", "Request current statements or valuations", "Get tax and legal advice before transferring or withdrawing registered-plan assets"],
+        "criticalFields": ["Account / Asset Type", "Institution / Provider", "Account / Plan Reference", "Beneficiary / Successor Holder"]
+      },
+      "Pensions and Public Benefits": {
+        "description": "CPP, QPP, OAS, workplace pensions, and other public benefits. Eligibility and survivor entitlements depend on each program's rules.",
+        "usefulFor": ["Service Canada", "Retirement and workplace pension administrators", "Surviving spouses, partners, and dependants"],
+        "firstActions": ["Contact each program or plan administrator to confirm notification and claim steps", "Ask about CPP/QPP survivor, child, or death benefits where applicable", "Use official federal or provincial program information to confirm current eligibility"],
+        "criticalFields": ["Plan / Benefit Type", "Administrator / Provider", "Member / Claim Reference", "Beneficiary / Survivor Information"]
+      },
+      "Property and Vehicles": {
+        "description": "Property, leases, vehicles, registered ownership, liens, and related insurance records.",
+        "usefulFor": ["Executors or estate representatives", "Lenders and insurers", "Provincial or territorial land-title and vehicle authorities"],
+        "firstActions": ["Locate title, lease, mortgage, and registration documents", "Confirm ownership and transfer requirements with the relevant authority", "Check the province or territory's process before sale, transfer, or refinancing"],
+        "criticalFields": ["Address / Description", "Owner(s) / Ownership Details", "Title / Parcel / Registration Number", "Mortgage / Lien / Lender"]
+      },
+      "Loans and Liabilities": {
+        "description": "Mortgages, credit, student loans, tax liabilities, and other debts, including joint borrowers or co-signers.",
+        "usefulFor": ["Estate representatives", "Banks and creditors", "Household financial planning"],
+        "firstActions": ["Contact creditors through their official support channel", "Confirm legal responsibility before making payments", "Ask whether an insurance policy or lender protection applies and document the response"],
+        "criticalFields": ["Liability Type", "Lender / Creditor", "Borrower(s) / Co-signer", "Approximate Balance (CAD)"]
+      },
+      "Employment and Income": {
+        "description": "Employment, business, pension, and benefit sources that may affect a household or estate.",
+        "usefulFor": ["Employer HR and payroll", "Service Canada and benefit administrators", "Pension providers"],
+        "firstActions": ["Contact employers and administrators about final pay and plan benefits", "Confirm any survivor or dependant benefit requirements", "Keep tax slips, pay records, and award letters available"],
+        "criticalFields": ["Income / Benefit Type", "Employer / Paying Organization", "HR / Payroll / Claim Contact"]
+      },
+      "Tax and Government Records": {
+        "description": "Reference details for CRA and provincial or territorial programs. Authentication information must not be stored here.",
+        "usefulFor": ["Canada Revenue Agency", "Provincial, territorial, and municipal authorities", "Accountants and tax advisers"],
+        "firstActions": ["Use official government services and confirm current filing requirements", "Keep tax slips, returns, and correspondence in secure storage", "Never share account passwords, security answers, or one-time codes"],
+        "criticalFields": ["Record Type", "Authority / Provider", "Reference Number", "Returns / Correspondence Location"]
+      },
+      "Legal and Estate Planning": {
+        "description": "Wills, powers of attorney, representation arrangements, and health directives. Names and legal requirements vary across provinces and territories; Quebec has distinct civil-law instruments.",
+        "usefulFor": ["Executors and estate representatives", "Attorneys and substitute decision-makers", "Lawyers and notaries"],
+        "firstActions": ["Locate the original or valid copy and confirm the governing province or territory", "Ask a local lawyer or notary about authority and registration requirements", "Do not treat a contact list or this inventory as a substitute for a legal document"],
+        "criticalFields": ["Document / Arrangement", "Province / Territory Governing It", "Executor / Attorney / Representative", "Original / Registered Copy Location"]
+      },
+      "Digital Accounts and Devices": {
+        "description": "An inventory of important services and devices with safe recovery pointers, not credentials.",
+        "usefulFor": ["Trusted digital legacy contacts", "Executors or estate representatives", "Service providers"],
+        "firstActions": ["Use each provider's official legacy or bereavement process", "Use a password manager's emergency-access feature instead of recording credentials here", "Secure devices and do not bypass account access controls"],
+        "criticalFields": ["Provider / Description", "Account Identifier (not password)", "Recovery / Multi-factor Method", "Legacy Contact / Trusted Person"]
       }
     },
     "legalNotes": [
       "This guide provides general emergency access information only and is not legal advice",
-      "Consult qualified legal or financial professionals for wills, powers of attorney, and account access planning",
-      "Ensure compliance with provincial and federal requirements for identity and healthcare documentation",
+      "Wills, estate administration, powers of attorney, substitute decision-making, health directives, and public health coverage vary by province or territory; Quebec has distinct civil-law instruments",
+      "Confirm local emergency numbers and poison-centre contact information; availability and numbers can vary by community",
+      "A Social Insurance Number is sensitive personal information. Protect it and provide it only when there is a lawful need",
+      "For estate, tax, benefit, or account questions, confirm current requirements with the relevant authority and a qualified local professional",
       "Update this information at least annually or after major life events",
       "Review beneficiary designations and account ownership on a regular basis",
       "Keep original legal documents in a secure, protected location with a trusted family member or executor",
       "Make sure healthcare directives and emergency care instructions are properly documented",
-      "Share access to this information only with trusted, authorized individuals"
+      "Never store or share passwords, PINs, security answers, one-time codes, or recovery keys in this export",
+      "Official guidance: Social Insurance Number protection: https://www.canada.ca/en/employment-social-development/services/sin/protection.html",
+      "Official guidance: What to do when someone dies: https://www.canada.ca/en/services/death.html",
+      "Official guidance: Canada Pension Plan and Old Age Security: https://www.canada.ca/en/services/benefits/publicpensions.html",
+      "Official guidance: 9-8-8 Suicide Crisis Helpline: https://988.ca/",
+      "Official guidance: Emergency preparedness: https://www.canada.ca/en/services/policing/emergencies/preparedness.html"
     ],
     "generalGuidance": {
       "fileStructure": [
@@ -558,12 +746,12 @@
         "Mac: Double-click the ZIP file to extract it automatically",
         "Save the extracted files to a secure, memorable location",
         "Consider encrypted cloud backup such as OneDrive, Google Drive, or iCloud",
-        "Use password protection or a protected folder for sensitive information",
-        "Share access credentials with at least one trusted family member",
+        "Use encrypted storage with access limited to trusted, authorized people",
+        "For passwords, use a reputable password manager with an emergency-access feature; do not place credentials in this export",
         "Keep duplicate copies on an encrypted USB drive or secure mobile device"
       ],
       "securityTips": [
-        "Never store passwords in plain text files",
+        "Never store passwords, PINs, security answers, one-time codes, or recovery keys in this export or an unencrypted file",
         "Share personal documents only through encrypted channels",
         "Avoid sending sensitive information through regular email",
         "Use secure messaging apps such as Signal or WhatsApp when necessary",
@@ -576,34 +764,35 @@
   },
   "recoveryRoadmap": {
     "enabled": true,
-    "description": "Step-by-step family recovery plan for the first 30 to 365 days after a death or serious incapacity. Follow the steps in order and focus first on records, documents, and claims.",
+    "description": "General family recovery checklist after a death. Registration, estate, tax, and benefit processes vary by province or territory; confirm current requirements with the relevant authority.",
     "meta": {
       "title": "Family Recovery Roadmap – Canada",
       "version": "1.0",
-      "lastReviewed": "2026-10-14",
-      "reviewedBy": "Draft review pending",
-      "generatedOn": "2026-10-14"
+      "lastReviewed": "2026-10-17",
+      "reviewedBy": "Federal sources reviewed; province- and territory-specific legal review remains necessary",
+      "generatedOn": "2026-10-17"
     },
     "intro": {
       "condolence": "We are sorry for your loss. This roadmap is meant to reduce confusion by showing what matters first and what can wait.",
       "howToUse": "Begin with immediate records and financial access. Then move to insurance, pensions, estate administration, and long-term family protection."
     },
     "startHere": [
-      "Get several certified copies of the death certificate and list every account, policy, and major asset.",
-      "Pause or cancel automatic bill payments, subscriptions, and recurring charges.",
-      "Review beneficiaries on life insurance, pension plans, RRSPs, TFSAs, and bank accounts.",
+      "Follow the province or territory's death-registration process and ask which death records or certificates are needed.",
+      "List regular bills and contact providers before stopping payments or automatic transfers; confirm account authority and due dates.",
+      "Review beneficiaries on life insurance, registered plans, and pensions; confirm ownership and joint-account terms with each institution.",
       "Notify the employer, financial institutions, insurer, executor, and next of kin about the death.",
       "Collect the will, trust records, ID, and insurance policies in a secure place.",
       "Check whether a power of attorney, healthcare directive, or personal representative has been named.",
       "Keep a simple log of every call, claim, and appointment."
     ],
     "legalFramework": [
-      "Provincial estate administration and probate law",
+      "Provincial and territorial estate administration, probate, and succession law",
+      "Quebec civil law and Quebec-specific will, mandate, and estate procedures",
       "Federal pension and insurance rules",
       "CPP and OAS survivor benefit rules",
       "RRSP, TFSA, and retirement plan beneficiary rules",
       "Provincial tenancy and property transfer rules",
-      "Provincial and federal tax filing requirements for a deceased estate"
+      "Provincial, territorial, and federal tax filing requirements for a deceased estate"
     ],
     "phases": [
       {
@@ -615,30 +804,30 @@
         "keyActions": [
           {
             "step": 1,
-            "action": "Obtain several certified death certificates and keep copies for banks, insurers, government agencies, and the estate file.",
+            "action": "Ask the vital-statistics authority and each institution what death record or certificate format it requires; order the appropriate copies.",
             "priority": "do-first",
-            "why": "Most institutions need a certified death certificate before they can process claims or access records.",
+            "why": "Document requirements and available certificate types vary by province or territory and by institution.",
             "legalRef": "Provincial vital statistics and registration rules"
           },
           {
             "step": 2,
-            "action": "Review all joint accounts, account beneficiaries, registered accounts, and transfer-on-death designations. Confirm what passes outside probate and what requires estate administration.",
+            "action": "Review ownership and beneficiary or successor-holder designations on joint accounts, registered plans, pensions, and insurance. Confirm the treatment of each asset with the institution and a local professional.",
             "priority": "do-first",
-            "why": "Beneficiary designations and joint ownership can change whether an asset goes through probate or passes directly to the survivor or designated heir.",
+            "why": "Ownership, designation, and estate rules vary by asset and province or territory; do not assume an asset passes directly to another person.",
             "legalRef": "Banking, pension, and beneficiary rules"
           },
           {
             "step": 3,
-            "action": "Pause recurring charges: mortgage, utilities, credit cards, subscriptions, and auto-payments. Confirm the bank or lender will not treat the bill as late while the account is being reviewed.",
+            "action": "Identify recurring bills and speak with each provider before stopping payments. Confirm who is responsible, what remains due, and how to avoid missed essential services.",
             "priority": "do-first",
-            "why": "Late charges and interest can build quickly during a family emergency.",
+            "why": "Automatic cancellations or payments from a restricted account can create service, credit, or legal problems.",
             "legalRef": "Contract and bank account terms"
           },
           {
             "step": 4,
             "action": "Arrange a secure place for original documents and records: passport, SIN, health card, insurance policies, will, powers of attorney, deeds, and tax filings.",
             "priority": "do-soon",
-            "why": "Original documents often help the bank, insurer, or court issue a faster result than a photocopy alone.",
+            "why": "Each bank, insurer, and court sets its own acceptable-document requirements; keep originals secure and ask before sending them.",
             "legalRef": "Document retention and estate administration practice"
           },
           {
@@ -710,7 +899,7 @@
           }
         ],
         "criticalMistakes": [
-          "Not obtaining enough certified death certificates. Many institutions require more than one copy.",
+          "Ordering the wrong certificate type or assuming every institution accepts the same document.",
           "Assuming every account will go through probate. Beneficiaries and joint accounts may work differently.",
           "Paying debts before checking whether an insurer or policy covers them.",
           "Using the deceased person's online banking or card after death without authority.",
@@ -905,10 +1094,10 @@
           },
           {
             "step": 6,
-            "action": "Protect digital access: email, cloud drives, social accounts, bank portals, and subscriptions. Keep a list of sites, accounts, and recovery contacts for the family.",
+            "action": "Inventory important email, cloud, financial, social, and subscription accounts. Use each provider's official legacy or bereavement process and keep credentials in a separate password manager.",
             "priority": "do-soon",
             "why": "Digital access is frequently overlooked and can hide dollars, communication records, or important documents.",
-            "legalRef": "Privacy, digital account terms, and estate practice"
+            "legalRef": "Provider terms, privacy rules, and estate authority"
           }
         ],
         "mustHaveDocuments": [
@@ -918,7 +1107,7 @@
           "Mortgage, deed, lien, and title documents",
           "Trust and healthcare directives",
           "Vehicle and property transfer forms",
-          "Digital account list and login recovery notes"
+          "Digital account inventory and authorized recovery-plan location; do not include passwords or recovery codes"
         ],
         "keyContacts": [
           {
@@ -1006,9 +1195,9 @@
           },
           {
             "step": 3,
-            "action": "Build a liquid emergency fund equal to 6 to 12 months of essential household expenses and keep it in a liquid savings or cash reserve account.",
+            "action": "Review the household's accessible cash reserve against its essential expenses, income stability, insurance, and available support.",
             "priority": "do-first",
-            "why": "The first 90 days after a loss are usually the most cash-sensitive period.",
+            "why": "An appropriate reserve depends on household needs, obligations, and available benefits; avoid a one-size-fits-all target.",
             "legalRef": "General financial planning guidance"
           },
           {
@@ -1020,7 +1209,7 @@
           },
           {
             "step": 5,
-            "action": "Create a single family asset register with account types, numbers, document locations, passwords, and emergency contacts. Keep one secure copy and give another to a trusted family member.",
+            "action": "Create a family asset register with provider names, useful account references, document locations, and emergency contacts. Keep passwords and recovery codes in a password manager with an appropriate emergency-access feature.",
             "priority": "do-soon",
             "why": "This creates a practical map that can save time and reduce confusion when a family crisis hits again.",
             "legalRef": "Recordkeeping and estate planning best practice"
@@ -1101,8 +1290,7 @@
     "quickReference": {
       "deathCertificate": {
         "issuedBy": "Provincial or territorial vital records office",
-        "timeToObtain": "Usually a few days to a few weeks",
-        "cost": "Low, depending on the jurisdiction and number of copies",
+        "availability": "Issued under provincial or territorial vital-statistics processes; timelines, fees, and acceptable document types vary.",
         "usedFor": [
           "Insurance claims",
           "Bank access",
@@ -1113,15 +1301,14 @@
         "notSuitableFor": "A substitute for a will, trust, or estate plan"
       },
       "beneficiaryChecklist": {
-        "primaryFocus": "Review life insurance, RRSP, TFSA, pension plans, and bank accounts",
+        "primaryFocus": "Review life insurance, registered plans, pension plans, and account ownership records",
         "warning": "Outdated beneficiary names can create legal delay and extra family disputes",
         "action": "Update designations in writing and keep a copy of every confirmation"
       },
       "probate": {
-        "issuedBy": "Provincial court or probate authority",
-        "mandatory": "Depends on the asset mix and provincial law",
-        "timeToObtain": "Several weeks to several months depending on the estate",
-        "usedFor": "Property transfer, executor appointment, and estate administration",
+        "issuedBy": "The court or authority responsible in the province or territory",
+        "mandatory": "Requirements depend on the jurisdiction, estate, asset, and institution",
+        "usedFor": "May establish authority to administer an estate; terminology and process vary by jurisdiction",
         "reviewStatus": "needs-legal-review"
       },
       "estateAdminChecklist": {
@@ -1135,9 +1322,9 @@
         "keyNote": "Keep a written ledger and copies of every filing and communication."
       },
       "emergencyFund": {
-        "target": "6 to 12 months of essential household expenses",
-        "preferredLocation": "High-interest savings account or cash reserve",
-        "whyItMatters": "The first month after a loss is often the most cash-sensitive period."
+        "target": "Set a reserve based on essential expenses, income stability, obligations, and available support",
+        "preferredLocation": "An accessible, appropriately protected account",
+        "whyItMatters": "Liquidity needs differ between households and should be reviewed with the family's broader financial plan."
       }
     },
     "glossary": [
@@ -1155,7 +1342,7 @@
       },
       {
         "term": "Probate",
-        "definition": "The court process that validates the will and coordinates estate administration."
+        "definition": "A court or administrative process that may grant authority to administer an estate; the name and requirements vary by province or territory."
       },
       {
         "term": "Trust",
@@ -1174,8 +1361,8 @@
         "definition": "An account with two or more owners, which may pass to a surviving owner depending on the account type and province."
       },
       {
-        "term": "Transfer-on-death",
-        "definition": "A registration or designation that allows an asset to pass directly to a beneficiary without going through probate."
+        "term": "Beneficiary designation",
+        "definition": "A designation recorded with some insurance, pension, or registered-plan providers. Its effect depends on the asset, contract, and applicable provincial or territorial law."
       },
       {
         "term": "Lien",
