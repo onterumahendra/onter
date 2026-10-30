@@ -319,7 +319,7 @@
       ]
     },
     {
-      "section": "IMPORTANT DOCUMENTS LOCATION",
+      "section": "Important documents location",
       "type": "table",
       "description": "Where you keep important legal and personal documents",
       "maxRows": 20,
@@ -478,7 +478,7 @@
           "Account Type"
         ]
       },
-      "IMPORTANT DOCUMENTS LOCATION": {
+      "Important documents location": {
         "description": "Physical location of critical legal, personal, and financial documents.",
         "usefulFor": [
           "Estate executors",
