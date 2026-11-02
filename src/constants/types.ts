@@ -6,6 +6,7 @@ export interface FieldValidation {
   max?: number;
   pattern?: string;
   errorMessage?: string;
+  errorMessages?: Record<string, string>;
 }
 
 export interface BaseField {
@@ -15,37 +16,48 @@ export interface BaseField {
   placeholder?: string;
   validation?: FieldValidation;
   options?: string[];
+  optionKeys?: string[];
+  description?: string;
+  [key: string]: unknown;
 }
 
 export interface SimpleSection {
+  id?: string;
   section: string;
   type: 'simple';
   fields: BaseField[];
   description?: string;
+  [key: string]: unknown;
 }
 
 export interface TableSection {
+  id?: string;
   section: string;
   type: 'table';
   columns: BaseField[];
   description?: string;
   minRows?: number;
   maxRows?: number;
+  [key: string]: unknown;
 }
 
 export interface ComplexSubSection {
+  id?: string;
   type: 'table';
   title: string;
   columns: BaseField[];
   minRows?: number;
   maxRows?: number;
+  [key: string]: unknown;
 }
 
 export interface ComplexSection {
+  id?: string;
   section: string;
   type: 'complex';
   structure: ComplexSubSection[];
   description?: string;
+  [key: string]: unknown;
 }
 
 export type FormSection = SimpleSection | TableSection | ComplexSection;
@@ -66,6 +78,7 @@ export interface AccessGuideConfig {
     fire: string;
     [key: string]: string;
   };
+  officialLinks?: Record<string, unknown>;
   sectionGuidance: Record<string, SectionGuidance>;
   legalNotes: string[];
   generalGuidance?: {
@@ -161,7 +174,46 @@ export interface CountryFormConfig {
   countryName: string;
   currency: string;
   currencySymbol: string;
+  phonePrefix?: string;
   formSections: FormSection[];
   accessGuide?: AccessGuideConfig;
   recoveryRoadmap?: RecoveryRoadmapConfig;
+  [key: string]: unknown;
+}
+
+export interface ConfigField {
+  name: string;
+  type: BaseField['type'];
+  validation?: Omit<FieldValidation, 'errorMessage' | 'errorMessages'>;
+  optionKeys?: string[];
+  [key: string]: unknown;
+}
+
+export interface ConfigFormSection {
+  id: string;
+  type: 'simple' | 'table' | 'complex';
+  fields?: ConfigField[];
+  columns?: ConfigField[];
+  structure?: Array<{
+    id: string;
+    type: 'table';
+    columns: ConfigField[];
+    minRows?: number;
+    maxRows?: number;
+    [key: string]: unknown;
+  }>;
+  minRows?: number;
+  maxRows?: number;
+  [key: string]: unknown;
+}
+
+export interface RawCountryFormConfig {
+  countryCode: string;
+  currency: string;
+  currencySymbol: string;
+  phonePrefix?: string;
+  formSections: ConfigFormSection[];
+  accessGuide?: Record<string, unknown>;
+  recoveryRoadmap?: Record<string, unknown>;
+  [key: string]: unknown;
 }

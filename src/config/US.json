@@ -1,0 +1,1739 @@
+{
+  "countryCode": "US",
+  "currency": "USD",
+  "currencySymbol": "$",
+  "formSections": [
+    {
+      "id": "personalDetails",
+      "type": "simple",
+      "fields": [
+        {
+          "validation": {
+            "required": true,
+            "minLength": 2
+          },
+          "name": "full_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{3}-[0-9]{2}-[0-9]{4}$"
+          },
+          "name": "ssn",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "date_of_birth",
+          "type": "date"
+        },
+        {
+          "optionKeys": [
+            "a_positive",
+            "a_negative",
+            "b_positive",
+            "b_negative",
+            "ab_positive",
+            "ab_negative",
+            "o_positive",
+            "o_negative"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "blood_group",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "pattern": "^[A-Z0-9]{6,9}$"
+          },
+          "name": "passport_no",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "pattern": "^[A-Za-z0-9]{5,20}$"
+          },
+          "name": "drivers_license_no",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^\\([0-9]{3}\\) [0-9]{3}-[0-9]{4}$"
+          },
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+          },
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "residential_address",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "emergencyContacts",
+      "type": "table",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        {
+          "optionKeys": [
+            "spouse",
+            "parent",
+            "child",
+            "sibling",
+            "friend",
+            "doctor",
+            "hospital",
+            "emergency_service",
+            "neighbor",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "contact_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true,
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^\\([0-9]{3}\\) [0-9]{3}-[0-9]{4}$"
+          },
+          "name": "phone",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "insuranceDetails",
+      "type": "table",
+      "maxRows": 20,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "insured_name",
+          "type": "text"
+        },
+        {
+          "optionKeys": [
+            "health",
+            "life",
+            "auto",
+            "home",
+            "renter",
+            "travel",
+            "disability",
+            "property",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "insurance_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "provider",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "policy_no",
+          "type": "text"
+        },
+        {
+          "name": "member_id",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "min": 0
+          },
+          "name": "premium_amount",
+          "type": "number"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "due_date",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "bankDetails",
+      "type": "table",
+      "maxRows": 15,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "holder_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "optionKeys": [
+            "checking",
+            "savings",
+            "money_market",
+            "brokerage",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "account_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "account_no",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{9}$"
+          },
+          "name": "routing_number",
+          "type": "text"
+        },
+        {
+          "name": "branch_address",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "importantDocuments",
+      "type": "table",
+      "maxRows": 20,
+      "columns": [
+        {
+          "optionKeys": [
+            "birth_certificate",
+            "passport",
+            "social_security_card",
+            "marriage_certificate",
+            "property_deed_mortgage",
+            "will_testament",
+            "power_of_attorney",
+            "educational_certificates",
+            "insurance_policies",
+            "tax_returns",
+            "medical_records",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "doc_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "additionalDetails",
+      "type": "simple",
+      "fields": [
+        {
+          "validation": {
+            "maxLength": 5000
+          },
+          "name": "notes",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "emergencyServices": {
+      "medical": "911",
+      "police": "911",
+      "fire": "911",
+      "poison_control": "1-800-222-1222",
+      "suicide_prevention": "988"
+    },
+    "quickStartKeys": [
+      "item_34",
+      "item_35",
+      "item_48",
+      "item_52",
+      "item_60",
+      "item_37"
+    ],
+    "sectionGuidance": {
+      "personalDetails": {
+        "usefulForKeys": [
+          "item_27",
+          "item_26",
+          "item_13",
+          "item_12"
+        ],
+        "firstActionKeys": [
+          "item_35",
+          "item_09",
+          "item_13",
+          "item_30"
+        ],
+        "criticalFieldKeys": [
+          "item_24",
+          "item_03",
+          "item_19",
+          "item_05"
+        ]
+      },
+      "emergencyContacts": {
+        "usefulForKeys": [
+          "item_01",
+          "item_11",
+          "item_07",
+          "item_13"
+        ],
+        "firstActionKeys": [
+          "item_06",
+          "item_21",
+          "item_07",
+          "item_18"
+        ],
+        "criticalFieldKeys": [
+          "item_02",
+          "item_03",
+          "item_04"
+        ]
+      },
+      "insuranceDetails": {
+        "usefulForKeys": [
+          "item_06",
+          "item_08",
+          "item_05",
+          "item_10"
+        ],
+        "firstActionKeys": [
+          "item_25",
+          "item_16",
+          "item_09",
+          "item_22"
+        ],
+        "criticalFieldKeys": [
+          "item_08",
+          "item_12",
+          "item_10",
+          "item_04"
+        ]
+      },
+      "bankDetails": {
+        "usefulForKeys": [
+          "item_01",
+          "item_03",
+          "item_02",
+          "item_05"
+        ],
+        "firstActionKeys": [
+          "item_05",
+          "item_11",
+          "item_03",
+          "item_09"
+        ],
+        "criticalFieldKeys": [
+          "item_04",
+          "item_01",
+          "item_08",
+          "item_03"
+        ]
+      },
+      "importantDocuments": {
+        "usefulForKeys": [
+          "item_02",
+          "item_01",
+          "item_08",
+          "item_09"
+        ],
+        "firstActionKeys": [
+          "item_06",
+          "item_02",
+          "item_11",
+          "item_05"
+        ],
+        "criticalFieldKeys": [
+          "item_01",
+          "item_02",
+          "item_03"
+        ]
+      },
+      "additionalDetails": {
+        "usefulForKeys": [
+          "item_02",
+          "item_08",
+          "item_07"
+        ],
+        "firstActionKeys": [
+          "item_10",
+          "item_03",
+          "item_12"
+        ]
+      }
+    },
+    "generalGuidanceKeys": {
+      "fileStructure": [
+        "item_16",
+        "item_04",
+        "item_08",
+        "item_12",
+        "item_01"
+      ],
+      "dataAccess": [
+        "item_21",
+        "item_08",
+        "item_11",
+        "item_02",
+        "item_20",
+        "item_12",
+        "item_06"
+      ],
+      "securityTips": [
+        "item_17",
+        "item_24",
+        "item_01",
+        "item_31",
+        "item_22",
+        "item_27",
+        "item_26",
+        "item_08"
+      ]
+    },
+    "legalNoteKeys": [
+      "item_124",
+      "item_08",
+      "item_129",
+      "item_126",
+      "item_45",
+      "item_07",
+      "item_48",
+      "item_110"
+    ]
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": {
+      "$i18n": "recoveryRoadmap.description"
+    },
+    "meta": {
+      "title": {
+        "$i18n": "recoveryRoadmap.meta.title"
+      },
+      "version": {
+        "$i18n": "recoveryRoadmap.meta.version"
+      },
+      "lastReviewed": {
+        "$i18n": "recoveryRoadmap.meta.lastReviewed"
+      },
+      "reviewedBy": {
+        "$i18n": "recoveryRoadmap.meta.reviewedBy"
+      },
+      "generatedOn": {
+        "$i18n": "recoveryRoadmap.meta.generatedOn"
+      }
+    },
+    "intro": {
+      "condolence": {
+        "$i18n": "recoveryRoadmap.intro.condolence"
+      },
+      "howToUse": {
+        "$i18n": "recoveryRoadmap.intro.howToUse"
+      }
+    },
+    "startHere": [
+      {
+        "$i18n": "recoveryRoadmap.startHere.0"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.1"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.2"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.3"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.4"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.5"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.6"
+      }
+    ],
+    "legalFramework": [
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.0"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.1"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.2"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.3"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.4"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.5"
+      }
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.0.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.0.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.0.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.0.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.legalRef"
+            }
+          },
+          {
+            "step": 3,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.2.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.2.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.2.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.2.legalRef"
+            }
+          },
+          {
+            "step": 4,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.3.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.3.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.3.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.3.legalRef"
+            }
+          },
+          {
+            "step": 5,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.4.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.4.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.4.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.4.legalRef"
+            }
+          },
+          {
+            "step": 6,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.5.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.5.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.5.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.5.legalRef"
+            }
+          },
+          {
+            "step": 7,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.6.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.6.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.6.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.6.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.5"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.6"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.7"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.8"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.9"
+          }
+        ],
+        "keyContacts": [
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.0.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.0.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.0.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.1.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.1.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.1.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.2.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.2.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.2.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.3.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.3.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.0.keyContacts.3.use"
+            },
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.5"
+          }
+        ],
+        "legalDeadlines": [
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.0.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.0.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.0.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.0.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.1.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.1.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.1.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.1.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.2.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.2.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.2.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.0.legalDeadlines.2.type"
+            }
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.1.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.1.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.1.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.1.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.legalRef"
+            }
+          },
+          {
+            "step": 3,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.2.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.2.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.2.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.2.legalRef"
+            }
+          },
+          {
+            "step": 4,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.3.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.3.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.3.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.3.legalRef"
+            }
+          },
+          {
+            "step": 5,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.4.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.4.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.4.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.4.legalRef"
+            }
+          },
+          {
+            "step": 6,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.5.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.5.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.5.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.5.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.5"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.6"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.7"
+          }
+        ],
+        "keyContacts": [
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.0.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.0.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.0.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.1.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.1.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.1.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.2.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.2.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.2.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.3.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.3.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.1.keyContacts.3.use"
+            },
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.5"
+          }
+        ],
+        "legalDeadlines": [
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.0.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.0.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.0.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.0.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.1.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.1.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.1.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.1.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.2.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.2.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.2.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.1.legalDeadlines.2.type"
+            }
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.2.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.2.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.2.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.2.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.legalRef"
+            }
+          },
+          {
+            "step": 3,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.2.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.2.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.2.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.2.legalRef"
+            }
+          },
+          {
+            "step": 4,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.3.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.3.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.3.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.3.legalRef"
+            }
+          },
+          {
+            "step": 5,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.4.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.4.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.4.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.4.legalRef"
+            }
+          },
+          {
+            "step": 6,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.5.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.5.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.5.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.5.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.5"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.6"
+          }
+        ],
+        "keyContacts": [
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.0.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.0.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.0.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.1.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.1.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.1.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.2.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.2.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.2.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.3.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.3.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.2.keyContacts.3.use"
+            },
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.5"
+          }
+        ],
+        "legalDeadlines": [
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.0.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.0.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.0.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.0.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.1.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.1.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.1.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.1.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.2.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.2.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.2.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.2.legalDeadlines.2.type"
+            }
+          }
+        ]
+      },
+      {
+        "phase": 4,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.3.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.3.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.3.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.3.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.legalRef"
+            }
+          },
+          {
+            "step": 3,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.2.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.2.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.2.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.2.legalRef"
+            }
+          },
+          {
+            "step": 4,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.3.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.3.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.3.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.3.legalRef"
+            }
+          },
+          {
+            "step": 5,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.4.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.4.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.4.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.4.legalRef"
+            }
+          },
+          {
+            "step": 6,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.5.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.5.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.5.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.5.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.5"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.6"
+          }
+        ],
+        "keyContacts": [
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.0.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.0.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.0.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.1.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.1.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.1.use"
+            },
+            "verified": false
+          },
+          {
+            "entity": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.2.entity"
+            },
+            "name": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.2.name"
+            },
+            "phone": null,
+            "url": null,
+            "use": {
+              "$i18n": "recoveryRoadmap.phases.3.keyContacts.2.use"
+            },
+            "verified": false
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.4"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.5"
+          }
+        ],
+        "legalDeadlines": [
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.0.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.0.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.0.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.0.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.1.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.1.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.1.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.1.type"
+            }
+          },
+          {
+            "item": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.2.item"
+            },
+            "deadline": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.2.deadline"
+            },
+            "consequence": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.2.consequence"
+            },
+            "type": {
+              "$i18n": "recoveryRoadmap.phases.3.legalDeadlines.2.type"
+            }
+          }
+        ]
+      }
+    ],
+    "quickReference": {
+      "deathCertificate": {
+        "issuedBy": {
+          "$i18n": "recoveryRoadmap.quickReference.deathCertificate.issuedBy"
+        },
+        "timeToObtain": {
+          "$i18n": "recoveryRoadmap.quickReference.deathCertificate.timeToObtain"
+        },
+        "cost": {
+          "$i18n": "recoveryRoadmap.quickReference.deathCertificate.cost"
+        },
+        "usedFor": [
+          {
+            "$i18n": "recoveryRoadmap.quickReference.deathCertificate.usedFor.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.deathCertificate.usedFor.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.deathCertificate.usedFor.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.deathCertificate.usedFor.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.deathCertificate.usedFor.4"
+          }
+        ],
+        "notSuitableFor": {
+          "$i18n": "recoveryRoadmap.quickReference.deathCertificate.notSuitableFor"
+        }
+      },
+      "beneficiaryChecklist": {
+        "primaryFocus": {
+          "$i18n": "recoveryRoadmap.quickReference.beneficiaryChecklist.primaryFocus"
+        },
+        "warning": {
+          "$i18n": "recoveryRoadmap.quickReference.beneficiaryChecklist.warning"
+        },
+        "action": {
+          "$i18n": "recoveryRoadmap.quickReference.beneficiaryChecklist.action"
+        }
+      },
+      "probate": {
+        "issuedBy": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.issuedBy"
+        },
+        "mandatory": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.mandatory"
+        },
+        "timeToObtain": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.timeToObtain"
+        },
+        "usedFor": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.usedFor"
+        },
+        "reviewStatus": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.reviewStatus"
+        }
+      },
+      "estateAdminChecklist": {
+        "mustTrack": [
+          {
+            "$i18n": "recoveryRoadmap.quickReference.estateAdminChecklist.mustTrack.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.estateAdminChecklist.mustTrack.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.estateAdminChecklist.mustTrack.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.estateAdminChecklist.mustTrack.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.quickReference.estateAdminChecklist.mustTrack.4"
+          }
+        ],
+        "keyNote": {
+          "$i18n": "recoveryRoadmap.quickReference.estateAdminChecklist.keyNote"
+        }
+      },
+      "emergencyFund": {
+        "target": {
+          "$i18n": "recoveryRoadmap.quickReference.emergencyFund.target"
+        },
+        "preferredLocation": {
+          "$i18n": "recoveryRoadmap.quickReference.emergencyFund.preferredLocation"
+        },
+        "whyItMatters": {
+          "$i18n": "recoveryRoadmap.quickReference.emergencyFund.whyItMatters"
+        }
+      }
+    },
+    "glossary": [
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.0.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.0.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.1.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.1.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.2.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.2.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.3.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.3.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.4.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.4.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.5.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.5.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.6.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.6.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.7.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.7.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.8.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.8.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.9.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.9.definition"
+        }
+      }
+    ]
+  }
+}

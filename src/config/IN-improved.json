@@ -1,0 +1,422 @@
+{
+  "countryCode": "IN",
+  "currency": "INR",
+  "currencySymbol": "₹",
+  "formSections": [
+    {
+      "id": "emergencyContacts",
+      "type": "table",
+      "priority": "critical",
+      "estimatedTime": 3,
+      "skippable": false,
+      "minRows": 1,
+      "maxRows": 5,
+      "columns": [
+        {
+          "optionKeys": [
+            "emergency_contact",
+            "my_doctor",
+            "family_member",
+            "close_friend",
+            "others"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "contact_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true,
+            "minLength": 2
+          },
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$"
+          },
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "name": "relationship",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "essentialPersonalDetails",
+      "type": "simple",
+      "priority": "critical",
+      "estimatedTime": 2,
+      "skippable": false,
+      "fields": [
+        {
+          "optionKeys": [
+            "a_positive",
+            "a_negative",
+            "b_positive",
+            "b_negative",
+            "ab_positive",
+            "ab_negative",
+            "o_positive",
+            "o_negative",
+            "don_t_know"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "blood_group",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true,
+            "pattern": "^[0-9]{10}$"
+          },
+          "name": "telephone_mobile",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "pattern": "^[0-9]{12}$"
+          },
+          "name": "aadhaar",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "healthInsuranceMediclaim",
+      "type": "table",
+      "priority": "critical",
+      "estimatedTime": 3,
+      "skippable": true,
+      "maxRows": 4,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "company",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "policy_no",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "name": "helpline",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "bankAccounts",
+      "type": "table",
+      "priority": "important",
+      "estimatedTime": 5,
+      "skippable": false,
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "holder_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "account_no",
+          "type": "text"
+        },
+        {
+          "optionKeys": [
+            "savings",
+            "current",
+            "salary",
+            "nri"
+          ],
+          "name": "account_type",
+          "type": "select"
+        }
+      ]
+    },
+    {
+      "id": "lifeInsurancePolicies",
+      "type": "table",
+      "priority": "important",
+      "estimatedTime": 5,
+      "skippable": true,
+      "maxRows": 6,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "insured_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "provider",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "policy_no",
+          "type": "text"
+        },
+        {
+          "name": "sum_assured",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "loansEmis",
+      "type": "table",
+      "priority": "important",
+      "estimatedTime": 5,
+      "skippable": true,
+      "maxRows": 6,
+      "columns": [
+        {
+          "optionKeys": [
+            "home_loan",
+            "car_loan",
+            "personal_loan",
+            "education_loan",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "loan_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "loan_account_no",
+          "type": "text"
+        },
+        {
+          "name": "emi",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "completePersonalDetails",
+      "type": "simple",
+      "priority": "recommended",
+      "estimatedTime": 5,
+      "skippable": true,
+      "fields": [
+        {
+          "validation": {
+            "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+          },
+          "name": "pan",
+          "type": "text"
+        },
+        {
+          "name": "passport_no",
+          "type": "text"
+        },
+        {
+          "name": "driving_license_no",
+          "type": "text"
+        },
+        {
+          "name": "voters_id_no",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "investmentsSavings",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 10,
+      "skippable": true,
+      "maxRows": 15,
+      "columns": [
+        {
+          "optionKeys": [
+            "fixed_deposit",
+            "mutual_fund",
+            "stocks",
+            "ppf",
+            "epf_pf",
+            "nps",
+            "bonds",
+            "gold",
+            "other"
+          ],
+          "name": "type",
+          "type": "select"
+        },
+        {
+          "name": "institution",
+          "type": "text"
+        },
+        {
+          "name": "account_no",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "creditCards",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 3,
+      "skippable": true,
+      "maxRows": 4,
+      "columns": [
+        {
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "pattern": "^[0-9]{4}$"
+          },
+          "name": "card_no",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "propertyAssets",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 5,
+      "skippable": true,
+      "maxRows": 5,
+      "columns": [
+        {
+          "optionKeys": [
+            "house",
+            "flat_apartment",
+            "commercial_property",
+            "land",
+            "vehicle",
+            "other"
+          ],
+          "name": "type",
+          "type": "select"
+        },
+        {
+          "name": "details",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "importantDocuments",
+      "type": "simple",
+      "priority": "recommended",
+      "estimatedTime": 3,
+      "skippable": true,
+      "fields": [
+        {
+          "name": "bank_locker",
+          "type": "text"
+        },
+        {
+          "name": "home_safe",
+          "type": "text"
+        },
+        {
+          "name": "will_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "professionalAdvisors",
+      "type": "table",
+      "priority": "recommended",
+      "estimatedTime": 3,
+      "skippable": true,
+      "maxRows": 5,
+      "columns": [
+        {
+          "optionKeys": [
+            "lawyer",
+            "chartered_accountant",
+            "financial_advisor",
+            "insurance_agent",
+            "other"
+          ],
+          "name": "role",
+          "type": "select"
+        },
+        {
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "name": "contact_no",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "additionalNotes",
+      "type": "simple",
+      "priority": "recommended",
+      "estimatedTime": 2,
+      "skippable": true,
+      "fields": [
+        {
+          "validation": {
+            "maxLength": 2000
+          },
+          "name": "notes",
+          "type": "textarea"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1043 @@
+{
+  "forms": {
+    "personalDetails": {
+      "title": "Personal Details",
+      "fields": {
+        "full_name": {
+          "label": "Full Legal Name",
+          "errors": {
+            "required": "Full legal name is required",
+            "minLength": "Full legal name is required"
+          }
+        },
+        "date_of_birth": {
+          "label": "Date of Birth",
+          "errors": {
+            "required": "Date of birth is required"
+          }
+        },
+        "phone": {
+          "label": "Primary Phone Number"
+        },
+        "email": {
+          "label": "Email Address",
+          "errors": {
+            "required": "Please enter a valid email address"
+          }
+        },
+        "blood_group": {
+          "label": "Blood Group",
+          "placeholder": "Select blood group",
+          "errors": {
+            "required": "Blood group is required for medical emergencies"
+          }
+        }
+      }
+    },
+    "emergencyContacts": {
+      "title": "Emergency contact details",
+      "columns": {
+        "relationship": {
+          "errors": {
+            "required": "Relationship is required"
+          }
+        },
+        "name": {
+          "label": "Name"
+        },
+        "contact_details": {
+          "placeholder": "Optional contact details"
+        },
+        "contact_type": {
+          "errors": {
+            "required": "Please select contact type"
+          }
+        }
+      }
+    },
+    "healthAndCareInformation": {
+      "title": "Health and Care Information",
+      "fields": {
+        "medical_conditions": {
+          "label": "Known Medical Conditions"
+        },
+        "allergies": {
+          "label": "Allergies and Reactions"
+        },
+        "medications": {
+          "label": "Current Medicines"
+        },
+        "blood_group": {
+          "label": "Blood Group (if confirmed)"
+        },
+        "health_insurer": {
+          "label": "Health Insurance Provider / Insurer"
+        },
+        "myna_health_registration": {
+          "label": "My Number Card Health Insurance Registration"
+        }
+      }
+    },
+    "insuranceDetails": {
+      "title": "Insurance details",
+      "columns": {
+        "beneficiary": {
+          "label": "Insured People / Beneficiary",
+          "placeholder": "As recorded with provider"
+        },
+        "claims_contact": {
+          "label": "Claims Contact",
+          "placeholder": "Phone, email, or official website"
+        },
+        "premium_frequency": {
+          "label": "Premium and Frequency",
+          "placeholder": "Optional amount and payment frequency"
+        },
+        "renewal_date": {
+          "label": "Renewal / Review Date"
+        },
+        "document_location": {
+          "label": "Policy Document Location",
+          "placeholder": "Secure storage location"
+        },
+        "member_id": {
+          "placeholder": "Member or group ID"
+        },
+        "due_date": {
+          "errors": {
+            "required": "Due date is required"
+          }
+        }
+      }
+    },
+    "bankAccounts": {
+      "columns": {
+        "ownership_notes": {
+          "label": "Account Owner / Authority Notes"
+        },
+        "document_location": {
+          "placeholder": "Secure storage location"
+        },
+        "bank_branch_code": {
+          "label": "Bank / Branch Code (if applicable)"
+        }
+      }
+    },
+    "savingsAndInvestments": {
+      "columns": {
+        "asset_type": {
+          "errors": {
+            "required": "Select an asset type"
+          }
+        },
+        "provider": {
+          "errors": {
+            "required": "Provider is required"
+          }
+        },
+        "owners": {
+          "label": "Owner(s)"
+        },
+        "value_date": {
+          "label": "Value As Of"
+        }
+      }
+    },
+    "pensionsAndGovernmentBenefits": {
+      "title": "Pensions and Government Benefits",
+      "columns": {
+        "plan_type": {
+          "label": "Plan / Benefit Type",
+          "errors": {
+            "required": "Select a plan or benefit type"
+          }
+        },
+        "provider": {
+          "errors": {
+            "required": "Administrator is required"
+          }
+        },
+        "employer": {
+          "label": "Employer (if applicable)",
+          "placeholder": "Current or former employer"
+        },
+        "member_reference": {
+          "placeholder": "Reference, if known"
+        },
+        "contact": {
+          "placeholder": "Phone, email, or official website"
+        },
+        "document_location": {
+          "label": "Statement / Decision Letter Location",
+          "placeholder": "Secure storage location"
+        }
+      }
+    },
+    "propertyAndVehicles": {
+      "title": "Property and Vehicles",
+      "columns": {
+        "asset_type": {
+          "label": "Asset Type",
+          "errors": {
+            "required": "Select an asset type"
+          }
+        },
+        "address_description": {
+          "label": "Address / Description",
+          "errors": {
+            "required": "Address or description is required"
+          }
+        },
+        "owners": {
+          "placeholder": "Names and ownership as recorded"
+        },
+        "mortgage_lien": {
+          "label": "Mortgage / Lien / Lender"
+        },
+        "insurance": {
+          "label": "Insurer / Policy Reference",
+          "placeholder": "Provider and policy reference"
+        },
+        "value_date": {
+          "label": "Approximate Value and Date",
+          "placeholder": "Optional estimate and valuation date"
+        },
+        "document_location": {
+          "placeholder": "Secure storage location"
+        }
+      }
+    },
+    "loansAndLiabilities": {
+      "columns": {
+        "liability_type": {
+          "label": "Liability Type",
+          "errors": {
+            "required": "Select a liability type"
+          }
+        },
+        "creditor": {
+          "label": "Lender / Creditor",
+          "errors": {
+            "required": "Creditor is required"
+          }
+        },
+        "account_reference": {
+          "label": "Account Reference"
+        },
+        "balance_date": {
+          "label": "Balance As Of"
+        },
+        "contact_location": {
+          "label": "Creditor Contact / Documents"
+        }
+      }
+    },
+    "employmentAndIncome": {
+      "title": "Employment and Income",
+      "columns": {
+        "income_type": {
+          "label": "Income / Benefit Type",
+          "errors": {
+            "required": "Select an income or benefit type"
+          }
+        },
+        "organisation": {
+          "label": "Employer / Paying Organisation"
+        },
+        "contact_reference": {
+          "label": "HR / Payroll / Claim Contact",
+          "placeholder": "Contact and reference details"
+        },
+        "amount_frequency": {
+          "label": "Approximate Amount and Frequency",
+          "placeholder": "Optional estimate"
+        },
+        "survivor_benefit": {
+          "label": "Survivor / Dependant Benefit Notes"
+        },
+        "document_location": {
+          "label": "Supporting Records Location"
+        }
+      }
+    },
+    "taxAndGovernmentRecords": {
+      "columns": {
+        "record_type": {
+          "label": "Record Type",
+          "errors": {
+            "required": "Select a record type"
+          }
+        },
+        "authority": {
+          "label": "Authority / Provider"
+        },
+        "reference": {
+          "label": "Reference Number"
+        },
+        "period_jurisdiction": {
+          "label": "Tax Year / Jurisdiction",
+          "placeholder": "If relevant"
+        },
+        "adviser": {
+          "placeholder": "Name and contact details"
+        },
+        "document_location": {
+          "placeholder": "Secure storage location"
+        },
+        "period_location": {
+          "placeholder": "If relevant"
+        }
+      }
+    },
+    "legalAndEstatePlanning": {
+      "columns": {
+        "document_type": {
+          "label": "Document / Arrangement",
+          "errors": {
+            "required": "Select a document type"
+          }
+        },
+        "document_location": {
+          "label": "Original / Registered Copy Location"
+        }
+      }
+    },
+    "importantDocuments": {
+      "title": "Important documents location",
+      "columns": {
+        "document_type": {
+          "label": "Document Type",
+          "errors": {
+            "required": "Select a document type"
+          }
+        },
+        "location": {
+          "label": "Location"
+        },
+        "contact": {
+          "label": "Who Can Help Locate It"
+        },
+        "last_checked": {
+          "label": "Last Checked"
+        },
+        "doc_type": {
+          "label": "Document Type",
+          "errors": {
+            "required": "Document type is required"
+          }
+        }
+      }
+    },
+    "digitalAccountsAndDevices": {
+      "columns": {
+        "account_type": {
+          "label": "Account / Device Type",
+          "errors": {
+            "required": "Select an account or device type"
+          }
+        },
+        "provider": {
+          "label": "Provider / Description",
+          "placeholder": "Service or device name",
+          "errors": {
+            "required": "Provider or description is required"
+          }
+        },
+        "account_identifier": {
+          "label": "Account Identifier (not password)"
+        },
+        "legacy_contact": {
+          "label": "Legacy Contact / Trusted Person"
+        },
+        "account_preference": {
+          "label": "Preference"
+        }
+      }
+    },
+    "additionalDetails": {
+      "title": "Additional details",
+      "fields": {
+        "notes": {
+          "label": "Additional Notes",
+          "errors": {
+            "maxLength": "Notes cannot exceed 5000 characters"
+          }
+        }
+      }
+    },
+    "bankDetails": {
+      "title": "Bank details",
+      "columns": {
+        "bank_name": {
+          "label": "Bank Name",
+          "placeholder": "Bank name",
+          "errors": {
+            "required": "Bank name is required"
+          }
+        },
+        "account_type": {
+          "label": "Account Type",
+          "errors": {
+            "required": "Please select account type"
+          }
+        },
+        "account_no": {
+          "placeholder": "Account number"
+        },
+        "branch_address": {
+          "label": "Branch / Address",
+          "placeholder": "Branch name or address"
+        }
+      }
+    },
+    "pensionsAndPublicBenefits": {
+      "title": "Pensions and Public Benefits",
+      "columns": {
+        "plan_type": {
+          "label": "Plan / Benefit Type",
+          "errors": {
+            "required": "Select a plan or benefit type"
+          }
+        },
+        "provider": {
+          "errors": {
+            "required": "Administrator is required"
+          }
+        },
+        "employer": {
+          "label": "Employer (if applicable)",
+          "placeholder": "Current or former employer"
+        },
+        "document_location": {
+          "label": "Statement / Decision Letter Location",
+          "placeholder": "Secure storage location"
+        }
+      }
+    }
+  },
+  "options": {
+    "blood_group": {
+      "a_positive": "A+",
+      "a_negative": "A-",
+      "b_positive": "B+",
+      "b_negative": "B-",
+      "ab_positive": "AB+",
+      "ab_negative": "AB-",
+      "o_positive": "O+",
+      "o_negative": "O-",
+      "unknown": "Unknown"
+    },
+    "insurance_type": {
+      "life": "Life",
+      "income_protection": "Income Protection",
+      "trauma_critical_illness": "Trauma / Critical Illness",
+      "private_health": "Private Health",
+      "home_contents": "Home Contents",
+      "travel": "Travel",
+      "landlord": "Landlord",
+      "business": "Business",
+      "other": "Other",
+      "dental": "Dental",
+      "auto": "Auto",
+      "disability_income_protection": "Disability / Income Protection",
+      "critical_illness": "Critical Illness",
+      "mortgage_protection": "Mortgage Protection",
+      "home_buildings": "Home Buildings",
+      "motor": "Motor",
+      "personal_accident": "Personal Accident",
+      "medical_private_health": "Medical / Private Health",
+      "cancer_serious_illness": "Cancer / Serious Illness",
+      "long_term_care_supplement": "Long-Term Care Supplement",
+      "home_fire": "Home / Fire",
+      "contents": "Contents",
+      "health": "Health",
+      "home": "Home"
+    },
+    "account_type": {
+      "savings": "Savings",
+      "joint": "Joint",
+      "business": "Business",
+      "other": "Other",
+      "primary_email": "Primary Email",
+      "phone_provider": "Phone Provider",
+      "password_manager": "Password Manager",
+      "cloud_storage": "Cloud Storage",
+      "social_media": "Social Media",
+      "photo_file_archive": "Photo / File Archive",
+      "domain_website": "Domain / Website",
+      "subscription": "Subscription",
+      "computer_phone_tablet": "Computer / Phone / Tablet",
+      "crypto_wallet": "Crypto Wallet",
+      "banking_financial_service": "Banking / Financial Service",
+      "cryptocurrency_wallet": "Cryptocurrency Wallet",
+      "current": "Current",
+      "current_savings": "Current / Savings",
+      "time_deposit": "Time Deposit",
+      "banking_pension": "Banking / Pension",
+      "mynaportal_e_tax_reference_only": "Mynaportal / e-Tax (reference only)"
+    },
+    "asset_type": {
+      "term_deposit": "Term Deposit",
+      "managed_fund": "Managed Fund",
+      "shares": "Shares",
+      "exchange_traded_fund": "Exchange-Traded Fund",
+      "bonds": "Bonds",
+      "investment_account": "Investment Account",
+      "investment_property": "Investment Property",
+      "business_interest": "Business Interest",
+      "cryptoasset": "Cryptoasset",
+      "other": "Other",
+      "principal_residence": "Principal Residence",
+      "other_real_estate": "Other Real Estate",
+      "rental_property": "Rental Property",
+      "lease_rental": "Lease / Rental",
+      "motor_vehicle": "Motor Vehicle",
+      "boat_caravan": "Boat / Caravan",
+      "time_deposit": "Time Deposit",
+      "investment_fund": "Investment Fund",
+      "brokerage_account": "Brokerage Account",
+      "other_property": "Other Property",
+      "boat": "Boat",
+      "property_interest": "Property Interest",
+      "lease_tenancy": "Lease / Tenancy",
+      "real_estate": "Real Estate"
+    },
+    "plan_type": {
+      "other": "Other",
+      "personal_pension_annuity": "Personal Pension / Annuity",
+      "public_service_pension": "Public Service Pension",
+      "other_government_benefit": "Other Government Benefit",
+      "national_pension": "National Pension",
+      "employees_pension_insurance": "Employees' Pension Insurance"
+    },
+    "liability_type": {
+      "mortgage": "Mortgage",
+      "credit_card": "Credit Card",
+      "personal_loan": "Personal Loan",
+      "line_of_credit": "Line of Credit",
+      "vehicle_finance": "Vehicle Finance",
+      "business_debt": "Business Debt",
+      "other": "Other",
+      "student_loan": "Student Loan",
+      "overdraft": "Overdraft",
+      "tax": "Tax"
+    },
+    "income_type": {
+      "employment": "Employment",
+      "business": "Business",
+      "rental_income": "Rental Income",
+      "other": "Other",
+      "state_pension": "State Pension",
+      "national_pension": "National Pension",
+      "employees_pension": "Employees' Pension"
+    },
+    "record_type": {
+      "other": "Other",
+      "property_tax": "Property Tax",
+      "student_loan": "Student Loan",
+      "paye_employer": "PAYE / Employer",
+      "stamp_duty": "Stamp Duty",
+      "national_income_tax": "National Income Tax",
+      "inheritance_tax": "Inheritance Tax",
+      "resident_tax": "Resident Tax",
+      "health_insurance": "Health Insurance",
+      "municipal_services": "Municipal Services"
+    },
+    "document_type": {
+      "will": "Will",
+      "codicil": "Codicil",
+      "enduring_power_of_attorney": "Enduring Power of Attorney",
+      "trust": "Trust",
+      "funeral_wishes": "Funeral Wishes",
+      "other": "Other",
+      "birth_citizenship_certificate": "Birth / Citizenship Certificate",
+      "passport": "Passport",
+      "driver_licence_vehicle_papers": "Driver Licence / Vehicle Papers",
+      "property_title_mortgage": "Property Title / Mortgage",
+      "bank_investment_statements": "Bank / Investment Statements",
+      "insurance_policies": "Insurance Policies",
+      "medical_records": "Medical Records",
+      "driving_licence_vehicle_papers": "Driving Licence / Vehicle Papers",
+      "notarised_will": "Notarised Will",
+      "handwritten_will_deposit": "Handwritten Will / Deposit",
+      "voluntary_guardianship_contract": "Voluntary Guardianship Contract",
+      "adult_guardianship_family_court": "Adult Guardianship / Family Court Order",
+      "care_preferences_advance_care": "Care Preferences / Advance Care Plan",
+      "birth_family_register": "Birth / Family Register Certificate",
+      "residence_record": "Residence Record",
+      "my_number_notice_card": "My Number Notice / Card",
+      "residence_card": "Residence Card",
+      "health_insurance_eligibility": "Health Insurance Eligibility Document",
+      "pension_record": "Pension Record",
+      "will_guardianship_documents": "Will / Guardianship Documents",
+      "property_housing_records": "Property / Housing Records",
+      "tax_returns_notices": "Tax Returns / Notices"
+    },
+    "jurisdiction": {
+      "other_cross_border": "Other / Cross-border"
+    },
+    "account_preference": {
+      "preserve": "Preserve",
+      "close": "Close",
+      "memorialise_transfer": "Memorialise / Transfer",
+      "review_with_family": "Review with family",
+      "not_specified": "Not specified"
+    },
+    "contact_type": {
+      "spouse": "Spouse",
+      "parent": "Parent",
+      "child": "Child",
+      "sibling": "Sibling",
+      "friend": "Friend",
+      "doctor": "Doctor",
+      "hospital": "Hospital",
+      "emergency_service": "Emergency Service",
+      "neighbor": "Neighbor",
+      "other": "Other",
+      "my_doctor": "My Doctor",
+      "others": "Others"
+    },
+    "doc_type": {
+      "birth_certificate": "Birth Certificate",
+      "passport": "Passport",
+      "marriage_certificate": "Marriage Certificate",
+      "property_deed_mortgage": "Property Deed / Mortgage",
+      "power_of_attorney": "Power of Attorney",
+      "educational_certificates": "Educational Certificates",
+      "insurance_policies": "Insurance Policies",
+      "tax_returns": "Tax Returns",
+      "medical_records": "Medical Records",
+      "other": "Other"
+    },
+    "loan_type": {
+      "home_loan": "Home Loan",
+      "car_loan": "Car Loan",
+      "personal_loan": "Personal Loan",
+      "education_loan": "Education Loan",
+      "other": "Other"
+    },
+    "role": {
+      "lawyer": "Lawyer",
+      "chartered_accountant": "Chartered Accountant",
+      "financial_advisor": "Financial Advisor",
+      "insurance_agent": "Insurance Agent",
+      "other": "Other"
+    },
+    "myna_health_registration": {
+      "registered": "Registered",
+      "not_applicable": "Not applicable",
+      "unknown": "Unknown"
+    }
+  },
+  "accessGuide": {
+    "legalNotes": {
+      "item_122": "This guide is general information, not legal, tax, insurance, or financial advice.",
+      "item_124": "This guide provides general emergency access information only and is not legal advice",
+      "item_126": "Update this information at least annually or after major life events",
+      "item_91": "Official: My Number system: https://www.digital.go.jp/en/policies/mynumber/",
+      "item_90": "Official: My Number Card: https://www.kojinbango-card.go.jp/en/",
+      "item_89": "Official: My Number Card as health insurance certificate: https://www.digital.go.jp/en/policies/mynumber/faq-insurance-card/",
+      "item_82": "Official: Japan Pension Service: https://www.nenkin.go.jp/international/english/",
+      "item_92": "Official: National Tax Agency inheritance tax: https://www.nta.go.jp/english/taxes/others/02/15001.htm",
+      "item_81": "Official: Japan Courts: https://www.courts.go.jp/english/",
+      "item_19": "Emergency numbers: Japan National Police Agency: https://www.npa.go.jp/english/"
+    },
+    "sectionGuidance": {
+      "personalDetails": {
+        "usefulFor": {
+          "item_17": "Healthcare providers",
+          "item_26": "Legal representatives",
+          "item_27": "Medical professionals",
+          "item_13": "Government agencies",
+          "item_12": "Financial institutions",
+          "item_06": "Banks and pension providers",
+          "item_28": "Municipal offices"
+        },
+        "firstActions": {
+          "item_01": "Check identifiers against official records",
+          "item_03": "Check names and address against official records"
+        },
+        "criticalFields": {
+          "item_06": "Full Legal Name",
+          "item_03": "Date of Birth",
+          "item_19": "Primary Phone Number",
+          "item_05": "Email Address"
+        }
+      },
+      "emergencyContacts": {
+        "usefulFor": {
+          "item_06": "Family",
+          "item_01": "Emergency responders",
+          "item_10": "Healthcare providers",
+          "item_03": "Executors and attorneys",
+          "item_11": "Hospital staff",
+          "item_07": "Family members",
+          "item_13": "Legal representatives",
+          "item_09": "Healthcare providers",
+          "item_17": "Whānau and family",
+          "item_05": "Executors and guardians"
+        },
+        "firstActions": {
+          "item_02": "Confirm each person knows they are listed",
+          "item_22": "Verify phone and email details",
+          "item_06": "Contact the primary emergency contact immediately if needed",
+          "item_13": "Locate separate legal appointments when authority is needed"
+        },
+        "criticalFields": {
+          "item_07": "Relationship",
+          "item_03": "Name",
+          "item_05": "Phone Number",
+          "item_08": "Role / Instructions",
+          "item_02": "Contact Type",
+          "item_04": "Phone No."
+        }
+      },
+      "healthAndCareInformation": {
+        "usefulFor": {
+          "item_01": "Ambulance and hospital staff",
+          "item_11": "GP and care teams",
+          "item_04": "Family and appointed decision-makers",
+          "item_03": "Emergency responders",
+          "item_02": "Clinics and hospitals",
+          "item_08": "Family and care representatives"
+        },
+        "firstActions": {
+          "item_21": "Tell clinicians about known allergies and current medicines",
+          "item_22": "Tell clinicians about known allergies and medicines",
+          "item_20": "Tell clinicians about allergies and current medicines"
+        },
+        "criticalFields": {
+          "item_05": "GP / Medical Practice",
+          "item_09": "Known Medical Conditions",
+          "item_01": "Allergies and Reactions",
+          "item_02": "Current Medicines",
+          "item_10": "Usual Clinic / Healthcare Provider",
+          "item_07": "Health Insurance Provider / Insurer"
+        }
+      },
+      "insuranceDetails": {
+        "usefulFor": {
+          "item_09": "Insurers and claims teams",
+          "item_04": "Executors and beneficiaries",
+          "item_07": "Household members",
+          "item_06": "Hospital billing",
+          "item_08": "Insurance agents",
+          "item_05": "Family members",
+          "item_10": "Legal executors",
+          "item_03": "Employers"
+        },
+        "firstActions": {
+          "item_18": "Find current policy schedules and claims contacts",
+          "item_25": "Locate original policy documents and member IDs",
+          "item_09": "Check coverage limits and claim procedures for each provider",
+          "item_02": "Ask about evidence and claim requirements",
+          "item_15": "Confirm policy status and beneficiary details with each insurer"
+        },
+        "criticalFields": {
+          "item_02": "Cover Type",
+          "item_05": "Insurer / Provider",
+          "item_09": "Policy / Member Reference",
+          "item_01": "Claims Contact",
+          "item_08": "Policy Holder Name",
+          "item_12": "Provider",
+          "item_10": "Policy No.",
+          "item_04": "Insurance Type"
+        }
+      },
+      "bankAccounts": {
+        "usefulFor": {
+          "item_04": "Banks and credit unions",
+          "item_02": "Authorised representatives",
+          "item_07": "Household bill management",
+          "item_05": "Banks and financial institutions"
+        },
+        "firstActions": {
+          "item_04": "Confirm account holders and authorities with the bank",
+          "item_16": "Use the provider's bereavement process",
+          "item_05": "Confirm account holders and authority with the bank",
+          "item_15": "Use the bank's bereavement process",
+          "item_02": "Confirm account holder details and authority with the bank"
+        },
+        "criticalFields": {
+          "item_05": "Bank / Credit Union",
+          "item_01": "Account Number",
+          "item_03": "Account Owner / Authority Notes",
+          "item_06": "Bank / Financial Institution",
+          "item_09": "Branch Name / Code"
+        }
+      },
+      "savingsAndInvestments": {
+        "usefulFor": {
+          "item_03": "Executors or administrators",
+          "item_02": "Banks, brokers, and registries",
+          "item_12": "Tax and financial advisers",
+          "item_01": "Banks and brokers"
+        },
+        "firstActions": {
+          "item_08": "Confirm ownership and current valuations with providers",
+          "item_04": "Check tax and beneficiary treatment before transfer or sale",
+          "item_05": "Check tax and beneficiary treatment before transfers or sales",
+          "item_12": "Keep statements and valuation dates",
+          "item_01": "Check account succession and tax treatment before transfers or sales"
+        },
+        "criticalFields": {
+          "item_12": "Asset Type",
+          "item_16": "Provider / Institution",
+          "item_02": "Account / Holding Reference"
+        }
+      },
+      "pensionsAndGovernmentBenefits": {
+        "usefulFor": {
+          "item_03": "Dependants and beneficiaries"
+        },
+        "criticalFields": {
+          "item_06": "Plan / Benefit Type"
+        }
+      },
+      "propertyAndVehicles": {
+        "usefulFor": {
+          "item_02": "Executors and administrators",
+          "item_08": "Lenders and insurers",
+          "item_09": "Municipal offices"
+        },
+        "firstActions": {
+          "item_01": "Check insurance and essential services before changing arrangements",
+          "item_04": "Confirm ownership and transfer requirements with the relevant authority",
+          "item_15": "Locate title, tenancy, loan, and registration records"
+        },
+        "criticalFields": {
+          "item_01": "Address / Description",
+          "item_04": "Owner(s) / Ownership",
+          "item_08": "Title / Registration Reference",
+          "item_03": "Mortgage / Lien / Lender"
+        }
+      },
+      "loansAndLiabilities": {
+        "usefulFor": {
+          "item_05": "Executors and administrators",
+          "item_10": "Lenders and creditors",
+          "item_08": "Household cash-flow planning",
+          "item_01": "Banks and creditors",
+          "item_09": "Household financial planning"
+        },
+        "firstActions": {
+          "item_10": "Contact creditors through official channels",
+          "item_09": "Confirm who is liable before paying or cancelling",
+          "item_04": "Ask whether insurance or a guarantee affects the balance",
+          "item_05": "Ask whether insurance or guarantees affect the balance"
+        },
+        "criticalFields": {
+          "item_13": "Liability Type",
+          "item_12": "Lender / Creditor",
+          "item_11": "Borrower(s) / Guarantor"
+        }
+      },
+      "employmentAndIncome": {
+        "usefulFor": {
+          "item_04": "Employer HR and payroll",
+          "item_19": "Tax agents",
+          "item_05": "Employers and payroll",
+          "item_18": "Tax advisers"
+        },
+        "firstActions": {
+          "item_02": "Ask employers about final pay and group cover",
+          "item_04": "Check benefit continuation or survivor claims",
+          "item_03": "Ask employers about final salary and group cover",
+          "item_01": "Ask employers about final pay and any group cover",
+          "item_08": "Check pension or benefit continuation with the relevant agency",
+          "item_17": "Keep withholding and employment records"
+        },
+        "criticalFields": {
+          "item_04": "Income / Benefit Type",
+          "item_01": "Employer / Paying Organisation",
+          "item_03": "HR / Payroll / Claim Contact"
+        }
+      },
+      "taxAndGovernmentRecords": {
+        "firstActions": {
+          "item_20": "Use official services and confirm current filing duties",
+          "item_03": "Keep tax records and correspondence securely",
+          "item_16": "Use official channels and confirm current filing duties",
+          "item_04": "Keep tax records securely",
+          "item_05": "Keep tax returns and notices securely"
+        },
+        "criticalFields": {
+          "item_03": "Record Type",
+          "item_01": "Authority / Provider",
+          "item_04": "Reference Number",
+          "item_05": "Returns / Correspondence Location"
+        },
+        "usefulFor": {
+          "item_14": "Local authorities",
+          "item_29": "Tax advisers",
+          "item_18": "Municipal offices"
+        }
+      },
+      "legalAndEstatePlanning": {
+        "usefulFor": {
+          "item_08": "Executors and administrators",
+          "item_10": "Family Court and guardianship professionals",
+          "item_17": "Notaries and lawyers"
+        },
+        "criticalFields": {
+          "item_01": "Document / Arrangement",
+          "item_11": "Original / Registered Copy Location",
+          "item_03": "Executor / Attorney / Representative",
+          "item_13": "Solicitor / Adviser",
+          "item_06": "Executor / Guardian / Representative",
+          "item_10": "Notary / Lawyer / Adviser"
+        },
+        "firstActions": {
+          "item_15": "Locate the executed will or guardianship contract",
+          "item_04": "Confirm any guardianship appointment or court order with the relevant Family Court",
+          "item_21": "Seek Japanese legal advice for estate administration or cross-border issues"
+        }
+      },
+      "importantDocuments": {
+        "usefulFor": {
+          "item_06": "Family",
+          "item_03": "Executors and administrators",
+          "item_10": "Financial institutions and advisers",
+          "item_02": "Estate executors",
+          "item_01": "Attorneys",
+          "item_08": "Family members",
+          "item_09": "Financial advisors",
+          "item_11": "Healthcare providers and advisers"
+        },
+        "firstActions": {
+          "item_08": "Secure originals and verify current versions",
+          "item_12": "Tell the appropriate representative where documents are stored",
+          "item_09": "Share location details only with trusted people",
+          "item_06": "Locate and secure all original documents immediately",
+          "item_02": "Confirm wills, powers of attorney, and property records are current",
+          "item_11": "Store copies in multiple secure locations when possible",
+          "item_13": "Tell the authorised representative where documents are stored",
+          "item_10": "Share locations only with trusted people"
+        },
+        "criticalFields": {
+          "item_01": "Document Type",
+          "item_02": "Location",
+          "item_04": "Who Can Help Locate It",
+          "item_03": "Safe Storage"
+        }
+      },
+      "digitalAccountsAndDevices": {
+        "usefulFor": {
+          "item_01": "Digital legacy contacts",
+          "item_02": "Executors",
+          "item_05": "Service providers"
+        },
+        "firstActions": {
+          "item_07": "Use each provider's official legacy or bereavement process",
+          "item_08": "Use password-manager emergency access instead of putting secrets in this export",
+          "item_02": "Secure devices and do not bypass account controls",
+          "item_06": "Use each provider's official bereavement or legacy process"
+        },
+        "criticalFields": {
+          "item_03": "Provider / Description",
+          "item_01": "Account Identifier (not password)",
+          "item_04": "Recovery / Multi-factor Method",
+          "item_02": "Legacy Contact / Trusted Person"
+        }
+      },
+      "additionalDetails": {
+        "usefulFor": {
+          "item_10": "Trusted family",
+          "item_04": "Executors",
+          "item_09": "Professional advisers",
+          "item_02": "All parties",
+          "item_08": "Medical staff",
+          "item_07": "Legal representatives"
+        },
+        "firstActions": {
+          "item_06": "Keep notes current and non-secret",
+          "item_08": "Point to formal documents or a secure credential manager where needed",
+          "item_10": "Read through all notes carefully"
+        },
+        "criticalFields": {
+          "item_01": "Additional Notes"
+        }
+      },
+      "bankDetails": {
+        "usefulFor": {
+          "item_01": "Estate executors",
+          "item_03": "Financial advisors",
+          "item_02": "Family members",
+          "item_05": "Legal representatives"
+        },
+        "firstActions": {
+          "item_11": "Verify account holders and authorized signers"
+        },
+        "criticalFields": {
+          "item_04": "Bank Name",
+          "item_01": "Account No."
+        }
+      },
+      "pensionsAndPublicBenefits": {
+        "criticalFields": {
+          "item_05": "Plan / Benefit Type",
+          "item_04": "Member / Claim Reference",
+          "item_06": "Scheme / Administrator",
+          "item_07": "Survivor / Beneficiary Notes"
+        },
+        "usefulFor": {
+          "item_01": "Employers and pension administrators",
+          "item_07": "Survivors and dependants"
+        }
+      }
+    },
+    "generalGuidance": {
+      "fileStructure": {
+        "item_11": "The export ZIP may contain a spreadsheet, PDFs, and this access guide.",
+        "item_13": "Treat every file as sensitive; it may include identity, health, financial, and legal references.",
+        "item_16": "Your emergency kit is packaged as a single ZIP file",
+        "item_04": "Excel Workbook (.xlsx) - Editable spreadsheet with all your information",
+        "item_08": "PDF Documents - Read-only files for easy printing and sharing",
+        "item_12": "This Access Guide - Complete instructions for using your emergency kit",
+        "item_01": "All files are password-protected for your security (if enabled)"
+      },
+      "dataAccess": {
+        "item_03": "Extract to a private, encrypted location and keep an untouched backup.",
+        "item_14": "Share only with trusted authorised people; a family relationship alone does not grant legal access.",
+        "item_15": "Store credentials in a reputable password manager with an emergency-access feature, not in this export.",
+        "item_21": "Windows: Right-click the ZIP file and choose Extract All",
+        "item_08": "Mac: Double-click the ZIP file to extract it automatically",
+        "item_11": "Save the extracted files to a secure, memorable location",
+        "item_02": "Consider encrypted cloud backup such as OneDrive, Google Drive, or iCloud",
+        "item_06": "Keep duplicate copies on an encrypted USB drive or secure mobile device"
+      },
+      "securityTips": {
+        "item_30": "Use encrypted storage and secure channels for sensitive documents.",
+        "item_20": "Review after major life events and at least annually; remove outdated copies securely.",
+        "item_24": "Share personal documents only through encrypted channels",
+        "item_01": "Avoid sending sensitive information through regular email",
+        "item_31": "Use secure messaging apps such as Signal or WhatsApp when necessary",
+        "item_22": "Securely delete old document versions and backups",
+        "item_27": "Turn on two-factor authentication wherever possible",
+        "item_26": "Store original legal documents in a safe place or professional vault",
+        "item_08": "Maintain both digital and physical copies in separate secure locations",
+        "item_10": "Never put My Number Card PINs, passwords, e-Tax credentials, authentication codes, or recovery keys in the export."
+      }
+    }
+  },
+  "recoveryRoadmap": {
+    "meta": {
+      "version": "1.0"
+    },
+    "quickReference": {
+      "probate": {
+        "reviewStatus": "needs-legal-review"
+      },
+      "estateAdminChecklist": {
+        "keyNote": "Keep a written ledger and copies of every filing and communication."
+      },
+      "healthInsurance": {
+        "url": "https://www.digital.go.jp/en/policies/mynumber/faq-insurance-card/"
+      },
+      "inheritanceTax": {
+        "note": "Check current National Tax Agency filing rules and consult a tax professional for the estate's circumstances.",
+        "url": "https://www.nta.go.jp/english/taxes/others/02/15001.htm"
+      }
+    }
+  }
+}

@@ -1,0 +1,875 @@
+{
+  "countryName": "Ireland",
+  "forms": {
+    "personalDetails": {
+      "description": "Identity and contact details for family, healthcare, financial, and government administration. PPS and health-card details are sensitive and optional.",
+      "fields": {
+        "full_name": {
+          "placeholder": "Name as shown on official records"
+        },
+        "pps_number": {
+          "label": "Personal Public Service (PPS) Number",
+          "placeholder": "7 digits followed by 1 or 2 letters; store securely",
+          "errors": {
+            "pattern": "PPS number should be 7 digits followed by 1 or 2 letters, or be left blank"
+          }
+        },
+        "medical_card_number": {
+          "label": "Medical Card Number (if applicable)",
+          "placeholder": "Only if you hold an HSE medical card"
+        },
+        "gp_visit_card_number": {
+          "label": "GP Visit Card Number (if applicable)",
+          "placeholder": "Only if you hold an HSE GP visit card"
+        },
+        "passport_no": {
+          "label": "Passport Number (if applicable)",
+          "placeholder": "Passport number"
+        },
+        "drivers_license_no": {
+          "label": "Driving Licence Number (if applicable)",
+          "placeholder": "Driving licence number"
+        },
+        "phone": {
+          "placeholder": "+353 or local number",
+          "errors": {
+            "required": "Primary phone number is required"
+          }
+        },
+        "email": {
+          "placeholder": "name@example.ie",
+          "errors": {
+            "pattern": "Enter a valid email address or leave blank"
+          }
+        },
+        "residential_address": {
+          "label": "Residential Address",
+          "placeholder": "Street, town or city, county, Eircode"
+        },
+        "city_town": {
+          "label": "City (if applicable)",
+          "placeholder": "Select a City; leave blank if outside Ireland"
+        },
+        "eircode": {
+          "label": "Eircode (if applicable)",
+          "placeholder": "Optional Eircode; formats can vary for older or non-residential addresses"
+        }
+      }
+    },
+    "emergencyContacts": {
+      "description": "Trusted people to contact. Being listed does not itself grant legal authority to make decisions or access accounts.",
+      "columns": {
+        "relationship": {
+          "label": "Relationship",
+          "placeholder": "Partner, family member, friend, or other"
+        },
+        "name": {
+          "placeholder": "Full name",
+          "errors": {
+            "required": "Name is required",
+            "minLength": "Name is required"
+          }
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "+353 or local number",
+          "errors": {
+            "required": "Phone number is required"
+          }
+        },
+        "contact_details": {
+          "label": "Email / Address"
+        },
+        "role": {
+          "label": "Role / Instructions",
+          "placeholder": "Next of kin, executor, attorney, or other"
+        }
+      }
+    },
+    "healthAndCareInformation": {
+      "description": "Optional health and care information. Medical cards and GP visit cards have separate HSE eligibility rules; neither is a universal health identifier.",
+      "fields": {
+        "medical_practice": {
+          "label": "GP / Medical Practice",
+          "placeholder": "Practice name and contact details"
+        },
+        "medical_conditions": {
+          "placeholder": "Relevant diagnoses or care needs"
+        },
+        "allergies": {
+          "placeholder": "Known allergies, reactions, or none known"
+        },
+        "medications": {
+          "placeholder": "Medicine, dose, and where the current list is kept"
+        },
+        "care_needs": {
+          "label": "Care / Accessibility Needs",
+          "placeholder": "Relevant communication, accessibility, or care needs"
+        },
+        "advance_directive_location": {
+          "label": "Advance Healthcare Directive Location",
+          "placeholder": "Secure location of the current formal directive"
+        }
+      }
+    },
+    "insuranceDetails": {
+      "description": "Private, employer, property, and other insurance. HSE medical cards and public services are not private insurance policies.",
+      "columns": {
+        "insured_name": {
+          "label": "Policy Holder",
+          "placeholder": "Name on policy",
+          "errors": {
+            "required": "Policy holder is required"
+          }
+        },
+        "insurance_type": {
+          "label": "Cover Type",
+          "errors": {
+            "required": "Select a cover type"
+          }
+        },
+        "provider": {
+          "label": "Insurer / Provider",
+          "placeholder": "Insurer or provider",
+          "errors": {
+            "required": "Provider is required"
+          }
+        },
+        "policy_no": {
+          "label": "Policy / Member Reference",
+          "placeholder": "Policy or member reference",
+          "errors": {
+            "required": "Reference is required"
+          }
+        }
+      }
+    },
+    "bankAccounts": {
+      "title": "Bank accounts",
+      "description": "Irish bank, credit union, and savings accounts. Use the full IBAN and BIC where supplied; account details and account access rules are provider-specific.",
+      "columns": {
+        "holder_name": {
+          "label": "Account Holder(s)",
+          "placeholder": "Name(s) on account",
+          "errors": {
+            "required": "Account holder is required"
+          }
+        },
+        "bank_name": {
+          "label": "Bank / Credit Union",
+          "placeholder": "Institution name",
+          "errors": {
+            "required": "Institution name is required"
+          }
+        },
+        "account_type": {
+          "label": "Account Type"
+        },
+        "iban": {
+          "label": "IBAN",
+          "placeholder": "As shown by your financial institution"
+        },
+        "bic_swift": {
+          "label": "BIC / SWIFT (if applicable)",
+          "placeholder": "As shown by your financial institution"
+        },
+        "ownership_notes": {
+          "placeholder": "Joint holder or authorised signatory details"
+        },
+        "provider_contact": {
+          "label": "Bank Contact",
+          "placeholder": "Bereavement or customer-service contact"
+        },
+        "document_location": {
+          "label": "Statement Location"
+        }
+      }
+    },
+    "savingsAndInvestments": {
+      "title": "Savings and Investments",
+      "description": "Savings and investment assets. Record optional estimates with an as-of date and confirm ownership and tax treatment with the provider or a qualified adviser.",
+      "columns": {
+        "asset_type": {
+          "label": "Asset Type"
+        },
+        "provider": {
+          "label": "Provider / Institution",
+          "placeholder": "Bank, broker, registry, or provider"
+        },
+        "account_reference": {
+          "label": "Account / Holding Reference",
+          "placeholder": "Reference, if useful"
+        },
+        "owners": {
+          "placeholder": "Sole, joint, trust, or company ownership"
+        },
+        "beneficiary": {
+          "label": "Beneficiary / Nomination",
+          "placeholder": "Where current designation is recorded"
+        },
+        "value": {
+          "label": "Approximate Value (EUR)",
+          "placeholder": "Optional estimate",
+          "errors": {
+            "min": "Enter a non-negative value"
+          }
+        },
+        "contact_location": {
+          "label": "Contact / Documents Location",
+          "placeholder": "Provider contact or secure record location"
+        }
+      }
+    },
+    "pensionsAndSocialWelfare": {
+      "title": "Pensions and Social Welfare",
+      "description": "State Pension (Contributory or Non-Contributory), occupational schemes, PRSAs, and social welfare payments. Eligibility, survivor benefits, and tax depend on individual circumstances.",
+      "columns": {
+        "plan_type": {
+          "label": "Plan / Benefit Type",
+          "errors": {
+            "required": "Select a plan or benefit type"
+          }
+        },
+        "provider": {
+          "label": "Scheme / Administrator",
+          "placeholder": "Pension provider or public agency",
+          "errors": {
+            "required": "Administrator is required"
+          }
+        },
+        "employer": {
+          "label": "Employer (if applicable)",
+          "placeholder": "Current or former employer"
+        },
+        "member_reference": {
+          "label": "Member / Claim Reference",
+          "placeholder": "Reference, if known"
+        },
+        "beneficiary": {
+          "label": "Beneficiary / Survivor Notes",
+          "placeholder": "Where current scheme or nomination details are recorded"
+        },
+        "contact": {
+          "label": "Scheme Contact",
+          "placeholder": "Phone, email, or official website"
+        },
+        "document_location": {
+          "label": "Statement / Decision Letter Location",
+          "placeholder": "Secure storage location"
+        }
+      }
+    },
+    "propertyAndVehicles": {
+      "description": "Property, tenancies, vehicles, and registrations. Ownership, probate, and transfer steps depend on the asset and circumstances.",
+      "columns": {
+        "address_description": {
+          "placeholder": "Full address, Eircode, or asset description"
+        },
+        "owners": {
+          "label": "Owner(s) / Ownership"
+        },
+        "title_reference": {
+          "label": "Title / Registration Reference",
+          "placeholder": "Title, vehicle registration, or other reference"
+        },
+        "mortgage_lien": {
+          "placeholder": "Lender and reference; no login details"
+        },
+        "document_location": {
+          "label": "Title / Tenancy / Registration Location"
+        }
+      }
+    },
+    "loansAndLiabilities": {
+      "title": "Loans and Liabilities",
+      "description": "Mortgages, credit, Revenue and local property tax references, and other liabilities. Confirm legal responsibility before making payments or changing accounts.",
+      "columns": {
+        "creditor": {
+          "placeholder": "Institution or organisation"
+        },
+        "account_reference": {
+          "placeholder": "Reference, if useful"
+        },
+        "borrowers": {
+          "label": "Borrower(s) / Guarantor",
+          "placeholder": "Names and shared responsibility"
+        },
+        "balance": {
+          "label": "Approximate Balance (EUR)",
+          "placeholder": "Optional estimate",
+          "errors": {
+            "min": "Enter a non-negative value"
+          }
+        },
+        "payment_details": {
+          "label": "Payment / Review Details",
+          "placeholder": "Optional amount and frequency"
+        },
+        "contact_location": {
+          "placeholder": "Contact or secure record location"
+        }
+      }
+    },
+    "employmentAndIncome": {
+      "description": "Employment, business, regular income, pension, and social welfare payment sources.",
+      "columns": {
+        "organisation": {
+          "placeholder": "Employer or programme"
+        },
+        "survivor_benefit": {
+          "placeholder": "Where programme or plan terms are recorded"
+        },
+        "document_location": {
+          "placeholder": "Payslips, Employment Detail Summary, or award letters"
+        }
+      }
+    },
+    "taxAndGovernmentRecords": {
+      "title": "Tax and Government Records",
+      "description": "Reference details for Revenue, the Department of Social Protection, HSE, and local authorities. Never record myGovID, Revenue Online Service, or banking credentials.",
+      "columns": {
+        "authority": {
+          "placeholder": "Revenue, Department of Social Protection, HSE, or local authority"
+        },
+        "reference": {
+          "placeholder": "Optional account or reference"
+        },
+        "period_location": {
+          "label": "Tax Year / County"
+        },
+        "adviser": {
+          "label": "Tax Adviser / Contact"
+        },
+        "document_location": {
+          "label": "Returns / Correspondence Location"
+        }
+      }
+    },
+    "legalAndEstatePlanning": {
+      "title": "Legal and Estate Planning",
+      "description": "Index wills, probate papers, enduring powers of attorney, and advance healthcare directives. Use the Decision Support Service and Courts Service guidance for current requirements.",
+      "columns": {
+        "jurisdiction": {
+          "label": "Governing Law / Notes",
+          "placeholder": "Ireland or any relevant cross-border law"
+        },
+        "review_date": {
+          "label": "Made / Last Reviewed"
+        },
+        "appointed_person": {
+          "label": "Executor / Attorney / Representative",
+          "placeholder": "Name and contact, if appropriate"
+        },
+        "professional_contact": {
+          "label": "Solicitor / Adviser",
+          "placeholder": "Firm and contact details"
+        },
+        "document_location": {
+          "placeholder": "Secure location and any DSS registration details"
+        },
+        "instructions": {
+          "label": "Instructions / Notes",
+          "placeholder": "Point to formal instructions; do not duplicate sensitive content"
+        }
+      }
+    },
+    "importantDocuments": {
+      "description": "An index of where originals and current copies are kept, not the documents themselves.",
+      "columns": {
+        "location": {
+          "placeholder": "Physical or secure digital location",
+          "errors": {
+            "required": "Location is required"
+          }
+        },
+        "contact": {
+          "placeholder": "Trusted person, solicitor, or institution"
+        }
+      }
+    },
+    "digitalAccountsAndDevices": {
+      "title": "Digital Accounts and Devices",
+      "description": "Inventory important services and devices. Never enter passwords, PINs, Revenue Online Service or MyGovID credentials, one-time codes, security answers, or recovery keys.",
+      "columns": {
+        "account_identifier": {
+          "placeholder": "Username or email, if safe to record"
+        },
+        "recovery_method": {
+          "label": "Recovery / Multi-factor Method",
+          "placeholder": "Method only; no codes or secret values"
+        },
+        "legacy_contact": {
+          "placeholder": "Person and contact details"
+        },
+        "instructions_location": {
+          "label": "Secure Instructions Location",
+          "placeholder": "Password-manager emergency access or secure location"
+        }
+      }
+    },
+    "additionalDetails": {
+      "description": "Other practical notes for trusted family members or representatives. Do not put account secrets here.",
+      "fields": {
+        "notes": {
+          "placeholder": "Non-secret notes or pointers to secure records"
+        }
+      }
+    }
+  },
+  "options": {
+    "city_town": {
+      "carlow": "Carlow",
+      "cavan": "Cavan",
+      "clare": "Clare",
+      "cork": "Cork",
+      "donegal": "Donegal",
+      "dublin": "Dublin",
+      "galway": "Galway",
+      "kerry": "Kerry",
+      "kildare": "Kildare",
+      "kilkenny": "Kilkenny",
+      "laois": "Laois",
+      "leitrim": "Leitrim",
+      "limerick": "Limerick",
+      "longford": "Longford",
+      "louth": "Louth",
+      "mayo": "Mayo",
+      "meath": "Meath",
+      "monaghan": "Monaghan",
+      "offaly": "Offaly",
+      "roscommon": "Roscommon",
+      "sligo": "Sligo",
+      "tipperary": "Tipperary",
+      "waterford": "Waterford",
+      "westmeath": "Westmeath",
+      "wexford": "Wexford",
+      "wicklow": "Wicklow"
+    },
+    "insurance_type": {
+      "serious_illness": "Serious Illness"
+    },
+    "account_type": {
+      "deposit_savings": "Deposit / Savings",
+      "credit_union": "Credit Union",
+      "state_savings": "State Savings",
+      "my_gov_id_revenue_online_service": "MyGovID / Revenue Online Service (reference only)"
+    },
+    "asset_type": {
+      "deposit_account": "Deposit Account",
+      "state_savings": "State Savings"
+    },
+    "plan_type": {
+      "state_pension_contributory": "State Pension (Contributory)",
+      "state_pension_non_contributory": "State Pension (Non-Contributory)",
+      "occupational_pension": "Occupational Pension",
+      "personal_retirement_savings": "Personal Retirement Savings Account (PRSA)",
+      "retirement_annuity_contract_rac": "Retirement Annuity Contract (RAC)",
+      "additional_voluntary": "Additional Voluntary Contributions (AVC)",
+      "survivor_widows_widowers_benefit": "Survivor / Widows' / Widowers' Benefit",
+      "other_social_welfare_payment": "Other Social Welfare Payment"
+    },
+    "liability_type": {
+      "revenue_income_tax": "Revenue / Income Tax",
+      "local_property_tax": "Local Property Tax"
+    },
+    "income_type": {
+      "self_employment": "Self-Employment",
+      "occupational_personal_pension": "Occupational / Personal Pension",
+      "social_welfare_payment": "Social Welfare Payment"
+    },
+    "record_type": {
+      "revenue_income_tax": "Revenue / Income Tax",
+      "capital_acquisitions_tax_cat": "Capital Acquisitions Tax (CAT)",
+      "vat_business": "VAT / Business",
+      "local_property_tax": "Local Property Tax",
+      "prsi_social_welfare": "PRSI / Social Welfare",
+      "hse_medical_card_gp_visit_card": "HSE Medical Card / GP Visit Card"
+    },
+    "document_type": {
+      "grant_of_probate": "Grant of Probate",
+      "grant_of_administration": "Grant of Administration",
+      "enduring_power_of_attorney_dss": "Enduring Power of Attorney (DSS)",
+      "advance_healthcare_directive": "Advance Healthcare Directive",
+      "decision_support_arrangement": "Decision Support Arrangement",
+      "guardianship_care_plan": "Guardianship / Care Plan",
+      "pps_number_record": "PPS Number Record",
+      "medical_gp_visit_card": "Medical / GP Visit Card",
+      "will_grant_epa_directive": "Will / Grant / EPA / Directive",
+      "pension_prsa_records": "Pension / PRSA Records",
+      "tax_returns_employment_detail": "Tax Returns / Employment Detail Summary"
+    }
+  },
+  "accessGuide": {
+    "quickStart": {
+      "item_09": "For an immediate emergency in Ireland, call 112 or 999.",
+      "item_19": "For public poison advice, call the National Poisons Information Centre on 01 809 2166 from 8am to 10pm. In an emergency call 112 or 999.",
+      "item_20": "For someone to talk to, call Samaritans free on 116 123, day or night.",
+      "item_58": "Review emergency contacts, health information, legal document locations, insurance, bank accounts, pensions, and essential liabilities.",
+      "item_32": "If someone has died, identify the executor or authorised representative and use the current Courts Service, Revenue, HSE, and provider procedures.",
+      "item_42": "Keep the export encrypted. Never put passwords, PINs, MyGovID or Revenue Online Service credentials, authentication codes, or recovery keys in it."
+    },
+    "legalNotes": {
+      "item_42": "Ireland means the Republic of Ireland; Northern Ireland is part of the United Kingdom and follows different systems and laws.",
+      "item_102": "PPS numbers are sensitive personal data. The Department of Social Protection says a PPS number has 7 digits followed by one or two letters; share it only with authorised bodies when needed.",
+      "item_49": "Medical cards and GP visit cards have their own HSE eligibility requirements; do not assume every resident is entitled to a card or identical public coverage.",
+      "item_118": "The Courts Service explains that probate or administration may be required. Revenue forms and tax steps depend on the date of death and estate facts.",
+      "item_41": "Ireland has Capital Acquisitions Tax (CAT) on gifts and inheritances; tax thresholds, reliefs, filing, and payment depend on the facts and current Revenue rules.",
+      "item_05": "An enduring power of attorney and advance healthcare directive are separate Decision Support Service arrangements. Confirm registration, activation, and authority before relying on a document.",
+      "item_93": "Official: PPS number: https://www.gov.ie/en/department-of-social-protection/services/get-a-personal-public-service-pps-number/",
+      "item_104": "Public-service guidance: practical arrangements after a death: https://www.citizensinformation.ie/en/death/practical-arrangements-after-a-death/",
+      "item_10": "Courts Service: probate: https://www.courts.ie/hubs/probate",
+      "item_107": "Revenue: gifts and inheritances / CAT: https://www.revenue.ie/en/gains-gifts-and-inheritance/index.aspx",
+      "item_16": "Decision Support Service: enduring power of attorney: https://www.decisionsupportservice.ie/services/enduring-power-attorney-epa",
+      "item_15": "Decision Support Service: advance healthcare directives: https://www.decisionsupportservice.ie/services/advance-healthcare-directives",
+      "item_35": "HSE: medical cards: https://www2.hse.ie/services/schemes-allowances/medical-cards/",
+      "item_52": "National Poisons Information Centre: https://poisons.ie/public/",
+      "item_109": "Samaritans Ireland: https://www.samaritans.org/ireland/how-we-can-help/contact-samaritan/"
+    },
+    "sectionGuidance": {
+      "personalDetails": {
+        "description": "Identity and contact details for government, health, financial, and legal processes. PPS number is sensitive and should be recorded only when needed.",
+        "usefulFor": {
+          "item_09": "Department of Social Protection",
+          "item_32": "Revenue",
+          "item_20": "HSE and healthcare providers"
+        },
+        "firstActions": {
+          "item_06": "Check the PPS number against official records",
+          "item_18": "Keep PPS and card details confidential and share only when a service requires them",
+          "item_32": "Update address and contact information when circumstances change"
+        },
+        "criticalFields": {
+          "item_17": "Personal Public Service (PPS) Number"
+        }
+      },
+      "emergencyContacts": {
+        "description": "Trusted people and their possible roles; listing someone does not give them legal or financial authority."
+      },
+      "healthAndCareInformation": {
+        "description": "Optional health and care information and locations of formal directives.",
+        "usefulFor": {
+          "item_09": "Family and designated healthcare representatives"
+        },
+        "firstActions": {
+          "item_03": "Call 112 or 999 for an immediate emergency",
+          "item_17": "Locate the current advance healthcare directive and representative details"
+        }
+      },
+      "insuranceDetails": {
+        "description": "Private, employer, property, and other insurance policies; public HSE card schemes are separate.",
+        "firstActions": {
+          "item_13": "Confirm beneficiaries and policy terms with the insurer",
+          "item_03": "Ask about the evidence and time limits for claims"
+        }
+      },
+      "bankAccounts": {
+        "description": "Irish bank, credit union, and State Savings accounts with provider-supplied payment identifiers.",
+        "firstActions": {
+          "item_03": "Confirm account holders and account authority with the provider",
+          "item_13": "Keep statements and IBAN details securely"
+        },
+        "criticalFields": {
+          "item_12": "IBAN",
+          "item_08": "BIC / SWIFT (if applicable)"
+        }
+      },
+      "savingsAndInvestments": {
+        "description": "Deposits, securities, funds, property interests, and other investments.",
+        "usefulFor": {
+          "item_11": "Revenue and financial advisers"
+        },
+        "firstActions": {
+          "item_02": "Check CAT, income tax, and capital gains implications before transfers or gifts",
+          "item_15": "Record valuation dates and retain statements"
+        },
+        "criticalFields": {
+          "item_06": "Approximate Value (EUR)"
+        }
+      },
+      "pensionsAndSocialWelfare": {
+        "description": "State pensions, occupational schemes, PRSAs, and social welfare benefits; entitlements and survivor payments vary.",
+        "usefulFor": {
+          "item_01": "Department of Social Protection",
+          "item_02": "Pension administrators and trustees",
+          "item_03": "Survivors and dependants"
+        },
+        "firstActions": {
+          "item_02": "Contact each scheme and the Department of Social Protection to confirm the relevant claim steps",
+          "item_01": "Check PRSA, occupational scheme, and survivor-benefit records with each provider",
+          "item_03": "Use the Pensions Authority for general pension information and tracing resources"
+        },
+        "criticalFields": {
+          "item_03": "Plan / Benefit Type",
+          "item_04": "Scheme / Administrator",
+          "item_02": "Member / Claim Reference",
+          "item_01": "Beneficiary / Survivor Notes"
+        }
+      },
+      "propertyAndVehicles": {
+        "description": "Property, tenancies, vehicles, titles, lending, and associated insurance records.",
+        "usefulFor": {
+          "item_11": "Solicitors and property professionals"
+        },
+        "firstActions": {
+          "item_07": "Confirm ownership and transfer requirements with the relevant professional or authority"
+        }
+      },
+      "loansAndLiabilities": {
+        "description": "Debts and recurring obligations, including joint borrowers and guarantees.",
+        "usefulFor": {
+          "item_03": "Banks, Revenue, and creditors"
+        },
+        "firstActions": {
+          "item_01": "Ask about insurance and document all arrangements"
+        },
+        "criticalFields": {
+          "item_04": "Approximate Balance (EUR)"
+        }
+      },
+      "employmentAndIncome": {
+        "description": "Employment, business, pension, and social welfare income sources.",
+        "usefulFor": {
+          "item_03": "Department of Social Protection",
+          "item_12": "Pension administrators"
+        },
+        "firstActions": {
+          "item_06": "Check payment continuation or survivor claims with the relevant agency",
+          "item_11": "Keep employment and benefit records"
+        }
+      },
+      "taxAndGovernmentRecords": {
+        "description": "References for Revenue, the Department of Social Protection, HSE, and local authorities; never record online-service credentials.",
+        "usefulFor": {
+          "item_24": "Revenue",
+          "item_06": "Department of Social Protection",
+          "item_09": "HSE",
+          "item_15": "Local authorities and tax advisers"
+        },
+        "firstActions": {
+          "item_01": "Keep tax and social welfare records securely",
+          "item_14": "Never share PPS details or online account credentials unnecessarily"
+        }
+      },
+      "legalAndEstatePlanning": {
+        "description": "Wills, grants of representation, DSS enduring powers of attorney, and advance healthcare directives.",
+        "usefulFor": {
+          "item_06": "Decision supporters and healthcare representatives",
+          "item_19": "Solicitors and Courts Service"
+        },
+        "firstActions": {
+          "item_17": "Locate the signed will and any grant or DSS registration details",
+          "item_03": "Check whether the relevant EPA has been registered and activated before it is relied on",
+          "item_22": "Seek legal advice for estates, cross-border assets, or disputes"
+        }
+      },
+      "importantDocuments": {
+        "description": "An index to identity, financial, health, and legal documents.",
+        "usefulFor": {
+          "item_05": "Family"
+        }
+      },
+      "digitalAccountsAndDevices": {
+        "description": "A safe inventory of online accounts, devices, and recovery pointers, not passwords.",
+        "firstActions": {
+          "item_05": "Use a password manager's emergency-access feature rather than putting secrets in this export"
+        }
+      },
+      "additionalDetails": {
+        "description": "Other practical notes that do not fit another section. Do not place credentials or access codes here."
+      }
+    },
+    "generalGuidance": {
+      "securityTips": {
+        "item_13": "Never put passwords, PINs, PPS portal credentials, authentication codes, or recovery keys in the export."
+      }
+    },
+    "emergencyServices": {
+      "medical": "112 or 999",
+      "police": "112 or 999 for emergencies; use An Garda Síochána's official contact channels for non-emergencies",
+      "fire": "112 or 999",
+      "poison_control": "National Poisons Information Centre public line: 01 809 2166, 8am-10pm",
+      "suicide_prevention": "Samaritans Ireland: 116 123"
+    }
+  },
+  "recoveryRoadmap": {
+    "description": "A general checklist after a death in Ireland. Confirm the representative's authority and current legal, tax, and provider requirements before acting.",
+    "meta": {
+      "title": "Family Recovery Roadmap - Ireland",
+      "lastReviewed": "2026-10-17",
+      "reviewedBy": "Government and public-service sources reviewed; case-specific legal and tax advice may be needed",
+      "generatedOn": "2026-10-17"
+    },
+    "intro": {
+      "condolence": "We are sorry for your loss. This checklist is intended to make the first practical steps clearer.",
+      "howToUse": "Register the death, identify the executor or administrator, notify relevant agencies and providers, and keep a record of each action."
+    },
+    "startHere": {
+      "0": "Register the death and obtain the records requested by the relevant organisations.",
+      "1": "Locate the will and identify the executor; confirm whether a grant of representation is required.",
+      "2": "Contact Revenue, the Department of Social Protection, banks, insurers, employers, pension providers, and utilities as appropriate.",
+      "3": "List assets, debts, regular payments, and claims; confirm responsibility before changing payments or distributing property.",
+      "4": "Keep a log of contacts, forms, and documents supplied. Do not use the deceased person's online credentials or accounts without authority."
+    },
+    "legalFramework": {
+      "0": "Courts Service probate and grant-of-representation procedures.",
+      "1": "Revenue income tax, CAT, probate-related forms, and estate obligations.",
+      "2": "Decision Support Service enduring powers of attorney and advance healthcare directives.",
+      "3": "State pensions, occupational pension scheme rules, insurance contracts, and beneficiary nominations."
+    },
+    "phases": {
+      "0": {
+        "title": "Register and establish authority",
+        "timeframe": "First days",
+        "priority": "do-first",
+        "focus": "Follow official registration guidance, locate the will, and identify who may act.",
+        "keyActions": {
+          "0": {
+            "action": "Register the death and obtain the death certificate or records required by providers.",
+            "priority": "do-first",
+            "why": "Registration and certificate requirements are needed for later administration.",
+            "legalRef": "https://www.citizensinformation.ie/en/death/practical-arrangements-after-a-death/"
+          },
+          "1": {
+            "action": "Find the will and confirm the executor; contact a solicitor if there is no will, a dispute, or a complex asset situation.",
+            "priority": "do-first",
+            "why": "The executor or administrator must establish authority and may need a grant before dealing with assets.",
+            "legalRef": "https://www.courts.ie/hubs/probate"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Death registration and certificate details",
+          "1": "Will and codicils",
+          "2": "Executor or administrator details",
+          "3": "PPS and health-card record locations",
+          "4": "Bank, pension, insurance, property, and liability references"
+        },
+        "criticalMistakes": {
+          "0": "Assuming next of kin automatically has authority",
+          "1": "Assuming probate is never required",
+          "2": "Putting passwords or authentication codes in an exported record"
+        }
+      },
+      "1": {
+        "title": "Notify and identify claims",
+        "timeframe": "First weeks",
+        "priority": "do-first",
+        "focus": "Notify public bodies and providers, and keep an accurate asset and liability inventory.",
+        "keyActions": {
+          "0": {
+            "action": "Notify Revenue and the Department of Social Protection using current procedures and establish who is authorised to communicate with them.",
+            "priority": "do-first",
+            "why": "Tax, pension, and social welfare records may need to be updated; the information an agency can provide depends on authority.",
+            "legalRef": "https://www.revenue.ie/en/life-events-and-personal-circumstances/index.aspx"
+          },
+          "1": {
+            "action": "Contact banks, insurers, employers, pension providers, lenders, and utilities separately.",
+            "priority": "do-first",
+            "why": "No single government notification completes all private account and benefit processes.",
+            "legalRef": "https://www.citizensinformation.ie/en/death/practical-arrangements-after-a-death/"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Provider statements",
+          "1": "Pension and insurance records",
+          "2": "Employment and social welfare details",
+          "3": "List of regular bills and liabilities"
+        },
+        "criticalMistakes": {
+          "0": "Automatically stopping essential payments",
+          "1": "Assuming an asset passes outside the estate",
+          "2": "Paying liabilities without confirming responsibility"
+        }
+      },
+      "2": {
+        "title": "Administer and finalise",
+        "timeframe": "Following weeks and months",
+        "priority": "do-soon",
+        "focus": "Complete required court, Revenue, property, and provider steps before final distribution.",
+        "keyActions": {
+          "0": {
+            "action": "Confirm whether a grant of probate or administration is needed and follow the Courts Service process when required.",
+            "priority": "do-first",
+            "why": "Requirements depend on the will, estate, assets, and institutions involved.",
+            "legalRef": "https://www.courts.ie/guides/how-to-apply-for-probate"
+          },
+          "1": {
+            "action": "Check the deceased person's tax obligations and any CAT or estate-related filings with Revenue or a qualified tax adviser.",
+            "priority": "do-first",
+            "why": "The required forms and tax treatment depend on the date of death, recipients, assets, and current law.",
+            "legalRef": "https://www.revenue.ie/en/gains-gifts-and-inheritance/index.aspx"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Grant of representation if required",
+          "1": "Asset and liability inventory",
+          "2": "Revenue correspondence and returns",
+          "3": "Property and pension records"
+        },
+        "criticalMistakes": {
+          "0": "Distributing assets before confirming legal authority and tax duties",
+          "1": "Assuming no CAT or income-tax steps apply",
+          "2": "Using the deceased person's digital credentials"
+        }
+      },
+      "3": {
+        "title": "Review family arrangements",
+        "timeframe": "When immediate tasks are complete",
+        "priority": "when-ready",
+        "focus": "Review the surviving household's estate, pension, insurance, and secure information arrangements.",
+        "keyActions": {
+          "0": {
+            "action": "Review wills, DSS arrangements, pension nominations, insurance, and emergency contacts with appropriate professionals.",
+            "priority": "when-ready",
+            "why": "Major life changes can make current appointments or nominations unsuitable.",
+            "legalRef": "https://www.decisionsupportservice.ie/"
+          },
+          "1": {
+            "action": "Keep an asset and digital-account index; store credentials only in a suitable password manager.",
+            "priority": "when-ready",
+            "why": "A secure index helps authorised people locate records without exposing secrets.",
+            "legalRef": "Provider terms and security guidance"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Updated will and decision-support documents",
+          "1": "Current pension and insurance records",
+          "2": "Secure family record index"
+        },
+        "criticalMistakes": {
+          "0": "Leaving outdated representatives or beneficiaries",
+          "1": "Storing credentials in a spreadsheet or PDF",
+          "2": "Failing to keep provider confirmations"
+        }
+      }
+    },
+    "quickReference": {
+      "emergency": {
+        "number": "112 or 999",
+        "poisonLine": "01 809 2166, public line 8am-10pm",
+        "emotionalSupport": "Samaritans 116 123"
+      },
+      "probate": {
+        "note": "A grant of representation may be needed; check the Courts Service and current Revenue requirements.",
+        "url": "https://www.courts.ie/hubs/probate"
+      },
+      "cat": {
+        "note": "Revenue provides current CAT rules, thresholds, forms, and reliefs. Do not rely on a static amount in this guide.",
+        "url": "https://www.revenue.ie/en/gains-gifts-and-inheritance/index.aspx"
+      }
+    },
+    "glossary": {
+      "0": {
+        "term": "Grant of representation",
+        "definition": "A court grant authorising an executor or administrator to deal with an estate; the grant type and whether one is required depend on the case."
+      },
+      "1": {
+        "term": "Capital Acquisitions Tax (CAT)",
+        "definition": "Irish tax that may apply to gifts or inheritances. Liability, thresholds, reliefs, and filing duties depend on circumstances and current Revenue rules."
+      },
+      "2": {
+        "term": "Enduring Power of Attorney",
+        "definition": "A Decision Support Service arrangement that can authorise a trusted person to act on certain decisions if the donor loses capacity, subject to registration and legal requirements."
+      }
+    }
+  }
+}

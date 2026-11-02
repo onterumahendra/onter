@@ -1,0 +1,346 @@
+{
+  "countryName": "India",
+  "forms": {
+    "emergencyContacts": {
+      "description": "Who should we contact in an emergency? Add at least 1 contact.",
+      "completionMessage": "Emergency contacts saved!",
+      "helpText": "💡 Tip: Start with your most trusted person - spouse, parent, or close friend",
+      "columns": {
+        "contact_type": {
+          "label": "Contact Type"
+        },
+        "name": {
+          "placeholder": "Full name",
+          "errors": {
+            "required": "Name is required",
+            "minLength": "Name is required"
+          }
+        },
+        "phone": {
+          "label": "Phone No.",
+          "placeholder": "10 digit number",
+          "errors": {
+            "required": "Phone number must be exactly 10 digits",
+            "pattern": "Phone number must be exactly 10 digits"
+          }
+        },
+        "relationship": {
+          "label": "Relationship (optional)",
+          "placeholder": "e.g., Spouse, Parent"
+        }
+      }
+    },
+    "essentialPersonalDetails": {
+      "title": "Essential Personal Details",
+      "description": "Critical information for medical emergencies",
+      "completionMessage": "Basic medical info saved!",
+      "helpText": "💡 This information could save your life in an emergency",
+      "fields": {
+        "blood_group": {
+          "label": "Blood Group",
+          "placeholder": "Select blood group",
+          "errors": {
+            "required": "Blood group is critical for medical emergencies"
+          }
+        },
+        "telephone_mobile": {
+          "label": "Primary Mobile No.",
+          "placeholder": "10 digit mobile number",
+          "errors": {
+            "required": "Mobile number must be exactly 10 digits",
+            "pattern": "Mobile number must be exactly 10 digits"
+          }
+        },
+        "aadhaar": {
+          "label": "Aadhaar Number (optional but recommended)",
+          "placeholder": "12 digit number",
+          "errors": {
+            "pattern": "Aadhaar must be exactly 12 digits"
+          }
+        }
+      }
+    },
+    "healthInsuranceMediclaim": {
+      "title": "Health Insurance (Mediclaim)",
+      "description": "Medical insurance for cashless treatment",
+      "skipMessage": "No health insurance? You can add this later.",
+      "completionMessage": "Health insurance details saved!",
+      "helpText": "💡 Skip if you don't have health insurance",
+      "columns": {
+        "company": {
+          "label": "Insurance Company",
+          "placeholder": "e.g., Star Health, HDFC Ergo",
+          "errors": {
+            "required": "Company name is required"
+          }
+        },
+        "policy_no": {
+          "label": "Policy Number",
+          "placeholder": "Policy number",
+          "errors": {
+            "required": "Policy number is required"
+          }
+        },
+        "name": {
+          "label": "Covered Person",
+          "placeholder": "Who is covered?",
+          "errors": {
+            "required": "Name is required"
+          }
+        },
+        "helpline": {
+          "label": "Emergency Helpline (optional)",
+          "placeholder": "Customer care number"
+        }
+      }
+    },
+    "bankAccounts": {
+      "title": "Bank Accounts",
+      "description": "Your primary bank accounts",
+      "completionMessage": "Primary bank details saved!",
+      "helpText": "💡 Add at least your salary/main account. Other accounts can be added later.",
+      "columns": {
+        "holder_name": {
+          "label": "Account Holder Name",
+          "placeholder": "As per bank records",
+          "errors": {
+            "required": "Account holder name is required"
+          }
+        },
+        "bank_name": {
+          "label": "Bank Name",
+          "placeholder": "e.g., HDFC Bank, SBI",
+          "errors": {
+            "required": "Bank name is required"
+          }
+        },
+        "account_no": {
+          "label": "Account Number",
+          "placeholder": "Account number",
+          "errors": {
+            "required": "Account number is required"
+          }
+        },
+        "account_type": {
+          "label": "Account Type (optional)"
+        }
+      }
+    },
+    "lifeInsurancePolicies": {
+      "title": "Life Insurance Policies",
+      "description": "Life insurance and term plans",
+      "skipMessage": "No life insurance? You can add this when you get one.",
+      "completionMessage": "Insurance policies saved!",
+      "helpText": "💡 Skip if you don't have life insurance",
+      "columns": {
+        "insured_name": {
+          "label": "Insured Person",
+          "placeholder": "Who is insured?",
+          "errors": {
+            "required": "Insured name is required"
+          }
+        },
+        "provider": {
+          "label": "Insurance Company",
+          "placeholder": "e.g., LIC, HDFC Life",
+          "errors": {
+            "required": "Company name is required"
+          }
+        },
+        "policy_no": {
+          "label": "Policy Number",
+          "placeholder": "Policy number",
+          "errors": {
+            "required": "Policy number is required"
+          }
+        },
+        "sum_assured": {
+          "label": "Sum Assured (₹)",
+          "placeholder": "Coverage amount"
+        }
+      }
+    },
+    "loansEmis": {
+      "title": "Loans & EMIs",
+      "description": "Active loans and monthly EMIs",
+      "skipMessage": "No loans? Great! You can skip this.",
+      "completionMessage": "Loan details saved!",
+      "helpText": "💡 Skip if you have no loans",
+      "columns": {
+        "loan_type": {
+          "label": "Loan Type",
+          "errors": {
+            "required": "Loan type is required"
+          }
+        },
+        "bank_name": {
+          "label": "Bank/Lender",
+          "placeholder": "Bank name",
+          "errors": {
+            "required": "Bank name is required"
+          }
+        },
+        "loan_account_no": {
+          "label": "Loan Account Number",
+          "placeholder": "Account number",
+          "errors": {
+            "required": "Account number is required"
+          }
+        },
+        "emi": {
+          "label": "Monthly EMI (₹)",
+          "placeholder": "EMI amount"
+        }
+      }
+    },
+    "completePersonalDetails": {
+      "title": "Complete Personal Details",
+      "description": "Additional identification documents",
+      "skipMessage": "You can complete this later for comprehensive documentation.",
+      "helpText": "💡 Optional: Add for complete estate planning",
+      "fields": {
+        "pan": {
+          "label": "PAN",
+          "placeholder": "e.g., ABCDE1234F",
+          "errors": {
+            "pattern": "PAN must be in format: ABCDE1234F"
+          }
+        },
+        "passport_no": {
+          "label": "Passport No.",
+          "placeholder": "e.g., A1234567"
+        },
+        "driving_license_no": {
+          "label": "Driving License No.",
+          "placeholder": "DL number"
+        },
+        "voters_id_no": {
+          "label": "Voter ID",
+          "placeholder": "Voter ID"
+        }
+      }
+    },
+    "investmentsSavings": {
+      "title": "Investments & Savings",
+      "description": "Fixed deposits, mutual funds, stocks, PPF, EPF, etc.",
+      "helpText": "💡 Optional: Add for comprehensive wealth tracking",
+      "columns": {
+        "type": {
+          "label": "Investment Type"
+        },
+        "institution": {
+          "label": "Institution Name",
+          "placeholder": "Bank/Company name"
+        },
+        "account_no": {
+          "label": "Account/Folio Number",
+          "placeholder": "Reference number"
+        }
+      }
+    },
+    "creditCards": {
+      "title": "Credit Cards",
+      "description": "Active credit cards",
+      "columns": {
+        "bank_name": {
+          "label": "Bank Name",
+          "placeholder": "Issuing bank"
+        },
+        "card_no": {
+          "label": "Card Last 4 Digits",
+          "placeholder": "Last 4 digits",
+          "errors": {
+            "pattern": "Enter last 4 digits only"
+          }
+        }
+      }
+    },
+    "propertyAssets": {
+      "title": "Property & Assets",
+      "description": "Real estate and major assets",
+      "columns": {
+        "type": {
+          "label": "Property Type"
+        },
+        "details": {
+          "label": "Location/Details",
+          "placeholder": "Address or description"
+        }
+      }
+    },
+    "importantDocuments": {
+      "description": "Where you keep important papers",
+      "fields": {
+        "bank_locker": {
+          "label": "Bank Locker Details (if any)",
+          "placeholder": "Bank name, branch, locker number"
+        },
+        "home_safe": {
+          "label": "Home Safe Location",
+          "placeholder": "Where is your home safe?"
+        },
+        "will_location": {
+          "label": "Will Location",
+          "placeholder": "Where is your will stored?"
+        }
+      }
+    },
+    "professionalAdvisors": {
+      "title": "Professional Advisors",
+      "description": "Lawyer, CA, financial advisor contacts",
+      "columns": {
+        "role": {
+          "label": "Role"
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Advisor name"
+        },
+        "contact_no": {
+          "label": "Contact Number",
+          "placeholder": "Phone number"
+        }
+      }
+    },
+    "additionalNotes": {
+      "title": "Additional Notes",
+      "description": "Any other important information",
+      "fields": {
+        "notes": {
+          "label": "Special Instructions or Notes",
+          "placeholder": "Anything else your family should know..."
+        }
+      }
+    }
+  },
+  "options": {
+    "contact_type": {
+      "emergency_contact": "Emergency Contact",
+      "family_member": "Family Member",
+      "close_friend": "Close Friend"
+    },
+    "blood_group": {
+      "don_t_know": "Don't Know"
+    },
+    "account_type": {
+      "salary": "Salary",
+      "nri": "NRI"
+    },
+    "type": {
+      "fixed_deposit": "Fixed Deposit",
+      "mutual_fund": "Mutual Fund",
+      "stocks": "Stocks",
+      "ppf": "PPF",
+      "epf_pf": "EPF/PF",
+      "nps": "NPS",
+      "bonds": "Bonds",
+      "gold": "Gold",
+      "other": "Other",
+      "house": "House",
+      "flat_apartment": "Flat/Apartment",
+      "commercial_property": "Commercial Property",
+      "land": "Land",
+      "vehicle": "Vehicle"
+    }
+  }
+}

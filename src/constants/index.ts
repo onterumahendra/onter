@@ -1,5 +1,7 @@
 import type { CountryFormConfig } from './types';
 import { loadCountryConfig } from '../utils/configLoader';
+import { loadCountryTranslations } from '../utils/i18nLoader';
+import { localizeCountryConfig } from '../utils/localizeCountryConfig';
 import { AVAILABLE_COUNTRIES, DEFAULT_COUNTRY, getCountryCodes } from './countries';
 import type { Country } from './countries';
 
@@ -9,7 +11,9 @@ import type { Country } from './countries';
  * @returns Promise with country-specific form configuration
  */
 export async function getFormConfig(countryCode: string = DEFAULT_COUNTRY): Promise<CountryFormConfig> {
-  return await loadCountryConfig(countryCode);
+  const config = await loadCountryConfig(countryCode);
+  const translations = await loadCountryTranslations(countryCode);
+  return localizeCountryConfig(config, translations);
 }
 
 /**

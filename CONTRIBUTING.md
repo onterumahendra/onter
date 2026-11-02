@@ -11,8 +11,10 @@ Create a feature branch (git checkout -b feature/amazing-feature)
 Commit your changes (git commit -m 'Add amazing feature')
 Push to the branch (git push origin feature/amazing-feature)
 Open a Pull Request
-Adding New Countries
-We especially welcome contributions for new country configurations! See public/configs/README.md for guidelines.
+## Adding New Countries
+
+We especially welcome contributions for new country configurations. See
+[src/config/README.md](src/config/README.md) for the split config and i18n guidelines.
 
 ## Development Setup
 

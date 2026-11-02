@@ -1,0 +1,824 @@
+{
+  "countryName": "Australia",
+  "forms": {
+    "personalDetails": {
+      "description": "Identity and contact details for family, healthcare, financial, and government administration. Tax and Medicare identifiers are sensitive and optional.",
+      "fields": {
+        "full_name": {
+          "placeholder": "Name as shown on official records"
+        },
+        "tfn": {
+          "label": "Tax File Number (TFN, if useful)",
+          "placeholder": "8 or 9 digits; store securely",
+          "errors": {
+            "pattern": "TFN should contain 8 or 9 digits, or be left blank"
+          }
+        },
+        "medicare_card_number": {
+          "label": "Medicare Card Number (if enrolled)",
+          "placeholder": "As shown on the card"
+        },
+        "medicare_reference_number": {
+          "label": "Medicare Individual Reference Number",
+          "placeholder": "Reference beside your name on the card"
+        },
+        "passport_no": {
+          "label": "Passport Number (if applicable)",
+          "placeholder": "Passport number"
+        },
+        "drivers_license_no": {
+          "label": "Driver Licence Number and Issuing State/Territory",
+          "placeholder": "Licence number and issuer"
+        },
+        "phone": {
+          "placeholder": "+61 or local number",
+          "errors": {
+            "required": "Primary phone number is required"
+          }
+        },
+        "email": {
+          "placeholder": "name@example.com",
+          "errors": {
+            "pattern": "Enter a valid email address or leave blank"
+          }
+        },
+        "residential_address": {
+          "label": "Residential Address",
+          "placeholder": "Street, suburb, state or territory, postcode"
+        },
+        "state_territory": {
+          "label": "State or Territory"
+        }
+      }
+    },
+    "emergencyContacts": {
+      "description": "Trusted people to contact. Being listed does not itself grant legal authority to make decisions or access accounts.",
+      "columns": {
+        "relationship": {
+          "label": "Relationship",
+          "placeholder": "Partner, family member, friend, or other"
+        },
+        "name": {
+          "placeholder": "Full name",
+          "errors": {
+            "required": "Name is required",
+            "minLength": "Name is required"
+          }
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "+61 or local number",
+          "errors": {
+            "required": "Phone number is required"
+          }
+        },
+        "contact_details": {
+          "label": "Email / Address"
+        },
+        "role": {
+          "label": "Role / Instructions",
+          "placeholder": "Next of kin, executor, attorney, or other"
+        }
+      }
+    },
+    "healthAndCareInformation": {
+      "description": "Optional health and care information. Record blood group only if confirmed by a reliable medical record.",
+      "fields": {
+        "medical_practice": {
+          "label": "GP / Medical Practice",
+          "placeholder": "Practice name and contact details"
+        },
+        "medical_conditions": {
+          "placeholder": "Relevant diagnoses or care needs"
+        },
+        "allergies": {
+          "placeholder": "Known allergies, reactions, or none known"
+        },
+        "medications": {
+          "placeholder": "Medicine, dose, and where the current list is kept"
+        },
+        "care_needs": {
+          "label": "Care / Accessibility Needs",
+          "placeholder": "Relevant communication, accessibility, or care needs"
+        },
+        "care_plan_location": {
+          "label": "Advance Care Plan / Directive Location",
+          "placeholder": "Secure location of current formal documents"
+        }
+      }
+    },
+    "insuranceDetails": {
+      "description": "Private, employer, property, and other cover. Medicare and public health services are not private insurance policies.",
+      "columns": {
+        "insured_name": {
+          "label": "Policy Holder",
+          "placeholder": "Name on policy",
+          "errors": {
+            "required": "Policy holder is required"
+          }
+        },
+        "insurance_type": {
+          "label": "Cover Type",
+          "errors": {
+            "required": "Select a cover type"
+          }
+        },
+        "provider": {
+          "label": "Insurer / Provider",
+          "placeholder": "Insurer or super fund",
+          "errors": {
+            "required": "Provider is required"
+          }
+        },
+        "policy_no": {
+          "label": "Policy / Member Reference",
+          "placeholder": "Policy or member reference",
+          "errors": {
+            "required": "Reference is required"
+          }
+        }
+      }
+    },
+    "bankAccounts": {
+      "title": "Bank accounts",
+      "description": "Australian bank and credit union accounts. BSBs are six digits; account-number formats vary by institution.",
+      "columns": {
+        "holder_name": {
+          "label": "Account Holder(s)",
+          "placeholder": "Name(s) on account",
+          "errors": {
+            "required": "Account holder is required"
+          }
+        },
+        "bank_name": {
+          "label": "Bank / Credit Union",
+          "placeholder": "Institution name",
+          "errors": {
+            "required": "Institution name is required"
+          }
+        },
+        "account_type": {
+          "label": "Account Type"
+        },
+        "bsb": {
+          "label": "BSB",
+          "placeholder": "123-456",
+          "errors": {
+            "pattern": "BSB should contain 6 digits"
+          }
+        },
+        "account_no": {
+          "label": "Account Number",
+          "placeholder": "As shown by the institution"
+        },
+        "ownership_notes": {
+          "placeholder": "Joint holder or authorised signatory details"
+        },
+        "provider_contact": {
+          "label": "Bank Contact",
+          "placeholder": "Bereavement or customer-service contact"
+        },
+        "document_location": {
+          "label": "Statement Location"
+        }
+      }
+    },
+    "savingsAndInvestments": {
+      "title": "Savings and Investments",
+      "description": "Savings and investment assets. Record optional estimates with an as-of date; confirm ownership, tax treatment, and nominations with the provider.",
+      "columns": {
+        "asset_type": {
+          "label": "Asset Type"
+        },
+        "provider": {
+          "label": "Provider / Institution",
+          "placeholder": "Bank, broker, registry, or provider"
+        },
+        "account_reference": {
+          "label": "Account / Holding Reference",
+          "placeholder": "Reference, if useful"
+        },
+        "owners": {
+          "placeholder": "Sole, joint, trust, or company ownership"
+        },
+        "beneficiary": {
+          "label": "Beneficiary / Nomination",
+          "placeholder": "Where current designation is recorded"
+        },
+        "value": {
+          "label": "Approximate Value (AUD)",
+          "placeholder": "Optional estimate",
+          "errors": {
+            "min": "Enter a non-negative value"
+          }
+        },
+        "contact_location": {
+          "label": "Contact / Documents Location",
+          "placeholder": "Provider contact or secure record location"
+        }
+      }
+    },
+    "pensionsAndGovernmentBenefits": {
+      "description": "Superannuation, Age Pension, and other retirement or government benefits. Super death-benefit nominations and tax treatment depend on fund rules and circumstances.",
+      "columns": {
+        "provider": {
+          "label": "Fund / Administrator",
+          "placeholder": "Fund or government administrator"
+        },
+        "member_reference": {
+          "label": "Member / Claim Reference"
+        },
+        "nomination": {
+          "label": "Beneficiary Nomination and Review Date",
+          "placeholder": "Type, status, expiry, and where recorded"
+        },
+        "contact": {
+          "label": "Plan Contact"
+        }
+      }
+    },
+    "propertyAndVehicles": {
+      "description": "Real property, leases, vehicles, and registrations. Land-title and transfer processes vary by state or territory.",
+      "columns": {
+        "address_description": {
+          "placeholder": "Full address or asset description"
+        },
+        "owners": {
+          "label": "Owner(s) / Ownership"
+        },
+        "title_reference": {
+          "label": "Title / Registration Reference",
+          "placeholder": "Title, registration, or vehicle plate"
+        },
+        "mortgage_lien": {
+          "placeholder": "Lender and reference; no login details"
+        },
+        "document_location": {
+          "label": "Title / Registration Document Location"
+        }
+      }
+    },
+    "loansAndLiabilities": {
+      "title": "Loans and Liabilities",
+      "description": "Mortgages, credit, tax, business and other liabilities. Confirm legal responsibility before making payments or changing accounts.",
+      "columns": {
+        "creditor": {
+          "placeholder": "Institution or organisation"
+        },
+        "account_reference": {
+          "placeholder": "Reference, if useful"
+        },
+        "borrowers": {
+          "label": "Borrower(s) / Guarantor",
+          "placeholder": "Names and shared responsibility"
+        },
+        "balance": {
+          "label": "Approximate Balance (AUD)",
+          "placeholder": "Optional estimate",
+          "errors": {
+            "min": "Enter a non-negative value"
+          }
+        },
+        "payment_details": {
+          "label": "Payment / Review Details",
+          "placeholder": "Optional amount and frequency"
+        },
+        "contact_location": {
+          "placeholder": "Contact or secure record location"
+        }
+      }
+    },
+    "employmentAndIncome": {
+      "description": "Employment, business, regular income, and benefits that may support household or estate administration.",
+      "columns": {
+        "organisation": {
+          "placeholder": "Employer or program"
+        },
+        "survivor_benefit": {
+          "placeholder": "Where plan terms are recorded"
+        },
+        "document_location": {
+          "placeholder": "Payslips, income statements, or award letters"
+        }
+      }
+    },
+    "taxAndGovernmentRecords": {
+      "title": "Tax and Government Records",
+      "description": "Reference details for the ATO, Services Australia, state or territory agencies, and local councils. Never record myGov, myID, or banking credentials here.",
+      "columns": {
+        "authority": {
+          "placeholder": "ATO, Services Australia, state, territory, or council"
+        },
+        "reference": {
+          "placeholder": "Optional reference number"
+        },
+        "adviser": {
+          "label": "Tax Agent / Adviser"
+        },
+        "document_location": {
+          "label": "Returns / Correspondence Location"
+        }
+      }
+    },
+    "legalAndEstatePlanning": {
+      "title": "Legal and Estate Planning",
+      "description": "Index estate and incapacity documents. Wills, powers of attorney, guardianship and advance-care document names and laws vary by state or territory.",
+      "columns": {
+        "jurisdiction": {
+          "label": "State / Territory Governing It"
+        },
+        "review_date": {
+          "label": "Made / Last Reviewed"
+        },
+        "appointed_person": {
+          "label": "Executor / Attorney / Guardian",
+          "placeholder": "Name and contact, if appropriate"
+        },
+        "professional_contact": {
+          "label": "Lawyer / Trustee / Adviser",
+          "placeholder": "Firm and contact details"
+        },
+        "document_location": {
+          "placeholder": "Secure location and registration details"
+        },
+        "instructions": {
+          "label": "Instructions / Notes",
+          "placeholder": "Point to formal instructions; do not duplicate sensitive content"
+        }
+      }
+    },
+    "importantDocuments": {
+      "description": "An index of where originals and current copies are kept, not the documents themselves.",
+      "columns": {
+        "location": {
+          "placeholder": "Physical or secure digital location",
+          "errors": {
+            "required": "Location is required"
+          }
+        },
+        "contact": {
+          "placeholder": "Trusted person, lawyer, or institution"
+        }
+      }
+    },
+    "digitalAccountsAndDevices": {
+      "title": "Digital Accounts and Devices",
+      "description": "Inventory important services and devices. Never enter passwords, PINs, myGov/myID credentials, one-time codes, security answers, or recovery keys.",
+      "columns": {
+        "account_identifier": {
+          "placeholder": "Username or email, if safe to record"
+        },
+        "recovery_method": {
+          "label": "Recovery / Multi-factor Method",
+          "placeholder": "Method only; no codes or secret values"
+        },
+        "legacy_contact": {
+          "placeholder": "Person and contact details"
+        },
+        "instructions_location": {
+          "label": "Secure Instructions Location",
+          "placeholder": "Password-manager emergency access or secure location"
+        }
+      }
+    },
+    "additionalDetails": {
+      "description": "Other practical notes for trusted family members or representatives. Do not put account secrets here.",
+      "fields": {
+        "notes": {
+          "placeholder": "Non-secret notes or pointers to secure records"
+        }
+      }
+    }
+  },
+  "options": {
+    "state_territory": {
+      "ACT": "Australian Capital Territory",
+      "NSW": "New South Wales",
+      "NT": "Northern Territory",
+      "QLD": "Queensland",
+      "SA": "South Australia",
+      "TAS": "Tasmania",
+      "VIC": "Victoria",
+      "WA": "Western Australia",
+      "other_overseas": "Other / Overseas"
+    },
+    "insurance_type": {
+      "superannuation_death_tpd_cover": "Superannuation Death / TPD Cover",
+      "home_building": "Home Building",
+      "motor_vehicle": "Motor Vehicle"
+    },
+    "account_type": {
+      "transaction": "Transaction",
+      "offset": "Offset",
+      "my_gov_my_id_reference_only": "myGov / myID (reference only)",
+      "banking_super": "Banking / Super"
+    },
+    "plan_type": {
+      "superannuation_fund": "Superannuation Fund",
+      "self_managed_super_fund": "Self-Managed Super Fund",
+      "account_based_pension": "Account-Based Pension",
+      "defined_benefit_pension": "Defined Benefit Pension",
+      "age_pension": "Age Pension",
+      "carer_disability_payment": "Carer / Disability Payment",
+      "dva_payment": "DVA Payment",
+      "other_services_australia_benefit": "Other Services Australia Benefit"
+    },
+    "liability_type": {
+      "ato_tax": "ATO / Tax"
+    },
+    "income_type": {
+      "self_employment": "Self-Employment",
+      "superannuation": "Superannuation",
+      "age_pension": "Age Pension",
+      "services_australia_payment": "Services Australia Payment",
+      "dva_payment": "DVA Payment"
+    },
+    "record_type": {
+      "ato_individual_tax": "ATO Individual Tax",
+      "abn_business": "ABN / Business",
+      "gst_bas": "GST / BAS",
+      "payg_employer": "PAYG / Employer",
+      "centrelink_services_australia": "Centrelink / Services Australia",
+      "medicare": "Medicare",
+      "state_territory_revenue": "State / Territory Revenue",
+      "council_rates": "Council Rates"
+    },
+    "document_type": {
+      "enduring_guardian_appointment": "Enduring Guardian / Appointment",
+      "advance_care_directive": "Advance Care Directive",
+      "super_death_benefit_nomination": "Super Death-Benefit Nomination",
+      "guardianship_child_care_plan": "Guardianship / Child Care Plan",
+      "tfn_notice": "TFN Notice",
+      "medicare_card": "Medicare Card",
+      "will_powers_care_directive": "Will / Powers / Care Directive",
+      "superannuation_records": "Superannuation Records",
+      "tax_returns_income_statements": "Tax Returns / Income Statements"
+    },
+    "jurisdiction": {
+      "ACT": "Australian Capital Territory",
+      "NSW": "New South Wales",
+      "NT": "Northern Territory",
+      "QLD": "Queensland",
+      "SA": "South Australia",
+      "TAS": "Tasmania",
+      "VIC": "Victoria",
+      "WA": "Western Australia"
+    }
+  },
+  "accessGuide": {
+    "quickStart": {
+      "item_13": "For an immediate threat to life or safety, call Triple Zero (000). From a mobile, 112 may connect to emergency services; use 106 text emergency service if you have a speech or hearing impairment.",
+      "item_24": "For urgent health advice when it is not a life-threatening emergency, call healthdirect on 1800 022 222.",
+      "item_18": "For poison advice, call the Poisons Information Centre on 13 11 26.",
+      "item_46": "Locate and securely extract the Onter ZIP. Review emergency contacts, health details, legal document locations, insurance, banks, super, and essential liabilities first.",
+      "item_30": "If someone has died, identify the authorised representative and contact each provider using its official bereavement process. Do not access accounts or use credentials without authority.",
+      "item_39": "Keep the export encrypted and do not store passwords, PINs, authentication codes, myGov/myID credentials, or recovery keys in it."
+    },
+    "legalNotes": {
+      "item_131": "Wills, powers of attorney, guardianship, and advance-care laws and document names vary by Australian state and territory.",
+      "item_114": "Superannuation may be administered under fund rules and a death-benefit nomination; do not assume super automatically forms part of the estate or follows the will.",
+      "item_117": "The ATO states Australia has no inheritance tax, but final personal and estate tax returns, capital gains tax, and super tax may still apply. Check current ATO guidance.",
+      "item_99": "Official: Triple Zero emergency information: https://www.triplezero.gov.au/",
+      "item_87": "Official: Medicare cards and enrolment: https://www.servicesaustralia.gov.au/medicare-card",
+      "item_94": "Official: Protecting a TFN: https://www.ato.gov.au/individuals-and-families/tax-file-number",
+      "item_59": "Official: Deceased estates and tax: https://www.ato.gov.au/individuals-and-families/deceased-estates",
+      "item_56": "Official: ATO checklist after a death: https://www.ato.gov.au/individuals-and-families/deceased-estates/checklist-what-to-do-when-someone-dies",
+      "item_98": "Official: Superannuation death benefits: https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/death-benefits",
+      "item_29": "Health advice: healthdirect: https://www.healthdirect.gov.au/how-healthdirect-can-help-you",
+      "item_13": "Crisis support: Lifeline Australia: https://www.lifeline.org.au/get-help/"
+    },
+    "sectionGuidance": {
+      "personalDetails": {
+        "description": "Identity and contact details for official, financial, and healthcare processes. TFN and Medicare information are sensitive and may apply only to people eligible for those services.",
+        "usefulFor": {
+          "item_01": "ATO and Services Australia",
+          "item_07": "Banks and super funds"
+        },
+        "firstActions": {
+          "item_26": "Protect TFN details and share them only when required",
+          "item_21": "Keep the current address and contacts updated"
+        },
+        "criticalFields": {
+          "item_25": "Tax File Number (TFN, if useful)",
+          "item_10": "Medicare Card Number (if enrolled)"
+        }
+      },
+      "emergencyContacts": {
+        "description": "Trusted people and their possible roles; this list does not itself create decision-making or account authority.",
+        "firstActions": {
+          "item_12": "Locate separate formal appointment documents when legal authority is needed"
+        }
+      },
+      "healthAndCareInformation": {
+        "description": "Optional care information and locations of formal directives.",
+        "firstActions": {
+          "item_01": "Call 000 for life-threatening emergencies",
+          "item_14": "Locate any valid advance care directive and confirm state or territory requirements"
+        }
+      },
+      "insuranceDetails": {
+        "description": "Private, employer, home, and other policies; some life and disability cover may be held through superannuation.",
+        "usefulFor": {
+          "item_13": "Super funds"
+        },
+        "firstActions": {
+          "item_08": "Check cover and beneficiary or nomination details with the provider",
+          "item_04": "Ask about time limits and required evidence"
+        }
+      },
+      "bankAccounts": {
+        "description": "Australian transaction and savings accounts with BSB and account references.",
+        "firstActions": {
+          "item_14": "Keep statements in secure storage"
+        },
+        "criticalFields": {
+          "item_10": "BSB"
+        }
+      },
+      "savingsAndInvestments": {
+        "description": "Deposits, securities, funds, property interests, and other investments.",
+        "firstActions": {
+          "item_14": "Record valuation dates and keep transaction statements"
+        },
+        "criticalFields": {
+          "item_05": "Approximate Value (AUD)"
+        }
+      },
+      "pensionsAndGovernmentBenefits": {
+        "description": "Superannuation, retirement income, and Services Australia or DVA payments.",
+        "usefulFor": {
+          "item_06": "Super funds",
+          "item_05": "Services Australia",
+          "item_02": "Department of Veterans' Affairs"
+        },
+        "firstActions": {
+          "item_06": "Contact every super fund and benefit administrator",
+          "item_02": "Check whether a super death-benefit nomination is current and binding under fund rules",
+          "item_04": "Confirm eligibility and tax treatment with the ATO or a licensed adviser"
+        },
+        "criticalFields": {
+          "item_03": "Fund / Administrator",
+          "item_04": "Member / Claim Reference",
+          "item_01": "Beneficiary Nomination and Review Date"
+        }
+      },
+      "propertyAndVehicles": {
+        "description": "Property, leases, vehicles, titles, loans, and associated cover.",
+        "usefulFor": {
+          "item_12": "State or territory land-title and registration bodies"
+        },
+        "firstActions": {
+          "item_13": "Locate title, loan, and registration documents",
+          "item_03": "Confirm ownership and required transfers in the relevant state or territory"
+        }
+      },
+      "loansAndLiabilities": {
+        "description": "Debts and recurring obligations, including joint borrowers and guarantees.",
+        "criticalFields": {
+          "item_02": "Approximate Balance (AUD)"
+        }
+      },
+      "employmentAndIncome": {
+        "description": "Employment, business, super, and government payment sources.",
+        "usefulFor": {
+          "item_15": "Services Australia",
+          "item_17": "Super administrators"
+        },
+        "firstActions": {
+          "item_13": "Keep income statements and award letters"
+        }
+      },
+      "taxAndGovernmentRecords": {
+        "description": "References for the ATO and other government bodies; never record portal credentials.",
+        "usefulFor": {
+          "item_03": "ATO",
+          "item_25": "Services Australia",
+          "item_26": "State or territory agencies",
+          "item_23": "Registered tax agents"
+        },
+        "firstActions": {
+          "item_10": "Never share myGov, myID, or banking authentication secrets"
+        }
+      },
+      "legalAndEstatePlanning": {
+        "description": "Estate, incapacity, and care documents. Legal forms and execution rules vary by state and territory.",
+        "usefulFor": {
+          "item_01": "Attorneys and guardians",
+          "item_13": "Lawyers and public trustees"
+        },
+        "firstActions": {
+          "item_18": "Locate the valid original or copy and identify its governing jurisdiction",
+          "item_06": "Confirm who is appointed and whether the appointment is current",
+          "item_11": "Get local legal advice before relying on authority or distributing assets"
+        },
+        "criticalFields": {
+          "item_14": "State / Territory Governing It",
+          "item_02": "Executor / Attorney / Guardian"
+        }
+      },
+      "importantDocuments": {
+        "description": "An index to official identity, financial, health, and legal documents."
+      },
+      "digitalAccountsAndDevices": {
+        "description": "A safe inventory of online accounts, devices, and recovery pointers, not passwords."
+      },
+      "additionalDetails": {
+        "description": "Other practical notes that do not fit another section. Do not place credentials or access codes here."
+      }
+    },
+    "generalGuidance": {
+      "securityTips": {
+        "item_15": "Never put passwords, PINs, TFN portal credentials, authentication codes, or recovery keys in the export."
+      }
+    },
+    "emergencyServices": {
+      "medical": "000; 112 from a mobile; confirm local arrangements in remote areas",
+      "police": "000 for emergencies; contact the relevant state or territory police for non-emergencies",
+      "poison_control": "Poisons Information Centre: 13 11 26",
+      "urgent_health_advice": "healthdirect: 1800 022 222",
+      "text_emergency": "106 text-based emergency service for people with hearing or speech impairment",
+      "suicide_prevention": "Lifeline Australia: 13 11 14"
+    }
+  },
+  "recoveryRoadmap": {
+    "description": "A general checklist after a death. Confirm the relevant state or territory process and your authority before acting.",
+    "meta": {
+      "title": "Family Recovery Roadmap - Australia",
+      "lastReviewed": "2026-10-17",
+      "reviewedBy": "Federal sources reviewed; state and territory legal review remains necessary",
+      "generatedOn": "2026-10-17"
+    },
+    "intro": {
+      "condolence": "We are sorry for your loss. This checklist is intended to make the first practical steps clearer.",
+      "howToUse": "Confirm who is authorised to act, secure records, contact relevant providers, and obtain local legal or tax advice where needed."
+    },
+    "startHere": {
+      "0": "Follow the state or territory death-registration process and ask which documents are required.",
+      "1": "Locate the will and identify the executor or other authorised representative.",
+      "2": "Contact Services Australia, the ATO, banks, insurers, employers, and super funds through official bereavement processes.",
+      "3": "List assets, debts, regular bills, and claims; confirm responsibility before changing payments or distributing property.",
+      "4": "Keep a log of calls, documents supplied, and provider decisions. Never access an account without authority."
+    },
+    "legalFramework": {
+      "0": "State and territory probate, succession, powers-of-attorney, and guardianship rules.",
+      "1": "ATO rules for the final tax return and any deceased-estate tax returns.",
+      "2": "Super fund governing rules and death-benefit nominations; super may be treated differently from estate assets.",
+      "3": "Current Services Australia, insurance, creditor, and provider claim requirements."
+    },
+    "phases": {
+      "0": {
+        "title": "Secure records and authority",
+        "timeframe": "First days",
+        "priority": "do-first",
+        "focus": "Register the death as directed, identify the authorised representative, and protect records.",
+        "keyActions": {
+          "0": {
+            "action": "Follow local registration instructions and obtain the record or certificate required by each organisation.",
+            "priority": "do-first",
+            "why": "State and territory registration and certificate processes vary.",
+            "legalRef": "https://www.servicesaustralia.gov.au/what-to-do-when-someone-dies?context=60101"
+          },
+          "1": {
+            "action": "Find the will, identify the executor, and get legal advice if no will or a dispute exists.",
+            "priority": "do-first",
+            "why": "Authority to deal with the estate must be established before assets are administered.",
+            "legalRef": "https://www.ato.gov.au/individuals-and-families/deceased-estates/checklist-what-to-do-when-someone-dies"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Death registration and certificate details",
+          "1": "Will and codicils",
+          "2": "Executor or administrator details",
+          "3": "TFN and Medicare record locations",
+          "4": "Bank, super, insurance, property, and debt references"
+        },
+        "criticalMistakes": {
+          "0": "Assuming next of kin can operate accounts",
+          "1": "Assuming one state's legal forms apply throughout Australia",
+          "2": "Putting passwords or myGov codes in an exported record"
+        }
+      },
+      "1": {
+        "title": "Notify and identify claims",
+        "timeframe": "First weeks",
+        "priority": "do-first",
+        "focus": "Notify public bodies and private providers, and preserve a reliable asset and liability list.",
+        "keyActions": {
+          "0": {
+            "action": "Notify the ATO and Services Australia using their current bereavement processes.",
+            "priority": "do-first",
+            "why": "Government records, payments, and tax correspondence may need to be updated.",
+            "legalRef": "https://www.ato.gov.au/individuals-and-families/deceased-estates"
+          },
+          "1": {
+            "action": "Contact each bank, insurer, employer, and super fund separately; ask about forms, nominations, benefits, and payment arrangements.",
+            "priority": "do-first",
+            "why": "Government notification does not close every private account or submit every claim.",
+            "legalRef": "https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/death-benefits"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Provider statements",
+          "1": "Super and insurance nomination records",
+          "2": "Employer benefit details",
+          "3": "List of recurring bills and debts"
+        },
+        "criticalMistakes": {
+          "0": "Automatically cancelling essential payments",
+          "1": "Assuming super follows the will",
+          "2": "Paying debts before confirming legal responsibility"
+        }
+      },
+      "2": {
+        "title": "Administer and finalise",
+        "timeframe": "Following weeks and months",
+        "priority": "do-soon",
+        "focus": "Complete required tax and legal steps before final distribution.",
+        "keyActions": {
+          "0": {
+            "action": "Confirm whether probate or letters of administration are needed under the relevant state or territory process.",
+            "priority": "do-first",
+            "why": "Requirements depend on the estate, assets, and institutions holding them.",
+            "legalRef": "https://www.ato.gov.au/individuals-and-families/deceased-estates/checklist-what-to-do-when-someone-dies"
+          },
+          "1": {
+            "action": "Check the final individual tax return and any estate tax returns with the ATO or a registered tax agent.",
+            "priority": "do-first",
+            "why": "Tax affairs may continue after death and should be addressed before final distribution.",
+            "legalRef": "https://www.ato.gov.au/individuals-and-families/deceased-estates"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Grant or administration documents if required",
+          "1": "Asset and liability inventory",
+          "2": "Final tax records",
+          "3": "Property and super claim records"
+        },
+        "criticalMistakes": {
+          "0": "Distributing assets before confirming tax and creditor obligations",
+          "1": "Assuming no tax filings are needed",
+          "2": "Using another person's digital credentials"
+        }
+      },
+      "3": {
+        "title": "Review family arrangements",
+        "timeframe": "When immediate tasks are complete",
+        "priority": "when-ready",
+        "focus": "Review the surviving household's estate, super, insurance, and secure information arrangements.",
+        "keyActions": {
+          "0": {
+            "action": "Review wills, powers of attorney, super nominations, insurance beneficiaries, and emergency contacts with relevant professionals.",
+            "priority": "when-ready",
+            "why": "Major life changes can make existing appointments or nominations unsuitable.",
+            "legalRef": "State or territory legislation and fund rules"
+          },
+          "1": {
+            "action": "Keep a current asset and digital-account index; store credentials only in a suitable password manager.",
+            "priority": "when-ready",
+            "why": "A secure index can help authorised people find records without exposing secrets.",
+            "legalRef": "Provider terms and security guidance"
+          }
+        },
+        "mustHaveDocuments": {
+          "0": "Updated will and appointment records",
+          "1": "Current super and insurance nominations",
+          "2": "Secure family record index"
+        },
+        "criticalMistakes": {
+          "0": "Leaving stale beneficiaries or appointments",
+          "1": "Sharing passwords in the family record",
+          "2": "Failing to keep provider confirmations"
+        }
+      }
+    },
+    "quickReference": {
+      "emergency": {
+        "number": "000; 112 from mobile; 106 text emergency service for speech/hearing impairment",
+        "healthAdvice": "healthdirect 1800 022 222",
+        "poisons": "13 11 26"
+      },
+      "taxAfterDeath": {
+        "note": "The ATO may require a final individual return and deceased-estate returns. Confirm current requirements before distributing assets.",
+        "url": "https://www.ato.gov.au/individuals-and-families/deceased-estates"
+      },
+      "super": {
+        "note": "Contact each super fund about death benefits, fund rules, nominations, and tax treatment.",
+        "url": "https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/death-benefits"
+      }
+    },
+    "glossary": {
+      "0": {
+        "term": "Legal personal representative",
+        "definition": "An executor or administrator with authority recognised for dealing with a deceased estate."
+      },
+      "1": {
+        "term": "Superannuation death benefit",
+        "definition": "A benefit paid under superannuation law and fund rules; the recipient and tax treatment depend on the circumstances and nomination."
+      },
+      "2": {
+        "term": "Grant of probate",
+        "definition": "A court grant recognising an executor's authority to administer an estate; when required varies by state or territory and institution."
+      }
+    }
+  }
+}

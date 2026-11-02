@@ -1,67 +1,72 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
-import { clearConfigCache, isCountryAvailable, loadCountryConfig, preloadConfigs } from './configLoader';
-import { DEFAULT_COUNTRY } from '../constants/countries';
-import type { CountryFormConfig } from '../constants/types';
-
-const config = (countryCode: string): CountryFormConfig => ({
-  countryCode,
-  countryName: countryCode,
-  currency: 'USD',
-  currencySymbol: '$',
-  formSections: [],
-});
-
-const response = (value: CountryFormConfig, ok = true) => ({ ok, json: async () => value });
+import { beforeEach, describe, expect, it } from 'vite-plus/test';
+import {
+  clearConfigCache,
+  isCountryAvailable,
+  loadCountryConfig,
+  preloadConfigs,
+} from './configLoader';
 
 describe('configLoader', () => {
-  beforeEach(() => {
-    clearConfigCache();
-    vi.stubGlobal('fetch', vi.fn());
-  });
+  beforeEach(() => clearConfigCache());
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
-    vi.restoreAllMocks();
-  });
-
-  it('loads and caches a country configuration', async () => {
-    const fetchMock = vi.mocked(fetch).mockResolvedValue(response(config('US')) as Response);
+  it('loads and caches only structural country configuration', async () => {
     const first = await loadCountryConfig('US');
     const second = await loadCountryConfig('US');
-    expect(first).toEqual(config('US'));
+
     expect(second).toBe(first);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('configs/US.json'));
+    expect(first.countryCode).toBe('US');
+    expect(first.formSections[0]).toHaveProperty('id', 'personalDetails');
+    expect(first.formSections[0].fields?.[0]).not.toHaveProperty('label');
+    expect(first.formSections[0].fields?.[0]).toHaveProperty('name');
   });
 
-  it('falls back to the default country when a requested config fails', async () => {
-    vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    vi.mocked(fetch)
-      .mockResolvedValueOnce(response(config('CA'), false) as Response)
-      .mockResolvedValueOnce(response(config(DEFAULT_COUNTRY)) as Response);
-    await expect(loadCountryConfig('CA')).resolves.toEqual(config(DEFAULT_COUNTRY));
-    expect(fetch).toHaveBeenCalledTimes(2);
+  it('does not silently fall back to another country configuration', async () => {
+    await expect(loadCountryConfig('ZZ')).rejects.toThrow('No configuration found for ZZ');
+    await expect(loadCountryConfig('IN-improved')).rejects.toThrow('Invalid country code: IN-improved');
   });
 
-  it('rethrows failures for the default country', async () => {
-    vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    vi.mocked(fetch).mockResolvedValue(response(config(DEFAULT_COUNTRY), false) as Response);
-    await expect(loadCountryConfig(DEFAULT_COUNTRY)).rejects.toThrow(`Failed to load config for ${DEFAULT_COUNTRY}`);
-  });
-
-  it('preloads all requested configs and checks availability with HEAD', async () => {
-    vi.mocked(fetch)
-      .mockResolvedValueOnce(response(config('IN')) as Response)
-      .mockResolvedValueOnce(response(config('US')) as Response)
-      .mockResolvedValueOnce({ ok: true } as Response);
+  it('preloads requested configs and checks availability from bundled configs', async () => {
     await expect(preloadConfigs(['IN', 'US'])).resolves.toBeUndefined();
     await expect(isCountryAvailable('CA')).resolves.toBe(true);
-    expect(fetch).toHaveBeenLastCalledWith(expect.stringContaining('configs/CA.json'), { method: 'HEAD' });
+    await expect(isCountryAvailable('XX')).resolves.toBe(false);
+    await expect(isCountryAvailable('IN-improved')).resolves.toBe(false);
   });
 
-  it('returns false when the availability request rejects', async () => {
-    vi.mocked(fetch).mockRejectedValue(new Error('offline'));
-    await expect(isCountryAvailable('XX')).resolves.toBe(false);
+  it('keeps structural and machine-readable keys concise across all countries', async () => {
+    for (const countryCode of ['AU', 'CA', 'GB', 'HK', 'IE', 'IN', 'JP', 'KR', 'NZ', 'SG', 'US']) {
+      const config = await loadCountryConfig(countryCode);
+      const oversized: string[] = [];
+      const humanText: string[] = [];
+      const visit = (value: unknown, path: string): void => {
+        if (Array.isArray(value)) {
+          if (path.endsWith('Keys') || path.endsWith('optionKeys')) {
+            for (const key of value) {
+              if (typeof key === 'string' && key.length > 32) oversized.push(`${path}: ${key}`);
+            }
+          }
+          value.forEach((item, index) => visit(item, `${path}.${index}`));
+          return;
+        }
+        if (!value || typeof value !== 'object') return;
+        for (const [key, child] of Object.entries(value)) {
+          if (key.length > 32) oversized.push(`${path}: ${key}`);
+          if (
+            typeof child === 'string' &&
+            child.includes(' ') &&
+            /[a-z]/i.test(child) &&
+            key !== 'pattern' &&
+            key !== '$i18n' &&
+            !/^https?:\/\//i.test(child)
+          ) {
+            humanText.push(`${path}.${key}: ${child}`);
+          }
+          visit(child, `${path}.${key}`);
+        }
+      };
+
+      visit(config, countryCode);
+      expect(oversized, countryCode).toEqual([]);
+      expect(humanText, countryCode).toEqual([]);
+    }
   });
 });

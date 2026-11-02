@@ -110,35 +110,23 @@ For each form section, the guide provides:
 
 ### Configuration
 
-Access guides are configurable per country in `public/configs/<COUNTRY>.json`:
+Country structure and presentation text are stored separately:
 
 ```json
 {
-  "accessGuide": {
-    "enabled": true,
-    "quickStart": ["Emergency instructions..."],
-    "emergencyServices": {
-      "medical": "911",
-      "police": "911"
-    },
-    "sectionGuidance": {
-      "Personal Details": {
-        "icon": "👤",
-        "description": "Identity information...",
-        "usefulFor": ["Medical professionals", "Legal representatives"],
-        "firstActions": ["Verify documents...", "Contact emergency contacts..."],
-        "criticalFields": ["SSN", "Blood Group"]
-      }
-    },
-    "legalNotes": ["Legal disclaimers..."],
-    "generalGuidance": {
-      "fileStructure": ["What's in your ZIP..."],
-      "dataAccess": ["How to extract files..."],
-      "securityTips": ["Keep documents secure..."]
-    }
-  }
+  "countryCode": "CA",
+  "formSections": [
+    { "id": "personalDetails", "type": "simple", "fields": [] }
+  ]
 }
 ```
+
+Country structure belongs in `src/config/<COUNTRY>.json`. Shared copy belongs in
+`src/i18n/global/<LANG>.json`; country-specific copy belongs in
+`src/i18n/<COUNTRY>_<LANG>.json`. The loader resolves country-language text,
+then global-language text, then global English. Keep display strings out of
+country config files. See [src/config/README.md](src/config/README.md) for the
+full structure and contribution guidance.
 
 ### Export Package
 
@@ -219,6 +207,8 @@ src/
 ├── hooks/             # Custom React hooks
 ├── services/          # Business logic services
 │   └── accessGuideService.ts  # Emergency Access Guide PDF generation
+├── config/            # Self-contained country structural configs
+├── i18n/              # Shared and country-specific translations
 ├── store/             # Zustand state management
 ├── utils/             # Utility functions
 │   ├── excel.ts       # Excel generation
@@ -233,26 +223,17 @@ src/
 └── main.tsx           # Application entry point
 
 public/
-└── configs/           # Country-specific JSON configurations
-    ├── IN.json        # India configuration (with access guide)
-    ├── US.json        # United States configuration (with access guide)
-    ├── CA.json        # Canada configuration (with access guide)
-    ├── GB.json        # Great Britain configuration (with access guide)
-    ├── AU.json        # Australia configuration (with access guide)
-    ├── NZ.json        # New Zealand configuration (with access guide)
-    ├── IE.json        # Ireland configuration (with access guide)
-    ├── SG.json        # Singapore configuration (with access guide)
-    ├── HK.json        # Hong Kong configuration (with access guide)
-    ├── JP.json        # Japan configuration (with access guide)
-    ├── KR.json        # South Korea configuration (with access guide)
-    └── README.md      # Configuration guide
+└── ...               # Static images, fonts, and other public assets
 ```
 
 ### Dynamic Configuration System
 
-Onter uses a JSON-based configuration system for easy internationalization:
+Onter uses JSON structural configs and i18next resources:
 
-**Location**: `public/configs/<COUNTRY_CODE>.json`
+**Locations**:
+- `src/config/<COUNTRY_CODE>.json`
+- `src/i18n/global/<LANG>.json`
+- `src/i18n/<COUNTRY_CODE>_<LANG>.json`
 
 **Available Countries**:
 - 🇮🇳 **IN** - India (₹ INR)
@@ -269,11 +250,11 @@ Onter uses a JSON-based configuration system for easy internationalization:
 
 ### Adding a New Country
 
-1. Create `public/configs/<CODE>.json` (see [configs/README.md](public/configs/README.md))
-2. Define country-specific form sections and validation
-3. Configure the **Emergency Access Guide** with country-specific emergency numbers, legal notes, and section guidance
-4. Update `AVAILABLE_COUNTRIES` in `src/constants/countries.ts`
-5. Test thoroughly, including PDF exports and access guide generation!
+1. Add a self-contained `src/config/<CODE>.json` with structural and validation data.
+2. Add country-specific display text to `src/i18n/<CODE>_en.json`.
+3. Use stable section IDs and machine-readable option keys that match the i18n keys.
+4. Update `AVAILABLE_COUNTRIES` in `src/constants/countries.ts`.
+5. Test the form and exports for that country.
 
 See [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) for detailed documentation.
 
@@ -314,7 +295,7 @@ MIT License
 ## 📖 Documentation
 
 - [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) - Configuration system guide
-- [public/configs/README.md](public/configs/README.md) - Country config creation (includes Access Guide setup)
+- [src/config/README.md](src/config/README.md) - Country config and i18n contribution guide
 - [MIGRATION.md](MIGRATION.md) - Migration guide (if applicable)
 - [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) - Feature status
 
@@ -352,7 +333,7 @@ Contributions are welcome! To contribute:
 
 ### Adding New Countries
 
-We especially welcome contributions for new country configurations! See [public/configs/README.md](public/configs/README.md) for guidelines.
+We especially welcome contributions for new country configurations! See [src/config/README.md](src/config/README.md) for guidelines.
 
 ---
 

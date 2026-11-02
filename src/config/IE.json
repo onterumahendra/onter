@@ -1,0 +1,1533 @@
+{
+  "countryCode": "IE",
+  "currency": "EUR",
+  "currencySymbol": "€",
+  "formSections": [
+    {
+      "id": "personalDetails",
+      "type": "simple",
+      "fields": [
+        {
+          "validation": {
+            "required": true,
+            "minLength": 2
+          },
+          "name": "full_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "date_of_birth",
+          "type": "date"
+        },
+        {
+          "validation": {
+            "pattern": "^[0-9]{7}[A-Za-z]{1,2}$"
+          },
+          "name": "pps_number",
+          "type": "text"
+        },
+        {
+          "name": "medical_card_number",
+          "type": "text"
+        },
+        {
+          "name": "gp_visit_card_number",
+          "type": "text"
+        },
+        {
+          "name": "passport_no",
+          "type": "text"
+        },
+        {
+          "name": "drivers_license_no",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+          },
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "residential_address",
+          "type": "textarea"
+        },
+        {
+          "optionKeys": [
+            "carlow",
+            "cavan",
+            "clare",
+            "cork",
+            "donegal",
+            "dublin",
+            "galway",
+            "kerry",
+            "kildare",
+            "kilkenny",
+            "laois",
+            "leitrim",
+            "limerick",
+            "longford",
+            "louth",
+            "mayo",
+            "meath",
+            "monaghan",
+            "offaly",
+            "roscommon",
+            "sligo",
+            "tipperary",
+            "waterford",
+            "westmeath",
+            "wexford",
+            "wicklow"
+          ],
+          "name": "city_town",
+          "type": "select"
+        },
+        {
+          "name": "eircode",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "emergencyContacts",
+      "type": "table",
+      "minRows": 1,
+      "maxRows": 10,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "relationship",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true,
+            "minLength": 2
+          },
+          "name": "name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "phone",
+          "type": "text"
+        },
+        {
+          "name": "contact_details",
+          "type": "text"
+        },
+        {
+          "name": "role",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "healthAndCareInformation",
+      "type": "simple",
+      "fields": [
+        {
+          "name": "medical_practice",
+          "type": "text"
+        },
+        {
+          "name": "medical_conditions",
+          "type": "textarea"
+        },
+        {
+          "name": "allergies",
+          "type": "textarea"
+        },
+        {
+          "name": "medications",
+          "type": "textarea"
+        },
+        {
+          "optionKeys": [
+            "a_positive",
+            "a_negative",
+            "b_positive",
+            "b_negative",
+            "ab_positive",
+            "ab_negative",
+            "o_positive",
+            "o_negative",
+            "unknown"
+          ],
+          "name": "blood_group",
+          "type": "select"
+        },
+        {
+          "name": "care_needs",
+          "type": "textarea"
+        },
+        {
+          "name": "advance_directive_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "insuranceDetails",
+      "type": "table",
+      "maxRows": 30,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "insured_name",
+          "type": "text"
+        },
+        {
+          "optionKeys": [
+            "life",
+            "serious_illness",
+            "income_protection",
+            "private_health",
+            "home_buildings",
+            "home_contents",
+            "motor",
+            "travel",
+            "mortgage_protection",
+            "business",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "insurance_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "provider",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "policy_no",
+          "type": "text"
+        },
+        {
+          "name": "beneficiary",
+          "type": "text"
+        },
+        {
+          "name": "claims_contact",
+          "type": "text"
+        },
+        {
+          "name": "premium_frequency",
+          "type": "text"
+        },
+        {
+          "name": "renewal_date",
+          "type": "date"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "bankAccounts",
+      "type": "table",
+      "maxRows": 30,
+      "columns": [
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "holder_name",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "optionKeys": [
+            "current",
+            "deposit_savings",
+            "credit_union",
+            "joint",
+            "business",
+            "state_savings",
+            "other"
+          ],
+          "name": "account_type",
+          "type": "select"
+        },
+        {
+          "name": "iban",
+          "type": "text"
+        },
+        {
+          "name": "bic_swift",
+          "type": "text"
+        },
+        {
+          "name": "ownership_notes",
+          "type": "text"
+        },
+        {
+          "name": "provider_contact",
+          "type": "text"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "savingsAndInvestments",
+      "type": "table",
+      "maxRows": 40,
+      "columns": [
+        {
+          "optionKeys": [
+            "deposit_account",
+            "state_savings",
+            "shares",
+            "investment_fund",
+            "bonds",
+            "investment_account",
+            "property_interest",
+            "business_interest",
+            "cryptoasset",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "asset_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "provider",
+          "type": "text"
+        },
+        {
+          "name": "account_reference",
+          "type": "text"
+        },
+        {
+          "name": "owners",
+          "type": "text"
+        },
+        {
+          "name": "beneficiary",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "min": 0
+          },
+          "name": "value",
+          "type": "number"
+        },
+        {
+          "name": "value_date",
+          "type": "date"
+        },
+        {
+          "name": "contact_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "pensionsAndSocialWelfare",
+      "type": "table",
+      "maxRows": 30,
+      "columns": [
+        {
+          "optionKeys": [
+            "state_pension_contributory",
+            "state_pension_non_contributory",
+            "occupational_pension",
+            "personal_retirement_savings",
+            "retirement_annuity_contract_rac",
+            "additional_voluntary",
+            "public_service_pension",
+            "survivor_widows_widowers_benefit",
+            "other_social_welfare_payment",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "plan_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "provider",
+          "type": "text"
+        },
+        {
+          "name": "employer",
+          "type": "text"
+        },
+        {
+          "name": "member_reference",
+          "type": "text"
+        },
+        {
+          "name": "beneficiary",
+          "type": "text"
+        },
+        {
+          "name": "contact",
+          "type": "text"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "propertyAndVehicles",
+      "type": "table",
+      "maxRows": 30,
+      "columns": [
+        {
+          "optionKeys": [
+            "principal_residence",
+            "other_property",
+            "rental_property",
+            "lease_tenancy",
+            "motor_vehicle",
+            "boat_caravan",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "asset_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "address_description",
+          "type": "textarea"
+        },
+        {
+          "name": "owners",
+          "type": "text"
+        },
+        {
+          "name": "title_reference",
+          "type": "text"
+        },
+        {
+          "name": "mortgage_lien",
+          "type": "text"
+        },
+        {
+          "name": "insurance",
+          "type": "text"
+        },
+        {
+          "name": "value_date",
+          "type": "text"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "loansAndLiabilities",
+      "type": "table",
+      "maxRows": 40,
+      "columns": [
+        {
+          "optionKeys": [
+            "mortgage",
+            "credit_card",
+            "personal_loan",
+            "overdraft",
+            "revenue_income_tax",
+            "local_property_tax",
+            "business_debt",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "liability_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "creditor",
+          "type": "text"
+        },
+        {
+          "name": "account_reference",
+          "type": "text"
+        },
+        {
+          "name": "borrowers",
+          "type": "text"
+        },
+        {
+          "validation": {
+            "min": 0
+          },
+          "name": "balance",
+          "type": "number"
+        },
+        {
+          "name": "balance_date",
+          "type": "date"
+        },
+        {
+          "name": "payment_details",
+          "type": "text"
+        },
+        {
+          "name": "contact_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "employmentAndIncome",
+      "type": "table",
+      "maxRows": 30,
+      "columns": [
+        {
+          "optionKeys": [
+            "employment",
+            "self_employment",
+            "business",
+            "state_pension",
+            "occupational_personal_pension",
+            "social_welfare_payment",
+            "rental_income",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "income_type",
+          "type": "select"
+        },
+        {
+          "name": "organisation",
+          "type": "text"
+        },
+        {
+          "name": "contact_reference",
+          "type": "text"
+        },
+        {
+          "name": "amount_frequency",
+          "type": "text"
+        },
+        {
+          "name": "survivor_benefit",
+          "type": "text"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "taxAndGovernmentRecords",
+      "type": "table",
+      "maxRows": 25,
+      "columns": [
+        {
+          "optionKeys": [
+            "revenue_income_tax",
+            "capital_acquisitions_tax_cat",
+            "vat_business",
+            "paye_employer",
+            "local_property_tax",
+            "prsi_social_welfare",
+            "hse_medical_card_gp_visit_card",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "record_type",
+          "type": "select"
+        },
+        {
+          "name": "authority",
+          "type": "text"
+        },
+        {
+          "name": "reference",
+          "type": "text"
+        },
+        {
+          "name": "period_location",
+          "type": "text"
+        },
+        {
+          "name": "adviser",
+          "type": "text"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "legalAndEstatePlanning",
+      "type": "table",
+      "maxRows": 30,
+      "columns": [
+        {
+          "optionKeys": [
+            "will",
+            "codicil",
+            "grant_of_probate",
+            "grant_of_administration",
+            "enduring_power_of_attorney_dss",
+            "advance_healthcare_directive",
+            "decision_support_arrangement",
+            "trust",
+            "guardianship_care_plan",
+            "funeral_wishes",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "document_type",
+          "type": "select"
+        },
+        {
+          "name": "jurisdiction",
+          "type": "text"
+        },
+        {
+          "name": "review_date",
+          "type": "date"
+        },
+        {
+          "name": "appointed_person",
+          "type": "text"
+        },
+        {
+          "name": "professional_contact",
+          "type": "text"
+        },
+        {
+          "name": "document_location",
+          "type": "text"
+        },
+        {
+          "name": "instructions",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "importantDocuments",
+      "type": "table",
+      "maxRows": 40,
+      "columns": [
+        {
+          "optionKeys": [
+            "birth_citizenship_certificate",
+            "passport",
+            "pps_number_record",
+            "medical_gp_visit_card",
+            "driving_licence_vehicle_papers",
+            "will_grant_epa_directive",
+            "property_title_mortgage",
+            "bank_investment_statements",
+            "pension_prsa_records",
+            "insurance_policies",
+            "tax_returns_employment_detail",
+            "medical_records",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "document_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "location",
+          "type": "text"
+        },
+        {
+          "name": "contact",
+          "type": "text"
+        },
+        {
+          "name": "last_checked",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "digitalAccountsAndDevices",
+      "type": "table",
+      "maxRows": 50,
+      "columns": [
+        {
+          "optionKeys": [
+            "primary_email",
+            "my_gov_id_revenue_online_service",
+            "phone_provider",
+            "password_manager",
+            "cloud_storage",
+            "banking_pension",
+            "social_media",
+            "photo_file_archive",
+            "domain_website",
+            "subscription",
+            "computer_phone_tablet",
+            "crypto_wallet",
+            "other"
+          ],
+          "validation": {
+            "required": true
+          },
+          "name": "account_type",
+          "type": "select"
+        },
+        {
+          "validation": {
+            "required": true
+          },
+          "name": "provider",
+          "type": "text"
+        },
+        {
+          "name": "account_identifier",
+          "type": "text"
+        },
+        {
+          "name": "recovery_method",
+          "type": "text"
+        },
+        {
+          "name": "legacy_contact",
+          "type": "text"
+        },
+        {
+          "name": "instructions_location",
+          "type": "text"
+        },
+        {
+          "optionKeys": [
+            "preserve",
+            "close",
+            "memorialise_transfer",
+            "review_with_family",
+            "not_specified"
+          ],
+          "name": "account_preference",
+          "type": "select"
+        }
+      ]
+    },
+    {
+      "id": "additionalDetails",
+      "type": "simple",
+      "fields": [
+        {
+          "validation": {
+            "maxLength": 5000
+          },
+          "name": "notes",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "accessGuide": {
+    "enabled": true,
+    "emergencyServices": {
+      "medical": {
+        "$i18n": "accessGuide.emergencyServices.medical"
+      },
+      "police": {
+        "$i18n": "accessGuide.emergencyServices.police"
+      },
+      "fire": {
+        "$i18n": "accessGuide.emergencyServices.fire"
+      },
+      "poison_control": {
+        "$i18n": "accessGuide.emergencyServices.poison_control"
+      },
+      "suicide_prevention": {
+        "$i18n": "accessGuide.emergencyServices.suicide_prevention"
+      }
+    },
+    "quickStartKeys": [
+      "item_09",
+      "item_19",
+      "item_20",
+      "item_58",
+      "item_32",
+      "item_42"
+    ],
+    "sectionGuidance": {
+      "personalDetails": {
+        "usefulForKeys": [
+          "item_09",
+          "item_32",
+          "item_06",
+          "item_20"
+        ],
+        "firstActionKeys": [
+          "item_06",
+          "item_18",
+          "item_32"
+        ],
+        "criticalFieldKeys": [
+          "item_06",
+          "item_03",
+          "item_17",
+          "item_19"
+        ]
+      },
+      "emergencyContacts": {
+        "usefulForKeys": [
+          "item_17",
+          "item_01",
+          "item_09",
+          "item_03"
+        ],
+        "firstActionKeys": [
+          "item_02",
+          "item_22",
+          "item_13"
+        ],
+        "criticalFieldKeys": [
+          "item_07",
+          "item_03",
+          "item_05",
+          "item_08"
+        ]
+      },
+      "healthAndCareInformation": {
+        "usefulForKeys": [
+          "item_01",
+          "item_11",
+          "item_09"
+        ],
+        "firstActionKeys": [
+          "item_03",
+          "item_22",
+          "item_17"
+        ],
+        "criticalFieldKeys": [
+          "item_05",
+          "item_09",
+          "item_01",
+          "item_02"
+        ]
+      },
+      "insuranceDetails": {
+        "usefulForKeys": [
+          "item_09",
+          "item_04",
+          "item_07"
+        ],
+        "firstActionKeys": [
+          "item_18",
+          "item_13",
+          "item_03"
+        ],
+        "criticalFieldKeys": [
+          "item_02",
+          "item_05",
+          "item_09",
+          "item_01"
+        ]
+      },
+      "bankAccounts": {
+        "usefulForKeys": [
+          "item_04",
+          "item_02",
+          "item_07"
+        ],
+        "firstActionKeys": [
+          "item_03",
+          "item_16",
+          "item_13"
+        ],
+        "criticalFieldKeys": [
+          "item_05",
+          "item_12",
+          "item_08",
+          "item_03"
+        ]
+      },
+      "savingsAndInvestments": {
+        "usefulForKeys": [
+          "item_03",
+          "item_01",
+          "item_11"
+        ],
+        "firstActionKeys": [
+          "item_08",
+          "item_02",
+          "item_15"
+        ],
+        "criticalFieldKeys": [
+          "item_12",
+          "item_16",
+          "item_02",
+          "item_06"
+        ]
+      },
+      "pensionsAndSocialWelfare": {
+        "usefulForKeys": [
+          "item_01",
+          "item_02",
+          "item_03"
+        ],
+        "firstActionKeys": [
+          "item_02",
+          "item_01",
+          "item_03"
+        ],
+        "criticalFieldKeys": [
+          "item_03",
+          "item_04",
+          "item_02",
+          "item_01"
+        ]
+      },
+      "propertyAndVehicles": {
+        "usefulForKeys": [
+          "item_02",
+          "item_08",
+          "item_11"
+        ],
+        "firstActionKeys": [
+          "item_15",
+          "item_07",
+          "item_01"
+        ],
+        "criticalFieldKeys": [
+          "item_01",
+          "item_04",
+          "item_08",
+          "item_03"
+        ]
+      },
+      "loansAndLiabilities": {
+        "usefulForKeys": [
+          "item_05",
+          "item_03",
+          "item_09"
+        ],
+        "firstActionKeys": [
+          "item_10",
+          "item_09",
+          "item_01"
+        ],
+        "criticalFieldKeys": [
+          "item_13",
+          "item_12",
+          "item_11",
+          "item_04"
+        ]
+      },
+      "employmentAndIncome": {
+        "usefulForKeys": [
+          "item_05",
+          "item_03",
+          "item_12",
+          "item_18"
+        ],
+        "firstActionKeys": [
+          "item_01",
+          "item_06",
+          "item_11"
+        ],
+        "criticalFieldKeys": [
+          "item_04",
+          "item_01",
+          "item_03"
+        ]
+      },
+      "taxAndGovernmentRecords": {
+        "usefulForKeys": [
+          "item_24",
+          "item_06",
+          "item_09",
+          "item_15"
+        ],
+        "firstActionKeys": [
+          "item_20",
+          "item_01",
+          "item_14"
+        ],
+        "criticalFieldKeys": [
+          "item_03",
+          "item_01",
+          "item_04",
+          "item_05"
+        ]
+      },
+      "legalAndEstatePlanning": {
+        "usefulForKeys": [
+          "item_08",
+          "item_06",
+          "item_19"
+        ],
+        "firstActionKeys": [
+          "item_17",
+          "item_03",
+          "item_22"
+        ],
+        "criticalFieldKeys": [
+          "item_01",
+          "item_03",
+          "item_13",
+          "item_11"
+        ]
+      },
+      "importantDocuments": {
+        "usefulForKeys": [
+          "item_05",
+          "item_03",
+          "item_11"
+        ],
+        "firstActionKeys": [
+          "item_08",
+          "item_12",
+          "item_09"
+        ],
+        "criticalFieldKeys": [
+          "item_01",
+          "item_02",
+          "item_04"
+        ]
+      },
+      "digitalAccountsAndDevices": {
+        "usefulForKeys": [
+          "item_01",
+          "item_02",
+          "item_05"
+        ],
+        "firstActionKeys": [
+          "item_06",
+          "item_05",
+          "item_02"
+        ],
+        "criticalFieldKeys": [
+          "item_03",
+          "item_01",
+          "item_04",
+          "item_02"
+        ]
+      },
+      "additionalDetails": {
+        "usefulForKeys": [
+          "item_10",
+          "item_04",
+          "item_09"
+        ],
+        "firstActionKeys": [
+          "item_06",
+          "item_08"
+        ],
+        "criticalFieldKeys": [
+          "item_01"
+        ]
+      }
+    },
+    "generalGuidanceKeys": {
+      "fileStructure": [
+        "item_11",
+        "item_13"
+      ],
+      "dataAccess": [
+        "item_03",
+        "item_14",
+        "item_15"
+      ],
+      "securityTips": [
+        "item_13",
+        "item_30",
+        "item_20"
+      ]
+    },
+    "legalNoteKeys": [
+      "item_122",
+      "item_42",
+      "item_102",
+      "item_49",
+      "item_118",
+      "item_41",
+      "item_05",
+      "item_93",
+      "item_104",
+      "item_10",
+      "item_107",
+      "item_16",
+      "item_15",
+      "item_35",
+      "item_52",
+      "item_109"
+    ]
+  },
+  "recoveryRoadmap": {
+    "enabled": true,
+    "description": {
+      "$i18n": "recoveryRoadmap.description"
+    },
+    "meta": {
+      "title": {
+        "$i18n": "recoveryRoadmap.meta.title"
+      },
+      "version": {
+        "$i18n": "recoveryRoadmap.meta.version"
+      },
+      "lastReviewed": {
+        "$i18n": "recoveryRoadmap.meta.lastReviewed"
+      },
+      "reviewedBy": {
+        "$i18n": "recoveryRoadmap.meta.reviewedBy"
+      },
+      "generatedOn": {
+        "$i18n": "recoveryRoadmap.meta.generatedOn"
+      }
+    },
+    "intro": {
+      "condolence": {
+        "$i18n": "recoveryRoadmap.intro.condolence"
+      },
+      "howToUse": {
+        "$i18n": "recoveryRoadmap.intro.howToUse"
+      }
+    },
+    "startHere": [
+      {
+        "$i18n": "recoveryRoadmap.startHere.0"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.1"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.2"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.3"
+      },
+      {
+        "$i18n": "recoveryRoadmap.startHere.4"
+      }
+    ],
+    "legalFramework": [
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.0"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.1"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.2"
+      },
+      {
+        "$i18n": "recoveryRoadmap.legalFramework.3"
+      }
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.0.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.0.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.0.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.0.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.0.keyActions.1.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.3"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.mustHaveDocuments.4"
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.0.criticalMistakes.2"
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.1.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.1.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.1.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.1.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.1.keyActions.1.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.mustHaveDocuments.3"
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.1.criticalMistakes.2"
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.2.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.2.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.2.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.2.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.2.keyActions.1.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.2"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.mustHaveDocuments.3"
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.2.criticalMistakes.2"
+          }
+        ]
+      },
+      {
+        "phase": 4,
+        "title": {
+          "$i18n": "recoveryRoadmap.phases.3.title"
+        },
+        "timeframe": {
+          "$i18n": "recoveryRoadmap.phases.3.timeframe"
+        },
+        "priority": {
+          "$i18n": "recoveryRoadmap.phases.3.priority"
+        },
+        "focus": {
+          "$i18n": "recoveryRoadmap.phases.3.focus"
+        },
+        "keyActions": [
+          {
+            "step": 1,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.0.legalRef"
+            }
+          },
+          {
+            "step": 2,
+            "action": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.action"
+            },
+            "priority": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.priority"
+            },
+            "why": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.why"
+            },
+            "legalRef": {
+              "$i18n": "recoveryRoadmap.phases.3.keyActions.1.legalRef"
+            }
+          }
+        ],
+        "mustHaveDocuments": [
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.mustHaveDocuments.2"
+          }
+        ],
+        "criticalMistakes": [
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.0"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.1"
+          },
+          {
+            "$i18n": "recoveryRoadmap.phases.3.criticalMistakes.2"
+          }
+        ]
+      }
+    ],
+    "quickReference": {
+      "emergency": {
+        "number": {
+          "$i18n": "recoveryRoadmap.quickReference.emergency.number"
+        },
+        "poisonLine": {
+          "$i18n": "recoveryRoadmap.quickReference.emergency.poisonLine"
+        },
+        "emotionalSupport": {
+          "$i18n": "recoveryRoadmap.quickReference.emergency.emotionalSupport"
+        }
+      },
+      "probate": {
+        "note": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.note"
+        },
+        "url": {
+          "$i18n": "recoveryRoadmap.quickReference.probate.url"
+        }
+      },
+      "cat": {
+        "note": {
+          "$i18n": "recoveryRoadmap.quickReference.cat.note"
+        },
+        "url": {
+          "$i18n": "recoveryRoadmap.quickReference.cat.url"
+        }
+      }
+    },
+    "glossary": [
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.0.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.0.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.1.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.1.definition"
+        }
+      },
+      {
+        "term": {
+          "$i18n": "recoveryRoadmap.glossary.2.term"
+        },
+        "definition": {
+          "$i18n": "recoveryRoadmap.glossary.2.definition"
+        }
+      }
+    ]
+  }
+}
