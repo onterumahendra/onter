@@ -580,8 +580,19 @@ export function FormStepper() {
                 </Alert>
               )}
 
-              <Group justify="space-between" align="flex-start">
-                <Box style={{ maxWidth: isMobile ? '100%' : '300px', flex: 1 }}>
+              <Box
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  paddingTop: isMobile ? 0 : '20px',
+                }}
+              >
+                <Box
+                  style={{
+                    width: '100%',
+                    maxWidth: 'none',
+                  }}
+                >
                   <Title order={4} c="slate.8" mb="xs">
                     {currentSection?.section}
                   </Title>
@@ -591,20 +602,27 @@ export function FormStepper() {
                     </Text>
                   )}
                 </Box>
-                
-                {/* Desktop/Tablet: Show progress stats beside section title */}
+
                 {!isMobile && (
-                  <ProgressStats
-                    isSaving={isSaving}
-                    lastSaveTime={lastSaveTime}
-                    completedSteps={completedSteps.size + skippedSteps.size}
-                    totalSteps={formSections.length}
-                    progressPercentage={progressPercentage}
-                    variant="desktop"
-                    t={t}
-                  />
+                  <Box
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      right: 0,
+                    }}
+                  >
+                    <ProgressStats
+                      isSaving={isSaving}
+                      lastSaveTime={lastSaveTime}
+                      completedSteps={completedSteps.size + skippedSteps.size}
+                      totalSteps={formSections.length}
+                      progressPercentage={progressPercentage}
+                      variant="desktop"
+                      t={t}
+                    />
+                  </Box>
                 )}
-              </Group>
+              </Box>
 
               {renderSectionContent()}
             </Stack>
