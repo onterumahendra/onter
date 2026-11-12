@@ -118,6 +118,15 @@ describe('indexedDB utilities', () => {
     expect(database.createObjectStore).toHaveBeenCalledWith('encryptedData', { keyPath: 'id' });
   });
 
+  it('deletes multiple records in one operation', async () => {
+    await saveData('countryData:IN', 'india');
+    await saveData('formData', 'legacy');
+
+    await deleteData('countryData:IN', 'formData');
+
+    expect(await getAllKeys()).toEqual([]);
+  });
+
   it('returns null for missing and expired values and cleans expired records', async () => {
     records.set('old', { id: 'old', encryptedPayload: 'stale', expiresAt: Date.now() - 1 });
     expect(await getData('missing')).toBeNull();
@@ -134,7 +143,7 @@ describe('indexedDB utilities', () => {
     expect(await getAllKeys()).toEqual([]);
     await expect(saveData('x', 'y')).rejects.toThrow('IndexedDB save operation failed');
     await expect(clearAllData()).rejects.toThrow('IndexedDB clear operation failed');
-    await expect(deleteData('x')).resolves.toBeUndefined();
+    await expect(deleteData('x')).rejects.toThrow('IndexedDB delete operation failed');
     await expect(cleanupExpiredData()).resolves.toBeUndefined();
   });
 
@@ -151,9 +160,9 @@ describe('indexedDB utilities', () => {
     await expect(getData('x')).rejects.toThrow('Failed to retrieve data');
   });
 
-  it('silently handles database-open failures for cleanup and delete', async () => {
+  it('surfaces delete failures but keeps cleanup best-effort on database-open failures', async () => {
     failOpen = true;
     await expect(cleanupExpiredData()).resolves.toBeUndefined();
-    await expect(deleteData('x')).resolves.toBeUndefined();
+    await expect(deleteData('x')).rejects.toThrow('IndexedDB delete operation failed');
   });
 });

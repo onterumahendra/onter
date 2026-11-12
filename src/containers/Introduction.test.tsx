@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
 import { MemoryRouter } from 'react-router-dom';
 import { theme } from '../theme';
@@ -13,6 +13,10 @@ const mockSetImportMode = vi.fn();
 const mockUpdateFormData = vi.fn();
 const mockGenerateTemplate = vi.fn();
 const mockImportData = vi.fn();
+let mockSelectedCountry = 'US';
+const mockSetCountry = vi.fn((country: string) => {
+  mockSelectedCountry = country;
+});
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
@@ -44,8 +48,8 @@ vi.mock('../constants', () => ({
 vi.mock('../store/appStore', () => ({
   useAppStore: (selector?: (state: any) => unknown) => {
     const state = {
-      selectedCountry: 'US',
-      setCountry: vi.fn(),
+      selectedCountry: mockSelectedCountry,
+      setCountry: mockSetCountry,
       setImportMode: mockSetImportMode,
       updateFormData: mockUpdateFormData,
       loadFromIndexedDB: mockLoadFromIndexedDB,
@@ -74,13 +78,14 @@ const { Introduction } = await import('./Introduction');
 describe('Introduction', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockSelectedCountry = 'US';
     mockGenerateTemplate.mockResolvedValue(undefined);
     mockImportData.mockResolvedValue({ personalInfo: { name: 'Jane' } });
     mockClearData.mockResolvedValue(undefined);
     mockLoadFromIndexedDB.mockResolvedValue(false);
   });
 
-  it('renders the introduction screen and loads saved state on mount', () => {
+  it('renders the introduction screen and checks for data belonging to the selected country', async () => {
     render(
       <MantineProvider theme={theme}>
         <MemoryRouter>
@@ -90,10 +95,33 @@ describe('Introduction', () => {
     );
 
     expect(screen.getByText('app.tagline')).toBeInTheDocument();
-    expect(mockLoadFromIndexedDB).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(mockLoadFromIndexedDB).toHaveBeenCalledWith('US'));
+    expect(screen.queryByRole('button', { name: 'introduction.start.resumeSession' })).not.toBeInTheDocument();
   });
 
-  it('navigates to the form without import when manual entry is selected', () => {
+  it('hides the resume card when switching to a country without saved data', async () => {
+    mockLoadFromIndexedDB.mockImplementation(async (country: string) => country === 'US');
+
+    const renderIntroduction = () => (
+      <MantineProvider theme={theme}>
+        <MemoryRouter>
+          <Introduction />
+        </MemoryRouter>
+      </MantineProvider>
+    );
+    const { rerender } = render(renderIntroduction());
+    await screen.findByRole('button', { name: 'introduction.start.resumeSession' });
+
+    act(() => mockSetCountry('IN'));
+    rerender(renderIntroduction());
+
+    await waitFor(() => {
+      expect(mockLoadFromIndexedDB).toHaveBeenLastCalledWith('IN');
+      expect(screen.queryByRole('button', { name: 'introduction.start.resumeSession' })).not.toBeInTheDocument();
+    });
+  });
+
+  it('navigates to the form without import when manual entry is selected', async () => {
     mockLoadFromIndexedDB.mockResolvedValue(false);
 
     render(
@@ -104,6 +132,9 @@ describe('Introduction', () => {
       </MantineProvider>,
     );
 
+    await waitFor(() => expect(
+      screen.getByRole('button', { name: 'introduction.start.manualEntry' }),
+    ).toBeEnabled());
     fireEvent.click(screen.getByRole('button', { name: 'introduction.start.manualEntry' }));
 
     expect(mockNavigate).toHaveBeenCalledWith('/form');
@@ -153,6 +184,26 @@ describe('Introduction', () => {
     });
   }, 15_000);
 
+  it('resumes only after the selected country session is loaded', async () => {
+    mockLoadFromIndexedDB.mockResolvedValue(true);
+
+    render(
+      <MantineProvider theme={theme}>
+        <MemoryRouter>
+          <Introduction />
+        </MemoryRouter>
+      </MantineProvider>,
+    );
+
+    const resumeButton = await screen.findByRole('button', { name: 'introduction.start.resumeSession' });
+    fireEvent.click(resumeButton);
+
+    await waitFor(() => {
+      expect(mockLoadFromIndexedDB).toHaveBeenLastCalledWith('US');
+      expect(mockNavigate).toHaveBeenCalledWith('/form');
+    });
+  });
+
   it('resumes saved data and cancels or confirms a saved-session import', async () => {
     mockLoadFromIndexedDB.mockResolvedValue(true);
     const { container } = render(
@@ -163,8 +214,10 @@ describe('Introduction', () => {
       </MantineProvider>,
     );
     await screen.findAllByText('introduction.start.resumeSession');
-    fireEvent.click(screen.getByRole('button', { name: 'introduction.start.resumeSession' }));
-    expect(mockNavigate).toHaveBeenCalledWith('/form');
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'introduction.start.resumeSession' }));
+    });
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/form'));
 
     const file = new File(['test'], 'import.xlsx', { type: 'application/vnd.ms-excel' });
     const input = container.querySelector('input[type="file"]') as HTMLInputElement;
@@ -216,6 +269,9 @@ describe('Introduction', () => {
       </MantineProvider>,
     );
 
+    await waitFor(() => expect(
+        screen.getByRole('button', { name: 'introduction.start.importExcel' }),
+    ).toBeEnabled());
     const file = new File(['test'], 'import.xlsx', { type: 'application/vnd.ms-excel' });
     const input = document.querySelector('input[type="file"]') as HTMLInputElement | null;
 
@@ -242,6 +298,9 @@ describe('Introduction', () => {
       </MantineProvider>,
     );
 
+    await waitFor(() => expect(
+        screen.getByRole('button', { name: 'introduction.start.importExcel' }),
+    ).toBeEnabled());
     const file = new File(['test'], 'import.xlsx', { type: 'application/vnd.ms-excel' });
     const input = document.querySelector('input[type="file"]') as HTMLInputElement | null;
 

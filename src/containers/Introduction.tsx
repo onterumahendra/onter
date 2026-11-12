@@ -45,7 +45,8 @@ export function Introduction() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string>('');
-  const [hasSavedData, setHasSavedData] = useState(false);
+  const [savedDataCountry, setSavedDataCountry] = useState<string | null>(null);
+  const [checkedCountry, setCheckedCountry] = useState<string | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingAction, setPendingAction] = useState<'manual' | 'import' | 'download' | null>(null);
   const [showLogo, setShowLogo] = useState(false);
@@ -60,17 +61,33 @@ export function Introduction() {
     clearData,
     lastSaveTime,
   } = useAppStore();
+  const hasSavedData = savedDataCountry === selectedCountry;
+  const isCheckingSavedData = checkedCountry !== selectedCountry;
   
   const { isGenerating, isImporting, generateTemplate, importData } = useExcelOperations();
   
   // Check for saved data on mount
   useEffect(() => {
+    let isCurrent = true;
     const checkSavedData = async () => {
-      const hasData = await loadFromIndexedDB();
-      setHasSavedData(hasData);
+      setCheckedCountry(null);
+      try {
+        const hasData = await loadFromIndexedDB(selectedCountry);
+        if (isCurrent) setSavedDataCountry(hasData ? selectedCountry : null);
+      } catch (error) {
+        if (isCurrent) {
+          setSavedDataCountry(null);
+          setError(error instanceof Error ? error.message : t('introduction.errors.loadFailed'));
+        }
+      } finally {
+        if (isCurrent) setCheckedCountry(selectedCountry);
+      }
     };
     void checkSavedData();
-  }, [loadFromIndexedDB]);
+    return () => {
+      isCurrent = false;
+    };
+  }, [loadFromIndexedDB, selectedCountry, t]);
 
   useEffect(() => {
     setNow(Date.now());
@@ -103,9 +120,18 @@ export function Introduction() {
   };
   
   const handleConfirmClear = async () => {
+    setError('');
+    try {
+      await clearData();
+    } catch (error) {
+      setError(error instanceof Error ? error.message : t('introduction.errors.clearFailed'));
+      setShowConfirmModal(false);
+      setPendingAction(null);
+      return;
+    }
+
     setShowConfirmModal(false);
-    await clearData();
-    setHasSavedData(false);
+    setSavedDataCountry(null);
     
     // Execute the pending action
     if (pendingAction === 'manual') {
@@ -183,8 +209,10 @@ export function Introduction() {
     }
   };
 
-  const handleResumeSession = () => {
-    navigate('/form');
+  const handleResumeSession = async () => {
+    const hasData = await loadFromIndexedDB(selectedCountry);
+    setSavedDataCountry(hasData ? selectedCountry : null);
+    if (hasData) navigate('/form');
   };
 
   const countryFlagSrc = publicAsset(`flags/${selectedCountry.toLowerCase()}.svg`);
@@ -330,7 +358,8 @@ export function Introduction() {
                 onClick={handleManualEntry}
                 variant="filled"
                 color="blue"
-                disabled={isGenerating || isImporting}
+                disabled={isGenerating || isImporting || isCheckingSavedData}
+                loading={isCheckingSavedData}
               >
                 {t('introduction.start.manualEntry')}
               </Button>
@@ -349,7 +378,7 @@ export function Introduction() {
                 <FileButton 
                   onChange={setFile} 
                   accept=".xlsx,.xls"
-                  disabled={isGenerating || isImporting}
+                  disabled={isGenerating || isImporting || isCheckingSavedData}
                 >
                   {(props) => (
                     <Button
@@ -380,7 +409,8 @@ export function Introduction() {
                   onClick={handleImport}
                   color="teal"
                   size="lg"
-                  loading={isImporting}
+                  loading={isImporting || isCheckingSavedData}
+                  disabled={isCheckingSavedData}
                 >
                   {t('introduction.start.importContinue')}
                 </Button>

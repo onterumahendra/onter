@@ -43,7 +43,8 @@ When a key family member passes away unexpectedly, surviving dependents face emo
 - **Global form framework:** Configurable country-specific workflows (India, USA, Canada, more)
 - **Client-side privacy:** All storage is local in your browser
 - **Exportable package:** Download a comprehensive data bundle (Excel + PDF + Access Guide) for safe handover
-- **Auto-save & auto-delete:** Progress is saved, and data is cleared after 24 hours for privacy
+- **Country-specific sessions:** Each country's progress is saved separately and can be resumed when that country is selected
+- **Auto-delete:** Saved sessions are cleared after 24 hours for privacy
 - **Responsive design:** Desktop and mobile
 - **Step-by-step forms:** Guided, easy-to-use wizard
 - **Validation:** Built-in checks for accuracy
@@ -264,7 +265,7 @@ See [DYNAMIC_CONFIG.md](DYNAMIC_CONFIG.md) for detailed documentation.
 
 - **Client-side only:** All data stays on your device
 - **No servers:** No data transmission to external servers
-- **Auto-delete:** Form data is stored locally in your browser and automatically cleared after 24 hours for additional privacy protection.
+- **Auto-delete:** Country-specific form sessions are stored locally in your browser and automatically cleared after 24 hours for additional privacy protection.
 - **Open source:** Transparent code you can audit
 
 ---

@@ -1,8 +1,58 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { saveData, getData, clearAllData } from '../utils/indexedDB';
-import { DEFAULT_COUNTRY } from '../constants/countries';
+import { saveData, getData, deleteData } from '../utils/indexedDB';
+import { DEFAULT_COUNTRY, getCountryCodes } from '../constants/countries';
+
+const LEGACY_FORM_DATA_KEY = 'formData';
+const APP_METADATA_KEY = 'appMeta';
+
+interface PersistedCountryData {
+  formData: Record<string, any>;
+  currentStep: number;
+}
+
+function countryDataKey(country: string): string {
+  return `countryData:${country}`;
+}
+
+function isRecord(value: unknown): value is Record<string, any> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function parseJson(value: string): unknown {
+  return JSON.parse(value) as unknown;
+}
+
+function parseMetadata(value: string | null): unknown {
+  if (!value) return null;
+  try {
+    return parseJson(value);
+  } catch (error) {
+    console.error('Failed to parse saved metadata:', error);
+    return null;
+  }
+}
+
+function resolveCountry(metadata: unknown): string | null {
+  if (isRecord(metadata) && typeof metadata.selectedCountry === 'string') {
+    return getCountryCodes().includes(metadata.selectedCountry)
+      ? metadata.selectedCountry
+      : null;
+  }
+  return DEFAULT_COUNTRY;
+}
+
+function parsePersistedCountryData(value: unknown): PersistedCountryData | null {
+  if (!isRecord(value) || !isRecord(value.formData)) return null;
+
+  return {
+    formData: value.formData,
+    currentStep: Number.isInteger(value.currentStep) && value.currentStep >= 0
+      ? value.currentStep
+      : 0,
+  };
+}
 
 interface AppState {
   // State
@@ -19,7 +69,7 @@ interface AppState {
   updateFormData: (section: string, data: any) => void;
   setImportMode: (isImport: boolean) => void;
   saveToIndexedDB: () => Promise<void>;
-  loadFromIndexedDB: () => Promise<boolean>;
+  loadFromIndexedDB: (country?: string) => Promise<boolean>;
   initializeFromStorage: () => Promise<void>;
   clearData: () => Promise<void>;
   reset: () => void;
@@ -37,7 +87,22 @@ export const useAppStore = create<AppState>()(
       isDataLoaded: false,
       
       // Actions
-      setCountry: (country) => set({ selectedCountry: country }),
+      setCountry: (country) => {
+        if (!getCountryCodes().includes(country)) {
+          console.error(`Cannot select unsupported country: ${country}`);
+          return;
+        }
+
+        if (country !== get().selectedCountry) {
+          set({
+            selectedCountry: country,
+            formData: {},
+            currentStep: 0,
+            lastSaveTime: null,
+            isDataLoaded: false,
+          });
+        }
+      },
       
       setStep: (step) => set({ currentStep: step }),
       
@@ -59,28 +124,84 @@ export const useAppStore = create<AppState>()(
         }
         
         try {
-          // Save directly without encryption
-          await saveData('formData', JSON.stringify(formData));
-          // Also save metadata (country and step)
-          await saveData('appMeta', JSON.stringify({ selectedCountry, currentStep }));
+          await saveData(
+            countryDataKey(selectedCountry),
+            JSON.stringify({ formData, currentStep } satisfies PersistedCountryData)
+          );
+          await saveData(APP_METADATA_KEY, JSON.stringify({ selectedCountry }));
           set({ lastSaveTime: Date.now() });
         } catch (error) {
           console.error('Failed to save data:', error);
         }
       },
       
-      loadFromIndexedDB: async () => {
+      loadFromIndexedDB: async (country = get().selectedCountry) => {
+        if (!getCountryCodes().includes(country)) {
+          console.error(`Cannot load data for unsupported country: ${country}`);
+          return false;
+        }
+
         try {
-          const storedData = await getData('formData');
-          if (!storedData) {
-            return false;
+          let storedData = await getData(countryDataKey(country));
+          let persistedData: PersistedCountryData | null = null;
+
+          if (storedData) {
+            persistedData = parsePersistedCountryData(parseJson(storedData));
+            if (!persistedData) {
+              throw new Error(`Invalid saved data for ${country}`);
+            }
+          } else {
+            const legacyData = await getData(LEGACY_FORM_DATA_KEY);
+            if (legacyData) {
+              const metadataValue = await getData(APP_METADATA_KEY);
+              const metadata = parseMetadata(metadataValue);
+
+              if (resolveCountry(metadata) === country) {
+                const legacyFormData = parseJson(legacyData);
+                if (!isRecord(legacyFormData)) {
+                  throw new Error(`Invalid legacy saved data for ${country}`);
+                }
+
+                const legacyStep = isRecord(metadata) ? metadata.currentStep : 0;
+                persistedData = {
+                  formData: legacyFormData,
+                  currentStep: Number.isInteger(legacyStep) && legacyStep >= 0
+                    ? legacyStep
+                    : 0,
+                };
+                storedData = JSON.stringify(persistedData);
+                await saveData(countryDataKey(country), storedData);
+
+                try {
+                  await deleteData(LEGACY_FORM_DATA_KEY);
+                } catch (error) {
+                  console.error('Failed to remove migrated legacy data:', error);
+                }
+              }
+            }
           }
-          
-          // Load directly without decryption
-          set({ formData: JSON.parse(storedData), isDataLoaded: true });
-          return true;
+
+          const formData = persistedData?.formData ?? {};
+          const hasData = Object.keys(formData).length > 0;
+          if (get().selectedCountry === country) {
+            set({
+              formData: hasData ? formData : {},
+              currentStep: hasData ? persistedData?.currentStep ?? 0 : 0,
+              lastSaveTime: null,
+              isDataLoaded: true,
+            });
+          }
+          return hasData;
         } catch (error) {
           console.error('Failed to load data:', error);
+          if (get().selectedCountry === country) {
+            set({
+              formData: {},
+              currentStep: 0,
+              lastSaveTime: null,
+              isDataLoaded: true,
+            });
+          }
           return false;
         }
       },
@@ -88,20 +209,24 @@ export const useAppStore = create<AppState>()(
       initializeFromStorage: async () => {
         // Auto-load data on app initialization
         try {
-          const storedData = await getData('formData');
-          if (storedData) {
-            const formData = JSON.parse(storedData);
-            // Also restore country and step if available
-            const metaData = await getData('appMeta');
-            const meta = metaData ? JSON.parse(metaData) : {};
-            
-            set({ 
-              formData,
-              selectedCountry: meta.selectedCountry || DEFAULT_COUNTRY,
-              currentStep: meta.currentStep || 0,
-              isDataLoaded: true
+          const initialCountry = get().selectedCountry;
+          const metadataValue = await getData(APP_METADATA_KEY);
+          const metadata = parseMetadata(metadataValue);
+          const country = get().selectedCountry === initialCountry
+            ? resolveCountry(metadata) ?? DEFAULT_COUNTRY
+            : get().selectedCountry;
+
+          if (get().selectedCountry !== country) {
+            set({
+              selectedCountry: country,
+              formData: {},
+              currentStep: 0,
+              lastSaveTime: null,
+              isDataLoaded: false,
             });
           }
+
+          await get().loadFromIndexedDB(country);
         } catch (error) {
           console.error('Failed to initialize from storage:', error);
         }
@@ -109,7 +234,19 @@ export const useAppStore = create<AppState>()(
       
       clearData: async () => {
         try {
-          await clearAllData();
+          const country = get().selectedCountry;
+          const idsToDelete = [countryDataKey(country)];
+          const legacyData = await getData(LEGACY_FORM_DATA_KEY);
+
+          if (legacyData) {
+            const metadataValue = await getData(APP_METADATA_KEY);
+            const metadata = parseMetadata(metadataValue);
+            if (resolveCountry(metadata) === country) {
+              idsToDelete.push(LEGACY_FORM_DATA_KEY);
+            }
+          }
+
+          await deleteData(...idsToDelete);
           set({ 
             formData: {}, 
             currentStep: 0,
@@ -118,6 +255,7 @@ export const useAppStore = create<AppState>()(
           });
         } catch (error) {
           console.error('Failed to clear data:', error);
+          throw error;
         }
       },
       

@@ -1159,7 +1159,7 @@
       "fileSize": "{{size}} KB",
       "confirmClear": {
         "title": "Clear Existing Data?",
-        "message": "You have previously saved data. Starting fresh will permanently delete all your saved information. This action cannot be undone.",
+        "message": "You have previously saved data for this country. Starting fresh will permanently delete that country's saved information. Saved sessions for other countries will remain.",
         "confirm": "Yes, Start Fresh",
         "cancel": "Cancel"
       }
@@ -1171,7 +1171,9 @@
     "errors": {
       "selectFile": "Please select a file to import",
       "templateFailed": "Failed to generate template. Please try again.",
-      "importFailed": "Failed to import Excel file"
+      "importFailed": "Failed to import Excel file",
+      "clearFailed": "Failed to clear saved data. Please try again.",
+      "loadFailed": "Failed to check saved data. Please try again."
     }
   },
   "formStepper": {
@@ -1197,13 +1199,13 @@
     },
     "success": {
       "title": "Success!",
-      "message": "Data exported successfully! All data has been cleared from your browser."
+      "message": "Data exported successfully! This country's saved data has been cleared from your browser."
     },
     "export": {
       "title": "Export Your Data",
       "warning": {
         "title": "Important: Data Will Be Cleared",
-        "message": "After exporting, all your data will be automatically deleted from the browser for security. Make sure to save the downloaded Excel file in a secure location."
+        "message": "After exporting, this country's saved data will be automatically deleted from the browser for security. Saved sessions for other countries will remain. Make sure to save the downloaded Excel file in a secure location."
       },
       "stats": {
         "totalSections": "Total Sections:",

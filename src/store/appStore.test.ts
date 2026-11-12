@@ -5,12 +5,13 @@ import { act } from '@testing-library/react';
 
 const saveDataMock = vi.fn();
 const getDataMock = vi.fn();
-const clearAllDataMock = vi.fn();
+const deleteDataMock = vi.fn();
+const records = new Map<string, string>();
 
 vi.mock('../utils/indexedDB', () => ({
   saveData: saveDataMock,
   getData: getDataMock,
-  clearAllData: clearAllDataMock,
+  deleteData: deleteDataMock,
 }));
 
 let useAppStore: any;
@@ -21,127 +22,168 @@ beforeAll(async () => {
 
 describe('useAppStore', () => {
   beforeEach(() => {
+    records.clear();
     useAppStore.getState().reset();
     vi.clearAllMocks();
-    saveDataMock.mockResolvedValue(undefined);
-    getDataMock.mockResolvedValue(null);
-    clearAllDataMock.mockResolvedValue(undefined);
-  });
-
-  it('updates the selected country and form data', () => {
-    act(() => {
-      useAppStore.getState().setCountry('IN');
-      useAppStore.getState().updateFormData('personalInfo', { name: 'Asha' });
+    saveDataMock.mockImplementation(async (id: string, value: string) => {
+      records.set(id, value);
     });
-
-    const state = useAppStore.getState();
-    expect(state.selectedCountry).toBe('IN');
-    expect(state.formData.personalInfo).toEqual({ name: 'Asha' });
+    getDataMock.mockImplementation(async (id: string) => records.get(id) ?? null);
+    deleteDataMock.mockImplementation(async (...ids: string[]) => {
+      ids.forEach(id => records.delete(id));
+    });
   });
 
-  it('updates the step and import mode without writing empty stores', async () => {
+  it('clears the previous country form from memory when changing countries', () => {
     act(() => {
+      useAppStore.getState().updateFormData('personalDetails', { name: 'Asha' });
       useAppStore.getState().setStep(2);
-      useAppStore.getState().setImportMode(true);
+      useAppStore.getState().setCountry('US');
     });
 
-    expect(useAppStore.getState().currentStep).toBe(2);
-    expect(useAppStore.getState().isImportMode).toBe(true);
-
-    await act(async () => {
-      await useAppStore.getState().saveToIndexedDB();
-    });
-
-    expect(saveDataMock).not.toHaveBeenCalled();
+    expect(useAppStore.getState().selectedCountry).toBe('US');
+    expect(useAppStore.getState().formData).toEqual({});
+    expect(useAppStore.getState().currentStep).toBe(0);
+    expect(useAppStore.getState().isDataLoaded).toBe(false);
   });
 
-  it('saves data to IndexedDB with metadata', async () => {
+  it('saves form data and progress under the selected country', async () => {
     act(() => {
       useAppStore.getState().setCountry('CA');
-      useAppStore.getState().updateFormData('personalInfo', { name: 'Asha' });
+      useAppStore.getState().updateFormData('personalDetails', { name: 'Asha' });
+      useAppStore.getState().setStep(2);
     });
 
-    await act(async () => {
-      await useAppStore.getState().saveToIndexedDB();
-    });
+    await act(async () => useAppStore.getState().saveToIndexedDB());
 
-    expect(saveDataMock).toHaveBeenCalledWith('formData', JSON.stringify({ personalInfo: { name: 'Asha' } }));
-    expect(saveDataMock).toHaveBeenCalledWith('appMeta', JSON.stringify({ selectedCountry: 'CA', currentStep: 0 }));
+    expect(saveDataMock).toHaveBeenCalledWith(
+      'countryData:CA',
+      JSON.stringify({ formData: { personalDetails: { name: 'Asha' } }, currentStep: 2 }),
+    );
+    expect(saveDataMock).toHaveBeenCalledWith('appMeta', JSON.stringify({ selectedCountry: 'CA' }));
   });
 
-  it('loads saved data and marks the store as initialized', async () => {
-    getDataMock.mockResolvedValueOnce(JSON.stringify({ personalInfo: { name: 'Asha' } }));
+  it('loads only the selected country data and does not leak another country into memory', async () => {
+    records.set(
+      'countryData:US',
+      JSON.stringify({ formData: { personalDetails: { name: 'Jane' } }, currentStep: 1 }),
+    );
+    useAppStore.getState().setCountry('US');
 
-    let result = false;
-    await act(async () => {
-      result = await useAppStore.getState().loadFromIndexedDB();
-    });
+    await expect(useAppStore.getState().loadFromIndexedDB('US')).resolves.toBe(true);
+    expect(useAppStore.getState().formData.personalDetails.name).toBe('Jane');
+    expect(useAppStore.getState().currentStep).toBe(1);
 
-    expect(result).toBe(true);
-    expect(useAppStore.getState().formData.personalInfo).toEqual({ name: 'Asha' });
-    expect(useAppStore.getState().isDataLoaded).toBe(true);
-  });
-
-  it('handles missing data, missing metadata, and malformed persisted JSON', async () => {
-    await expect(useAppStore.getState().loadFromIndexedDB()).resolves.toBe(false);
-
-    getDataMock
-      .mockResolvedValueOnce(JSON.stringify({ personalInfo: { name: 'Asha' } }))
-      .mockResolvedValueOnce(null);
-    await act(async () => {
-      await useAppStore.getState().initializeFromStorage();
-    });
-    expect(useAppStore.getState().selectedCountry).toBe('IN');
+    useAppStore.getState().setCountry('IN');
+    await expect(useAppStore.getState().loadFromIndexedDB('IN')).resolves.toBe(false);
+    expect(useAppStore.getState().formData).toEqual({});
     expect(useAppStore.getState().currentStep).toBe(0);
+  });
 
-    const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    getDataMock.mockResolvedValueOnce('{invalid');
-    await expect(useAppStore.getState().loadFromIndexedDB()).resolves.toBe(false);
-    getDataMock.mockResolvedValueOnce('{invalid');
+  it('migrates legacy data to the country recorded in its metadata', async () => {
+    records.set('formData', JSON.stringify({ personalDetails: { name: 'Asha' } }));
+    records.set('appMeta', JSON.stringify({ selectedCountry: 'IN', currentStep: 3 }));
+
     await act(async () => useAppStore.getState().initializeFromStorage());
+
+    expect(useAppStore.getState().selectedCountry).toBe('IN');
+    expect(useAppStore.getState().formData.personalDetails.name).toBe('Asha');
+    expect(useAppStore.getState().currentStep).toBe(3);
+    expect(records.has('countryData:IN')).toBe(true);
+    expect(records.has('formData')).toBe(false);
+  });
+
+  it('assigns legacy data without country metadata to the default country only', async () => {
+    records.set('formData', JSON.stringify({ personalDetails: { name: 'Asha' } }));
+
+    useAppStore.getState().setCountry('US');
+    await expect(useAppStore.getState().loadFromIndexedDB('US')).resolves.toBe(false);
+    expect(records.has('formData')).toBe(true);
+    expect(records.has('countryData:US')).toBe(false);
+
+    useAppStore.getState().setCountry('IN');
+    await expect(useAppStore.getState().loadFromIndexedDB('IN')).resolves.toBe(true);
+    expect(useAppStore.getState().formData.personalDetails.name).toBe('Asha');
+    expect(records.has('countryData:IN')).toBe(true);
+  });
+
+  it('does not reassign legacy data from an unsupported country to the default country', async () => {
+    records.set('formData', JSON.stringify({ personalDetails: { name: 'Asha' } }));
+    records.set('appMeta', JSON.stringify({ selectedCountry: 'ZZ' }));
+
+    await act(async () => useAppStore.getState().initializeFromStorage());
+
+    expect(useAppStore.getState().selectedCountry).toBe('IN');
+    expect(useAppStore.getState().formData).toEqual({});
+    expect(records.has('formData')).toBe(true);
+    expect(records.has('countryData:IN')).toBe(false);
+  });
+
+  it('does not apply a late load after the user changes countries', async () => {
+    let resolveStoredData: ((value: string | null) => void) | undefined;
+    getDataMock.mockImplementationOnce(() => new Promise(resolve => {
+      resolveStoredData = resolve;
+    }));
+
+    const loadPromise = useAppStore.getState().loadFromIndexedDB('IN');
+    useAppStore.getState().setCountry('US');
+    resolveStoredData?.(JSON.stringify({ formData: { personalDetails: { name: 'Asha' } }, currentStep: 0 }));
+
+    await expect(loadPromise).resolves.toBe(true);
+    expect(useAppStore.getState().selectedCountry).toBe('US');
+    expect(useAppStore.getState().formData).toEqual({});
+  });
+
+  it('clears only the selected country data and any matching legacy copy', async () => {
+    records.set('countryData:IN', JSON.stringify({ formData: { Personal: { name: 'Asha' } }, currentStep: 0 }));
+    records.set('countryData:US', JSON.stringify({ formData: { Personal: { name: 'Jane' } }, currentStep: 0 }));
+    records.set('formData', JSON.stringify({ Personal: { name: 'Asha' } }));
+    records.set('appMeta', JSON.stringify({ selectedCountry: 'IN' }));
+
+    await act(async () => useAppStore.getState().clearData());
+
+    expect(deleteDataMock).toHaveBeenCalledWith('countryData:IN', 'formData');
+    expect(records.has('countryData:IN')).toBe(false);
+    expect(records.has('formData')).toBe(false);
+    expect(records.has('countryData:US')).toBe(true);
+    expect(useAppStore.getState().formData).toEqual({});
+  });
+
+  it('does not offer malformed or empty records as resumable sessions', async () => {
+    const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    records.set('countryData:IN', '{invalid');
+    await expect(useAppStore.getState().loadFromIndexedDB('IN')).resolves.toBe(false);
+    expect(useAppStore.getState().formData).toEqual({});
+
+    records.set('countryData:IN', JSON.stringify({ formData: {}, currentStep: 5 }));
+    await expect(useAppStore.getState().loadFromIndexedDB('IN')).resolves.toBe(false);
+    expect(useAppStore.getState().currentStep).toBe(0);
     expect(log).toHaveBeenCalled();
     log.mockRestore();
   });
 
-  it('initializes from storage when app starts', async () => {
-    getDataMock
-      .mockResolvedValueOnce(JSON.stringify({ personalInfo: { name: 'Asha' } }))
-      .mockResolvedValueOnce(JSON.stringify({ selectedCountry: 'US', currentStep: 2 }));
+  it('restores the last country and its session on initialization', async () => {
+    records.set('appMeta', JSON.stringify({ selectedCountry: 'US' }));
+    records.set('countryData:US', JSON.stringify({
+      formData: { personalDetails: { name: 'Jane' } },
+      currentStep: 2,
+    }));
 
-    await act(async () => {
-      await useAppStore.getState().initializeFromStorage();
-    });
+    await act(async () => useAppStore.getState().initializeFromStorage());
 
-    const state = useAppStore.getState();
-    expect(state.selectedCountry).toBe('US');
-    expect(state.currentStep).toBe(2);
-    expect(state.formData.personalInfo).toEqual({ name: 'Asha' });
+    expect(useAppStore.getState().selectedCountry).toBe('US');
+    expect(useAppStore.getState().currentStep).toBe(2);
+    expect(useAppStore.getState().formData.personalDetails.name).toBe('Jane');
   });
 
-  it('clears all saved state', async () => {
-    act(() => {
-      useAppStore.getState().setCountry('US');
-      useAppStore.getState().updateFormData('personalInfo', { name: 'Asha' });
-    });
-
-    await act(async () => {
-      await useAppStore.getState().clearData();
-    });
-
-    const state = useAppStore.getState();
-    expect(state.formData).toEqual({});
-    expect(state.currentStep).toBe(0);
-    expect(clearAllDataMock).toHaveBeenCalledTimes(1);
-  });
-
-  it('logs persistence failures without rejecting store actions', async () => {
+  it('reports persistence failures and leaves the in-memory data intact', async () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    await act(() => useAppStore.getState().updateFormData('personalInfo', { name: 'Asha' }));
+    useAppStore.getState().updateFormData('personalDetails', { name: 'Asha' });
     saveDataMock.mockRejectedValue(new Error('write failed'));
     await expect(useAppStore.getState().saveToIndexedDB()).resolves.toBeUndefined();
-    clearAllDataMock.mockRejectedValue(new Error('clear failed'));
-    await expect(useAppStore.getState().clearData()).resolves.toBeUndefined();
-    expect(useAppStore.getState().formData.personalInfo).toEqual({ name: 'Asha' });
+    deleteDataMock.mockRejectedValue(new Error('delete failed'));
+    await expect(useAppStore.getState().clearData()).rejects.toThrow('delete failed');
+    expect(useAppStore.getState().formData.personalDetails.name).toBe('Asha');
     expect(log).toHaveBeenCalled();
     log.mockRestore();
   });

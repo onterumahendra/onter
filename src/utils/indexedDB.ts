@@ -133,27 +133,39 @@ export async function getData(id: string): Promise<string | null> {
 /**
  * Delete data from IndexedDB
  */
-export async function deleteData(id: string): Promise<void> {
+export async function deleteData(...ids: string[]): Promise<void> {
+  if (ids.length === 0) return;
+
   try {
     const db = await openDatabase();
     const transaction = db.transaction([STORE_NAME], 'readwrite');
     const store = transaction.objectStore(STORE_NAME);
 
     return new Promise((resolve, reject) => {
-      const request = store.delete(id);
+      let remaining = ids.length;
+      let settled = false;
 
-      request.onsuccess = () => {
-        db.close();
-        resolve();
-      };
-
-      request.onerror = () => {
-        db.close();
-        reject(new Error('Failed to delete data'));
-      };
+      ids.forEach(id => {
+        const request = store.delete(id);
+        request.onsuccess = () => {
+          remaining -= 1;
+          if (remaining === 0 && !settled) {
+            settled = true;
+            db.close();
+            resolve();
+          }
+        };
+        request.onerror = () => {
+          if (!settled) {
+            settled = true;
+            db.close();
+            reject(new Error('Failed to delete data'));
+          }
+        };
+      });
     });
   } catch {
-    // Silently fail
+    throw new Error('IndexedDB delete operation failed');
   }
 }
 
