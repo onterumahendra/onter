@@ -1,5 +1,7 @@
 import { getFormSections } from '../constants';
 import DOMPurify from 'dompurify';
+import { sanitizeSheetName } from './sanitizeSheetName';
+import { brand } from '../branding';
 
 // Type for values that can be sanitized
 type SanitizableValue = string | number | boolean | null | undefined;
@@ -16,37 +18,6 @@ function sanitizeInput(value: SanitizableValue): string | number | boolean {
     return '';
   }
   return String(value);
-}
-
-/**
- * Sanitize sheet name for Excel compatibility
- * - Remove special characters not allowed in Excel sheet names
- * - Limit to 31 characters
- * - Prevent duplicates by tracking used names
- */
-function sanitizeSheetName(name: string, usedNames: Set<string> = new Set()): string {
-  // Remove special characters: Excel doesn't allow: \ / ? * [ ] :
-  // We'll keep only alphanumeric, spaces, underscores, and hyphens
-  let sanitized = name.replace(/[^a-zA-Z0-9 _-]/g, '').trim();
-  
-  // Replace multiple spaces with single space
-  sanitized = sanitized.replace(/\s+/g, ' ');
-  
-  // Limit to 31 characters
-  sanitized = sanitized.substring(0, 31).trim();
-  
-  // Handle duplicates by appending a number
-  let finalName = sanitized;
-  let counter = 1;
-  while (usedNames.has(finalName)) {
-    const suffix = `_${counter}`;
-    const maxLength = 31 - suffix.length;
-    finalName = sanitized.substring(0, maxLength) + suffix;
-    counter++;
-  }
-  
-  usedNames.add(finalName);
-  return finalName;
 }
 
 /**
@@ -85,7 +56,7 @@ export async function generateSampleExcel(countryCode: string): Promise<void> {
     }
   });
   
-  const fileName = `Onter_Care_${countryCode}_${new Date().toISOString().split('T')[0]}.xlsx`;
+  const fileName = `${brand.filePrefix}_${countryCode}_${new Date().toISOString().split('T')[0]}.xlsx`;
   XLSX.writeFile(workbook, fileName);
 }
 
@@ -293,6 +264,6 @@ export async function exportToExcel(
   });
   
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
-  const fileName = `Onter_Care_${countryCode}_${timestamp}.xlsx`;
+  const fileName = `${brand.filePrefix}_${countryCode}_${timestamp}.xlsx`;
   XLSX.writeFile(workbook, fileName);
 }

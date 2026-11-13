@@ -1,32 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createTheme, type MantineColorsTuple } from '@mantine/core';
-
-// Custom color palettes based on your design system
-const blue: MantineColorsTuple = [
-  '#EFF6FF', // lightest
-  '#DBEAFE',
-  '#BFDBFE',
-  '#93C5FD',
-  '#60A5FA',
-  '#2563EB', // Primary Blue
-  '#1D4ED8', // Hover
-  '#1E40AF', // Active
-  '#1E3A8A',
-  '#1E293B', // darkest
-];
-
-const teal: MantineColorsTuple = [
-  '#F0FDFA',
-  '#CCFBF1',
-  '#99F6E4',
-  '#5EEAD4',
-  '#2DD4BF',
-  '#14B8A6', // Accent Teal
-  '#0D9488',
-  '#0F766E',
-  '#115E59',
-  '#134E4A',
-];
+import { brand } from './branding';
 
 const slate: MantineColorsTuple = [
   '#F8FAFC', // Secondary background
@@ -43,13 +17,14 @@ const slate: MantineColorsTuple = [
 
 export const theme = createTheme({
   primaryColor: 'blue',
+  primaryShade: { light: 5, dark: 5 },
   colors: {
-    blue,
-    teal,
+    blue: brand.primaryPalette,
+    teal: brand.accentPalette,
     slate,
   },
   
-  fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontFamily: brand.fontFamily,
   
   white: '#FFFFFF',
   black: '#0F172A',
@@ -97,7 +72,7 @@ export const theme = createTheme({
   
   // Headings configuration
   headings: {
-    fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontFamily: brand.fontFamily,
     fontWeight: '600',
     sizes: {
       h1: { fontSize: '2.25rem', lineHeight: '2.5rem' },
@@ -118,10 +93,10 @@ export const theme = createTheme({
     textInverse: '#FFFFFF',
     
     // Button colors
-    btnPrimary: '#2563EB',
-    btnPrimaryHover: '#1D4ED8',
-    btnPrimaryActive: '#1E40AF',
-    btnPrimaryDisabled: '#93C5FD',
+    btnPrimary: brand.primaryPalette[5],
+    btnPrimaryHover: brand.primaryPalette[6],
+    btnPrimaryActive: brand.primaryPalette[7],
+    btnPrimaryDisabled: brand.primaryPalette[3],
     
     // Secondary button
     btnSecondary: '#E2E8F0',
@@ -130,15 +105,15 @@ export const theme = createTheme({
     btnSecondaryBorder: '#CBD5E1',
     
     // Outline button
-    btnOutlineBorder: '#2563EB',
-    btnOutlineText: '#2563EB',
-    btnOutlineHover: '#EFF6FF',
+    btnOutlineBorder: brand.primaryPalette[5],
+    btnOutlineText: brand.primaryPalette[5],
+    btnOutlineHover: brand.primaryPalette[0],
     
     // Links
-    linkDefault: '#2563EB',
-    linkHover: '#1D4ED8',
+    linkDefault: brand.primaryPalette[5],
+    linkHover: brand.primaryPalette[6],
     linkVisited: '#7C3AED',
-    linkActive: '#1E40AF',
+    linkActive: brand.primaryPalette[7],
     
     // Backgrounds
     bgPrimary: '#FFFFFF',
@@ -161,8 +136,8 @@ export const theme = createTheme({
     
     // Tabs
     tabActiveBg: '#FFFFFF',
-    tabActiveText: '#2563EB',
-    tabActiveBorder: '#2563EB',
+    tabActiveText: brand.primaryPalette[5],
+    tabActiveBorder: brand.primaryPalette[5],
     tabInactiveBg: '#F1F5F9',
     tabInactiveText: '#475569',
     tabHoverBg: '#E2E8F0',

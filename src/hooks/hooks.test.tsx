@@ -53,7 +53,7 @@ describe('useFormConfig', () => {
     const { result } = renderHook(() => useFormConfig(service));
     await waitFor(() => expect(result.current.isLoading).toBe(false));
     expect(result.current.formSections).toEqual([section]);
-    expect(service.loadFormSections).toHaveBeenCalledWith('US');
+    expect(service.loadFormSections).toHaveBeenCalledWith('US', expect.any(String));
 
     await act(async () => {
       await result.current.reload();

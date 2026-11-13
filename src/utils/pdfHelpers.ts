@@ -4,6 +4,9 @@ import autoTable from 'jspdf-autotable';
 import type { FormSection, SimpleSection, TableSection, ComplexSection } from '../constants/types';
 import { publicAsset } from './paths';
 import { loadPdfImage, rasterizePdfImage, resolveCountryCode } from './pdfImageHelpers';
+import { brand } from '../branding';
+import { hexToRgb } from '../branding/colors';
+import i18n from '../i18n';
 
 /**
  * Shared PDF utility constants and functions
@@ -15,16 +18,16 @@ interface PDFRowData {
 }
 
 export const PDF_CONFIG = {
-  LOGO_PATH: publicAsset('logo.png'),
+  LOGO_PATH: publicAsset(brand.logoAsset),
   PAGE_MARGIN: 10,
   LOGO_HEIGHT: 7, // ~20px in PDF units (mm)
-  THEME_COLOR: [37, 99, 235] as [number, number, number],
+  THEME_COLOR: hexToRgb(brand.primaryPalette[5]),
   HEADER_TEXT_COLOR: [255, 255, 255] as [number, number, number],
   FONT_SIZE: 9,
   CELL_PADDING: 3,
   TABLE_THEME: 'grid' as const,
   HEADER_FONT_STYLE: 'bold' as const,
-  FONT_FAMILY: 'helvetica' as const, // Note: Custom fonts require addFont() setup
+  FONT_FAMILY: brand.rtlPdfFont?.family ?? 'helvetica',
   FONT_BOLD: 'bold' as const,
   FONT_NORMAL: 'normal' as const,
 } as const;
@@ -35,18 +38,19 @@ export async function addSectionHeader(
   yPosition: number,
   country?: string | null
 ): Promise<number> {
-  // Add section heading on the left
+  const isRtl = doc.getR2L();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const headingX = isRtl ? pageWidth - PDF_CONFIG.PAGE_MARGIN : PDF_CONFIG.PAGE_MARGIN;
   doc.setFontSize(16);
   doc.setFont(PDF_CONFIG.FONT_FAMILY, PDF_CONFIG.FONT_BOLD);
-  doc.text(section.section, PDF_CONFIG.PAGE_MARGIN, yPosition);
+  doc.text(section.section, headingX, yPosition, { align: isRtl ? 'right' : 'left' });
   
-  // Add logo on the right at the same Y position
+  // Place the brand mark opposite the heading in the reading direction.
   try {
     const logoImg = await loadPdfImage(PDF_CONFIG.LOGO_PATH);
     const imgWidth = logoImg.naturalWidth;
     const imgHeight = logoImg.naturalHeight;
     const logoWidth = (PDF_CONFIG.LOGO_HEIGHT * imgWidth) / imgHeight;
-    const pageWidth = doc.internal.pageSize.getWidth();
     const countryCode = resolveCountryCode(country);
     const flagPath = countryCode ? publicAsset(`flags/${countryCode}.svg`) : null;
     const flagImg = flagPath ? await loadPdfImage(flagPath).catch(error => {
@@ -60,7 +64,9 @@ export async function addSectionHeader(
     const gap = flagImg ? 5 : 0;
     const separatorWidth = flagImg ? 3 : 0;
     const totalWidth = logoWidth + gap + separatorWidth + flagWidth;
-    const logoX = pageWidth - totalWidth - PDF_CONFIG.PAGE_MARGIN;
+    const logoX = isRtl
+      ? PDF_CONFIG.PAGE_MARGIN
+      : pageWidth - totalWidth - PDF_CONFIG.PAGE_MARGIN;
     const logoY = yPosition - PDF_CONFIG.LOGO_HEIGHT + 2; // Align with text baseline
     
     doc.addImage(
@@ -115,16 +121,17 @@ export function generateSimplePDFSection(
     field.label,
     data?.[field.name] || ''
   ]);
+  const isRtl = doc.getR2L();
   
   // Calculate equal width for 2 columns (50% each)
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const availableWidth = pageWidth - (2 * PDF_CONFIG.PAGE_MARGIN);
+  const tablePageWidth = doc.internal.pageSize.getWidth();
+  const availableWidth = tablePageWidth - (2 * PDF_CONFIG.PAGE_MARGIN);
   const columnWidth = availableWidth / 2;
   
   autoTable(doc, {
     startY: yPosition,
-    head: [['Field', 'Value']],
-    body: tableData,
+    head: [[i18n.t(isRtl ? 'pdf.value' : 'pdf.field'), i18n.t(isRtl ? 'pdf.field' : 'pdf.value')]],
+    body: isRtl ? tableData.map((row) => row.slice().reverse()) : tableData,
     theme: PDF_CONFIG.TABLE_THEME,
     headStyles: {
       fillColor: PDF_CONFIG.THEME_COLOR,
@@ -139,7 +146,8 @@ export function generateSimplePDFSection(
     styles: {
       fontSize: PDF_CONFIG.FONT_SIZE,
       cellPadding: PDF_CONFIG.CELL_PADDING,
-      lineColor: PDF_CONFIG.THEME_COLOR
+      lineColor: PDF_CONFIG.THEME_COLOR,
+      halign: isRtl ? 'right' : 'left',
     }
   });
 }
@@ -155,7 +163,9 @@ export function generateTablePDFSection(
   yPosition: number,
   data?: PDFRowData[]
 ): void {
-  const headers = section.columns.map(col => col.label);
+  const isRtl = doc.getR2L();
+  const columns = isRtl ? [...section.columns].reverse() : section.columns;
+  const headers = columns.map(col => col.label);
   const maxRows = section.maxRows || 10;
   const minRows = section.minRows || 1;
   
@@ -184,12 +194,12 @@ export function generateTablePDFSection(
   }
   
   const tableData = rows.map(row => 
-    section.columns.map(col => row[col.name] || '')
+    columns.map(col => row[col.name] || '')
   );
   
   // Calculate equal width for all columns
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const availableWidth = pageWidth - (2 * PDF_CONFIG.PAGE_MARGIN);
+  const tablePageWidth = doc.internal.pageSize.getWidth();
+  const availableWidth = tablePageWidth - (2 * PDF_CONFIG.PAGE_MARGIN);
   const columnWidth = availableWidth / section.columns.length;
   
   // Create column styles with equal widths
@@ -213,7 +223,8 @@ export function generateTablePDFSection(
     styles: {
       fontSize: PDF_CONFIG.FONT_SIZE,
       cellPadding: PDF_CONFIG.CELL_PADDING,
-      lineColor: PDF_CONFIG.THEME_COLOR
+      lineColor: PDF_CONFIG.THEME_COLOR,
+      halign: isRtl ? 'right' : 'left',
     }
   });
 }
@@ -235,10 +246,14 @@ export function generateComplexPDFSection(
     // Add sub-section title
     doc.setFontSize(12);
     doc.setFont(PDF_CONFIG.FONT_FAMILY, PDF_CONFIG.FONT_BOLD);
-    doc.text(struct.title, PDF_CONFIG.PAGE_MARGIN, yPosition);
+    const isRtl = doc.getR2L();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const titleX = isRtl ? pageWidth - PDF_CONFIG.PAGE_MARGIN : PDF_CONFIG.PAGE_MARGIN;
+    doc.text(struct.title, titleX, yPosition, { align: isRtl ? 'right' : 'left' });
     yPosition += 8;
     
-    const headers = struct.columns.map(col => col.label);
+    const columns = isRtl ? [...struct.columns].reverse() : struct.columns;
+    const headers = columns.map(col => col.label);
     const maxRows = struct.maxRows || 10;
     const minRows = struct.minRows || 1;
     
@@ -268,12 +283,12 @@ export function generateComplexPDFSection(
     }
     
     const tableData = rows.map(row => 
-      struct.columns.map(col => row[col.name] || '')
+      columns.map(col => row[col.name] || '')
     );
     
     // Calculate equal width for all columns
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const availableWidth = pageWidth - (2 * PDF_CONFIG.PAGE_MARGIN);
+    const tablePageWidth = doc.internal.pageSize.getWidth();
+    const availableWidth = tablePageWidth - (2 * PDF_CONFIG.PAGE_MARGIN);
     const columnWidth = availableWidth / struct.columns.length;
     
     // Create column styles with equal widths
@@ -297,7 +312,8 @@ export function generateComplexPDFSection(
       styles: {
         fontSize: PDF_CONFIG.FONT_SIZE,
         cellPadding: PDF_CONFIG.CELL_PADDING,
-        lineColor: PDF_CONFIG.THEME_COLOR
+        lineColor: PDF_CONFIG.THEME_COLOR,
+        halign: isRtl ? 'right' : 'left',
       }
     });
     
@@ -319,7 +335,7 @@ export function addPageNumber(doc: jsPDF, pageNum: number, totalPages: number): 
   doc.setFontSize(8);
   doc.setTextColor(150, 150, 150);
   doc.text(
-    `Page ${pageNum} of ${totalPages}`,
+    i18n.t('pdf.page', { current: pageNum, total: totalPages }),
     doc.internal.pageSize.getWidth() / 2,
     doc.internal.pageSize.getHeight() - 10,
     { align: 'center' }

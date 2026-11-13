@@ -31,6 +31,9 @@ import { TableFieldsContainer } from './FormFields/TableFieldsContainer';
 import { ComplexFieldsContainer } from './FormFields/ComplexFieldsContainer';
 import { downloadFormAsZip } from '../utils/zipService';
 import { publicAsset } from '../utils/paths';
+import { brand } from '../branding';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
+import i18n from '../i18n';
 
 /**
  * Progress Stats Component - Shows saving status and progress percentage
@@ -54,6 +57,11 @@ function ProgressStats({
   variant,
   t 
 }: ProgressStatsProps) {
+  const formattedProgress = new Intl.NumberFormat(i18n.language, {
+    style: 'percent',
+    maximumFractionDigits: 0,
+  }).format(progressPercentage / 100);
+
   if (variant === 'mobile') {
     return (
       <Group gap="xs" wrap="nowrap">
@@ -63,7 +71,7 @@ function ProgressStats({
           </Badge>
         )}
         <Badge color="blue" variant="filled" size="sm">
-          {Math.round(progressPercentage)}%
+          {formattedProgress}
         </Badge>
       </Group>
     );
@@ -78,7 +86,7 @@ function ProgressStats({
       )}
       {lastSaveTime && !isSaving && (
         <Text size="xs" c="slate.5">
-          {t('formStepper.saved', { time: new Date(lastSaveTime).toLocaleTimeString() })}
+          {t('formStepper.saved', { time: new Date(lastSaveTime).toLocaleTimeString(i18n.language) })}
         </Text>
       )}
       <Text size="sm" c="slate.5">
@@ -88,7 +96,7 @@ function ProgressStats({
         })}
       </Text>
       <Badge color="blue" variant="light">
-        {Math.round(progressPercentage)}%
+        {formattedProgress}
       </Badge>
     </Group>
   );
@@ -182,7 +190,7 @@ export function FormStepper() {
               validRowCount++;
             } else {
               Object.values(rowErrors).forEach((error) => {
-                errors.push(`Row ${index + 1}: ${error}`);
+                errors.push(t('formStepper.validation.rowError', { row: index + 1, error }));
               });
             }
           }
@@ -190,7 +198,12 @@ export function FormStepper() {
 
         // Check minimum rows requirement (only count fully valid rows)
         if (minRows > 0 && validRowCount < minRows) {
-          errors.push(`This section requires at least ${minRows} complete ${minRows === 1 ? 'entry' : 'entries'}`);
+          errors.push(t(
+            minRows === 1
+              ? 'formStepper.validation.minimumRowsOne'
+              : 'formStepper.validation.minimumRowsOther',
+            { min: minRows },
+          ));
         }
         break;
       }
@@ -215,7 +228,11 @@ export function FormStepper() {
                 validRowCount++;
               } else {
                 Object.values(rowErrors).forEach((error) => {
-                  errors.push(`${struct.title} - Row ${index + 1}: ${error}`);
+                  errors.push(t('formStepper.validation.complexRowError', {
+                    section: struct.title,
+                    row: index + 1,
+                    error,
+                  }));
                 });
               }
             }
@@ -223,7 +240,12 @@ export function FormStepper() {
 
           // Check minimum rows requirement for this subsection (only count fully valid rows)
           if (minRows > 0 && validRowCount < minRows) {
-            errors.push(`${struct.title}: Requires at least ${minRows} complete ${minRows === 1 ? 'entry' : 'entries'}`);
+            errors.push(t(
+              minRows === 1
+                ? 'formStepper.validation.complexMinimumRowsOne'
+                : 'formStepper.validation.complexMinimumRowsOther',
+              { section: struct.title, min: minRows },
+            ));
           }
         });
         break;
@@ -400,34 +422,22 @@ export function FormStepper() {
       }}
       padding="md"
     >
-      <AppShell.Header style={isMobile ? undefined : { width: '300px', borderRight: '1px solid var(--mantine-color-gray-3)' }}>
+      <AppShell.Header className="form-shell-header">
         <Group h="100%" px="md" justify="space-between">
           <Group gap="sm" align="center">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <img 
-              src={publicAsset('logo.png')} 
-              alt="Onter" 
-              style={{ height: isMobile ? 20 : 30, cursor: 'pointer' }}
+              src={publicAsset(brand.logoAsset)}
+              alt={brand.name}
+              className="form-brand-logo"
               onClick={() => navigate('/')}
               title={t('formStepper.header.backToHome')}
             />
-            <Box
-              h={isMobile ? 20 : 30}
-              style={{
-                width: '1px',
-                backgroundColor: 'var(--mantine-color-gray-3)',
-                alignSelf: 'center',
-              }}
-            />
+            <Box className="brand-separator" />
             <img
               src={countryFlagSrc}
               alt={selectedCountry}
-              style={{
-                height: isMobile ? 20 : 30,
-                width: 'auto',
-                cursor: 'default',
-                display: 'block',
-              }}
+              className="brand-country-flag"
             />
           </Group>
           
@@ -448,6 +458,7 @@ export function FormStepper() {
 
       <AppShell.Navbar p="md" bg="slate.0">
         <AppShell.Section>
+          <LanguageSwitcher />
           <Text size="xs" fw={600} c="slate.5" mb="xs" tt="uppercase">
             {t('formStepper.sections')}
           </Text>
@@ -457,37 +468,30 @@ export function FormStepper() {
             radius="xl"
             mb="md"
             color="blue"
-            styles={{
-              root: { backgroundColor: 'var(--mantine-color-slate-2)' }
-            }}
+            classNames={{ root: 'form-step-progress' }}
           />
         </AppShell.Section>
 
-        <AppShell.Section grow component="nav" style={{ overflowY: 'auto' }}>
+        <AppShell.Section grow component="nav" className="form-step-navigation">
           <Stack gap={4}>
             {formSections.map((section, index) => (
               <NavLink
                 key={index}
                 label={section.section}
-                description={`${index + 1} of ${formSections.length}`}
+                description={t('formStepper.stepLabel', {
+                  current: index + 1,
+                  total: formSections.length,
+                })}
                 active={index === currentStep}
                 onClick={() => goToStep(index)}
                 leftSection={getStepIcon(index)}
-                rightSection={index === currentStep ? <IconChevronRight size={16} /> : null}
+                rightSection={index === currentStep ? <IconChevronRight size={16} className="rtl-mirror" /> : null}
                 color={getStepColor(index)}
                 variant={index === currentStep ? 'filled' : 'light'}
-                styles={{
-                  root: {
-                    borderRadius: '8px',
-                    marginBottom: '4px',
-                  },
-                  label: {
-                    fontSize: '13px',
-                    fontWeight: index === currentStep ? 600 : 400,
-                  },
-                  description: {
-                    fontSize: '11px',
-                  }
+                classNames={{
+                  root: 'form-step-nav-link',
+                  label: 'form-step-nav-label',
+                  description: 'form-step-nav-description',
                 }}
               />
             ))}
@@ -520,8 +524,8 @@ export function FormStepper() {
         </AppShell.Section>
       </AppShell.Navbar>
 
-      <AppShell.Main bg="white" pt={isMobile ? "86px" : "16px"} style={{ position: 'relative', paddingBottom: '80px' }}>
-        <Container size="xl" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <AppShell.Main bg="white" pt={isMobile ? '86px' : '16px'} className="form-shell-main">
+        <Container size="xl" className="form-shell-container">
           {showSuccess && (
             <Notification
               icon={<IconCheck size={18} />}
@@ -529,14 +533,11 @@ export function FormStepper() {
               title={t('formStepper.success.title')}
               onClose={() => setShowSuccess(false)}
               mb="xl"
-              styles={(theme) => ({
-                root: {
-                  backgroundColor: theme.other.successBg,
-                  borderColor: theme.other.successBorder
-                },
-                title: { color: theme.other.successText },
-                description: { color: theme.other.successText }
-              })}
+              classNames={{
+                root: 'form-success-notification',
+                title: 'form-success-notification-title',
+                description: 'form-success-notification-description',
+              }}
             >
               {t('formStepper.success.message')}
             </Notification>
@@ -555,7 +556,7 @@ export function FormStepper() {
             </Notification>
           )}
 
-          <Box style={{ flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
+          <Box className="form-step-content">
             <Stack gap="xl">
               {/* Validation Errors */}
               {validationErrors.length > 0 && (
@@ -580,19 +581,8 @@ export function FormStepper() {
                 </Alert>
               )}
 
-              <Box
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  paddingTop: isMobile ? 0 : '20px',
-                }}
-              >
-                <Box
-                  style={{
-                    width: '100%',
-                    maxWidth: 'none',
-                  }}
-                >
+              <Box className="form-current-section">
+                <Box className="form-current-section-title">
                   <Title order={4} c="slate.8" mb="xs">
                     {currentSection?.section}
                   </Title>
@@ -604,13 +594,7 @@ export function FormStepper() {
                 </Box>
 
                 {!isMobile && (
-                  <Box
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
+                  <Box className="form-current-section-progress">
                     <ProgressStats
                       isSaving={isSaving}
                       lastSaveTime={lastSaveTime}
@@ -629,56 +613,29 @@ export function FormStepper() {
           </Box>
 
           {/* Fixed Navigation Buttons */}
-          <Box
-            style={{
-              position: 'fixed',
-              bottom: 0,
-              left: isMobile ? 0 : '300px',
-              right: 0,
-              padding: '16px',
-              backgroundColor: 'white',
-              borderTop: '1px solid var(--mantine-color-gray-3)',
-              zIndex: 100,
-              boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.05)'
-            }}
-          >
+          <Box className="form-fixed-navigation">
             <Container size={isMobile ? 'xs' : 'xl'} fluid={isMobile} p={0}>
-              <Group
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  gap: isMobile ? '0.75rem' : '1rem',
-                  flexWrap: 'nowrap',
-                }}
-              >
+              <Group className="form-navigation-buttons">
                 <Button
-                  leftSection={<IconArrowLeft size={16} />}
+                  leftSection={<IconArrowLeft size={16} className="rtl-mirror" />}
                   variant="default"
                   onClick={handlePrevious}
                   disabled={currentStep === 0}
                   size={isMobile ? 'xs' : 'sm'}
-                  style={isMobile ? { minWidth: 0 } : undefined}
+                  className="form-navigation-button"
                 >
                   {t('formStepper.navigation.previous')}
                 </Button>
 
-                <Group
-                  style={{
-                    display: 'flex',
-                    gap: '0.5rem',
-                    flexWrap: 'nowrap',
-                    justifyContent: 'flex-end',
-                  }}
-                >
+                <Group className="form-navigation-actions">
                   {currentStep < formSections.length - 1 && (
                     <Button
-                      leftSection={<IconPlayerSkipForward size={16} />}
+                      leftSection={<IconPlayerSkipForward size={16} className="rtl-mirror" />}
                       variant="subtle"
                       onClick={handleSkip}
                       color="gray"
                       size={isMobile ? 'xs' : 'sm'}
-                      style={isMobile ? { minWidth: 0 } : undefined}
+                      className="form-navigation-button"
                     >
                       {t('formStepper.navigation.skip')}
                     </Button>
@@ -686,10 +643,10 @@ export function FormStepper() {
 
                   {currentStep < formSections.length - 1 ? (
                     <Button
-                      rightSection={<IconArrowRight size={16} />}
+                      rightSection={<IconArrowRight size={16} className="rtl-mirror" />}
                       onClick={handleNext}
                       size={isMobile ? 'xs' : 'sm'}
-                      style={isMobile ? { minWidth: 0 } : undefined}
+                      className="form-navigation-button"
                     >
                       {t('formStepper.navigation.next')}
                     </Button>
@@ -699,7 +656,7 @@ export function FormStepper() {
                       onClick={handleSubmit}
                       color="teal"
                       size={isMobile ? 'xs' : 'sm'}
-                      style={isMobile ? { minWidth: 0 } : undefined}
+                      className="form-navigation-button"
                     >
                       {t('formStepper.navigation.exportData')}
                     </Button>

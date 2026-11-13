@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { jsPDF } from 'jspdf';
 import i18n from '../i18n';
+import { brand } from '../branding';
+import { configurePdfDocument } from '../utils/configurePdfDocument';
 import type { CountryFormConfig, FormSection } from '../constants/types';
 import {
     addCoverPage,
@@ -204,13 +206,13 @@ function addSectionGuidancePages(doc: jsPDF, countryConfig: CountryFormConfig): 
 
         // Who needs this
         if (guidance.usefulFor && guidance.usefulFor.length > 0) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
             doc.setFontSize(10);
             doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
             doc.text(i18n.t('accessGuide.labels.whoNeedsThis'), GUIDE_CONFIG.PAGE_MARGIN + 5, y);
             y += 5;
 
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
             doc.setFontSize(9);
             y = addBulletList(doc, guidance.usefulFor, y, '-');
             y += 3;
@@ -218,12 +220,12 @@ function addSectionGuidancePages(doc: jsPDF, countryConfig: CountryFormConfig): 
 
         // First actions
         if (guidance.firstActions && guidance.firstActions.length > 0) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
             doc.setFontSize(10);
             doc.text(i18n.t('accessGuide.labels.firstActions'), GUIDE_CONFIG.PAGE_MARGIN + 5, y);
             y += 5;
 
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
             doc.setFontSize(9);
             y = addBulletList(doc, guidance.firstActions, y, '-');
             y += 3;
@@ -231,12 +233,12 @@ function addSectionGuidancePages(doc: jsPDF, countryConfig: CountryFormConfig): 
 
         // Critical fields
         if (guidance.criticalFields && guidance.criticalFields.length > 0) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
             doc.setFontSize(10);
             doc.text(i18n.t('accessGuide.labels.criticalFields'), GUIDE_CONFIG.PAGE_MARGIN + 5, y);
             y += 5;
 
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
             doc.setFontSize(9);
             y = addBulletList(doc, guidance.criticalFields, y, '-');
             y += 3;
@@ -309,6 +311,7 @@ export async function generateAccessGuidePDF(options: AccessGuideOptions): Promi
             unit: 'mm',
             format: 'a4'
         });
+        await configurePdfDocument(doc, i18n.language);
 
         // 1. Cover Page
         await addCoverPage(doc, countryConfig.countryName);
@@ -367,7 +370,7 @@ export async function downloadAccessGuide(
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Onter_Emergency_Access_Guide_${countryConfig.countryCode}.pdf`;
+    link.download = `${brand.accessGuideFilePrefix}_${countryConfig.countryCode}.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

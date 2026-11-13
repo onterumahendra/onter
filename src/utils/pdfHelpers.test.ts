@@ -40,6 +40,27 @@ describe('PDF helpers', () => {
     expect(mocks.autoTable.mock.calls[2][1].body).toEqual([['Grace'], [''], ['']]);
   });
 
+  it('reverses field and column order for RTL PDF tables', () => {
+    const pdf = doc();
+    pdf.setR2L(true);
+    const email = { name: 'email', label: 'Email', type: 'email' as const };
+
+    generateSimplePDFSection(pdf, {
+      section: 'Personal',
+      type: 'simple',
+      fields: [field],
+    }, 20, { name: 'Ada' });
+    generateTablePDFSection(pdf, {
+      section: 'Contacts',
+      type: 'table',
+      columns: [field, email],
+    }, 30, [{ name: 'Ada', email: 'ada@example.com' }]);
+
+    expect(mocks.autoTable.mock.calls[0][1].body).toEqual([['Ada', 'Name']]);
+    expect(mocks.autoTable.mock.calls[1][1].head).toEqual([['Email', 'Name']]);
+    expect(mocks.autoTable.mock.calls[1][1].body[0]).toEqual(['ada@example.com', 'Ada']);
+  });
+
   it('renders complex subsection templates/data and paginates long subsections', () => {
     const pdf = doc();
     mocks.autoTable.mockImplementation((target: any, options: any) => {

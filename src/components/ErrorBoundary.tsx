@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Container, Title, Text, Button, Paper, Stack, Alert } from '@mantine/core';
 import { IconAlertTriangle, IconRefresh } from '@tabler/icons-react';
+import i18n from '../i18n';
 
 interface Props {
   children: ReactNode;
@@ -72,12 +73,11 @@ export class ErrorBoundary extends Component<Props, State> {
               <IconAlertTriangle size={64} color="red" />
               
               <Title order={2} c="red.7">
-                Oops! Something went wrong
+                {i18n.t('errorBoundary.title')}
               </Title>
               
               <Text c="dimmed" ta="center">
-                We encountered an unexpected error. Your data is safe in your browser.
-                You can try refreshing the page or contact support if the problem persists.
+                {i18n.t('errorBoundary.description')}
               </Text>
               
               {import.meta.env.DEV && this.state.error && (
@@ -85,14 +85,14 @@ export class ErrorBoundary extends Component<Props, State> {
                   color="red" 
                   variant="light" 
                   icon={<IconAlertTriangle size={18} />}
-                  title="Error Details (Development Only)"
-                  style={{ width: '100%', maxWidth: '600px' }}
+                  title={i18n.t('errorBoundary.details')}
+                  className="error-boundary-details"
                 >
-                  <Text size="sm" ff="monospace" style={{ whiteSpace: 'pre-wrap' }}>
+                  <Text size="sm" ff="monospace" className="error-boundary-stack">
                     {this.state.error.toString()}
                   </Text>
                   {this.state.errorInfo && (
-                    <Text size="xs" ff="monospace" c="dimmed" mt="xs" style={{ whiteSpace: 'pre-wrap' }}>
+                    <Text size="xs" ff="monospace" c="dimmed" mt="xs" className="error-boundary-stack">
                       {this.state.errorInfo.componentStack}
                     </Text>
                   )}
@@ -106,7 +106,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   variant="filled"
                   color="blue"
                 >
-                  Try Again
+                  {i18n.t('errorBoundary.tryAgain')}
                 </Button>
                 
                 <Button
@@ -114,7 +114,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   variant="light"
                   color="blue"
                 >
-                  Reload Page
+                  {i18n.t('errorBoundary.reload')}
                 </Button>
               </Stack>
             </Stack>

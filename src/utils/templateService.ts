@@ -1,4 +1,8 @@
 import { getFormSections } from '../constants';
+import { sanitizeSheetName } from './sanitizeSheetName';
+import { brand } from '../branding';
+import i18n from '../i18n';
+import { configurePdfDocument } from './configurePdfDocument';
 import {
   PDF_CONFIG,
   addSectionHeader,
@@ -7,27 +11,6 @@ import {
   generateComplexPDFSection,
   addPageNumber
 } from './pdfHelpers';
-
-/**
- * Sanitize sheet name for Excel compatibility
- */
-function sanitizeSheetName(name: string, usedNames: Set<string> = new Set()): string {
-  let sanitized = name.replace(/[^a-zA-Z0-9 _-]/g, '').trim();
-  sanitized = sanitized.replace(/\s+/g, ' ');
-  sanitized = sanitized.substring(0, 31).trim();
-  
-  let finalName = sanitized;
-  let counter = 1;
-  while (usedNames.has(finalName)) {
-    const suffix = `_${counter}`;
-    const maxLength = 31 - suffix.length;
-    finalName = sanitized.substring(0, maxLength) + suffix;
-    counter++;
-  }
-  
-  usedNames.add(finalName);
-  return finalName;
-}
 
 /**
  * Generate Excel template as blob
@@ -95,6 +78,7 @@ async function generatePDFTemplateBlob(countryCode: string): Promise<Blob> {
     unit: 'mm',
     format: 'a4'
   });
+  await configurePdfDocument(doc, i18n.language);
   
   let isFirstPage = true;
   
@@ -116,11 +100,11 @@ async function generatePDFTemplateBlob(countryCode: string): Promise<Blob> {
     // Add template note
     doc.setFontSize(10);
     doc.setTextColor(150, 150, 150);
-    doc.setFont('helvetica', 'italic');
+    doc.setFont(PDF_CONFIG.FONT_FAMILY, 'italic');
     // doc.text('(Template - Fill in your information)', PDF_CONFIG.PAGE_MARGIN, yPosition);
     yPosition += 10;
     doc.setTextColor(0, 0, 0);
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_CONFIG.FONT_FAMILY, 'normal');
     
     // Generate section content based on type (all templates - no data)
     switch (section.type) {
@@ -161,8 +145,8 @@ export async function downloadTemplateAsZip(countryCode: string): Promise<void> 
     const pdfBlob = await generatePDFTemplateBlob(countryCode);
     
     // Add files to zip
-    zip.file(`Onter_Care_${countryCode}_${timestamp}.xlsx`, excelBlob);
-    zip.file(`Onter_Care_${countryCode}_${timestamp}.pdf`, pdfBlob);
+    zip.file(`${brand.filePrefix}_${countryCode}_${timestamp}.xlsx`, excelBlob);
+    zip.file(`${brand.filePrefix}_${countryCode}_${timestamp}.pdf`, pdfBlob);
     
     // Generate zip file
     const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -171,7 +155,7 @@ export async function downloadTemplateAsZip(countryCode: string): Promise<void> 
     const url = URL.createObjectURL(zipBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Onter_Care_${countryCode}_${timestamp}.zip`;
+    link.download = `${brand.filePrefix}_${countryCode}_${timestamp}.zip`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -98,7 +98,7 @@ describe('ZIP export service', () => {
     expect(mocks.zip.file).toHaveBeenCalledTimes(2);
 
     vi.mocked(getFormConfig).mockRejectedValueOnce(new Error('config failed'));
-    await expect(downloadFormAsZip({}, 'US')).rejects.toThrow('Failed to create export package. Please try again.');
+    await expect(downloadFormAsZip({}, 'US')).rejects.toThrow('config failed');
     expect(log).toHaveBeenCalled();
   });
 });

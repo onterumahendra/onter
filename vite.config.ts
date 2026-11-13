@@ -1,7 +1,42 @@
-import { defineConfig } from 'vite-plus'
+import { defineConfig, loadEnv } from 'vite-plus'
 import react from '@vitejs/plugin-react'
+import { resolveBrandProfile } from './src/branding/profiles'
 
-export default defineConfig({
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
+}
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, '.', 'VITE_');
+  const brandId = process.env.npm_config_brand || env.VITE_BRAND_ID || 'onter';
+  const brand = resolveBrandProfile(brandId);
+  const socialImageUrl = new URL(brand.socialImageAsset, brand.siteUrl).href;
+  const brandHtmlPlugin = {
+    name: 'brand-html-metadata',
+    transformIndexHtml(html: string) {
+      const values: Record<string, string> = {
+        __BRAND_NAME__: brand.name,
+        __BRAND_TITLE__: brand.appTitle,
+        __BRAND_DESCRIPTION__: brand.description,
+        __BRAND_SITE_URL__: brand.siteUrl,
+        __BRAND_SOURCE_URL__: brand.sourceUrl || brand.siteUrl,
+        __BRAND_LOGO_URL__: socialImageUrl,
+        __BRAND_LOGO_ALT__: `${brand.name} logo`,
+        __BRAND_FAVICON__: `./${brand.faviconAsset}`,
+      };
+
+      return Object.entries(values).reduce(
+        (result, [token, value]) => result.replaceAll(token, escapeHtml(value)),
+        html,
+      );
+    },
+  };
+
+  return {
   fmt: {},
   check: {
     fmt: false,
@@ -154,7 +189,7 @@ export default defineConfig({
       "vite-plus/prefer-vite-plus-imports": "error"
     }
   },
-  plugins: [react()],
+  plugins: [react(), brandHtmlPlugin],
   base: './',
   build: {
     outDir: 'dist',
@@ -188,4 +223,5 @@ export default defineConfig({
       },
     },
   },
-})
+  };
+});

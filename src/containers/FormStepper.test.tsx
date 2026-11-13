@@ -28,7 +28,11 @@ vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
   return { ...actual, useNavigate: () => mocks.navigate };
 });
-vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+vi.mock('react-i18next', async () => {
+  const actual = await vi.importActual<typeof import('react-i18next')>('react-i18next');
+  const t = (key: string) => key;
+  return { ...actual, useTranslation: () => ({ t }) };
+});
 
 const nameField = { name: 'name', label: 'Name', type: 'text' as const, validation: { required: true } };
 const emailField = { name: 'email', label: 'Email', type: 'email' as const, validation: { required: true } };
@@ -106,14 +110,14 @@ describe('FormStepper', () => {
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.next' }));
     await waitFor(() => expect(useAppStore.getState().formData.Contacts?.rows).toHaveLength(2));
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.next' }));
-    expect(screen.getByText(/This section requires at least 2 complete entries/)).toBeInTheDocument();
+    expect(await screen.findByText('formStepper.validation.title')).toBeInTheDocument();
 
     act(() => useAppStore.getState().updateFormData('Contacts', {
       rows: [{ name: 'Ada', email: '' }, { name: 'Grace', email: 'grace@example.com' }],
     }));
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.next' }));
-    expect(screen.getByText(/Row 1: Email is required/)).toBeInTheDocument();
-    expect(screen.getByText(/This section requires at least 2 complete entries/)).toBeInTheDocument();
+    expect(screen.getByText(/formStepper.validation.rowError/)).toBeInTheDocument();
+    expect(screen.getByText(/formStepper.validation.minimumRowsOther/)).toBeInTheDocument();
 
     act(() => useAppStore.getState().updateFormData('Contacts', {
       rows: [{ name: 'Ada', email: 'ada@example.com' }, { name: 'Grace', email: 'grace@example.com' }],
@@ -138,7 +142,7 @@ describe('FormStepper', () => {
     expect(screen.getByText('33%')).toBeInTheDocument();
   });
 
-  it('validates complex rows and advances when the subsection is complete', () => {
+  it('validates complex rows and advances when the subsection is complete', async () => {
     mocks.sections = [...sections, reviewSection];
     useAppStore.getState().setStep(2);
     useAppStore.getState().updateFormData('Estate', { Beneficiaries: [{ name: '', email: '' }] });
@@ -148,11 +152,11 @@ describe('FormStepper', () => {
     expect(screen.getByRole('heading', { name: 'Estate' })).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.next' }));
-    expect(screen.getByText(/Beneficiaries: Requires at least 1 complete entry/)).toBeInTheDocument();
+    expect(await screen.findByText('formStepper.validation.title')).toBeInTheDocument();
 
     act(() => useAppStore.getState().updateFormData('Estate', { Beneficiaries: [{ name: 'Ada', email: '' }] }));
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.next' }));
-    expect(screen.getByText(/Beneficiaries - Row 1: Email is required/)).toBeInTheDocument();
+    expect(screen.getByText(/formStepper.validation.complexRowError/)).toBeInTheDocument();
 
     act(() => useAppStore.getState().updateFormData('Estate', { Beneficiaries: [{ name: 'Ada', email: 'ada@example.com' }] }));
     fireEvent.click(screen.getByRole('button', { name: 'formStepper.navigation.next' }));

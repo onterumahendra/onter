@@ -5,6 +5,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useTranslation } from 'react-i18next';
 import { SimpleField } from './SimpleFieldsGrid';
 import type { BaseField } from '../../constants/types';
+import i18n from '../../i18n';
 
 interface TableFieldsGridProps {
   columns: BaseField[];
@@ -55,7 +56,7 @@ export function TableFieldsGrid({
                 <Stack gap="sm">
                   <Group justify="space-between" mb="xs">
                     <Text size="sm" fw={600} c="blue.6">
-                      {t('table.entry')} #{rowIndex + 1}
+                      {t('table.entry')} #{new Intl.NumberFormat(i18n.language).format(rowIndex + 1)}
                     </Text>
                     <ActionIcon
                       color="red"
@@ -93,14 +94,14 @@ export function TableFieldsGrid({
             <Table.Thead>
               <Table.Tr>
                 {columns.map((col) => (
-                  <Table.Th key={col.name} style={{ minWidth: 180 }}>
+                  <Table.Th key={col.name} className="form-table-column">
                     <Text size="sm" fw={600}>
                       {col.label}
                       {col.validation?.required && <Text component="span" c="red.6"> *</Text>}
                     </Text>
                   </Table.Th>
                 ))}
-                <Table.Th style={{ width: 80 }}>{t('table.actions')}</Table.Th>
+                <Table.Th className="form-table-actions-column">{t('table.actions')}</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
@@ -116,7 +117,7 @@ export function TableFieldsGrid({
                 rows.map((row, rowIndex) => (
                   <Table.Tr key={rowIndex}>
                     {columns.map((col) => (
-                      <Table.Td key={col.name} style={{ verticalAlign: 'top', padding: '8px' }}>
+                      <Table.Td key={col.name} className="form-table-cell">
                         <SimpleField
                           field={col}
                           value={row[col.name]}
@@ -127,7 +128,7 @@ export function TableFieldsGrid({
                         />
                       </Table.Td>
                     ))}
-                    <Table.Td style={{ verticalAlign: 'top', padding: '8px' }}>
+                    <Table.Td className="form-table-cell">
                       <ActionIcon
                         color="red"
                         variant="light"

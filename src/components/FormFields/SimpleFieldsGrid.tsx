@@ -24,13 +24,10 @@ export function SimpleField({ field, value, error, onChange, onBlur, hideLabel =
     onBlur: onBlur,
     error: error,
     withAsterisk: hideLabel ? false : field.validation?.required,
-    styles: (theme: any) => ({
-      error: { color: theme.other.errorText },
-      input: error ? {
-        borderColor: theme.other.errorBorder,
-        backgroundColor: theme.other.errorBg
-      } : {}
-    })
+    classNames: {
+      input: error ? 'form-field-error-input' : undefined,
+      error: 'form-field-error-message',
+    },
   };
 
   switch (field.type) {

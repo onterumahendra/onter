@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, no-unused-vars, react/set-state-in-effect, react/purity, no-floating-promises */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMediaQuery } from '@mantine/hooks';
 import {
   Container,
   Title,
@@ -16,7 +15,6 @@ import {
   List,
   Modal,
   SimpleGrid,
-  Transition,
   Box,
 } from '@mantine/core';
 import {
@@ -33,6 +31,8 @@ import { getAvailableCountries } from '../constants';
 import { useAppStore } from '../store/appStore';
 import { useExcelOperations } from '../hooks/useExcelOperations';
 import { publicAsset } from '../utils/paths';
+import { brand } from '../branding';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 /**
  * Introduction component following SOLID principles
@@ -40,9 +40,8 @@ import { publicAsset } from '../utils/paths';
  * - Dependency Inversion: Uses hooks for all external dependencies
  */
 export function Introduction() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const isMobile = useMediaQuery('(max-width: 768px)');
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string>('');
   const [savedDataCountry, setSavedDataCountry] = useState<string | null>(null);
@@ -110,13 +109,15 @@ export function Introduction() {
   const formatTimeAgo = (timestamp: number | null) => {
     if (!timestamp) return '';
     const seconds = Math.floor((now - timestamp) / 1000);
-    if (seconds < 60) return `${seconds}s`;
+    const formatUnit = (value: number, unit: Intl.NumberFormatOptions['unit']) =>
+      new Intl.NumberFormat(i18n.language, { style: 'unit', unit, unitDisplay: 'short' }).format(value);
+    if (seconds < 60) return formatUnit(seconds, 'second');
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m`;
+    if (minutes < 60) return formatUnit(minutes, 'minute');
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h`;
+    if (hours < 24) return formatUnit(hours, 'hour');
     const days = Math.floor(hours / 24);
-    return `${days}d`;
+    return formatUnit(days, 'day');
   };
   
   const handleConfirmClear = async () => {
@@ -221,69 +222,51 @@ export function Introduction() {
     <>
       <Container size="md" py="xl">
         <Stack gap="xl">
-          <div style={{ textAlign: 'center' }}>
+          <div className="introduction-brand">
             <Title 
               order={1} 
               c="slate.8" 
               mb="md"
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                minHeight: isMobile ? 20 : 30
-              }}
+              className="introduction-brand-title"
             >
-              <Transition
-                mounted={showLogo}
-                transition="fade"
-                duration={300}
-                timingFunction="ease-in-out"
+              <Group
+                gap="sm"
+                align="center"
+                className={`introduction-brand-assets${showLogo ? ' is-visible' : ''}`}
               >
-                {(styles) => (
-                  <Group gap="sm" align="center" style={styles}>
-                    <img
-                      src={publicAsset('logo.png')}
-                      alt="Onter"
-                      loading="lazy"
-                      style={{ 
-                        height: isMobile ? 20 : 30,
-                      }}
-                    />
-                    <Box
-                      h={isMobile ? 20 : 30}
-                      style={{
-                        width: '1px',
-                        backgroundColor: 'var(--mantine-color-gray-3)',
-                      }}
-                    />
-                    <img
-                      src={countryFlagSrc}
-                      alt={selectedCountry}
-                      loading="lazy"
-                      style={{
-                        height: isMobile ? 20 : 30,
-                        width: 'auto',
-                        display: 'block',
-                      }}
-                    />
-                  </Group>
-                )}
-              </Transition>
+                <img
+                  src={publicAsset(brand.logoAsset)}
+                  alt={brand.name}
+                  loading="lazy"
+                  className="brand-logo"
+                />
+                <Box className="brand-separator" />
+                <img
+                  src={countryFlagSrc}
+                  alt={selectedCountry}
+                  loading="lazy"
+                  className="brand-country-flag"
+                />
+              </Group>
             </Title>
             <Stack gap="xs" align="center">
               <Text c="slate.6" size="lg">
-                {t('app.tagline')}
+                {brand.tagline}
               </Text>
-              <a
-                href="https://github.com/onterumahendra/onter"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: '#2563eb', textDecoration: 'underline', fontSize: 14 }}
-              >
-                {t('app.viewSource')}
-              </a>
+              {brand.sourceUrl && (
+                <a
+                  href={brand.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="source-link"
+                >
+                  {t('app.viewSource')}
+                </a>
+              )}
             </Stack>
           </div>
+
+          <LanguageSwitcher />
           
           <Alert 
             icon={<IconShieldLock size={20} />} 
@@ -398,7 +381,12 @@ export function Introduction() {
                     {t('introduction.start.selectedFile', { filename: file.name })}
                   </Text>
                   <Text size="xs" c="slate.6">
-                    {t('introduction.start.fileSize', { size: (file.size / 1024).toFixed(2) })}
+                    {t('introduction.start.fileSize', {
+                      size: new Intl.NumberFormat(i18n.language, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).format(file.size / 1024),
+                    })}
                   </Text>
                 </Alert>
               )}

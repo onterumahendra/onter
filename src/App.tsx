@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { cleanupExpiredData } from './utils/indexedDB';
 import { useAppStore } from './store/appStore';
 import { Container, Loader, Center, Stack, Text } from '@mantine/core';
+import i18n from './i18n';
+import { setDocumentLocale } from './utils/localeDirection';
 
 // Lazy load components for code splitting
 const Introduction = lazy(() => import('./containers/Introduction').then(m => ({ default: m.Introduction })));
@@ -15,6 +17,13 @@ const FormStepper = lazy(() => import('./containers/FormStepper').then(m => ({ d
  */
 function App() {
   const initializeFromStorage = useAppStore(state => state.initializeFromStorage);
+
+  useEffect(() => {
+    const updateDocumentLocale = (locale: string) => setDocumentLocale(locale);
+    updateDocumentLocale(i18n.resolvedLanguage || i18n.language);
+    i18n.on('languageChanged', updateDocumentLocale);
+    return () => i18n.off('languageChanged', updateDocumentLocale);
+  }, []);
   
   useEffect(() => {
     // Cleanup expired data and initialize from storage on mount only
@@ -39,7 +48,7 @@ function App() {
   return (
     <Suspense fallback={
       <Container size="sm" py="xl">
-        <Center style={{ minHeight: '100vh' }}>
+        <Center className="app-loading-center">
           <Stack align="center" gap="md">
             <Loader size="lg" />
             <Text c="dimmed">Loading...</Text>

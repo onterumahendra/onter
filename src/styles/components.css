@@ -1,0 +1,240 @@
+:root {
+  --form-navbar-width: 300px;
+}
+
+.app-loading-center {
+  min-height: 100vh;
+}
+
+.introduction-brand {
+  text-align: center;
+}
+
+.introduction-brand-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+}
+
+.introduction-brand-assets {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.introduction-brand-assets.is-visible {
+  opacity: 1;
+}
+
+.brand-logo,
+.brand-country-flag {
+  display: block;
+  width: auto;
+  height: 30px;
+}
+
+.brand-separator {
+  align-self: center;
+  flex: none;
+  width: 1px;
+  height: 30px;
+  background-color: var(--mantine-color-gray-3);
+}
+
+.source-link {
+  color: var(--mantine-color-blue-5);
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.language-switcher {
+  min-width: 10rem;
+}
+
+.form-shell-header {
+  width: 100%;
+}
+
+.form-brand-logo {
+  height: 30px;
+  cursor: pointer;
+}
+
+.form-step-progress {
+  background-color: var(--mantine-color-slate-2);
+}
+
+.form-step-navigation {
+  overflow-y: auto;
+}
+
+.form-step-nav-link {
+  margin-block-end: 4px;
+  border-radius: 8px;
+}
+
+.form-step-nav-label {
+  font-size: 13px;
+}
+
+.form-step-nav-link[data-active] .form-step-nav-label {
+  font-weight: 600;
+}
+
+.form-step-nav-description {
+  font-size: 11px;
+}
+
+.form-shell-main {
+  position: relative;
+  padding-block-end: 80px;
+}
+
+.form-shell-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form-success-notification {
+  border-color: var(--mantine-color-teal-6);
+  background-color: var(--mantine-color-teal-0);
+}
+
+.form-success-notification-title,
+.form-success-notification-description {
+  color: var(--mantine-color-teal-8);
+}
+
+.form-step-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-inline-end: 8px;
+}
+
+.form-current-section {
+  position: relative;
+  width: 100%;
+  padding-block-start: 20px;
+}
+
+.form-current-section-title {
+  width: 100%;
+  max-width: none;
+}
+
+.form-current-section-progress {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.form-fixed-navigation {
+  position: fixed;
+  z-index: 100;
+  inset-block-end: 0;
+  inset-inline-start: var(--form-navbar-width);
+  inset-inline-end: 0;
+  padding: 16px;
+  border-block-start: 1px solid var(--mantine-color-gray-3);
+  background-color: var(--mantine-color-body);
+  box-shadow: 0 -2px 10px rgb(0 0 0 / 5%);
+}
+
+.form-navigation-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.form-navigation-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+
+.form-table-column {
+  min-width: 180px;
+}
+
+.form-table-actions-column {
+  width: 80px;
+}
+
+.form-table-cell {
+  padding: 8px;
+  vertical-align: top;
+}
+
+.form-field-error-input {
+  border-color: var(--mantine-color-red-6);
+  background-color: var(--mantine-color-red-0);
+}
+
+.form-field-error-message {
+  color: var(--mantine-color-red-7);
+}
+
+.error-boundary-details {
+  width: 100%;
+  max-width: 600px;
+}
+
+.error-boundary-stack {
+  white-space: pre-wrap;
+}
+
+html[dir='rtl'] .rtl-mirror {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 48em) {
+  .introduction-brand-title {
+    min-height: 20px;
+  }
+
+  .brand-logo,
+  .brand-country-flag {
+    height: 20px;
+  }
+
+  .brand-separator {
+    height: 20px;
+  }
+
+  .form-brand-logo {
+    height: 20px;
+  }
+
+  .form-current-section {
+    padding-block-start: 0;
+  }
+
+  .form-fixed-navigation {
+    inset-inline-start: 0;
+  }
+
+  .form-navigation-buttons {
+    gap: 0.75rem;
+  }
+
+  .form-navigation-button {
+    min-width: 0;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .form-shell-header {
+    width: var(--form-navbar-width);
+    border-inline-end: 1px solid var(--mantine-color-gray-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introduction-brand-assets {
+    transition: none;
+  }
+}

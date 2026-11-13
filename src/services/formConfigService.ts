@@ -1,7 +1,7 @@
 import { getFormSections, type FormSection } from '../constants';
 
 export interface IFormConfigService {
-  loadFormSections(countryCode: string): Promise<FormSection[]>;
+  loadFormSections(countryCode: string, language?: string): Promise<FormSection[]>;
 }
 
 /**
@@ -9,9 +9,11 @@ export interface IFormConfigService {
  * Follows Single Responsibility Principle: Only handles form config loading
  */
 export class FormConfigService implements IFormConfigService {
-  async loadFormSections(countryCode: string): Promise<FormSection[]> {
+  async loadFormSections(countryCode: string, language?: string): Promise<FormSection[]> {
     try {
-      return await getFormSections(countryCode);
+      return language === undefined
+        ? await getFormSections(countryCode)
+        : await getFormSections(countryCode, language);
     } catch (error) {
       console.error(`Failed to load form sections for ${countryCode}:`, error);
       throw error;

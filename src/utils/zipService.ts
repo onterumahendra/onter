@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { sanitizeSheetName } from './sanitizeSheetName';
+import { brand } from '../branding';
+
 /**
  * Generate Excel file as blob (with dynamic imports)
  */
@@ -13,27 +16,8 @@ async function generateExcelBlob(
   const workbook = XLSX.utils.book_new();
   const usedNames = new Set<string>();
   
-  // Helper function to sanitize sheet names
-  const sanitizeSheetName = (name: string): string => {
-    let sanitized = name.replace(/[^a-zA-Z0-9 _-]/g, '').trim();
-    sanitized = sanitized.replace(/\s+/g, ' ');
-    sanitized = sanitized.substring(0, 31).trim();
-    
-    let finalName = sanitized;
-    let counter = 1;
-    while (usedNames.has(finalName)) {
-      const suffix = `_${counter}`;
-      const maxLength = 31 - suffix.length;
-      finalName = sanitized.substring(0, maxLength) + suffix;
-      counter++;
-    }
-    
-    usedNames.add(finalName);
-    return finalName;
-  };
-  
   sections.forEach((section, index) => {
-    const sheetName = sanitizeSheetName(section.section);
+    const sheetName = sanitizeSheetName(section.section, usedNames);
     const sectionData = formData[section.section];
     const isSkipped = skippedSteps.has(index);
     
@@ -70,7 +54,7 @@ async function generateExcelBlob(
     } else if (section.type === 'complex') {
       section.structure.forEach((struct, idx) => {
         const structName = struct.title || `${section.section}_${idx + 1}`;
-        const complexSheetName = sanitizeSheetName(structName);
+        const complexSheetName = sanitizeSheetName(structName, usedNames);
         const maxRows = struct.maxRows || 10;
         let structData = isSkipped ? [] : (sectionData?.[struct.title] || []);
         
@@ -136,8 +120,8 @@ export async function downloadFormAsZip(
     const pdfBlob = await generateFormPDF(formData, countryCode, completedSteps, skippedSteps);
     
     // Add files to zip
-    zip.file(`Onter_Care_${countryCode}_${timestamp}.xlsx`, excelBlob);
-    zip.file(`Onter_Care_${countryCode}_${timestamp}.pdf`, pdfBlob);
+    zip.file(`${brand.filePrefix}_${countryCode}_${timestamp}.xlsx`, excelBlob);
+    zip.file(`${brand.filePrefix}_${countryCode}_${timestamp}.pdf`, pdfBlob);
     
     // Generate and add Access Guide if enabled
     if (countryConfig.accessGuide?.enabled) {
@@ -147,7 +131,7 @@ export async function downloadFormAsZip(
           countryConfig,
           includeData: true
         });
-        zip.file(`Onter_Emergency_Access_Guide_${countryCode}.pdf`, accessGuideBlob);
+        zip.file(`${brand.accessGuideFilePrefix}_${countryCode}.pdf`, accessGuideBlob);
         console.log('✓ Access Guide generated successfully');
       } catch (error) {
         console.error('Failed to generate access guide:', error);
@@ -160,7 +144,7 @@ export async function downloadFormAsZip(
     if ((countryConfig as any).recoveryRoadmap?.enabled) {
       try {
         const roadmapBlob = await generateRecoveryRoadmapPDF({ countryConfig });
-        zip.file(`Onter_Recovery_Roadmap_${countryCode}.pdf`, roadmapBlob);
+        zip.file(`${brand.recoveryRoadmapFilePrefix}_${countryCode}.pdf`, roadmapBlob);
         console.log('✓ Recovery Roadmap generated successfully');
       } catch (error) {
         console.error('Failed to generate recovery roadmap:', error);
@@ -175,7 +159,7 @@ export async function downloadFormAsZip(
     const url = URL.createObjectURL(zipBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Onter_Care_${countryCode}_${timestamp}.zip`;
+    link.download = `${brand.filePrefix}_${countryCode}_${timestamp}.zip`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -184,6 +168,8 @@ export async function downloadFormAsZip(
     setTimeout(() => URL.revokeObjectURL(url), 100);
   } catch (error) {
     console.error('Error creating zip file:', error);
-    throw new Error('Failed to create export package. Please try again.');
+    throw new Error(
+      error instanceof Error ? error.message : 'Failed to create export package. Please try again.',
+    );
   }
 }

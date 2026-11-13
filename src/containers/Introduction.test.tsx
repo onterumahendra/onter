@@ -5,6 +5,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MantineProvider } from '@mantine/core';
 import { MemoryRouter } from 'react-router-dom';
 import { theme } from '../theme';
+import { brand } from '../branding';
 
 const mockNavigate = vi.fn();
 const mockLoadFromIndexedDB = vi.fn();
@@ -18,9 +19,14 @@ const mockSetCountry = vi.fn((country: string) => {
   mockSelectedCountry = country;
 });
 
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}));
+vi.mock('react-i18next', async () => {
+  const actual = await vi.importActual<typeof import('react-i18next')>('react-i18next');
+  const t = (key: string) => key;
+  return {
+    ...actual,
+    useTranslation: () => ({ t, i18n: { language: 'en' } }),
+  };
+});
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
@@ -94,7 +100,7 @@ describe('Introduction', () => {
       </MantineProvider>,
     );
 
-    expect(screen.getByText('app.tagline')).toBeInTheDocument();
+    expect(screen.getByText(brand.tagline)).toBeInTheDocument();
     await waitFor(() => expect(mockLoadFromIndexedDB).toHaveBeenCalledWith('US'));
     expect(screen.queryByRole('button', { name: 'introduction.start.resumeSession' })).not.toBeInTheDocument();
   });

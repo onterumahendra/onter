@@ -1,6 +1,8 @@
 import { jsPDF } from 'jspdf';
 import { publicAsset } from './paths';
 import { loadPdfImage, rasterizePdfImage, resolveCountryCode } from './pdfImageHelpers';
+import { brand } from '../branding';
+import { hexToRgb } from '../branding/colors';
 
 /**
  * Access Guide PDF Helper Functions
@@ -8,10 +10,11 @@ import { loadPdfImage, rasterizePdfImage, resolveCountryCode } from './pdfImageH
  */
 
 export const GUIDE_CONFIG = {
-    LOGO_PATH: publicAsset('logo.png'),
+    LOGO_PATH: publicAsset(brand.logoAsset),
     PAGE_MARGIN: 15,
     LOGO_HEIGHT: 15,
-    THEME_COLOR: [37, 99, 235] as [number, number, number],
+    THEME_COLOR: hexToRgb(brand.primaryPalette[5]),
+    FONT_FAMILY: brand.rtlPdfFont?.family ?? 'helvetica',
     ACCENT_COLOR: [239, 68, 68] as [number, number, number], // Red for urgent items
     SUCCESS_COLOR: [34, 197, 94] as [number, number, number], // Green for success
     WARNING_COLOR: [234, 179, 8] as [number, number, number], // Yellow for warnings
@@ -81,7 +84,7 @@ export async function addCoverPage(doc: jsPDF, country: string): Promise<void> {
     }
 
     // Main title
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
     doc.setFontSize(32);
     doc.setTextColor(...GUIDE_CONFIG.THEME_COLOR);
     doc.text('Emergency Access Guide', pageWidth / 2, yPos, { align: 'center' });
@@ -102,11 +105,11 @@ export async function addCoverPage(doc: jsPDF, country: string): Promise<void> {
     doc.roundedRect(boxX, yPos, boxWidth, 30, 3, 3, 'FD');
 
     doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
     doc.setTextColor(...GUIDE_CONFIG.ACCENT_COLOR);
     doc.text('KEEP THIS GUIDE SECURE', pageWidth / 2, yPos + 10, { align: 'center' });
 
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
     doc.setFontSize(9);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
     doc.text('This document contains sensitive information.', pageWidth / 2, yPos + 17, { align: 'center' });
@@ -145,7 +148,7 @@ export function addSectionHeader(
     doc.rect(GUIDE_CONFIG.PAGE_MARGIN, yPosition - 5, pageWidth - 2 * GUIDE_CONFIG.PAGE_MARGIN, 12, 'F');
 
     // Title only (no icon)
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
     doc.setFontSize(14);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
     doc.text(title, GUIDE_CONFIG.PAGE_MARGIN + 3, yPosition + 3);
@@ -166,7 +169,7 @@ export function addBulletList(
     const pageWidth = doc.internal.pageSize.getWidth();
     const maxWidth = pageWidth - 2 * GUIDE_CONFIG.PAGE_MARGIN - 10;
 
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
     doc.setFontSize(10);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
 
@@ -241,13 +244,13 @@ export function addInfoBox(
     doc.roundedRect(boxX, yPosition, boxWidth, estimatedHeight, 2, 2, 'FD');
 
     // Add title
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
     doc.setFontSize(11);
     doc.setTextColor(...borderColor);
     doc.text(title, boxX + 5, yPosition + 7);
 
     // Add content
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
     doc.setFontSize(9);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
 
@@ -279,14 +282,14 @@ export function addSubsection(
     }
 
     // Title
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'bold');
     doc.setFontSize(12);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_PRIMARY);
     doc.text(title, GUIDE_CONFIG.PAGE_MARGIN + 3, y);
     y += 7;
 
     // Description
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
     doc.setFontSize(9);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_SECONDARY);
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -311,7 +314,7 @@ export function addPageFooter(doc: jsPDF, pageNum: number): void {
     doc.line(GUIDE_CONFIG.PAGE_MARGIN, pageHeight - 15, pageWidth - GUIDE_CONFIG.PAGE_MARGIN, pageHeight - 15);
 
     // Page number
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(GUIDE_CONFIG.FONT_FAMILY, 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...GUIDE_CONFIG.TEXT_SECONDARY);
     doc.text(`Page ${pageNum}`, pageWidth / 2, pageHeight - 10, { align: 'center' });

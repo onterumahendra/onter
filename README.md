@@ -164,6 +164,52 @@ Onter_Care_US_2026-05-22.zip
 
 ---
 
+## White-label and language configuration
+
+Each deployment selects one registered brand profile. To add a partner:
+
+1. Add its logo, favicon, and social-preview image to `public/`. Use filenames
+   that identify the partner, for example `partner-logo.png`,
+   `partner-favicon.ico`, and `partner-social.png`. Asset paths in the profile
+   are relative to `public/` (write `partner-logo.png`, not `public/partner-logo.png`).
+   Use a PNG or JPEG logo if it must also appear in PDF exports.
+2. Add a profile in `src/branding/profiles.ts` and register it in
+   `brandProfiles` using a short, unique `id` such as `partner-name`. The profile
+   ID is the value passed to dev/build commands. Set:
+   - `name`, `appTitle`, `description`, and `tagline` for app and page metadata.
+   - `siteUrl` to the partner's canonical public URL and `sourceUrl` (optional)
+     to the source-code URL. The social-preview URL is built from `siteUrl` and
+     `socialImageAsset`.
+   - `logoAsset`, `faviconAsset`, and `socialImageAsset` to the filenames in
+     `public/`. `logoAsset` is used in the app and PDF exports.
+   - `fontFamily` to the desired CSS font stack.
+   - `filePrefix`, `accessGuideFilePrefix`, and `recoveryRoadmapFilePrefix` to
+     the prefixes used for downloaded exports.
+   - `primaryPalette` and `accentPalette` as ten six-digit hex colors each,
+     ordered from lightest (index 0) to darkest (index 9). Index 5 is the main
+     theme color; indices 6 and 7 are used for hover/active states.
+   - `rtlPdfFont` only if RTL PDF exports are needed; provide a font family and
+     regular/bold TTF asset filenames in `public/`.
+3. Run or build with that profile ID:
+
+   ```sh
+   npm run dev --brand=partner-name
+   npm run build --brand=partner-name
+   ```
+
+   The npm `--brand` option selects the profile for both dev and build. You can
+   also set `VITE_BRAND_ID=partner-name` in the environment or a Vite env file.
+   The default profile is `onter`; an unknown ID fails rather than silently
+   falling back to it.
+
+Languages are user-selectable only when a global translation file exists in
+`src/i18n/global/`. Country-specific translations can override global strings.
+Add a complete global translation file before making a locale available; add
+country-language files in `src/i18n/` to localize country-specific form content.
+The document direction is derived from its BCP 47 language/script code. RTL PDF
+exports additionally require regular and bold TTF font assets configured on the
+brand profile. They fail explicitly when those fonts are missing.
+
 ## 🚀 Getting Started
 
 ### Prerequisites

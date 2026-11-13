@@ -7,7 +7,8 @@ vi.mock('./components/ErrorBoundary', () => ({ ErrorBoundary: ({ children }: { c
 vi.mock('react-router-dom', () => ({ HashRouter: () => null }));
 vi.mock('@mantine/core', () => ({ MantineProvider: () => null }));
 vi.mock('./theme', () => ({ theme: {} }));
-vi.mock('./i18n', () => ({}));
+vi.mock('./i18n', () => ({ initialLocale: 'en', i18nReady: Promise.resolve() }));
+vi.mock('./utils/i18nLoader', () => ({ loadCountryTranslations: vi.fn() }));
 
 beforeEach(() => {
   vi.resetModules();

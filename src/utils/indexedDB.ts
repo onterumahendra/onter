@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, no-unused-vars, @typescript-eslint/no-unused-vars */
+import { brand } from '../branding';
 /**
  * IndexedDB Wrapper for secure data persistence
  * 
@@ -11,7 +12,7 @@
  * SECURITY: Never store plain-text sensitive data
  */
 
-const DB_NAME = 'OnterFinancialDB';
+const DB_NAME = brand.id === 'onter' ? 'OnterFinancialDB' : `${brand.id}FinancialDB`;
 const DB_VERSION = 1;
 const STORE_NAME = 'encryptedData';
 const DATA_RETENTION_MS = 24 * 60 * 60 * 1000; // 24 hours

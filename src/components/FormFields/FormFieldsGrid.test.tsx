@@ -12,7 +12,11 @@ vi.mock('@mantine/hooks', async () => {
   const actual = await vi.importActual<typeof import('@mantine/hooks')>('@mantine/hooks');
   return { ...actual, useMediaQuery: () => media.mobile };
 });
-vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+vi.mock('react-i18next', async () => {
+  const actual = await vi.importActual<typeof import('react-i18next')>('react-i18next');
+  const t = (key: string) => key;
+  return { ...actual, useTranslation: () => ({ t }) };
+});
 
 const field = (name: string, type: BaseField['type'] = 'text'): BaseField => ({ name, label: name, type });
 const wrap = (element: React.ReactNode) => render(<MantineProvider theme={theme}>{element}</MantineProvider>);

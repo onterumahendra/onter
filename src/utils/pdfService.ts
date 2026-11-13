@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getFormSections } from '../constants';
+import { brand } from '../branding';
+import i18n from '../i18n';
+import { configurePdfDocument } from './configurePdfDocument';
 import {
   PDF_CONFIG,
   addSectionHeader,
@@ -38,6 +41,7 @@ export async function generateFormPDF(
       unit: 'mm',
       format: 'a4'
     });
+    await configurePdfDocument(doc, i18n.language);
     
     // Remove the default first page, we'll add pages manually
     let isFirstPage = true;
@@ -63,11 +67,11 @@ export async function generateFormPDF(
       if (isSkipped) {
         doc.setFontSize(10);
         doc.setTextColor(150, 150, 150);
-        doc.setFont('helvetica', 'italic');
+        doc.setFont(PDF_CONFIG.FONT_FAMILY, 'italic');
         doc.text('(Section Skipped - Showing Empty Fields)', PDF_CONFIG.PAGE_MARGIN, yPosition);
         yPosition += 10;
         doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(PDF_CONFIG.FONT_FAMILY, 'normal');
       }
       
       // Generate section content based on type
@@ -108,7 +112,7 @@ export async function generateFormPDF(
     return doc.output('blob');
   } catch (error) {
     console.error('Error generating PDF:', error);
-    throw new Error('Failed to generate PDF. Please try again.');
+    throw new Error(error instanceof Error ? error.message : 'Failed to generate PDF.');
   }
 }
 
@@ -117,7 +121,7 @@ export async function generateFormPDF(
  */
 export function downloadPDF(blob: Blob, countryCode: string): void {
   const timestamp = new Date().toISOString().split('T')[0];
-  const fileName = `Onter_Care_${countryCode}_${timestamp}.pdf`;
+  const fileName = `${brand.filePrefix}_${countryCode}_${timestamp}.pdf`;
   
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');

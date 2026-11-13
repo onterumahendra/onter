@@ -10,9 +10,14 @@ import type { Country } from './countries';
  * @param countryCode - ISO country code (e.g., 'IN', 'US', 'UK')
  * @returns Promise with country-specific form configuration
  */
-export async function getFormConfig(countryCode: string = DEFAULT_COUNTRY): Promise<CountryFormConfig> {
+export async function getFormConfig(
+  countryCode: string = DEFAULT_COUNTRY,
+  language?: string,
+): Promise<CountryFormConfig> {
   const config = await loadCountryConfig(countryCode);
-  const translations = await loadCountryTranslations(countryCode);
+  const translations = language === undefined
+    ? await loadCountryTranslations(countryCode)
+    : await loadCountryTranslations(countryCode, language);
   return localizeCountryConfig(config, translations);
 }
 
@@ -21,8 +26,8 @@ export async function getFormConfig(countryCode: string = DEFAULT_COUNTRY): Prom
  * @param countryCode - ISO country code
  * @returns Promise with array of form sections
  */
-export async function getFormSections(countryCode: string = DEFAULT_COUNTRY) {
-  const config = await getFormConfig(countryCode);
+export async function getFormSections(countryCode: string = DEFAULT_COUNTRY, language?: string) {
+  const config = await getFormConfig(countryCode, language);
   return config.formSections;
 }
 
